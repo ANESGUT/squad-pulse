@@ -617,14 +617,13 @@ const firebaseConfig = {
 };
 
 /* ---------------- 🤖 GEMINI YAPAY ZEKA + 🔒 YÖNETİCİ PANELİ AYARLARI ---------------- */
-const GEMINI_API_KEY = "const GEMINI_API_KEY = "AIzaSyB2BYfGFY8j3qNkQWO4F_-YwhyErWBOhno";";
-   
+const GEMINI_API_KEY = "AIzaSyB2BYfGFY8j3qNkQWO4F_-YwhyErWBOhno";          // ← Google AI Studio API anahtarını buraya yaz
 const GEMINI_MODEL = "gemini-1.5-flash";                   // İstenen model
 // "gemini-1.5-flash" Google tarafından 29 Eylül 2025'te kapatıldı (404 döner).
 // Model bulunamazsa aşağıdakiler sırayla otomatik denenir; "gemini-flash-latest" her zaman güncel Flash modelidir.
 const GEMINI_FALLBACK_MODELS = ["gemini-flash-latest", "gemini-3.5-flash", "gemini-2.5-flash"];
 const ADMIN_PANEL_PASSWORD = "1234";                       // Yönetici sekmesi şifresi
-const APP_VERSION = "v2.1 · Gemini + Yönetici";
+const APP_VERSION = "v2.4 · Gemini + Yönetici";
 const DB_ROOT = 'squadpulse/v1';        // Veritabanındaki kök yol
 const HISTORY_DAYS = 120;               // Canlı dinlenen geçmiş (gün)
 const CHAT_LIMIT = 300;                 // Sohbette canlı dinlenen son mesaj sayısı
@@ -1749,7 +1748,7 @@ const Gemini = {
   BOT_ID: 'gemini',
   NAME: '🤖 Gemini Asistan',
   TRIGGER: /^\s*@gemini\b[\s,:;.!?-]*/i,
-  hasKey() { return !!GEMINI_API_KEY && !/BURAYA/i.test(GEMINI_API_KEY); },
+  hasKey() { const k = String(GEMINI_API_KEY || '').trim(); return !!k && !/BURAYA/i.test(k); },
   title(q) { const w = q.replace(/\s+/g, ' ').trim().split(' ').filter(Boolean); return w.slice(0, 6).join(' ') + (w.length > 6 ? '…' : ''); },
   /** Soru soran kişinin cihazında çalışır: soruyu Gemini'a yollar, cevabı herkes için messages'a yazar */
   async handle(userMsg) {
@@ -1768,48 +1767,89 @@ const Gemini = {
     DB.update('ai_logs', logId, { status: ok ? 'ok' : 'error', model, error: ok ? null : text.slice(0, 200) });
     Chat.renderList([]);
   },
-  async ask(question, me) {
+  /** Kopyala-yapıştırda gelen boşluk/satır sonu/tırnakları temizlenmiş anahtar */
+  key() { return String(GEMINI_API_KEY || '').trim().replace(/^["'`]+|["'`]+$/g, ''); },
+  keyInfo() {
+    const k = this.key(); if (!this.hasKey()) return 'tanımlı değil';
+    const type = k.startsWith('AQ.') ? 'AQ. — yeni tip "auth key"' : k.startsWith('AIza') ? 'AIza — standart API anahtarı' : 'tanınmayan biçim';
+    return `${k.slice(0, 6)}…${k.slice(-4)} · ${k.length} karakter · ${type}`;
+  },
+  /** Google hata yanıtını anlaşılır Türkçe açıklamaya çevirir */
+  explain(status, err = {}) {
+    const msg = String(err.message || '').slice(0, 200);
+    const reason = (err.details || []).map(d => d && d.reason).filter(Boolean)[0] || err.status || '';
+    const g = msg ? `\n(Google: ${msg})` : '';
+    const isAQ = this.key().startsWith('AQ.');
+    if (status === 401 && /ACCESS_TOKEN_TYPE_UNSUPPORTED/i.test(reason + msg))
+      return `401 · ACCESS_TOKEN_TYPE_UNSUPPORTED — Google bu anahtar türünü kabul etmedi${isAQ ? ' (AQ. ile başlayan yeni tip anahtar)' : ''}.\nÇözüm: Google Cloud Console → APIs & Services → Credentials → "Create credentials → API key" ile yeni bir anahtar oluştur, "API restrictions" kısmında yalnızca "Generative Language API"yi seç ve bu anahtarı GEMINI_API_KEY satırına yaz.${g}`;
+    if (status === 401)
+      return `401 · Kimlik doğrulama başarısız (${reason || 'UNAUTHENTICATED'}). Anahtar eksik/yanlış kopyalanmış, silinmiş veya bu API için geçersiz olabilir. Yönetici panelindeki "Bağlantıyı test et" ile anahtarı kontrol et.${g}`;
+    if (/API_KEY_INVALID|api key not valid/i.test(reason + msg)) return `API anahtarı geçersiz (${status}). GEMINI_API_KEY değerini yeniden kopyala.${g}`;
+    if (status === 403 && /SERVICE_DISABLED|has not been used|is disabled/i.test(reason + msg)) return `403 · Generative Language API bu Google Cloud projesinde kapalı. Cloud Console → APIs & Services → Library → "Generative Language API" → Enable.${g}`;
+    if (status === 403 && /REFERRER|referer/i.test(reason + msg)) return `403 · Anahtarın web sitesi kısıtlaması bu sayfaya izin vermiyor. Anahtarın "Website restrictions" listesine bu sayfanın adresini ekle.${g}`;
+    if (status === 403) return `403 · Anahtarın bu isteğe izni yok (${reason || 'PERMISSION_DENIED'}). Anahtar kısıtlamasının "Generative Language API"yi içerdiğinden emin ol.${g}`;
+    if (status === 429) return `429 · Gemini kullanım kotası doldu. Biraz sonra tekrar dene.${g}`;
+    return `Gemini hatası (${status}${reason ? ' · ' + reason : ''}).${g}`;
+  },
+  /** Tek istek. auth: 'header' (x-goog-api-key) veya 'query' (?key=) */
+  async request(model, body, auth = 'header') {
+    const k = this.key(), base = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+    const url = auth === 'query' ? `${base}?key=${encodeURIComponent(k)}` : base;
+    const headers = { 'Content-Type': 'application/json' }; if (auth === 'header') headers['x-goog-api-key'] = k;
+    let res;
+    try { res = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) }); }
+    catch (e) {
+      const er = new Error(`Gemini sunucusuna ulaşılamadı — tarayıcı isteği tamamlayamadı (${e && e.message ? e.message : 'ağ hatası'}).\nOlası sebepler: reklam/içerik engelleyici (uBlock, AdGuard vb.) generativelanguage.googleapis.com adresini engelliyor olabilir, internet bağlantısı kesik olabilir ya da şirket/okul ağı Google API'lerini engelliyor olabilir. Engelleyiciyi bu sayfa için kapatıp tekrar dene.`);
+      er.status = 0; throw er;
+    }
+    let data = {}; try { data = await res.json(); } catch (e) {}
+    return { status: res.status, ok: res.ok, data };
+  },
+  /** Modelleri sırayla dener; 404'te yedek modele geçer, 401'de anahtarı ikinci yöntemle bir kez daha dener */
+  async call(body) {
     if (!this.hasKey()) throw new Error('Gemini API anahtarı tanımlı değil. index.html içinde Firebase ayarlarının hemen altındaki GEMINI_API_KEY satırına anahtarını yaz.');
+    if (this.key() === firebaseConfig.apiKey) throw new Error('GEMINI_API_KEY satırına Firebase anahtarı yazılmış. Gemini için ayrı bir anahtar gerekir (Google AI Studio veya Google Cloud Console → Credentials).');
+    const models = [GEMINI_MODEL, ...GEMINI_FALLBACK_MODELS.filter(m => m && m !== GEMINI_MODEL)];
+    let lastErr = null;
+    for (const model of models) {
+      let r = await this.request(model, body, 'header');
+      if (r.status === 401) {
+        // İkinci yöntem (?key=) yalnızca bir şanstır; o da başarısız olursa asıl 401 hatası gösterilir
+        try { const r2 = await this.request(model, body, 'query'); if (r2.ok || (r2.status !== 401 && r2.status !== 0)) r = r2; } catch (e) { /* asıl 401 yanıtı korunur */ }
+      }
+      if (r.status === 404) { lastErr = new Error(`Model bulunamadı: ${model}`); continue; }
+      if (!r.ok) { const e = new Error(this.explain(r.status, r.data && r.data.error)); e.status = r.status; throw e; }
+      const cand = r.data.candidates && r.data.candidates[0];
+      const text = ((cand && cand.content && cand.content.parts) || []).map(p => p.text || '').join('').trim();
+      if (!text) { const why = r.data.promptFeedback?.blockReason || cand?.finishReason; throw new Error(why ? `Gemini bu soruya yanıt vermedi (${why}).` : 'Gemini boş yanıt döndürdü.'); }
+      return { text: text.slice(0, 4000), model };
+    }
+    throw lastErr || new Error('Uygun Gemini modeli bulunamadı.');
+  },
+  async ask(question, me) {
     const s = DB.get('settings');
     const recent = Chat.list().filter(m => !m.pending && m.text).slice(-11, -1)
       .map(m => `${m.bot ? 'Gemini Asistan' : Chat.senderName(m)}: ${m.text.slice(0, 400)}`).join('\n');
     const system = `Sen "${s.teamName}" ekibinin Squad Pulse uygulamasındaki ekip sohbetinde çalışan yardımcı asistansın (Gemini Asistan). ` +
       `Ekip sohbetinde herkes cevabını görür. Varsayılan olarak Türkçe, samimi, kısa ve net yanıt ver (gerekmedikçe 150 kelimeyi geçme). Gerekirse madde işaretleri kullan.`;
-    const body = {
+    return this.call({
       systemInstruction: { parts: [{ text: system }] },
       contents: [{ role: 'user', parts: [{ text: (recent ? `Sohbetin son mesajları (bağlam için):\n${recent}\n\n` : '') + `${me.name} soruyor: ${question}` }] }],
       generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
-    };
-    const models = [GEMINI_MODEL, ...GEMINI_FALLBACK_MODELS.filter(m => m && m !== GEMINI_MODEL)];
-    let lastErr = null;
-    for (const model of models) {
-      let res;
-      try {
-        res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
-          method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': GEMINI_API_KEY }, body: JSON.stringify(body)
-        });
-      } catch (e) { throw new Error('Gemini sunucusuna ulaşılamadı (ağ hatası).'); }
-      let data = {}; try { data = await res.json(); } catch (e) {}
-      const msg = data?.error?.message || res.statusText || '';
-      if (res.status === 404) { lastErr = new Error(`Model bulunamadı: ${model}`); continue; }   // yedek modele geç
-      if (!res.ok) {
-        if (/api key not valid|API_KEY_INVALID/i.test(msg)) throw new Error('API anahtarı geçersiz. GEMINI_API_KEY değerini kontrol et.');
-        if (res.status === 429) throw new Error('Gemini kullanım kotası doldu. Biraz sonra tekrar dene.');
-        if (res.status === 403) throw new Error('API anahtarının bu isteğe izni yok (anahtar kısıtlamalarını kontrol et).');
-        throw new Error(`Gemini hatası (${res.status}): ${msg.slice(0, 160)}`);
-      }
-      const cand = data.candidates && data.candidates[0];
-      const text = ((cand && cand.content && cand.content.parts) || []).map(p => p.text || '').join('').trim();
-      if (!text) { const why = data.promptFeedback?.blockReason || cand?.finishReason; throw new Error(why ? `Gemini bu soruya yanıt vermedi (${why}).` : 'Gemini boş yanıt döndürdü.'); }
-      return { text: text.slice(0, 4000), model };
-    }
-    throw lastErr || new Error('Uygun Gemini modeli bulunamadı.');
+    });
+  },
+  /** Yönetici panelindeki bağlantı testi — ai_logs'a yazmaz, sohbete mesaj göndermez */
+  async test() {
+    const t0 = Date.now();
+    try { const r = await this.call({ contents: [{ role: 'user', parts: [{ text: 'Bağlantı testi. Sadece "tamam" yaz.' }] }], generationConfig: { maxOutputTokens: 20 } });
+      return { ok: true, text: `✅ Bağlantı başarılı · model: ${r.model} · ${Date.now() - t0} ms · yanıt: "${r.text.slice(0, 40)}"` }; }
+    catch (e) { return { ok: false, text: '❌ ' + e.message }; }
   }
 };
 
 /* ---- Gizli Yönetici Paneli (AI kullanım logları) ---- */
 const AdminGate = {
-  unlocked: false,
+  unlocked: false, lastTest: '',
   prompt() {
     if (this.unlocked || Modal.el) return;
     const check = w => {
@@ -1855,6 +1895,14 @@ Views.aipanel = () => {
       ${kpi('clock', 'Bugün', logs.filter(l => l.at >= T.sod(t)).length, 'soru', '', 'brk')}
       ${kpi('check', 'Başarılı yanıt', done.length ? '%' + Math.round(okN / done.length * 100) : '—', `${done.length - okN} hata`, '', 'ok')}
     </div>
+    <section class="card mt">
+      <div class="card-head"><h3>${ic('wifi', 17)} Gemini bağlantı testi</h3><button class="btn btn-primary btn-sm" data-act="testGemini" id="gemTestBtn">${ic('play', 14)} Bağlantıyı test et</button></div>
+      <div class="stat-grid">
+        <div class="mini-stat"><span>API anahtarı</span><b style="font-size:13px;word-break:break-all">${esc(Gemini.keyInfo())}</b></div>
+        <div class="mini-stat"><span>Model sırası</span><b style="font-size:13px">${esc([GEMINI_MODEL, ...GEMINI_FALLBACK_MODELS].join(' → '))}</b></div>
+      </div>
+      <pre class="code" id="gemTestOut" style="white-space:pre-wrap">${esc(AdminGate.lastTest || 'Henüz test yapılmadı. Butona basınca Gemini\'a küçük bir deneme isteği gönderilir (sohbete veya loglara yazılmaz).')}</pre>
+    </section>
     <section class="card mt">
       <div class="card-head"><h3>${ic('chart', 17)} Kullanıcı bazında Gemini kullanımı</h3><span class="sub">Satıra dokunarak soru başlıklarını aç/kapat</span></div>
       ${groups.length ? groups.map((g, i) => {
@@ -2071,6 +2119,12 @@ const Actions = {
   sendChat() { Chat.send(); },
   gemHint() { const i = $('#chatInput'); if (!i) return; if (!/^\s*@gemini/i.test(i.value)) i.value = '@Gemini ' + i.value.replace(/^\s+/, ''); Chat.draft = i.value; i.focus(); try { i.setSelectionRange(i.value.length, i.value.length); } catch (e) {} },
   unlockAdmin() { AdminGate.prompt(); },
+  async testGemini(el) {
+    const out = $('#gemTestOut'); el.disabled = true; if (out) out.textContent = '⏳ Gemini\'a deneme isteği gönderiliyor…';
+    const r = await Gemini.test(); AdminGate.lastTest = r.text;
+    const o = $('#gemTestOut'); if (o) o.textContent = r.text; const b = $('#gemTestBtn'); if (b) b.disabled = false;
+    toast(r.ok ? 'Gemini bağlantısı çalışıyor' : 'Gemini bağlantı testi başarısız', r.ok ? 'success' : 'error');
+  },
   lockAdmin() { AdminGate.lock(); },
   exportAiLogs() {
     const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
