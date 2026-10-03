@@ -468,6 +468,30 @@ html[data-mode="light"] pre.code{background:rgba(20,28,60,.04)}
 .send-btn:hover{filter:brightness(1.08)}
 .send-btn:active{transform:scale(.94)}
 .composer-hint{font-size:11px;color:var(--faint);padding:0 16px 8px;background:var(--surface)}
+/* Özel mesajlar: kenar listesi + konuşma */
+.chat-wrap{flex-direction:row}
+.chat-side{width:300px;flex-shrink:0;display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--border);background:var(--surface-2)}
+.cs-head{padding:18px 18px 8px}
+.cs-head h3{font-size:16px}
+.cs-head .sub{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.cs-list{flex:1;overflow-y:auto;padding:4px 10px 14px;overscroll-behavior:contain}
+.cs-sec{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin:16px 8px 6px}
+.cs-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:11px;align-items:center;width:100%;padding:10px;border:0;border-radius:15px;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:background .15s;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.cs-item *{pointer-events:none}
+.cs-item:hover{background:var(--surface-3)}
+.cs-item.on{background:rgba(var(--accent-rgb),.15)}
+.cs-av{display:flex}
+.cs-meta{min-width:0}
+.cs-meta b{display:block;font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-meta small{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-item.unread .cs-meta b{font-weight:750}
+.cs-item.unread .cs-meta small{color:var(--text);font-weight:600}
+.cs-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.cs-right time{font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cs-badge{font-style:normal;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;display:inline-grid;place-items:center}
+.chat-main{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
+.dm-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:12px;font-weight:650;background:rgba(var(--accent-rgb),.13);color:var(--accent);white-space:nowrap}
+.dm-note{align-self:center;display:inline-flex;align-items:center;gap:6px;margin:4px 0 6px;padding:6px 12px;border-radius:12px;font-size:12px;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);text-align:center}
 .nav-badge{margin-left:auto;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;display:inline-grid;place-items:center;box-shadow:0 0 0 2px var(--surface-solid)}
 .nav-badge[hidden]{display:none}
 
@@ -480,6 +504,19 @@ html[data-mode="light"] pre.code{background:rgba(20,28,60,.04)}
 .bubble .txt code{font:12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:1px 5px;border-radius:6px;background:var(--surface-3)}
 .bubble .txt .md-pre{margin:6px 0;padding:10px 12px;border-radius:10px;background:var(--surface-3);font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-x:auto}
 .mention{font-weight:700;padding:0 5px;border-radius:7px;background:rgba(155,114,203,.18);color:#a78bfa}
+.mention.is-me{background:rgba(245,158,11,.2);color:#f59e0b}
+.bubble.tagged{box-shadow:0 0 0 2px rgba(245,158,11,.55),var(--shadow-sm)}
+.notify-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
+.notify-row:first-of-type{border-top:0}
+.notify-row b{display:block;font-size:13.5px}
+.notify-row small{display:block;font-size:12px;color:var(--muted)}
+.switch{display:inline-flex;align-items:center;cursor:pointer;flex-shrink:0}
+.switch input{display:none}
+.switch span{width:42px;height:24px;border-radius:999px;background:var(--surface-3);position:relative;transition:.2s}
+.switch span::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:.2s var(--ease)}
+.switch input:checked+span{background:var(--accent)}
+.switch input:checked+span::after{transform:translateX(18px)}
+.bell-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:7px 12px;border-radius:12px;border:1px dashed rgba(var(--accent-rgb),.5);background:rgba(var(--accent-rgb),.08);color:var(--text);font-size:12.5px;font-weight:600;cursor:pointer}
 .msg.mine .mention{background:rgba(255,255,255,.22);color:inherit}
 .typing{display:inline-flex;gap:5px;align-items:center;padding:6px 2px;color:#9b72cb;font-size:12.5px}
 .typing i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.35;animation:blink 1.2s infinite}
@@ -556,6 +593,9 @@ html[data-mode="light"] pre.code{background:rgba(20,28,60,.04)}
   .msg{max-width:86%}
   .av-slot{width:28px}
   .composer-hint{display:none}
+  .chat-side{width:100%;border-right:0;background:transparent}
+  .chat-wrap[data-pane="conv"] .chat-side{display:none}
+  .chat-wrap[data-pane="list"] .chat-main{display:none}
   .only-mobile{display:inline-grid !important}
   .g-2,.g-3{grid-template-columns:minmax(0,1fr)}
   .rep-row{grid-template-columns:minmax(0,1fr)}
@@ -623,10 +663,10 @@ const GEMINI_MODEL = "gemini-1.5-flash";                   // İstenen model
 // Model bulunamazsa aşağıdakiler sırayla otomatik denenir; "gemini-flash-latest" her zaman güncel Flash modelidir.
 const GEMINI_FALLBACK_MODELS = ["gemini-flash-latest", "gemini-3.5-flash", "gemini-2.5-flash"];
 const ADMIN_PANEL_PASSWORD = "1234";                       // Yönetici sekmesi şifresi
-const APP_VERSION = "v2.4 · Gemini + Yönetici";
+const APP_VERSION = "v2.6 · Bildirimler";
 const DB_ROOT = 'squadpulse/v1';        // Veritabanındaki kök yol
 const HISTORY_DAYS = 120;               // Canlı dinlenen geçmiş (gün)
-const CHAT_LIMIT = 300;                 // Sohbette canlı dinlenen son mesaj sayısı
+const CHAT_LIMIT = 600;                 // Sohbette canlı dinlenen son mesaj sayısı (genel + özel)
 
 /* ---------------- 2. YARDIMCILAR ---------------- */
 const Clock = { offset: 0 };             // Firebase sunucu saati farkı — tüm cihazlarda aynı sayaç
@@ -705,7 +745,8 @@ const ICONS = {
   wifi: '<path d="M5 12.55a11 11 0 0 1 14 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/>',
   undo: '<path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/>',
   chat: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/>',
-  send: '<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>'
+  send: '<path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/>',
+  bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>'
 };
 const ic = (n, s = 18) => `<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 
@@ -716,7 +757,7 @@ const ic = (n, s = 18) => `<svg class="ic" width="${s}" height="${s}" viewBox="0
      sessions/{sessionId}  → { userId, activityId, note, start, end }
      days/{userId_tarih}   → { userId, date, start, end }   (Güne Başladım / Günü Tamamla)
      presence/{userId}     → { connections:{…}, lastSeen }  (çevrimiçi durumu)
-     messages/{messageId}  → { userId, text, at }            (canlı ekip sohbeti; Gemini cevapları userId:'gemini')
+     messages/{messageId}  → { userId, text, at, recipientId? } (recipientId boş = genel sohbet, dolu = özel mesaj; Gemini cevapları userId:'gemini')
      ai_logs/{logId}       → { userId, userName, title, at, status, model }  (Gemini kullanım kayıtları)
    Her değişiklik belge bazında yazılır, böylece 3 kişi aynı anda yazsa da çakışma olmaz.
 ---------------------------------------------------------- */
@@ -970,7 +1011,7 @@ const Auth = {
   current: null,
   restore() { try { const a = JSON.parse(localStorage.getItem(this.key) || 'null'); if (a && a.userId && DB.find('users', a.userId)) this.current = a.userId; } catch (e) {} },
   login(id) { this.current = id; try { localStorage.setItem(this.key, JSON.stringify({ userId: id })); } catch (e) {} Presence.attach(id); },
-  logout() { this.current = null; try { localStorage.removeItem(this.key); } catch (e) {} Presence.detach(); if (typeof AdminGate !== 'undefined') AdminGate.unlocked = false; },
+  logout() { this.current = null; try { localStorage.removeItem(this.key); } catch (e) {} Presence.detach(); if (typeof AdminGate !== 'undefined') AdminGate.unlocked = false; if (typeof Chat !== 'undefined') { Chat.channel = 'general'; Chat.pane = 'list'; Chat.drafts = {}; } },
   user() { return this.current ? DB.find('users', this.current) : null; },
   isAdmin() { return this.user()?.role === 'admin'; }
 };
@@ -1121,7 +1162,7 @@ const Sound = {
   },
   alert(title, body) {
     this.beep(); toast(`<b>${title}</b> ${body}`, 'success');
-    try { if ('Notification' in window && Notification.permission === 'granted' && document.hidden) new Notification(title, { body }); } catch (e) {}
+    Notify.show({ title, body, tag: 'sp-pomo' });
   }
 };
 
@@ -1284,7 +1325,7 @@ Views.shell = () => {
   return `<div class="app">
     <aside class="sidebar"><div class="card side">
       <div class="brand">${logo()}<div><b>Squad Pulse</b><span>${esc(s.teamName)}</span><span class="badge" style="margin-top:4px">${APP_VERSION}</span></div></div>
-      <nav class="nav" id="tabBar" role="tablist">${nav.map(n => `<button type="button" class="nav-item ${App.view === n.id ? 'active' : ''}" data-nav="${n.id}" role="tab" aria-selected="${App.view === n.id}" title="${n.label}">${ic(n.icon, 19)}<span>${n.label}</span>${n.id === 'chat' ? `<b class="nav-badge" id="chatBadge" ${Chat.unread() ? '' : 'hidden'}>${Chat.unread() > 99 ? '99+' : Chat.unread()}</b>` : ''}</button>`).join('')}</nav>
+      <nav class="nav" id="tabBar" role="tablist">${nav.map(n => `<button type="button" class="nav-item ${App.view === n.id ? 'active' : ''}" data-nav="${n.id}" role="tab" aria-selected="${App.view === n.id}" title="${n.label}">${ic(n.icon, 19)}<span>${n.label}</span>${n.id === 'chat' ? `<b class="nav-badge" id="chatBadge" ${Chat.unreadTotal() ? '' : 'hidden'}>${Chat.unreadTotal() > 99 ? '99+' : Chat.unreadTotal()}</b>` : ''}</button>`).join('')}</nav>
       <div class="side-foot"><div class="me">${avatarDot(u, 40, st)}<div class="me-meta"><b>${esc(u.name)}</b><span>${u.role === 'admin' ? 'Yönetici' : 'Üye'}</span></div>
         <button class="btn-icon sm" data-act="logout" title="Çıkış yap">${ic('logout', 16)}</button></div></div>
     </div></aside>
@@ -1437,6 +1478,7 @@ Views.team = () => {
         </div>
         <div class="progress" title="Günlük hedef"><i style="width:${pct.toFixed(1)}%" data-live="bar" data-uid="${u.id}"></i></div>
         <div data-live="timeline" data-uid="${u.id}" data-day="${T.sod(t)}" data-compact="1">${Charts.timeline(u.id, t, true)}</div>
+        ${u.id !== me.id ? `<button class="btn btn-soft btn-sm" data-act="openChat" data-id="${u.id}">${ic('chat', 14)} Özel mesaj gönder</button>` : ''}
         ${me.role === 'admin' && u.id !== me.id && ['active', 'break', 'idle'].includes(st.key) ? `<button class="btn btn-ghost btn-sm" data-act="adminEndDay" data-id="${u.id}">${ic('flag', 14)} Bu üyenin gününü tamamla</button>` : ''}
       </article>`;
     }).join('')}</div>`;
@@ -1639,37 +1681,98 @@ Views.profile = () => {
       <div class="swatches">${bgList.map(c => sw(c, 'setBg', c === p.bg)).join('')}<label class="swatch custom ${p.bg && !bgList.includes(p.bg) ? 'on' : ''}"><input type="color" data-pref="bg" value="${p.bg || (mode === 'dark' ? '#0b0d14' : '#f2f3f8')}"></label>${p.bg ? `<button class="btn btn-ghost btn-sm" data-act="resetBg">${ic('undo', 14)} Varsayılan</button>` : ''}</div>
       <label class="lbl">Arka plan dokusu</label><div class="tex-grid">${Theme.textures.map(t => `<button class="tex-opt ${p.texture === t.id ? 'on' : ''}" data-act="setTexture" data-v="${t.id}"><span class="tex-thumb"><span class="texture-mini tx-${t.id}"></span></span>${t.label}</button>`).join('')}</div>
       <label class="lbl">Doku yoğunluğu <span id="texVal">%${Math.round(p.texOpacity * 100)}</span></label><input type="range" class="range" min="0" max="1" step="0.05" value="${p.texOpacity}" data-pref="texOpacity">
-    </section></div>`;
+    </section>
+    ${Views.notifyCard(u)}
+    </div>`;
+};
+
+Views.notifyCard = u => {
+  const p = Notify.prefs(u), st = Notify.status(), perm = Notify.permission();
+  const row = (k, title, sub) => `<div class="notify-row"><div><b>${title}</b><small>${sub}</small></div>
+    <label class="switch"><input type="checkbox" data-notify="${k}" ${p[k] ? 'checked' : ''}><span></span></label></div>`;
+  return `<section class="card span-all">
+    <div class="card-head"><h3>${ic('bell', 17)} Bildirimler</h3><span class="badge ${st.cls}">${st.text}</span></div>
+    <p class="muted sm">Uygulama arka plandayken (başka sekmede, küçültülmüş pencerede) masaüstüne sistem bildirimi gönderir; bildirime tıklayınca ilgili sohbet açılır. Uygulama öndeyken bildirimler sayfa içinde gösterilir.</p>
+    <div class="row-btns mt">
+      ${perm === 'default' ? `<button class="btn btn-primary" data-act="notifyAsk">${ic('bell', 15)} Bildirimlere izin ver</button>` : ''}
+      ${perm === 'granted' ? `<button class="btn btn-ghost" data-act="notifyTest">${ic('play', 14)} Test bildirimi gönder</button>` : ''}
+      ${perm === 'denied' ? `<span class="muted sm">Bildirimler bu site için engellenmiş. Adres çubuğundaki kilit/ayar simgesi → Bildirimler → İzin ver, sonra sayfayı yenile.</span>` : ''}
+      ${perm === 'unsupported' ? `<span class="muted sm">Bu tarayıcı sistem bildirimlerini desteklemiyor.</span>` : ''}
+    </div>
+    <div class="mt">
+      ${row('dm', '🔒 Özel mesajlar', 'Biri sana özel mesaj gönderdiğinde')}
+      ${row('mention', '📣 Etiketlendiğimde', '@' + esc(firstName(u.name)) + ', @herkes veya @ekip yazıldığında · Gemini senin soruna cevap verdiğinde')}
+      ${row('all', '💬 Tüm genel sohbet mesajları', 'Genel Sohbet\'e yazılan her mesajda (kapalı önerilir)')}
+    </div>
+    ${location.protocol === 'file:' ? `<p class="help">ℹ️ Sayfa bilgisayardaki dosyadan açılmış. Bazı tarayıcılar dosyadan açılan sayfalara bildirim izni vermez; en güvenilir sonuç için sayfayı bir web adresinden (ör. Firebase Hosting, Netlify) aç.</p>` : ''}
+    <p class="help">📱 Telefonda (Android) sistem bildirimi için index.html'nin yanında <b>sw.js</b> dosyası bulunmalı ve sayfa https adresinden açılmalı. iPhone'da yalnızca "Ana Ekrana Ekle" ile yüklenen web uygulamaları bildirim alabilir.</p>
+  </section>`;
 };
 
 /* ---- Sohbet ---- */
 const Chat = {
-  draft: '',
-  readKey() { return 'squadpulse.chatRead.' + Auth.current; },
-  list() { return DB.get('messages').filter(m => m && (m.text || m.pending)).sort((a, b) => (a.at - b.at) || (a.id < b.id ? -1 : 1)); },
-  lastRead() { try { return +localStorage.getItem(this.readKey()) || 0; } catch (e) { return this._read || 0; } },
-  markRead() {
-    const last = this.list().reduce((a, m) => Math.max(a, m.at || 0), 0);
-    if (last <= this.lastRead()) return;
-    this._read = last; try { localStorage.setItem(this.readKey(), String(last)); } catch (e) {}
-    App.updateChatBadge();
+  channel: 'general',     // 'general' = genel sohbet · aksi halde özel sohbetteki karşı tarafın userId'si
+  pane: 'list',           // mobilde hangi panel görünür: 'list' (konuşma listesi) | 'conv' (konuşma)
+  drafts: {},             // konuşma başına gönderilmemiş taslaklar
+  stick: true, forceBottom: false, _read: {},
+  /** Mesaj bu konuşmaya mı ait? recipientId boşsa genel, doluysa yalnızca gönderen ile alıcı arasında */
+  inChannel(m, ch = this.channel, me = Auth.current) {
+    if (ch === 'general') return !m.recipientId;
+    return (m.userId === me && m.recipientId === ch) || (m.userId === ch && m.recipientId === me);
   },
-  unread() { if (!Auth.current) return 0; const lr = this.lastRead(); return this.list().filter(m => m.userId !== Auth.current && m.at > lr).length; },
+  /** Bu kullanıcının görebileceği tüm mesajlar: genel + dahil olduğu özel mesajlar */
+  all() {
+    const me = Auth.current;
+    return DB.get('messages').filter(m => m && (m.text || m.pending) && (!m.recipientId || m.userId === me || m.recipientId === me))
+      .sort((a, b) => (a.at - b.at) || (a.id < b.id ? -1 : 1));
+  },
+  list(ch = this.channel) { return this.all().filter(m => this.inChannel(m, ch)); },
+  lastMsg(ch) { const l = this.list(ch); return l[l.length - 1]; },
+  peers() {
+    return DB.get('users').filter(u => u.id !== Auth.current)
+      .sort((a, b) => ((this.lastMsg(b.id) || {}).at || 0) - ((this.lastMsg(a.id) || {}).at || 0) || a.name.localeCompare(b.name, 'tr'));
+  },
+  readKey(ch = this.channel) { const base = 'squadpulse.chatRead.' + Auth.current; return ch === 'general' ? base : base + '.dm.' + ch; },
+  lastRead(ch = this.channel) { const k = this.readKey(ch); try { const v = localStorage.getItem(k); if (v !== null) return +v || 0; } catch (e) {} return this._read[k] || 0; },
+  markRead(ch = this.channel) {
+    const last = this.list(ch).reduce((a, m) => Math.max(a, m.at || 0), 0);
+    if (last <= this.lastRead(ch)) return;
+    const k = this.readKey(ch); this._read[k] = last; try { localStorage.setItem(k, String(last)); } catch (e) {}
+    App.updateChatBadge(); this.renderSide();
+  },
+  unread(ch = this.channel) { if (!Auth.current) return 0; const lr = this.lastRead(ch); return this.list(ch).filter(m => m.userId !== Auth.current && m.at > lr).length; },
+  unreadTotal() { if (!Auth.current) return 0; return ['general', ...this.peers().map(u => u.id)].reduce((a, ch) => a + this.unread(ch), 0); },
+  /** Konuşma ekranı gerçekten görünüyor mu? (mobilde liste paneli açıkken okundu sayılmaz) */
+  convVisible() { const el = $('#chatList'); return !!(el && el.offsetParent !== null); },
+  open(ch) {
+    if (ch !== 'general' && !DB.find('users', ch)) ch = 'general';
+    this.channel = ch; this.pane = 'conv'; this.stick = true; this.forceBottom = true;
+    if (App.view !== 'chat') App.go('chat'); else App.render();
+    if (matchMedia('(min-width: 901px)').matches) { const i = $('#chatInput'); if (i) i.focus(); }
+  },
+  back() { this.pane = 'list'; App.render(); },
   send() {
     const inp = $('#chatInput'); if (!inp || !Auth.current) return;
     const text = inp.value.replace(/\s+$/, '').replace(/^\s+/, '').slice(0, 1000);
     if (!text) { inp.focus(); return; }
     const m = { id: 'm' + NOW().toString(36) + Math.random().toString(36).slice(2, 7), userId: Auth.current, text, at: NOW() };
+    if (this.channel !== 'general') m.recipientId = this.channel;   // özel mesaj
     App.seenMsgs.add(m.id);
     DB.insert('messages', m);
-    inp.value = ''; this.draft = ''; this.autoGrow(inp); inp.focus();
-    this.renderList([m.id]); this.markRead();
-    if (Gemini.TRIGGER.test(text)) Gemini.handle(m);
+    inp.value = ''; this.drafts[this.channel] = ''; this.autoGrow(inp); inp.focus();
+    this.renderList([m.id]); this.markRead(); this.renderSide();
+    if (this.channel === 'general' && Gemini.TRIGGER.test(text)) Gemini.handle(m);   // Gemini yalnızca genel sohbette
   },
-  stick: true,
   stickToBottom() { const el = $('#chatList'); if (el && this.stick) el.scrollTop = el.scrollHeight; },
   autoGrow(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight + 2, 140) + 'px'; },
   senderName(m) { if (m.bot || m.userId === Gemini.BOT_ID) return Gemini.NAME; const u = DB.find('users', m.userId); return u ? u.name : 'Eski üye'; },
+  preview(m) {
+    if (!m) return '';
+    const who = m.userId === Auth.current ? 'Sen' : (m.bot ? 'Gemini' : firstName(this.senderName(m)));
+    const t = m.pending ? 'düşünüyor…' : String(m.text).replace(/```[\s\S]*?```/g, ' ').replace(/[*`#_>]/g, '').replace(/\s+/g, ' ').trim();
+    return `${who}: ${t}`;
+  },
+  timeLabel(ts) { if (!ts) return ''; return T.key(ts) === T.key(NOW()) ? T.hm(ts) : T.sod(ts) === T.addDays(T.sod(), -1) ? 'Dün' : T.fmt(ts, { day: 'numeric', month: 'short' }); },
   dayLabel(ts) {
     const d = T.sod(ts), today = T.sod();
     if (d === today) return 'Bugün';
@@ -1683,13 +1786,32 @@ const Chat = {
     this.stick = true;
     el.scrollTop = el.scrollHeight;
     requestAnimationFrame(() => { el.scrollTop = el.scrollHeight; });
-  }
+  },
+  /** Sol taraftaki konuşma listesini (rozetler, son mesaj önizlemesi) günceller */
+  renderSide() { const el = $('#chatSide'); if (el) el.innerHTML = Views.chatSideItems(); }
+};
+
+Views.chatSideItems = () => {
+  const item = (ch, av, title, m, extra = '') => {
+    const n = Chat.unread(ch), on = Chat.channel === ch;
+    return `<button type="button" class="cs-item ${on ? 'on' : ''} ${n ? 'unread' : ''}" data-act="openChat" data-id="${esc(ch)}">
+      <span class="cs-av">${av}</span>
+      <span class="cs-meta"><b>${title}${extra}</b><small>${m ? esc(Chat.preview(m)) : 'Mesajlaşmaya başla'}</small></span>
+      <span class="cs-right"><time>${m ? Chat.timeLabel(m.at) : ''}</time>${n ? `<em class="cs-badge">${n > 99 ? '99+' : n}</em>` : ''}</span>
+    </button>`;
+  };
+  const online = u => Presence.online(u.id) ? { key: 'active', color: '#22c55e' } : { key: 'offline', color: '#94a3b8' };
+  return item('general', `<span class="kpi-ic" style="width:40px;height:40px;border-radius:13px">${ic('users', 19)}</span>`, 'Genel Sohbet', Chat.lastMsg('general'))
+    + `<div class="cs-sec">${ic('lock', 12)} Özel Mesajlar</div>`
+    + (Chat.peers().map(u => item(u.id, avatarDot(u, 40, online(u)), esc(u.name), Chat.lastMsg(u.id))).join('') || `<p class="muted sm" style="padding:8px">Ekipte başka üye yok.</p>`);
 };
 
 Views.chatMessages = (pop = new Set()) => {
-  const list = Chat.list(), me = Auth.current;
-  if (!list.length) return `<div class="chat-empty">${ic('chat', 38)}<h4 style="color:var(--text);margin-bottom:4px">Henüz mesaj yok</h4><p>Ekibe ilk mesajı sen gönder 👋</p></div>`;
-  let html = '', lastDay = null;
+  const list = Chat.list(), me = Auth.current, dm = Chat.channel !== 'general';
+  const peer = dm ? DB.find('users', Chat.channel) : null;
+  const note = dm ? `<div class="dm-note">${ic('lock', 13)} Bu özel konuşma yalnızca sen ve ${esc(peer ? firstName(peer.name) : 'karşı taraf')} için görünür</div>` : '';
+  if (!list.length) return note + `<div class="chat-empty">${ic('chat', 38)}<h4 style="color:var(--text);margin-bottom:4px">Henüz mesaj yok</h4><p>${dm ? `${esc(peer ? firstName(peer.name) : '')} ile ilk mesajı sen gönder 👋` : 'Ekibe ilk mesajı sen gönder 👋'}</p></div>`;
+  let html = note, lastDay = null;
   list.forEach((m, i) => {
     const prev = list[i - 1], next = list[i + 1], day = T.key(m.at);
     if (day !== lastDay) { html += `<div class="day-sep">${Chat.dayLabel(m.at)}</div>`; lastDay = day; }
@@ -1708,30 +1830,176 @@ Views.chatMessages = (pop = new Set()) => {
     const u = DB.find('users', m.userId), mine = m.userId === me;
     const name = u ? (mine ? `${firstName(u.name)} (sen)` : u.name) : 'Eski üye';
     const color = u ? u.color : '#94a3b8';
+    const txt = dm ? esc(m.text) : Mentions.highlight(esc(m.text));
     html += `<div class="msg ${mine ? 'mine' : 'theirs'} ${sameAsPrev ? '' : 'first'} ${sameAsNext ? '' : 'last'} ${pop.has(m.id) ? 'pop' : ''}" data-mid="${esc(m.id)}">
       ${mine ? '' : `<span class="av-slot">${sameAsNext ? '' : (u ? avatar(u, 30) : '')}</span>`}
-      <div class="bubble" style="--c:${color}"><span class="who">${esc(name)}</span><div class="txt">${esc(m.text).replace(/^(\s*)@gemini\b/i, '$1<span class="mention">@Gemini</span>')}</div><span class="meta">${T.hm(m.at)}</span></div>
+      <div class="bubble ${!mine && !dm && Mentions.hits(m.text, me) ? 'tagged' : ''}" style="--c:${color}"><span class="who">${esc(name)}</span><div class="txt">${txt}</div><span class="meta">${T.hm(m.at)}</span></div>
     </div>`;
   });
   return html;
 };
 
 Views.chat = () => {
+  if (Chat.channel !== 'general' && !DB.find('users', Chat.channel)) Chat.channel = 'general';
   const users = DB.get('users'), online = users.filter(u => Presence.online(u.id));
-  return `<section class="card chat">
-    <header class="chat-head">
-      <span class="kpi-ic">${ic('chat', 20)}</span>
-      <div class="grow"><h3>Ekip Sohbeti</h3><p>${esc(DB.get('settings').teamName)} · ${online.length}/${users.length} çevrimiçi</p></div>
-      <button class="gem-chip" data-act="gemHint" title="Gemini'a soru sor">🤖 @Gemini</button>
-      <div class="chat-members">${users.map(u => `<span title="${esc(u.name)} — ${Presence.online(u.id) ? 'çevrimiçi' : 'çevrimdışı'}">${avatarDot(u, 32, Presence.online(u.id) ? { key: 'active', color: '#22c55e' } : { key: 'offline', color: '#94a3b8' })}</span>`).join('')}</div>
-    </header>
-    <div class="chat-list" id="chatList" role="log" aria-live="polite">${Views.chatMessages()}</div>
-    <div class="composer">
-      <textarea class="input" id="chatInput" rows="1" maxlength="1000" placeholder="Mesaj yaz… · @Gemini ile yapay zekaya sor" autocomplete="off">${esc(Chat.draft)}</textarea>
-      <button class="send-btn" data-act="sendChat" title="Gönder">${ic('send', 19)}</button>
+  const dm = Chat.channel !== 'general', peer = dm ? DB.find('users', Chat.channel) : null;
+  const head = dm
+    ? `${avatarDot(peer, 40, Presence.online(peer.id) ? { key: 'active', color: '#22c55e' } : { key: 'offline', color: '#94a3b8' })}
+       <div class="grow"><h3>${esc(peer.name)}</h3><p>${Presence.online(peer.id) ? 'Çevrimiçi' : (Presence.lastSeen(peer.id) ? 'Son görülme ' + T.ago(Presence.lastSeen(peer.id)) : 'Çevrimdışı')} · ${esc(peer.title || '')}</p></div>
+       <span class="dm-chip">${ic('lock', 13)} Özel sohbet</span>`
+    : `<span class="kpi-ic">${ic('users', 20)}</span>
+       <div class="grow"><h3>Genel Sohbet</h3><p>${esc(DB.get('settings').teamName)} · ${online.length}/${users.length} çevrimiçi</p></div>
+       <button class="gem-chip" data-act="gemHint" title="Gemini'a soru sor">🤖 @Gemini</button>
+       <div class="chat-members">${users.map(u => `<span title="${esc(u.name)} — ${Presence.online(u.id) ? 'çevrimiçi' : 'çevrimdışı'}">${avatarDot(u, 32, Presence.online(u.id) ? { key: 'active', color: '#22c55e' } : { key: 'offline', color: '#94a3b8' })}</span>`).join('')}</div>`;
+  return `<section class="card chat chat-wrap" data-pane="${Chat.pane}">
+    <aside class="chat-side">
+      <div class="cs-head"><h3>Mesajlar</h3><span class="sub">Genel sohbet ve birebir konuşmalar</span>
+        ${Notify.permission() === 'default' ? `<button type="button" class="bell-btn" data-act="notifyAsk">${ic('bell', 14)} Masaüstü bildirimlerini aç</button>` : ''}</div>
+      <div class="cs-list" id="chatSide">${Views.chatSideItems()}</div>
+    </aside>
+    <div class="chat-main">
+      <header class="chat-head">
+        <button type="button" class="btn-icon sm only-mobile" data-act="chatBack" title="Konuşmalar">${ic('left', 16)}</button>
+        ${head}
+      </header>
+      <div class="chat-list" id="chatList" role="log" aria-live="polite">${Views.chatMessages()}</div>
+      <div class="composer">
+        <textarea class="input" id="chatInput" rows="1" maxlength="1000" placeholder="${dm ? `${esc(firstName(peer.name))} adlı kişiye özel mesaj yaz…` : 'Mesaj yaz… · @Gemini ile yapay zekaya sor'}" autocomplete="off">${esc(Chat.drafts[Chat.channel] || '')}</textarea>
+        <button class="send-btn" data-act="sendChat" title="Gönder">${ic('send', 19)}</button>
+      </div>
+      <div class="composer-hint">${dm ? 'Enter: gönder · Shift + Enter: yeni satır · Özel mesajlarda @Gemini çalışmaz, Genel Sohbet\'te kullan' : 'Enter: gönder · Shift + Enter: yeni satır · <b>@Ad</b> ile birini, <b>@herkes</b> ile tüm ekibi etiketle · <b>@Gemini</b> ile yapay zekaya sor'}</div>
     </div>
-    <div class="composer-hint">Enter: gönder · Shift + Enter: yeni satır · Mesajı <b>@Gemini</b> ile başlatırsan yapay zeka herkesin göreceği şekilde cevaplar</div>
   </section>`;
+};
+
+/* ---- Tarayıcı (sistem) bildirimleri ----
+   • Masaüstü tarayıcılarda sayfa açıkken (başka sekmede / küçültülmüşken bile) çalışır.
+   • Android Chrome sayfadan doğrudan bildirime izin vermez: index.html'nin yanına sw.js konursa onu kullanır.
+   • Tarayıcı tamamen kapalıyken bildirim için sunucu tarafı Web Push (FCM) gerekir — bu sürümde yok. */
+const Notify = {
+  BASE_TITLE: 'Squad Pulse · Canlı Ekip Takip',
+  askedKey() { return 'squadpulse.notifyAsked.' + (Auth.current || ''); },   // kişi başına bir kez sorulur
+  swReg: null, ctorBroken: false, _icon: null,
+  supported() { return 'Notification' in window; },
+  permission() { return this.supported() ? Notification.permission : 'unsupported'; },
+  prefs(u = Auth.user()) { const n = (u && u.prefs && u.prefs.notify) || {}; return { dm: n.dm !== false, mention: n.mention !== false, all: !!n.all }; },
+  /** Sayfa arka planda mı? (başka sekme, küçültülmüş pencere veya başka uygulama önde) */
+  background() { return document.hidden || !document.hasFocus(); },
+  async request(fromUser = true) {
+    if (!this.supported()) { if (fromUser) toast('Bu tarayıcı sistem bildirimlerini desteklemiyor.', 'error'); return 'unsupported'; }
+    try { localStorage.setItem(this.askedKey(), '1'); } catch (e) {}
+    if (Notification.permission !== 'default') {
+      if (fromUser && Notification.permission === 'denied') toast('Bildirimler bu site için engellenmiş. Adres çubuğundaki kilit/ayar simgesinden "Bildirimler → İzin ver" seçmelisin.', 'error');
+      return Notification.permission;
+    }
+    let r = 'default';
+    try { r = await Notification.requestPermission(); } catch (e) { r = 'denied'; }
+    if (fromUser || r === 'granted') toast(r === 'granted' ? '🔔 Bildirimler açıldı' : 'Bildirim izni verilmedi', r === 'granted' ? 'success' : 'info');
+    if (App.view === 'profile' || App.view === 'chat') App.render();
+    return r;
+  },
+  /** Girişte bir kez sor (kullanıcı tıklamasıyla tetiklendiği için tarayıcılar izin verir) */
+  maybeAskOnLogin() {
+    if (!this.supported() || Notification.permission !== 'default') return;
+    let asked = false; try { asked = localStorage.getItem(this.askedKey()) === '1'; } catch (e) {}
+    if (!asked) this.request(false);
+  },
+  icon() {
+    if (this._icon) return this._icon;
+    try {
+      const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
+      const g = x.createLinearGradient(0, 0, 128, 128); g.addColorStop(0, '#6366f1'); g.addColorStop(1, '#ec4899');
+      x.fillStyle = g; x.beginPath(); x.roundRect ? x.roundRect(0, 0, 128, 128, 34) : x.rect(0, 0, 128, 128); x.fill();
+      x.strokeStyle = '#fff'; x.lineWidth = 10; x.lineCap = x.lineJoin = 'round';
+      x.beginPath(); x.moveTo(18, 68); x.lineTo(42, 68); x.lineTo(54, 40); x.lineTo(74, 92); x.lineTo(86, 64); x.lineTo(110, 64); x.stroke();
+      this._icon = c.toDataURL('image/png');
+    } catch (e) { this._icon = ''; }
+    return this._icon;
+  },
+  /** İsteğe bağlı service worker (sw.js yanındaysa ve sayfa http/https'ten açıldıysa) */
+  async initSW() {
+    if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
+    try {
+      this.swReg = await navigator.serviceWorker.register('sw.js');
+      navigator.serviceWorker.addEventListener('message', e => { if (e.data && e.data.type === 'open-chat') { try { window.focus(); } catch (_) {} Chat.open(e.data.channel || 'general'); } });
+    } catch (e) { this.swReg = null; /* sw.js yok: masaüstünde yine çalışır */ }
+  },
+  /** Sistem bildirimi göster; tıklanınca ilgili sohbeti açar */
+  show({ title, body, tag, channel, force = false }) {
+    if (this.permission() !== 'granted') return false;
+    if (!force && !this.background()) return false;
+    const opts = { body: String(body || '').slice(0, 180), tag: tag || 'squadpulse', icon: this.icon(), data: { channel }, renotify: true };
+    if (this.swReg && this.swReg.active) { this.swReg.showNotification(title, opts).catch(() => {}); return true; }
+    if (this.ctorBroken) return false;
+    try {
+      delete opts.renotify; delete opts.data;
+      const n = new Notification(title, opts);
+      n.onclick = e => { if (e && e.preventDefault) e.preventDefault(); try { window.focus(); } catch (_) {} n.close(); if (channel) Chat.open(channel); };
+      return true;
+    } catch (e) { this.ctorBroken = true; return false; }   // mobil tarayıcı: sw.js gerekir
+  },
+  /** Bu mesaj bana hangi tür bildirim olarak gelir? null = bildirim yok */
+  kind(m, me = Auth.current) {
+    if (!m || m.userId === me || m.pending || !m.text) return null;
+    if (m.recipientId) return m.recipientId === me ? 'dm' : null;
+    if (m.bot) return m.askedBy === me ? 'mention' : 'all';
+    if (Mentions.hits(m.text, me)) return 'mention';
+    return 'all';
+  },
+  plain(m) { return m.bot ? m.text.replace(/```[\s\S]*?```/g, ' ').replace(/[*`#_>]/g, '').replace(/\s+/g, ' ').trim() : m.text; },
+  /** Yeni gelen mesajlar için: arka plandaysa sistem bildirimi, öndeyse toast */
+  handle(msgs, convVisible) {
+    const pr = this.prefs(), toastLeft = { n: 3 };
+    msgs.forEach(m => {
+      const k = this.kind(m); if (!k) return;
+      const ch = m.recipientId ? m.userId : 'general';
+      const inOpenConv = convVisible && Chat.inChannel(m);
+      const name = m.bot ? Gemini.NAME : Chat.senderName(m), text = this.plain(m);
+      const allowed = (k === 'dm' && pr.dm) || (k === 'mention' && pr.mention) || (k === 'all' && pr.all);
+      if (this.background()) {
+        if (allowed) this.show({
+          title: k === 'dm' ? `🔒 ${name} · özel mesaj` : k === 'mention' ? (m.bot ? '🤖 Gemini sorunu cevapladı' : `📣 ${name} seni etiketledi`) : `💬 ${name} · Genel Sohbet`,
+          body: text, tag: 'sp-' + ch, channel: ch
+        });
+        return;
+      }
+      if (inOpenConv || toastLeft.n <= 0) return;
+      toastLeft.n--;
+      const icon = k === 'dm' ? '🔒' : k === 'mention' ? '📣' : '💬';
+      toast(`${icon} <b>${esc(m.bot ? Gemini.NAME : firstName(name))}${k === 'dm' ? ' (özel)' : k === 'mention' && !m.bot ? ' seni etiketledi' : ''}:</b> ${esc(text.length > 70 ? text.slice(0, 70) + '…' : text)}`);
+    });
+  },
+  status() {
+    const p = this.permission();
+    if (p === 'unsupported') return { cls: 'gray', text: 'Bu tarayıcı desteklemiyor' };
+    if (p === 'granted') return { cls: 'live', text: this.ctorBroken && !(this.swReg && this.swReg.active) ? 'İzin var · bu cihaz için sw.js gerekli' : 'Açık' };
+    if (p === 'denied') return { cls: 'tomato', text: 'Engellendi' };
+    return { cls: 'gray', text: 'Henüz izin verilmedi' };
+  }
+};
+
+/* ---- @etiketleme: @Ad, @herkes / @ekip ---- */
+const Mentions = {
+  norm(s) { return String(s || '').replace(/İ/g, 'i').replace(/I/g, 'ı').toLocaleLowerCase('tr-TR').replace(/ı/g, 'i').normalize('NFD').replace(/[̀-ͯ]/g, ''); },
+  ALL: ['herkes', 'ekip', 'everyone', 'all'],
+  handle(u) { return this.norm(firstName(u.name)); },
+  hits(text, uid) {
+    const u = DB.find('users', uid); if (!u) return false;
+    const t = this.norm(text), re = w => new RegExp('(^|[^a-z0-9_])@' + w + '(?![a-z0-9_])');
+    return this.ALL.some(w => re(w).test(t)) || re(this.handle(u).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).test(t);
+  },
+  /** Kaçışlanmış (escape) metindeki @etiketleri renklendirir */
+  highlight(html, me = Auth.current) {
+    const users = DB.get('users'), meU = DB.find('users', me);
+    return html.replace(/(^|[\s(>])@([^\s@<>.,!?:;()"']+)/g, (all, pre, word) => {
+      const w = this.norm(word);
+      if (w === 'gemini') return `${pre}<span class="mention">@${word}</span>`;
+      const isAll = this.ALL.includes(w), u = users.find(x => this.handle(x) === w);
+      if (!isAll && !u) return all;
+      const mine = isAll || (meU && u && u.id === meU.id);
+      return `${pre}<span class="mention ${mine ? 'is-me' : ''}">@${word}</span>`;
+    });
+  }
 };
 
 /* ---- Gemini Asistan ---- */
@@ -1828,7 +2096,7 @@ const Gemini = {
   },
   async ask(question, me) {
     const s = DB.get('settings');
-    const recent = Chat.list().filter(m => !m.pending && m.text).slice(-11, -1)
+    const recent = Chat.list('general').filter(m => !m.pending && m.text).slice(-11, -1)
       .map(m => `${m.bot ? 'Gemini Asistan' : Chat.senderName(m)}: ${m.text.slice(0, 400)}`).join('\n');
     const system = `Sen "${s.teamName}" ekibinin Squad Pulse uygulamasındaki ekip sohbetinde çalışan yardımcı asistansın (Gemini Asistan). ` +
       `Ekip sohbetinde herkes cevabını görür. Varsayılan olarak Türkçe, samimi, kısa ve net yanıt ver (gerekmedikçe 150 kelimeyi geçme). Gerekirse madde işaretleri kullan.`;
@@ -1945,7 +2213,7 @@ function confirmBox(title, text, okLabel = 'Onayla', danger = true) {
   return new Promise(res => { let done = false; const fin = v => { if (!done) { done = true; res(v); } };
     Modal.open({ title, body: `<p class="muted">${text}</p>`, onClose: () => fin(false), actions: [{ label: 'Vazgeç', onClick: () => fin(false) }, { label: okLabel, cls: danger ? 'btn-danger' : 'btn-primary', onClick: () => fin(true) }] }); });
 }
-function doLogin(u) { Auth.login(u.id); toast(`Hoş geldin, ${esc(firstName(u.name))}!`, 'success'); App.go('dashboard'); }
+function doLogin(u) { Auth.login(u.id); toast(`Hoş geldin, ${esc(firstName(u.name))}!`, 'success'); App.go('dashboard'); Notify.maybeAskOnLogin(); }
 function pinPrompt(u) {
   const check = w => { const inp = $('#pinIn', w); if (inp.value === u.pin) { doLogin(u); return true; } inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake'); inp.value = ''; inp.focus(); return false; };
   Modal.open({ title: `${esc(firstName(u.name))}, PIN kodunu gir`, body: `<div style="display:flex;flex-direction:column;align-items:center;gap:16px">${avatar(u, 64)}<input class="input pin-input" id="pinIn" type="password" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="••••"></div>`,
@@ -2113,11 +2381,18 @@ const Actions = {
     DB.multi(up); toast('Demo kayıtları silindi'); App.render();
   },
   async clearChat() {
-    if (!await confirmBox('Sohbeti temizle', 'Tüm sohbet mesajları HERKES için kalıcı olarak silinecek.', 'Sohbeti temizle')) return;
+    if (!await confirmBox('Sohbeti temizle', 'Genel sohbet ve tüm özel mesajlar HERKES için kalıcı olarak silinecek.', 'Sohbeti temizle')) return;
     DB.multi({ messages: null }); toast('Sohbet temizlendi'); App.render();
   },
   sendChat() { Chat.send(); },
-  gemHint() { const i = $('#chatInput'); if (!i) return; if (!/^\s*@gemini/i.test(i.value)) i.value = '@Gemini ' + i.value.replace(/^\s+/, ''); Chat.draft = i.value; i.focus(); try { i.setSelectionRange(i.value.length, i.value.length); } catch (e) {} },
+  notifyAsk() { Notify.request(true); },
+  notifyTest() {
+    const ok = Notify.show({ title: '🔔 Squad Pulse test bildirimi', body: 'Bildirimler çalışıyor! Bu bildirime tıklayınca Sohbet açılır.', tag: 'sp-test', channel: 'general', force: true });
+    toast(ok ? 'Test bildirimi gönderildi' : 'Bildirim gösterilemedi (bu cihaz için sw.js gerekebilir)', ok ? 'success' : 'error');
+  },
+  openChat(el) { Chat.open(el.dataset.id); },
+  chatBack() { Chat.back(); },
+  gemHint() { const i = $('#chatInput'); if (!i) return; if (!/^\s*@gemini/i.test(i.value)) i.value = '@Gemini ' + i.value.replace(/^\s+/, ''); Chat.drafts.general = i.value; i.focus(); try { i.setSelectionRange(i.value.length, i.value.length); } catch (e) {} },
   unlockAdmin() { AdminGate.prompt(); },
   async testGemini(el) {
     const out = $('#gemTestOut'); el.disabled = true; if (out) out.textContent = '⏳ Gemini\'a deneme isteği gönderiliyor…';
@@ -2183,7 +2458,7 @@ const App = {
     const onResize = () => Chat.stickToBottom();
     window.addEventListener('resize', onResize);
     if (window.visualViewport) window.visualViewport.addEventListener('resize', onResize);
-    document.addEventListener('visibilitychange', () => { if (!document.hidden && this.view === 'chat' && $('#chatList')) { Chat.markRead(); this.updateChatBadge(); } });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && this.view === 'chat' && Chat.convVisible()) { Chat.markRead(); this.updateChatBadge(); } });
     const press = () => { this.pressing = true; clearTimeout(this.pressTimer); this.pressTimer = setTimeout(() => this.release(), 4000); };
     document.addEventListener('pointerdown', press, true);
     document.addEventListener('touchstart', press, { capture: true, passive: true });
@@ -2209,43 +2484,46 @@ const App = {
       if (claim.committed || !(await this.waitFor(() => DB.get('settings') && DB.get('users').length, 6000))) await Seed.run();
     }
     Net.ready = true;
-    Chat.list().forEach(m => this.seenMsgs.add(m.id));
+    DB.get('messages').forEach(m => m && this.seenMsgs.add(m.id));
     this.dayKey = T.key(NOW());
     Auth.restore();
     if (Auth.current) Presence.attach(Auth.current);
     Tracker.autoClose();
     setInterval(() => this.tick(), 1000);
+    Notify.initSW();
     this.started = true;
     this.route();
   },
   /** Yeni sohbet mesajı geldiğinde: sohbet açıksa yalnızca liste güncellenir, değilse rozet + bildirim */
   onMessages() {
-    const answered = Chat.list().filter(m => m.bot && !m.pending && this.pendingBots.has(m.id));
+    const all = Chat.all();
+    const answered = all.filter(m => m.bot && !m.pending && this.pendingBots.has(m.id));
     answered.forEach(m => this.pendingBots.delete(m.id));
-    Chat.list().filter(m => m.bot && m.pending).forEach(m => this.pendingBots.add(m.id));
-    const fresh = Chat.list().filter(m => !this.seenMsgs.has(m.id));
-    fresh.forEach(m => this.seenMsgs.add(m.id));
-    // Gemini cevabı sonradan tamamlandığında (mesaj kimliği zaten görülmüş olsa da) diğer sekmelerde bildirim göster
-    if (!(this.view === 'chat' && $('#chatList'))) answered.forEach(m => { if (!fresh.some(f => f.id === m.id)) fresh.push(m); });
+    all.filter(m => m.bot && m.pending).forEach(m => this.pendingBots.add(m.id));
+    const fresh = all.filter(m => !this.seenMsgs.has(m.id));
+    DB.get('messages').forEach(m => m && this.seenMsgs.add(m.id));
     if (!Auth.current) return;
+    const inChat = this.view === 'chat' && !!$('#chatList');
+    const convVisible = inChat && Chat.convVisible();
+    // Gemini cevabı sonradan tamamlandığında (kimliği zaten görülmüş olsa da) bildirim göster
+    answered.forEach(m => { if ((!(convVisible && Chat.inChannel(m)) || Notify.background()) && !fresh.some(f => f.id === m.id)) fresh.push(m); });
     const sig = Chat.list().map(m => m.id + (m.pending ? 'p' : '') + (m.text || '').length).join('|');
     const changed = sig !== this.msgSig; this.msgSig = sig;
-    if (this.view === 'chat' && $('#chatList')) {
-      if (fresh.length || changed) Chat.renderList(fresh.map(m => m.id));
-      if (!document.hidden) Chat.markRead();
-    } else {
-      fresh.filter(m => m.userId !== Auth.current).slice(-3).forEach(m => {
-        if (m.pending || !m.text) return;
-        const name = m.bot ? Gemini.NAME : firstName(Chat.senderName(m));
-        const plain = m.bot ? m.text.replace(/```[\s\S]*?```/g, ' ').replace(/[*`#_>]/g, '').replace(/\s+/g, ' ').trim() : m.text;
-        toast(`💬 <b>${esc(name)}:</b> ${esc(plain.length > 70 ? plain.slice(0, 70) + '…' : plain)}`);
-      });
+    if (inChat) {
+      const here = fresh.filter(m => Chat.inChannel(m));
+      if (here.length || changed) Chat.renderList(here.map(m => m.id));
+      if (convVisible && !document.hidden) Chat.markRead();
+      Chat.renderSide();
     }
+    // Yeni mesajlar: sayfa arka plandaysa sistem bildirimi, öndeyse (açık konuşmada değilse) toast
+    Notify.handle(fresh, convVisible);
     this.updateChatBadge();
   },
   updateChatBadge() {
+    const n = Chat.unreadTotal();
+    document.title = n ? `(${n > 99 ? '99+' : n}) ${Notify.BASE_TITLE}` : Notify.BASE_TITLE;   // arka plandaki sekmede de görünür
     const b = $('#chatBadge'); if (!b) return;
-    const n = Chat.unread(); b.textContent = n > 99 ? '99+' : n; b.hidden = !n;
+    b.textContent = n > 99 ? '99+' : n; b.hidden = !n;
   },
   release() { this.pressing = false; if (this.pending && !Modal.el) this.scheduleRender(); },
   waitFor(fn, ms) { return new Promise(res => { const t0 = Date.now(); const iv = setInterval(() => { if (fn()) { clearInterval(iv); res(true); } else if (Date.now() - t0 > ms) { clearInterval(iv); res(false); } }, 150); }); },
@@ -2264,8 +2542,11 @@ const App = {
   route() {
     if (!this.started) return;
     let v = 'dashboard';
-    try { v = (location.hash.replace(/^#\/?/, '') || 'dashboard').split('?')[0]; } catch (e) {}
-    if (v === this.view && $('#tabBar')) return;
+    let q = '';
+    try { [v, q = ''] = (location.hash.replace(/^#\/?/, '') || 'dashboard').split('?'); } catch (e) {}
+    const c = new URLSearchParams(q).get('c');
+    if (v === 'chat' && c && Auth.user()) { Chat.channel = DB.find('users', c) ? c : 'general'; Chat.pane = 'conv'; Chat.forceBottom = true; }
+    if (v === this.view && $('#tabBar') && !c) return;
     this.view = this.allowed(v) ? v : 'dashboard';
     this.render();
   },
@@ -2274,6 +2555,7 @@ const App = {
     $$('#tabBar [data-nav]').forEach(btn => btn.addEventListener('click', e => {
       e.preventDefault(); e.stopPropagation();
       this.pressing = false;
+      if (btn.dataset.nav === 'chat') Chat.pane = 'list';   // telefonda Sohbet sekmesi önce konuşma listesini açar
       this.go(btn.dataset.nav);
     }));
   },
@@ -2317,7 +2599,7 @@ const App = {
     }
     if (Math.abs(window.scrollY - y) > 1) window.scrollTo(0, y);
     const ncl = $('#chatList');
-    if (ncl) { ncl.scrollTop = chatAtBottom ? ncl.scrollHeight : chatTop; const ci = $('#chatInput'); if (ci) Chat.autoGrow(ci); if (!document.hidden) Chat.markRead(); }
+    if (ncl) { ncl.scrollTop = (chatAtBottom || Chat.forceBottom) ? ncl.scrollHeight : chatTop; Chat.forceBottom = false; const ci = $('#chatInput'); if (ci) Chat.autoGrow(ci); if (!document.hidden && Chat.convVisible()) Chat.markRead(); }
     this.bindNav();
     this.updateChatBadge();
     this.tick(true);
@@ -2361,12 +2643,16 @@ const App = {
       DB.patchSettings({ [k]: v }); toast('Ayar kaydedildi — tüm ekibe yansıdı', 'success');
       if (k === 'teamName') this.render(); return;
     }
+    if (t.dataset.notify) {
+      const u = Auth.user(), prefs = { ...Theme.prefs(u), notify: { ...Notify.prefs(u), [t.dataset.notify]: t.checked } };
+      DB.update('users', u.id, { prefs }); toast('Bildirim tercihi kaydedildi', 'success'); return;
+    }
     if (t.dataset.pref) updatePrefs({ [t.dataset.pref]: t.dataset.pref === 'texOpacity' ? +t.value : t.value });
   },
   onInput(e) {
     const t = e.target;
     if (t.id === 'pulseInput') savePulse(false);
-    if (t.id === 'chatInput') { Chat.draft = t.value; Chat.autoGrow(t); }
+    if (t.id === 'chatInput') { Chat.drafts[Chat.channel] = t.value; Chat.autoGrow(t); }
     if (t.dataset.pref === 'texOpacity') { document.documentElement.style.setProperty('--tex-opacity', t.value); const v = $('#texVal'); if (v) v.textContent = '%' + Math.round(t.value * 100); }
   },
 
