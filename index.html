@@ -613,6 +613,102 @@ html[data-mode="light"] #notifyGate{background:radial-gradient(ellipse at 50% 0%
 .fade-in{animation:fadeIn .35s var(--ease)}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}}
 
+/* =========================================================
+   LIQUID GLASS — Akışkan Cam Tasarım Katmanı
+   ========================================================= */
+html[data-mode="dark"]{
+  --glass-bg:rgba(20,23,36,.34); --glass-bg-strong:rgba(26,30,46,.55); --glass-bg-soft:rgba(255,255,255,.035);
+  --glass-border:rgba(255,255,255,.08); --glass-border-hi:rgba(255,255,255,.14);
+  --glass-hi:inset 0 1px 0 rgba(255,255,255,.07),inset 0 0 0 .5px rgba(255,255,255,.02);
+  --topbar-bg:rgba(11,13,20,.28); --topbar-bg-stuck:rgba(11,13,20,.7);
+  --modal-bg:rgba(22,25,37,.86);
+  --lq-a1:.46; --lq-a2:.28; --lq-a3:.22;
+}
+html[data-mode="light"]{
+  --glass-bg:rgba(255,255,255,.42); --glass-bg-strong:rgba(255,255,255,.66); --glass-bg-soft:rgba(255,255,255,.32);
+  --glass-border:rgba(255,255,255,.6); --glass-border-hi:rgba(255,255,255,.85);
+  --glass-hi:inset 0 1px 0 rgba(255,255,255,.75),inset 0 0 0 .5px rgba(20,28,60,.06);
+  --topbar-bg:rgba(242,243,248,.32); --topbar-bg-stuck:rgba(242,243,248,.74);
+  --modal-bg:rgba(255,255,255,.9);
+  --lq-a1:.30; --lq-a2:.20; --lq-a3:.16;
+}
+
+/* ---- Cam kartlar ---- */
+.card{background:var(--glass-bg);border:1px solid var(--glass-border);box-shadow:var(--shadow),var(--glass-hi);-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%)}
+.modal{background:var(--modal-bg)}
+
+/* ---- Cam kenar çubuğu ---- */
+.sidebar .side{background:var(--glass-bg);border:1px solid var(--glass-border);box-shadow:var(--shadow),var(--glass-hi);-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%)}
+.me{background:var(--glass-bg-soft);border:1px solid var(--glass-border);box-shadow:var(--glass-hi)}
+
+/* ---- Cam menü elemanları ---- */
+.nav-item{border:1px solid transparent}
+.nav-item:hover{background:var(--glass-bg-soft);border-color:var(--glass-border)}
+.nav-item.active{background:linear-gradient(135deg,rgba(var(--accent-rgb),.22),rgba(var(--accent-rgb),.08));border-color:rgba(var(--accent-rgb),.28);box-shadow:var(--glass-hi),0 8px 22px -14px rgba(var(--accent-rgb),.8)}
+.seg{background:var(--glass-bg-soft);border:1px solid var(--glass-border);-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%)}
+.seg button.on{background:var(--glass-bg-strong);box-shadow:var(--shadow-sm),var(--glass-hi)}
+.btn-icon{background:var(--glass-bg);border-color:var(--glass-border);box-shadow:var(--glass-hi);-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%)}
+.btn-icon:hover{background:var(--glass-bg-strong);border-color:var(--glass-border-hi)}
+.clock-pill{background:var(--glass-bg);border-color:var(--glass-border);box-shadow:var(--shadow-sm),var(--glass-hi);-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%)}
+
+/* ---- Cam girdiler ---- */
+.input{background:var(--glass-bg-soft);border:1px solid var(--glass-border);box-shadow:var(--glass-hi);-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%)}
+.input:focus{background:var(--glass-bg-strong);border-color:rgba(var(--accent-rgb),.6);box-shadow:0 0 0 4px rgba(var(--accent-rgb),.15),var(--glass-hi)}
+select.input{background-color:var(--glass-bg-soft)}
+select.input:focus{background-color:var(--glass-bg-strong)}
+
+/* ---- Sticky buzlu üst bar ---- */
+.topbar{position:sticky;top:0;z-index:100;margin:-26px -34px 24px;padding:26px 34px 16px;background:var(--topbar-bg);border-bottom:1px solid transparent;-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);transition:background-color .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease),padding .3s var(--ease)}
+html.is-scrolled .topbar{background:var(--topbar-bg-stuck);border-bottom-color:var(--glass-border);box-shadow:0 12px 30px -22px rgba(0,0,0,.55),var(--glass-hi);padding-top:16px;padding-bottom:12px}
+@media (max-width:900px){
+  .topbar{margin:-18px -16px 18px;padding:18px 16px 14px}
+  html.is-scrolled .topbar{padding-top:12px;padding-bottom:10px}
+}
+
+/* ---- Akışkan arka planlar (mesh & aurora) ---- */
+.texture{overflow:hidden}
+.texture.tx-mesh{background:radial-gradient(ellipse at 50% 45%,rgba(var(--accent-rgb),.07),transparent 70%)}
+.texture.tx-aurora{background:linear-gradient(180deg,rgba(var(--accent-rgb),.06),transparent 55%)}
+.texture.tx-mesh::before,.texture.tx-mesh::after,.texture.tx-aurora::before,.texture.tx-aurora::after{content:"";position:absolute;inset:-35%;pointer-events:none;will-change:transform;transform-origin:50% 50%}
+.texture.tx-mesh::before{
+  background:
+    radial-gradient(circle at 32% 30%,rgba(var(--accent-rgb),var(--lq-a1)) 0,transparent 24%),
+    radial-gradient(circle at 70% 28%,rgba(236,72,153,var(--lq-a2)) 0,transparent 22%),
+    radial-gradient(circle at 64% 72%,rgba(20,184,166,var(--lq-a2)) 0,transparent 24%);
+  animation:lqDriftA 38s ease-in-out infinite alternate}
+.texture.tx-mesh::after{
+  background:
+    radial-gradient(circle at 30% 70%,rgba(245,158,11,var(--lq-a3)) 0,transparent 22%),
+    radial-gradient(circle at 76% 56%,rgba(var(--accent-rgb),var(--lq-a3)) 0,transparent 20%),
+    radial-gradient(circle at 46% 44%,rgba(139,92,246,var(--lq-a3)) 0,transparent 18%);
+  animation:lqDriftB 52s ease-in-out infinite alternate}
+.texture.tx-aurora::before{
+  background:
+    radial-gradient(ellipse 34% 16% at 38% 24%,rgba(var(--accent-rgb),var(--lq-a1)),transparent 72%),
+    radial-gradient(ellipse 26% 14% at 66% 22%,rgba(56,189,248,var(--lq-a2)),transparent 72%),
+    radial-gradient(ellipse 20% 12% at 52% 30%,rgba(20,184,166,var(--lq-a3)),transparent 72%);
+  animation:lqAurora 32s ease-in-out infinite alternate}
+.texture.tx-aurora::after{
+  background:
+    radial-gradient(ellipse 30% 15% at 58% 76%,rgba(168,85,247,var(--lq-a2)),transparent 72%),
+    radial-gradient(ellipse 22% 12% at 28% 68%,rgba(236,72,153,var(--lq-a3)),transparent 72%);
+  animation:lqDriftB 46s ease-in-out infinite alternate-reverse}
+@keyframes lqDriftA{
+  0%{transform:translate3d(-5%,-4%,0) rotate(0deg) scale(1)}
+  50%{transform:translate3d(5%,3%,0) rotate(22deg) scale(1.12)}
+  100%{transform:translate3d(-2%,6%,0) rotate(-14deg) scale(.94)}
+}
+@keyframes lqDriftB{
+  0%{transform:translate3d(4%,5%,0) rotate(0deg) scale(1.06)}
+  50%{transform:translate3d(-6%,-2%,0) rotate(-26deg) scale(.92)}
+  100%{transform:translate3d(3%,-5%,0) rotate(16deg) scale(1.1)}
+}
+@keyframes lqAurora{
+  0%{transform:translate3d(-6%,0,0) skewX(-8deg) scaleY(1)}
+  50%{transform:translate3d(4%,2%,0) skewX(10deg) scaleY(1.25)}
+  100%{transform:translate3d(7%,-1%,0) skewX(-4deg) scaleY(.9)}
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width:1180px){
   .g-dash{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -2619,6 +2715,9 @@ const App = {
     });
     document.addEventListener('focusout', e => { const t = e.target; if (t && t.dataset && t.dataset.dirty) { delete t.dataset.dirty; this.onChange({ target: t }); } if (t && t.id === 'pulseInput') savePulse(true); });
     window.addEventListener('hashchange', () => this.route());
+    const onPageScroll = () => document.documentElement.classList.toggle('is-scrolled', (window.scrollY || document.documentElement.scrollTop || 0) > 8);
+    window.addEventListener('scroll', onPageScroll, { passive: true });
+    onPageScroll();
     document.addEventListener('scroll', e => { if (e.target && e.target.id === 'chatList') { const l = e.target; Chat.stick = l.scrollHeight - l.scrollTop - l.clientHeight < 80; } }, true);
     const onResize = () => Chat.stickToBottom();
     window.addEventListener('resize', onResize);
