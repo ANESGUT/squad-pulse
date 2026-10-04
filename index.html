@@ -1807,6 +1807,220 @@ html[data-mode="light"] .cl-row{background:linear-gradient(rgba(255,255,255,.55)
 .msg-sys.pop{animation:sysPop .6s ease both}
 @keyframes sysPop{0%{opacity:0;transform:scale(.9)}30%{opacity:1;transform:scale(1.04) rotate(-1.5deg)}55%{transform:rotate(1.2deg)}80%{transform:rotate(-.5deg)}100%{transform:none}}
 @media (max-width:640px){.cmp-tools .cmp-soft{display:none}}
+/* =========================================================
+   SOSYAL ALAN · MİNİ OYUNLAR
+   ========================================================= */
+.social{display:flex;flex-direction:column;gap:18px}
+.soc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.soc-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:16px;border-radius:20px;text-align:left;color:var(--text);
+  background:var(--glass-sheen,none),linear-gradient(rgba(255,255,255,.04),rgba(255,255,255,.04));border:1px solid var(--glass-border,var(--border));box-shadow:var(--glass-hi,none);transition:transform .25s var(--ease-io,ease),border-color .25s,background .3s}
+html[data-mode="light"] .soc-card{background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.6))}
+.soc-card *{pointer-events:none}
+.soc-card:hover{transform:translateY(-4px);border-color:rgba(var(--accent-rgb),.4)}
+.soc-emoji{font-size:34px;line-height:1.1;margin-bottom:4px;transition:transform .3s var(--ease)}
+.soc-card:hover .soc-emoji{transform:scale(1.15) rotate(-6deg)}
+.soc-card b{font-size:15px}
+.soc-card small{font-size:12.5px;color:var(--muted);line-height:1.4}
+.soc-card em{margin-top:auto;padding-top:8px;font-style:normal;font-size:11.5px;font-weight:700;color:var(--accent)}
+.soc-inv-row,.sr-row,.sb-row{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:14px}
+.soc-inv-row{background:rgba(var(--accent-rgb),.07);border:1px solid rgba(var(--accent-rgb),.2);margin-bottom:6px}
+.soc-inv-row>div,.sr-row>div{flex:1;min-width:0}
+.soc-inv-row b,.sr-row b{display:block;font-size:13.5px}
+.soc-inv-row small,.sr-row small{font-size:11.5px;color:var(--muted)}
+.gs-emoji{font-size:30px;line-height:1}.gs-emoji.sm{font-size:22px}
+.soc-board,.soc-recent{display:flex;flex-direction:column;gap:4px}
+.sb-row:nth-child(odd),.sr-row:nth-child(odd){background:rgba(var(--ink),.035)}
+.sb-row.me{box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb),.3)}
+.sb-rank{width:26px;text-align:center;font-weight:800}
+.sb-row b{flex:1;min-width:0;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-by{font-size:12px;color:var(--muted);letter-spacing:.02em}
+.sb-row em,.sr-row em{font-style:normal;font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+.sr-row em.w{color:#22c55e}.sr-row em.l{color:#ef4444}.sr-row em.d{color:#f59e0b}
+.sr-row>span{font-size:20px}
+/* oyun sahnesi */
+.game-stage{padding:18px;border-color:rgba(var(--accent-rgb),.3)}
+.gs-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.gs-head>div:nth-child(2){flex:1;min-width:0}
+.gs-head h3{font-size:18px}
+.gs-head small{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:12.5px;color:var(--muted)}
+.gs-vs{display:inline-flex;align-items:center;gap:5px;font-weight:650;color:var(--text)}
+.gs-head small i{font-style:normal;font-size:11px;opacity:.6}
+.gs-turn{color:var(--accent);font-weight:700}
+.gs-btns{display:flex;gap:6px;align-items:center}
+.g-dot{display:inline-block;width:10px;height:10px;border-radius:50%;vertical-align:middle}
+.gs-body{display:flex;flex-direction:column;align-items:center;gap:14px}
+.g-score{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;max-width:520px;padding:8px 12px;border-radius:14px;background:rgba(var(--ink),.04);font-size:13px}
+.g-score span{display:inline-flex;align-items:center;gap:6px}
+.g-score b{font-size:18px;font-variant-numeric:tabular-nums}
+.g-score em{font-style:normal;font-size:11.5px;color:var(--muted);text-align:center}
+.g-hint{font-size:13px;color:var(--muted);text-align:center}
+.gs-result{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px;margin-bottom:12px;border-radius:18px;text-align:center;animation:attIn .4s var(--ease) both}
+.gs-result b{font-size:22px}.gs-result small{color:var(--muted)}
+.gs-result.win{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3)}.gs-result.win b{color:#22c55e}
+.gs-result.lose{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25)}
+.gs-result.draw{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3)}
+.gs-lobby{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.gl-p{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;font-size:13px;font-weight:650;background:rgba(var(--ink),.05);border:1px solid var(--glass-border,var(--border))}
+.gl-p em{font-style:normal;font-weight:500;font-size:11.5px;color:var(--muted)}
+.gl-p.ok{border-color:rgba(34,197,94,.35)}.gl-p.no{opacity:.55}.gl-p.wait em{animation:pulse 1.8s infinite}
+/* XOX */
+.xox-board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(300px,80vw)}
+.xox-cell{aspect-ratio:1;border-radius:18px;border:1px solid var(--glass-border,var(--border));background:rgba(var(--ink),.04);font-size:46px;font-weight:800;display:grid;place-items:center;color:var(--text);transition:background .2s,transform .15s,border-color .2s}
+.xox-board.my-turn .xox-cell:not(.filled):hover{background:rgba(var(--accent-rgb),.1);border-color:rgba(var(--accent-rgb),.4);transform:scale(1.03)}
+.xox-cell span{animation:popIn .25s var(--ease)}
+.xox-cell.m-X span{color:var(--accent)}.xox-cell.m-O span{color:#f59e0b}
+.xox-cell.win{background:rgba(34,197,94,.18);border-color:#22c55e}
+.xox-cell.last{box-shadow:inset 0 0 0 2px rgba(var(--ink),.12)}
+/* Dört Taş */
+.c4-board{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;padding:10px;border-radius:20px;width:min(440px,92vw);background:linear-gradient(160deg,rgba(var(--accent-rgb),.22),rgba(var(--accent-rgb),.08));border:1px solid rgba(var(--accent-rgb),.3)}
+.c4-col{display:grid;grid-template-rows:repeat(6,1fr);gap:6px;padding:4px;border:0;border-radius:12px;background:transparent;transition:background .2s}
+.c4-col *{pointer-events:none}
+.c4-board.my-turn .c4-col:not([disabled]):hover{background:rgba(255,255,255,.08)}
+.c4-cell{aspect-ratio:1;border-radius:50%;background:rgba(var(--ink),.12);box-shadow:inset 0 2px 4px rgba(0,0,0,.25)}
+.c4-cell.on{background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--disc) 60%,#fff),var(--disc));box-shadow:inset 0 -3px 0 rgba(0,0,0,.18)}
+.c4-cell.last{animation:c4Drop .35s cubic-bezier(.3,1.4,.5,1)}
+@keyframes c4Drop{from{transform:translateY(-120px)}}
+.c4-cell.win{outline:3px solid #fff;outline-offset:-3px}
+/* Taş-Kağıt-Makas */
+.rps-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+.rps-picks{display:flex;gap:10px}
+.rps-btn{display:flex;flex-direction:column;align-items:center;gap:4px;width:96px;padding:14px 8px;border-radius:20px;border:1px solid var(--glass-border,var(--border));background:rgba(var(--ink),.04);color:var(--text);font-weight:650;font-size:13px;transition:transform .2s,background .2s,border-color .2s}
+.rps-btn span{font-size:40px;line-height:1.1}
+.rps-btn:not([disabled]):hover{transform:translateY(-4px) rotate(-4deg);border-color:rgba(var(--accent-rgb),.4)}
+.rps-btn.on{background:rgba(var(--accent-rgb),.16);border-color:var(--accent)}
+.rps-btn[disabled]:not(.on){opacity:.4}
+.rps-reveal{display:flex;align-items:center;gap:18px;padding:10px 18px;border-radius:18px;background:rgba(var(--ink),.04);animation:attIn .4s var(--ease)}
+.rps-reveal>div{display:flex;flex-direction:column;align-items:center}
+.rps-big{font-size:44px;animation:rpsShake .5s ease}
+.rps-reveal small{font-size:11.5px;color:var(--muted)}
+@keyframes rpsShake{0%,60%{transform:translateY(0)}20%{transform:translateY(-10px)}40%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+/* Hız Testi */
+.rx-pad{width:min(520px,100%);height:220px;border-radius:26px;border:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;font-size:15px;touch-action:manipulation;user-select:none;-webkit-user-select:none;transition:background .12s}
+.rx-pad b{font-size:30px;letter-spacing:.02em}
+.rx-pad small{opacity:.85}
+.rx-pad.st-wait{background:linear-gradient(160deg,#ef4444,#b91c1c);cursor:pointer}
+.rx-pad.st-go{background:linear-gradient(160deg,#22c55e,#15803d);cursor:pointer;animation:rxGo .4s ease}
+.rx-pad.st-won{background:linear-gradient(160deg,rgba(var(--accent-rgb),.9),rgba(var(--accent-rgb),.6))}
+.rx-pad.st-lost{background:linear-gradient(160deg,#64748b,#334155)}
+@keyframes rxGo{from{transform:scale(.97)}}
+/* Emoji Hafıza */
+.mm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:min(380px,90vw)}
+.mm-card{position:relative;aspect-ratio:1;border:0;padding:0;border-radius:14px;background:transparent;perspective:600px}
+.mm-card span{position:absolute;inset:0;display:grid;place-items:center;border-radius:14px;backface-visibility:hidden;transition:transform .4s var(--ease)}
+.mm-card .mc-back{background:linear-gradient(150deg,rgba(var(--accent-rgb),.55),rgba(var(--accent-rgb),.25));color:#fff;font-weight:800;font-size:20px;border:1px solid rgba(var(--accent-rgb),.4)}
+.mm-card .mc-face{transform:rotateY(180deg);background:var(--glass-bg-strong,var(--surface));border:1px solid var(--glass-border,var(--border));font-size:30px}
+.mm-card.up .mc-back{transform:rotateY(180deg)}
+.mm-card.up .mc-face{transform:rotateY(360deg)}
+.mm-card.matched .mc-face{box-shadow:inset 0 0 0 2px var(--own);background:color-mix(in srgb,var(--own) 14%,var(--glass-bg-strong,var(--surface)))}
+.mm-card.miss .mc-face{box-shadow:inset 0 0 0 2px #ef4444}
+.mm-grid.my-turn .mm-card:not(.up):hover .mc-back{filter:brightness(1.15)}
+/* Adam Asmaca */
+.hm-wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:center}
+.hm-svg{width:130px;height:140px;stroke:var(--text);stroke-width:3.5;fill:none;stroke-linecap:round}
+.hm-gal{stroke:var(--muted)}
+.hm-part{opacity:0;transition:opacity .3s}.hm-part.on{opacity:1;animation:attIn .3s}
+.hm-word{display:flex;flex-wrap:wrap;gap:6px;max-width:440px;justify-content:center}
+.hm-l{width:30px;height:40px;display:grid;place-items:center;font-size:22px;font-weight:800;border-bottom:3px solid var(--muted)}
+.hm-l.on{border-color:var(--accent);animation:popIn .25s}
+.hm-l.miss{color:#ef4444}
+.hm-gap{width:14px}
+.hm-keys{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:560px}
+.hm-key{width:38px;height:40px;border-radius:10px;border:1px solid var(--glass-border,var(--border));background:rgba(var(--ink),.05);color:var(--text);font-weight:750;font-size:15px;transition:.15s}
+.hm-key:not([disabled]):hover{background:rgba(var(--accent-rgb),.15);border-color:var(--accent)}
+.hm-key.hit{background:rgba(34,197,94,.2);color:#22c55e;border-color:transparent}
+.hm-key.miss{background:rgba(239,68,68,.12);color:#ef4444;border-color:transparent;opacity:.6}
+.hm-key[disabled]:not(.hit):not(.miss){opacity:.45}
+.hm-solve{display:flex;gap:8px;width:min(460px,100%)}
+/* Açık Artırma */
+.g-auction .gs-body{align-items:stretch}
+.au-people{display:flex;flex-wrap:wrap;gap:8px}
+.au-p{display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:14px;background:rgba(var(--ink),.04);border:1px solid var(--glass-border,var(--border));transition:border-color .3s,background .3s}
+.au-p b{display:block;font-size:12.5px}.au-p small{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.au-p.lead{border-color:#22c55e;background:rgba(34,197,94,.1)}
+.au-p.host{border-style:dashed}
+.au-p em{font-style:normal;font-size:11px;color:var(--muted)}.au-p em.ok{color:#22c55e}
+.au-stage{display:flex;flex-direction:column;gap:14px;padding:16px;border-radius:22px;background:rgba(var(--ink),.035);border:1px solid var(--glass-border,var(--border))}
+.au-stage.sold{border-color:rgba(245,158,11,.4)}
+.au-lot{display:flex;align-items:center;gap:16px}
+.au-emoji{font-size:58px;line-height:1;filter:drop-shadow(0 8px 14px rgba(0,0,0,.3));animation:popIn .4s var(--ease)}
+.au-info{flex:1;min-width:0}
+.au-info small{font-size:11.5px;color:var(--muted);font-weight:650}
+.au-info h3{font-size:20px;margin:2px 0 4px}
+.au-hint{display:inline-block;font-size:12.5px;padding:3px 10px;border-radius:999px;background:rgba(var(--accent-rgb),.12);color:color-mix(in srgb,var(--accent) 75%,var(--text));font-weight:650}
+.au-real{display:inline-block;margin-left:6px;font-size:12.5px;padding:3px 10px;border-radius:999px;background:rgba(245,158,11,.14);color:#f59e0b;font-weight:650}
+.au-timer{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;padding:8px 14px;border-radius:14px;background:rgba(var(--ink),.06);min-width:84px;text-align:center}
+.au-timer.hot{color:#ef4444;animation:pulse 1s infinite}
+.au-bid{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.au-bid span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.au-bid b{font-size:36px;font-variant-numeric:tabular-nums;animation:popIn .3s}
+.au-bid small{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.au-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.au-actions>.btn{flex-direction:column;gap:0;min-width:96px;height:auto;padding:8px 12px}
+.au-actions>.btn small{font-size:11px;color:var(--muted);font-weight:600}
+.au-custom{display:flex;gap:8px;flex:1 1 260px;max-width:420px}
+.au-custom .input{min-width:0}
+.au-sold{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px;animation:auHammer .6s cubic-bezier(.3,1.5,.5,1)}
+.au-sold b{font-size:30px;letter-spacing:.06em;color:#f59e0b}
+.au-sold span{display:inline-flex;align-items:center;gap:8px;font-weight:700}
+.au-sold small{color:var(--muted);font-size:12px}
+.au-sold.none b{color:var(--muted)}
+@keyframes auHammer{0%{transform:scale(1.6) rotate(-8deg);opacity:0}60%{transform:scale(.95) rotate(2deg);opacity:1}100%{transform:none}}
+.au-wait{padding:30px;text-align:center;color:var(--muted)}
+.au-setup{display:flex;flex-direction:column;gap:12px}
+.au-lots{display:flex;flex-direction:column;gap:6px;max-height:360px;overflow:auto;padding-right:4px}
+.au-lot-row{display:grid;grid-template-columns:32px minmax(0,1fr) auto 120px;gap:8px;align-items:center}
+.au-lot-row>span{font-size:22px;text-align:center}
+.au-lot-row small{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.au-lot-row .input{padding:8px 10px;font-size:13px}
+.au-end{display:flex;flex-direction:column;gap:10px}
+.au-end h3{text-align:center;font-size:18px}
+.au-res{padding:12px 14px;border-radius:18px;background:rgba(var(--ink),.04);border:1px solid var(--glass-border,var(--border));animation:attIn .5s var(--ease) both;animation-delay:var(--d)}
+.au-res.up{border-color:rgba(34,197,94,.3)}.au-res.down{border-color:rgba(239,68,68,.25)}
+.au-res-head{display:flex;align-items:center;gap:10px}
+.au-res-head b{flex:1;font-size:15px}
+.au-medal{font-size:22px;width:28px;text-align:center}
+.au-pl{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+.au-res.up .au-pl{color:#22c55e}.au-res.down .au-pl{color:#ef4444}
+.au-res-sub{font-size:12px;color:var(--muted);margin:4px 0 0 38px}
+.au-items{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0 38px}
+.au-items span{font-size:12px;padding:4px 9px;border-radius:10px;background:rgba(var(--ink),.05)}
+.au-items span.good{box-shadow:inset 0 0 0 1px rgba(34,197,94,.35)}.au-items span.bad{box-shadow:inset 0 0 0 1px rgba(239,68,68,.3)}
+.au-items small{color:var(--muted)}
+.au-all summary{cursor:pointer;font-size:13px;font-weight:650;color:var(--muted);padding:6px 2px}
+.au-all>div{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;padding:6px 8px;font-size:12.5px;border-bottom:1px solid var(--glass-border,var(--border))}
+.au-all small{color:var(--muted)}
+/* davet penceresi + kurulum */
+.modal.modal-game{width:min(560px,100%)}
+.gp-people{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.gp-opt input{display:none}
+.gp-opt>span{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;border-radius:16px;border:1.5px solid var(--glass-border,var(--border));background:rgba(var(--ink),.03);cursor:pointer;text-align:center;transition:.2s}
+.gp-opt b{font-size:13px}.gp-opt small{font-size:11px;color:var(--muted)}
+.gp-opt input:checked+span{border-color:var(--accent);background:rgba(var(--accent-rgb),.12);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.12)}
+.gp-sec{margin-top:14px}
+.gp-sec .lbl{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:650;color:var(--muted);margin:0}
+.gp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gp-seg{margin-top:6px;flex-wrap:wrap}
+.gp-custom{display:grid;gap:8px;margin-top:10px}
+.gp-custom[hidden]{display:none}
+#gameInvite{position:fixed;left:50%;top:16px;z-index:9550;width:min(520px,calc(100vw - 24px));transform:translate(-50%,-140%);opacity:0;transition:transform .35s var(--ease),opacity .25s}
+#gameInvite.show{transform:translate(-50%,0);opacity:1}
+.gi-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:20px;background:var(--glass-sheen,none),linear-gradient(rgba(var(--accent-rgb),.12),rgba(var(--accent-rgb),.04)),linear-gradient(var(--pop-bg,var(--surface-solid)),var(--pop-bg,var(--surface-solid)));border:1px solid rgba(var(--accent-rgb),.4);box-shadow:0 22px 50px -18px rgba(0,0,0,.6),var(--glass-hi,none);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px)}
+.gi-emoji{font-size:30px;animation:nudgeBtn 1.2s ease infinite}
+.gi-txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.gi-txt b{font-size:14px}.gi-txt small,.gi-time{font-size:11.5px;color:var(--muted)}
+.gi-btns{display:flex;flex-direction:column;gap:6px}
+.g-confetti{position:fixed;inset:0;z-index:9800;pointer-events:none;overflow:hidden}
+.g-confetti i{position:absolute;left:var(--x);top:-40px;font-style:normal;font-size:24px;animation:gConf 2.2s cubic-bezier(.2,.6,.4,1) var(--d) forwards}
+@keyframes gConf{to{transform:translateY(110vh) rotate(var(--r))}}
+@media (max-width:640px){
+  .gs-head{flex-wrap:wrap}.gs-btns{width:100%;justify-content:flex-end}
+  .soc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rps-btn{width:84px}
+  .gp-grid{grid-template-columns:1fr}
+  .au-lot{flex-wrap:wrap}.au-emoji{font-size:44px}
+  .au-lot-row{grid-template-columns:28px minmax(0,1fr) 96px}.au-lot-row small{display:none}
+  .gi-card{flex-wrap:wrap}.gi-btns{flex-direction:row;width:100%}.gi-btns .btn{flex:1}
+}
 </style>
 </head>
 <body>
@@ -1940,6 +2154,7 @@ const ICONS = {
   briefcase: '<rect x="2" y="7" width="20" height="14" rx="2.5"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M2 13h20"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   vibrate: '<path d="m2 8 2 2-2 2 2 2-2 2"/><path d="m22 8-2 2 2 2-2 2 2 2"/><rect x="8" y="5" width="8" height="14" rx="1.5"/>',
+  game: '<rect x="2" y="6" width="20" height="12" rx="5"/><path d="M6 12h4M8 10v4"/><circle cx="15.5" cy="11" r="1"/><circle cx="18" cy="13.5" r="1"/>',
   minus: '<path d="M5 12h14"/>',
   clip: '<path d="m21.4 11.6-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/>',
   file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
@@ -1989,7 +2204,7 @@ const FirebaseBackend = {
     const since = NOW() - HISTORY_DAYS * DAY, loaded = new Set();
     const bind = (col, ref) => ref.on('value', snap => {
       DB.setCache(col, snap.val());
-      if (!loaded.has(col)) { loaded.add(col); if (loaded.size === 8) resolve(); }
+      if (!loaded.has(col)) { loaded.add(col); if (loaded.size === 9) resolve(); }
       else App.onRemote(col);
     }, err => { if (!Net.ready) reject(err); else { Net.error = err; App.render(); } });
     bind('settings', this.root.child('settings'));
@@ -2000,6 +2215,7 @@ const FirebaseBackend = {
     bind('messages', this.root.child('messages').orderByChild('at').limitToLast(CHAT_LIMIT));
     bind('ai_logs', this.root.child('ai_logs').orderByChild('at').limitToLast(2000));
     bind('clients', this.root.child('clients'));
+    bind('games', this.root.child('games').orderByChild('createdAt').limitToLast(150));
   },
   ref(path) { return this.root.child(path); },
   set(path, v) { return this.root.child(path).set(v).catch(onWriteError); },
@@ -2019,7 +2235,7 @@ const LocalBackend = {
     Net.connected = true;
     return Promise.resolve();
   },
-  load() { ['settings', 'users', 'sessions', 'days', 'presence', 'messages', 'ai_logs', 'clients'].forEach(c => DB.setCache(c, this.data[c])); },
+  load() { ['settings', 'users', 'sessions', 'days', 'presence', 'messages', 'ai_logs', 'clients', 'games'].forEach(c => DB.setCache(c, this.data[c])); },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) { toast('Kaydedilemedi: depolama alanı dolu olabilir.', 'error'); } },
   put(path, v) {
     const p = path.split('/'); let o = this.data;
@@ -2042,7 +2258,7 @@ const LocalBackend = {
 /* Uygulamanın konuştuğu tek veri arayüzü — önbellek + seçili backend */
 const DB = {
   backend: null,
-  cache: { settings: null, users: {}, sessions: {}, days: {}, presence: {}, messages: {}, ai_logs: {}, clients: {} },
+  cache: { settings: null, users: {}, sessions: {}, days: {}, presence: {}, messages: {}, ai_logs: {}, clients: {}, games: {} },
   _arr: {},
   setCache(col, val) {
     if (col === 'settings') this.cache.settings = normalizeSettings(val);
@@ -2447,6 +2663,7 @@ const NAV = [
   { id: 'team', label: 'Ekip Canlı', icon: 'users' },
   { id: 'chat', label: 'Sohbet', icon: 'chat' },
   { id: 'clients', label: 'Müşteriler', icon: 'briefcase' },
+  { id: 'social', label: 'Sosyal Alan', icon: 'game' },
   { id: 'reports', label: 'Raporlar', icon: 'chart', admin: true },
   { id: 'members', label: 'Üyeler', icon: 'shield', admin: true },
   { id: 'settings', label: 'Sistem Ayarları', icon: 'settings', admin: true },
@@ -2464,7 +2681,8 @@ const RULES_SNIPPET = `{
         "sessions": { ".indexOn": ["start"] },
         "days": { ".indexOn": ["date"] },
         "messages": { ".indexOn": ["at"] },
-        "ai_logs": { ".indexOn": ["at"] }
+        "ai_logs": { ".indexOn": ["at"] },
+        "games": { ".indexOn": ["createdAt"] }
       }
     }
   }
@@ -3492,7 +3710,7 @@ const Widget = {
       : st.key === 'break' || st.key === 'idle' ? `<button type="button" class="tw-btn" data-act="breakBack" title="Çalışmaya dön">${ic('play', 14)}<span>Devam</span></button>`
       : `<button type="button" class="tw-btn" data-act="startDay" data-id="${esc(Tracker.defaultWork() || '')}" title="Güne başla">${ic('sunrise', 15)}<span>Başla</span></button>`;
     el.dataset.corner = p.corner; el.dataset.tone = tone;
-    const min = (App.view === 'chat' || App.view === 'clients') ? !this.chatOpen : !!p.min;   // sohbette varsayılan: kapsül (yazma alanını kapatmasın)
+    const min = (App.view === 'chat' || App.view === 'clients' || App.view === 'social') ? !this.chatOpen : !!p.min;   // sohbette varsayılan: kapsül (yazma alanını kapatmasın)
     el.classList.toggle('min', min);
     document.body.classList.add('has-tw');
     document.body.dataset.twCorner = p.corner; document.body.classList.toggle('tw-min', min);
@@ -3515,7 +3733,7 @@ const Widget = {
       </div>
       <button type="button" class="tw-mini" data-act="twToggle" aria-label="Widget'ı genişlet" title="Genişlet"><span class="tw-dot"></span>${start ? `<span data-live="since" data-start="${start}">${T.clock(ms)}</span>` : `<span>${esc(label)}</span>`}</button>`;
   },
-  toggle() { if (App.view === 'chat' || App.view === 'clients') { this.chatOpen = !this.chatOpen; return this.render(); } const p = this.prefs(); p.min = !p.min; this.save(p); this.render(); },
+  toggle() { if (App.view === 'chat' || App.view === 'clients' || App.view === 'social') { this.chatOpen = !this.chatOpen; return this.render(); } const p = this.prefs(); p.min = !p.min; this.save(p); this.render(); },
   bindDrag() {
     const el = this.el; let sx, sy, ox, oy, drag = null;
     el.addEventListener('pointerdown', e => {
@@ -4159,6 +4377,638 @@ const Nudge = {
   },
   label(m, me = Auth.current) { return m.userId === me ? 'Sen bir titreşim gönderdin!' : `${firstName(Chat.senderName(m))} bir titreşim gönderdi!`; }
 };
+
+/* =========================================================
+   SOSYAL ALAN — gerçek zamanlı mini oyunlar
+   Oyunlar games/{id} altında tutulur; tüm hamleler tek alan (s) üzerinde transaction ile yapılır,
+   böylece aynı anda gelen hamleler çakışmaz. Sayaçlı geçişleri (tur bitişi vb.) oyundaki herhangi
+   bir istemci yapabilir; transaction koşulları aynı geçişin iki kez yapılmasını engeller.
+   ========================================================= */
+const TR_UP = s => String(s || '').toLocaleUpperCase('tr-TR');
+const money = n => (Math.round(+n || 0)).toLocaleString('tr-TR') + ' ₺';
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const other = (g, me) => (g.players || []).find(p => p !== me);
+const pname = id => { const u = DB.find('users', id); return u ? firstName(u.name) : 'Oyuncu'; };
+const pav = (id, s = 28) => { const u = DB.find('users', id); return u ? avatar(u, s) : ''; };
+const obj = v => (v && typeof v === 'object' && !Array.isArray(v)) ? v : {};
+
+const GAMES = {};
+const GameHub = {
+  INVITE_TTL: 120000, IDLE: 20 * MIN,
+  focus: null, dismissed: {}, notified: {}, _settle: {},
+  list() { return DB.get('games').filter(g => g && g.type && GAMES[g.type]); },
+  get(id) { const g = DB.find('games', id); return g && GAMES[g.type] ? g : null; },
+  inGame(g, me = Auth.current) { return (g.players || []).includes(me) || g.sunucu === me; },
+  invitedTo(g, me = Auth.current) { return (g.invitees || []).includes(me) && !(g.players || []).includes(me) && g.sunucu !== me && !(obj(g.declined)[me]); },
+  expired(g) { return (g.status === 'invite' || g.status === 'lobby') && NOW() - (g.createdAt || 0) > (g.status === 'lobby' ? 10 * MIN : this.INVITE_TTL); },
+  idle(g) { return g.status === 'active' && NOW() - (g.updatedAt || g.createdAt || 0) > this.IDLE; },
+  myActive(me = Auth.current) { return this.list().filter(g => this.inGame(g, me) && (g.status === 'active' || g.status === 'lobby') && !this.idle(g) && !this.expired(g)).sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0)); },
+  myInvites(me = Auth.current) { return this.list().filter(g => this.invitedTo(g, me) && (g.status === 'invite' || g.status === 'lobby') && !this.expired(g)); },
+
+  /** Yeni oyun: davet oluşturur */
+  create(type, invitees, opts = {}) {
+    const me = Auth.current, def = GAMES[type]; if (!me || !def) return;
+    invitees = invitees.filter(x => x && x !== me);
+    if (!invitees.length) return toast('Lütfen en az bir kişi seç', 'error');
+    const id = uid('g'), t = NOW(), sunucu = opts.hostRole === 'host' ? me : '';
+    const g = { id, type, host: me, sunucu, players: sunucu ? [] : [me], invitees, opts, status: def.multi ? 'lobby' : 'invite', createdAt: t, updatedAt: t, declined: {} };
+    DB.insert('games', g);
+    this.focus = id;
+    toast(`${def.emoji} Davet gönderildi — ${invitees.map(pname).join(', ')} bekleniyor`, 'success');
+    App.go('social');
+  },
+  accept(id) {
+    const g = this.get(id), me = Auth.current; if (!g || !this.invitedTo(g)) return;
+    if (this.expired(g)) return toast('Bu davetin süresi dolmuş', 'error');
+    this.hideInvite();
+    const players = [...(g.players || []), me];
+    if (GAMES[g.type].multi) { DB.update('games', id, { players, updatedAt: NOW() }); toast('Lobiye katıldın — oyun kurucusu başlatınca başlayacak', 'success'); }
+    else { DB.update('games', id, { players, status: 'active', s: GAMES[g.type].init(players, g.opts || {}, g), startedAt: NOW(), updatedAt: NOW() }); }
+    this.focus = id; App.go('social'); App.render();
+  },
+  decline(id) {
+    const g = this.get(id), me = Auth.current; if (!g) return;
+    this.hideInvite();
+    const declined = { ...obj(g.declined), [me]: true };
+    const left = (g.invitees || []).filter(u => !declined[u] && !(g.players || []).includes(u));
+    const patch = { declined, updatedAt: NOW() };
+    if (!GAMES[g.type].multi && !left.length) patch.status = 'declined';
+    DB.update('games', id, patch); App.render();
+  },
+  cancel(id) { const g = this.get(id); if (!g || g.host !== Auth.current) return; DB.update('games', id, { status: 'cancelled', updatedAt: NOW() }); if (this.focus === id) this.focus = null; App.render(); },
+  /** Açık artırma lobisi → başlat */
+  start(id) {
+    const g = this.get(id); if (!g || g.host !== Auth.current) return;
+    if ((g.players || []).length < 2) return toast('Başlatmak için en az 2 teklif veren oyuncu gerekli', 'error');
+    DB.update('games', id, { status: 'active', s: GAMES[g.type].init(g.players, g.opts || {}, g), startedAt: NOW(), updatedAt: NOW() }); App.render();
+  },
+  forfeit(id) {
+    const g = this.get(id), me = Auth.current; if (!g || !this.inGame(g)) return;
+    if (g.sunucu === me || GAMES[g.type].multi) { DB.update('games', id, { status: 'done', winner: '', result: 'Oyun erken bitirildi', endedAt: NOW(), updatedAt: NOW() }); App.render(); return; }
+    const w = other(g, me) || '';
+    DB.update('games', id, { status: 'done', winner: w, result: `${pname(me)} pes etti`, endedAt: NOW(), updatedAt: NOW() }); App.render();
+  },
+  rematch(id) {
+    const g = this.get(id); if (!g) return;
+    const others = [...new Set([...(g.players || []), ...(g.invitees || []), g.host])].filter(u => u && u !== Auth.current);
+    this.create(g.type, others, g.opts || {});
+  },
+  /** Hamle: fn(s, g) yeni durumu döndürür ya da undefined (geçersiz hamle) */
+  move(id, fn, retry = 1) {
+    const g = this.get(id); if (!g || g.status !== 'active') return Promise.resolve(false);
+    let nullSeen = false;
+    return DB.transaction('games', id, 's', cur => {
+      if (!cur) { nullSeen = true; return undefined; }
+      const n = fn(JSON.parse(JSON.stringify(cur)), g);
+      return n === undefined ? undefined : n;
+    }).then(ok => {
+      if (!ok && nullSeen && retry > 0) return new Promise(r => setTimeout(() => r(this.move(id, fn, retry - 1)), 300));
+      if (ok) { DB.update('games', id, { updatedAt: NOW() }); this.finalize(id); }
+      this.renderStage();
+      return ok;
+    });
+  },
+  /** Sonuç durum alanına yazıldıysa oyunu "bitti" olarak işaretle (her katılımcı yapabilir, idempotent) */
+  finalize(id) {
+    const g = this.get(id); if (!g || g.status !== 'active' || !g.s || !g.s.res) return;
+    const r = g.s.res;
+    DB.update('games', id, { status: 'done', winner: r.w || '', result: r.txt || '', endedAt: NOW(), updatedAt: NOW() });
+    const me = Auth.current;
+    if (this.inGame(g) && !this.notified[id]) { this.notified[id] = 1; if (r.w === me) { toast('🏆 Kazandın! Tebrikler', 'success'); this.confetti(); } else if (r.w === 'draw') toast('🤝 Berabere bitti'); }
+  },
+  /** Zamanlı geçişler (tur sonu, kart kapama, açık artırma kapanışı) */
+  clock() {
+    const me = Auth.current; if (!me) return;
+    const t = NOW();
+    this.list().forEach(g => {
+      if (g.status !== 'active' || !g.s || !this.inGame(g)) return;
+      if (g.s.res) { this.finalize(g.id); return; }
+      const def = GAMES[g.type]; if (!def.due) return;
+      const due = def.due(g.s, g, t);
+      if (due && (!this._settle[g.id] || t - this._settle[g.id] > 700)) { this._settle[g.id] = t; this.move(g.id, (s, gg) => def.settle(s, gg, NOW())); }
+    });
+    // ekrandaki ince sayaçlar ve "şimdi" durumları
+    $$('[data-gcount]').forEach(el => { const ms = +el.dataset.gcount - t; el.textContent = ms > 0 ? (ms / 1000).toFixed(ms < 10000 ? 1 : 0) + ' sn' : '0 sn'; el.classList.toggle('hot', ms < 3500); });
+    $$('[data-gwait]').forEach(el => { if (t >= +el.dataset.gwait) { el.removeAttribute('data-gwait'); this.renderStage(); } });
+  },
+  /** Sadece oyun sahnesini yeniden çizer; yazılan metin ve odak korunur */
+  renderStage() {
+    const st = $('#gameStage'); if (!st) return;
+    const ae = document.activeElement, keep = ae && st.contains(ae) && ae.id ? { id: ae.id, v: ae.value, s: ae.selectionStart, e: ae.selectionEnd } : null;
+    st.innerHTML = Views.gameStage();
+    if (keep) { const el = document.getElementById(keep.id); if (el) { if ('value' in el && keep.v != null) el.value = keep.v; el.focus({ preventScroll: true }); try { el.setSelectionRange(keep.s, keep.e); } catch (e) {} } }
+  },
+  /* --- davet kartı (her sayfada) --- */
+  inviteEl: null, inviteId: null,
+  started: {},
+  checkInvites() {
+    const me = Auth.current; if (!me) return this.hideInvite();
+    // Davet ettiğim oyun başladıysa ve ben başka sayfadaysam haber ver
+    this.list().forEach(g => {
+      if (g.status !== 'active' || !this.inGame(g) || this.started[g.id] || NOW() - (g.startedAt || 0) > 60000) return;
+      this.started[g.id] = 1;
+      if (g.host === me && App.view !== 'social') { this.focus = g.id; this.showStarted(g); }
+    });
+    if (this.startedEl) return;
+    const inv = this.myInvites(me).find(g => !this.dismissed[g.id]);
+    if (!inv) return this.hideInvite();
+    if (this.inviteId === inv.id) return;
+    this.showInvite(inv);
+  },
+  showInvite(g) {
+    const def = GAMES[g.type];
+    if (!this.inviteEl) { this.inviteEl = document.createElement('div'); this.inviteEl.id = 'gameInvite'; this.inviteEl.setAttribute('role', 'alertdialog'); document.body.appendChild(this.inviteEl); }
+    this.inviteId = g.id;
+    const extra = g.type === 'auction' ? `<small>${g.opts.count} ürün · ${money(g.opts.budget)} bütçe · ${g.opts.mode === 'sealed' ? 'kapalı zarf' : 'canlı artırma'}${g.sunucu ? ` · sunucu: ${esc(pname(g.sunucu))}` : ''}</small>` : '';
+    this.inviteEl.innerHTML = `<div class="gi-card"><span class="gi-emoji">${def.emoji}</span><div class="gi-txt"><b>${esc(pname(g.host))} seni ${def.name} oynamaya çağırıyor!</b>${extra}<span class="gi-time" data-gcount="${(g.createdAt || 0) + (g.status === 'lobby' ? 10 * MIN : this.INVITE_TTL)}"></span></div>
+      <div class="gi-btns"><button type="button" class="btn btn-primary btn-sm" data-act="gameAccept" data-id="${esc(g.id)}">${ic('check', 14)} Katıl</button><button type="button" class="btn btn-ghost btn-sm" data-act="gameDecline" data-id="${esc(g.id)}">Reddet</button></div></div>`;
+    requestAnimationFrame(() => this.inviteEl && this.inviteEl.classList.add('show'));
+    try { Sound.prime(); Sound.beep(); if ('vibrate' in navigator) navigator.vibrate([120, 60, 120]); } catch (e) {}
+    try { Notify.show({ title: `🎮 ${pname(g.host)} seni oyuna çağırıyor`, body: `${def.emoji} ${def.name} — katılmak için Squad Pulse'u aç`, tag: 'sp-game-' + g.id }); } catch (e) {}
+  },
+  startedEl: null,
+  showStarted(g) {
+    const def = GAMES[g.type]; this.hideInvite();
+    const el = document.createElement('div'); el.id = 'gameInvite'; el.setAttribute('role', 'alert');
+    el.innerHTML = `<div class="gi-card"><span class="gi-emoji">${def.emoji}</span><div class="gi-txt"><b>${def.name} başladı!</b><small>${(g.players || []).filter(u => u !== Auth.current).map(pname).join(', ')} davetini kabul etti</small></div>
+      <div class="gi-btns"><button type="button" class="btn btn-primary btn-sm" data-act="gFocus" data-id="${esc(g.id)}">${ic('play', 14)} Oyuna git</button><button type="button" class="btn btn-ghost btn-sm" data-act="gStartedClose">Sonra</button></div></div>`;
+    document.body.appendChild(el); this.startedEl = el;
+    requestAnimationFrame(() => el.classList.add('show'));
+    try { Sound.prime(); Sound.beep(); } catch (e) {}
+    clearTimeout(this._st); this._st = setTimeout(() => this.hideStarted(), 15000);
+  },
+  hideStarted() { if (!this.startedEl) return; const el = this.startedEl; this.startedEl = null; el.classList.remove('show'); setTimeout(() => el.remove(), 250); },
+  hideInvite() { if (!this.inviteEl) return; const el = this.inviteEl; this.inviteEl = null; this.inviteId = null; el.classList.remove('show'); setTimeout(() => el.remove(), 250); },
+  confetti() {
+    const fx = document.createElement('div'); fx.className = 'g-confetti';
+    fx.innerHTML = Array.from({ length: 28 }, (_, i) => `<i style="--x:${Math.random() * 100}vw;--d:${(Math.random() * .6).toFixed(2)}s;--r:${Math.round(Math.random() * 720 - 360)}deg">${['🎉', '✨', '🏆', '🎊', '⭐'][i % 5]}</i>`).join('');
+    document.body.appendChild(fx); setTimeout(() => fx.remove(), 2600);
+  },
+  stats() {
+    const done = this.list().filter(g => g.status === 'done'), w = {};
+    done.forEach(g => { if (g.winner && g.winner !== 'draw') { w[g.winner] = w[g.winner] || { total: 0, by: {} }; w[g.winner].total++; w[g.winner].by[g.type] = (w[g.winner].by[g.type] || 0) + 1; } });
+    return { w, played: done.length };
+  }
+};
+
+/* ---------- 1. XOX ---------- */
+const XOX_LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+GAMES.xox = {
+  name: 'XOX', emoji: '❌', desc: 'Klasik üçlü dizme. Hızlı ve kıyasıya.', time: '1 dk', players: '2 kişi',
+  init(players) { return { b: '---------', turn: players[0] }; },
+  mark(g, uidv) { return uidv === g.players[0] ? 'X' : 'O'; },
+  play(id, i) {
+    GameHub.move(id, (s, g) => {
+      const me = Auth.current; if (s.res || s.turn !== me || s.b[i] !== '-') return;
+      const m = this.mark(g, me), b = s.b.slice(0, i) + m + s.b.slice(i + 1); s.b = b; s.last = i;
+      const line = XOX_LINES.find(l => l.every(k => b[k] === m));
+      if (line) s.res = { w: me, line: line.join(','), txt: `${pname(me)} üçlüyü tamamladı` };
+      else if (!b.includes('-')) s.res = { w: 'draw', txt: 'Berabere' };
+      else s.turn = other(g, me);
+      return s;
+    });
+  },
+  view(g, s, me) {
+    const line = s.res && s.res.line ? s.res.line.split(',').map(Number) : [];
+    const my = s.turn === me && !s.res;
+    return `<div class="xox-board ${my ? 'my-turn' : ''}">${[...s.b].map((c, i) => `<button type="button" class="xox-cell ${c !== '-' ? 'filled m-' + c : ''} ${line.includes(i) ? 'win' : ''} ${s.last === i ? 'last' : ''}" ${c === '-' && my ? `data-act="gXox" data-id="${esc(g.id)}" data-i="${i}"` : 'disabled'} aria-label="Kare ${i + 1}">${c === '-' ? '' : `<span>${c}</span>`}</button>`).join('')}</div>`;
+  },
+  turnText(g, s, me) { return s.turn === me ? `Sıra sende · sen <b>${this.mark(g, me)}</b>` : `${esc(pname(s.turn))} düşünüyor…`; }
+};
+
+/* ---------- 2. Dört Taş ---------- */
+GAMES.c4 = {
+  name: 'Dört Taş', emoji: '🔴', desc: 'Taşları bırak, dördünü yan yana diz.', time: '2–3 dk', players: '2 kişi',
+  W: 7, H: 6,
+  init(players) { return { b: '-'.repeat(42), turn: players[0] }; },
+  drop(id, c) {
+    GameHub.move(id, (s, g) => {
+      const me = Auth.current; if (s.res || s.turn !== me) return;
+      let r = -1; for (let y = this.H - 1; y >= 0; y--) if (s.b[y * this.W + c] === '-') { r = y; break; }
+      if (r < 0) return;
+      const m = me === g.players[0] ? 'A' : 'B', i = r * this.W + c;
+      s.b = s.b.slice(0, i) + m + s.b.slice(i + 1); s.last = i;
+      const win = this.check(s.b, r, c, m);
+      if (win) s.res = { w: me, line: win.join(','), txt: `${pname(me)} dört taşı dizdi` };
+      else if (!s.b.includes('-')) s.res = { w: 'draw', txt: 'Tahta doldu — berabere' };
+      else s.turn = other(g, me);
+      return s;
+    });
+  },
+  check(b, r, c, m) {
+    const at = (y, x) => y >= 0 && y < this.H && x >= 0 && x < this.W && b[y * this.W + x] === m;
+    for (const [dy, dx] of [[0, 1], [1, 0], [1, 1], [1, -1]]) {
+      const cells = [[r, c]];
+      for (let k = 1; at(r + dy * k, c + dx * k); k++) cells.push([r + dy * k, c + dx * k]);
+      for (let k = 1; at(r - dy * k, c - dx * k); k++) cells.push([r - dy * k, c - dx * k]);
+      if (cells.length >= 4) return cells.map(([y, x]) => y * this.W + x);
+    }
+    return null;
+  },
+  view(g, s, me) {
+    const my = s.turn === me && !s.res, line = s.res && s.res.line ? s.res.line.split(',').map(Number) : [];
+    const ca = DB.find('users', g.players[0])?.color || '#ef4444', cb = DB.find('users', g.players[1])?.color || '#f59e0b';
+    let cols = '';
+    for (let x = 0; x < this.W; x++) {
+      let cells = '';
+      for (let y = 0; y < this.H; y++) { const i = y * this.W + x, v = s.b[i]; cells += `<span class="c4-cell ${v !== '-' ? 'on' : ''} ${line.includes(i) ? 'win' : ''} ${s.last === i ? 'last' : ''}" ${v !== '-' ? `style="--disc:${v === 'A' ? ca : cb}"` : ''}></span>`; }
+      const full = s.b[x] !== '-';
+      cols += `<button type="button" class="c4-col" ${my && !full ? `data-act="gC4" data-id="${esc(g.id)}" data-c="${x}"` : 'disabled'} aria-label="Sütun ${x + 1}">${cells}</button>`;
+    }
+    return `<div class="c4-board ${my ? 'my-turn' : ''}" style="--ca:${ca};--cb:${cb}">${cols}</div>`;
+  },
+  turnText(g, s, me) { const col = DB.find('users', me)?.color; return s.turn === me ? `Sıra sende <i class="g-dot" style="background:${col}"></i> bir sütun seç` : `${esc(pname(s.turn))} hamle yapıyor…`; }
+};
+
+/* ---------- 3. Taş-Kağıt-Makas ---------- */
+const RPS = { r: { e: '✊', n: 'Taş', beats: 's' }, p: { e: '✋', n: 'Kağıt', beats: 'r' }, s: { e: '✌️', n: 'Makas', beats: 'p' } };
+GAMES.rps = {
+  name: 'Taş-Kağıt-Makas', emoji: '✌️', desc: 'Aynı anda seç, aynı anda açılsın. 2 alan kazanır.', time: '1 dk', players: '2 kişi',
+  init(players) { return { round: 1, sc: { [players[0]]: 0, [players[1]]: 0 }, pk: {} }; },
+  pick(id, x) {
+    GameHub.move(id, (s, g) => {
+      const me = Auth.current, pk = obj(s.pk); if (s.res || pk[me]) return;
+      pk[me] = x; s.pk = pk;
+      const [a, b] = g.players;
+      if (pk[a] && pk[b]) {
+        const w = pk[a] === pk[b] ? 'draw' : RPS[pk[a]].beats === pk[b] ? a : b;
+        s.last = { a: pk[a], b: pk[b], w, round: s.round };
+        const sc = obj(s.sc); if (w !== 'draw') sc[w] = (sc[w] || 0) + 1; s.sc = sc;
+        s.pk = {}; s.round++;
+        if (w !== 'draw' && sc[w] >= 2) s.res = { w, txt: `${pname(w)} ${sc[w]}–${sc[w === a ? b : a] || 0} kazandı` };
+      }
+      return s;
+    });
+  },
+  view(g, s, me) {
+    const pk = obj(s.pk), sc = obj(s.sc), op = other(g, me), [a, b] = g.players, l = s.last;
+    const reveal = l ? `<div class="rps-reveal" key="${l.round}"><div><span class="rps-big">${RPS[me === a ? l.a : l.b].e}</span><small>Sen</small></div><b>${l.w === 'draw' ? 'Berabere' : l.w === me ? 'Turu aldın!' : 'Turu kaybettin'}</b><div><span class="rps-big">${RPS[me === a ? l.b : l.a].e}</span><small>${esc(pname(op))}</small></div></div>` : '';
+    const mine = pk[me];
+    return `<div class="rps-wrap"><div class="g-score"><span>${pav(me, 26)} Sen <b>${sc[me] || 0}</b></span><em>Tur ${Math.min(s.round, 3)} · 2 alan kazanır</em><span><b>${sc[op] || 0}</b> ${esc(pname(op))} ${pav(op, 26)}</span></div>
+      ${reveal}
+      ${s.res ? '' : `<div class="rps-picks">${Object.entries(RPS).map(([k, v]) => `<button type="button" class="rps-btn ${mine === k ? 'on' : ''}" ${mine ? 'disabled' : `data-act="gRps" data-id="${esc(g.id)}" data-v="${k}"`}><span>${v.e}</span>${v.n}</button>`).join('')}</div>
+      <p class="g-hint">${mine ? `Seçimin: ${RPS[mine].e} — ${pk[op] ? 'açılıyor…' : esc(pname(op)) + ' seçim yapıyor…'}` : pk[op] ? `${esc(pname(op))} seçimini yaptı, sıra sende!` : 'Seçimini yap — rakibin göremez'}</p>`}</div>`;
+  },
+  turnText(g, s, me) { return obj(s.pk)[me] ? 'Rakip bekleniyor…' : 'Seçimini yap'; }
+};
+
+/* ---------- 4. Hız Testi ---------- */
+GAMES.reflex = {
+  name: 'Hız Testi', emoji: '⚡', desc: 'Ekran yeşile döndüğü an bas. Erken basan yanar!', time: '1 dk', players: '2 kişi',
+  init(players) { return { round: 1, goAt: NOW() + 3000 + Math.random() * 2500, rw: '', sc: { [players[0]]: 0, [players[1]]: 0 } }; },
+  press(id) {
+    GameHub.move(id, (s, g) => {
+      const me = Auth.current, t = NOW(); if (s.res || s.rw) return;
+      if (t < s.goAt) { s.rw = other(g, me); s.fs = me; s.rt = 0; }
+      else { s.rw = me; s.rt = Math.round(t - s.goAt); s.fs = ''; }
+      s.endAt = t;
+      const sc = obj(s.sc); sc[s.rw] = (sc[s.rw] || 0) + 1; s.sc = sc;
+      if (sc[s.rw] >= 2) s.res = { w: s.rw, txt: `${pname(s.rw)} ${sc[s.rw]}–${sc[other(g, s.rw)] || 0} kazandı` };
+      return s;
+    });
+  },
+  due(s, g, t) { return s.rw && !s.res && t - (s.endAt || 0) > 2600; },
+  settle(s, g, t) { if (!s.rw || s.res || t - (s.endAt || 0) < 2500) return; s.round++; s.rw = ''; s.fs = ''; s.rt = 0; s.goAt = t + 2200 + Math.random() * 2800; return s; },
+  view(g, s, me) {
+    const t = NOW(), sc = obj(s.sc), op = other(g, me);
+    let state, txt, sub = '';
+    if (s.rw) { state = s.rw === me ? 'won' : 'lost'; txt = s.fs ? (s.fs === me ? 'Erken bastın! 😬' : `${esc(pname(s.fs))} erken bastı!`) : (s.rw === me ? `Hızlıydın! ${s.rt} ms ⚡` : `${esc(pname(s.rw))} daha hızlıydı · ${s.rt} ms`); sub = s.res ? '' : 'Sonraki tur hazırlanıyor…'; }
+    else if (t < s.goAt) { state = 'wait'; txt = 'Bekle…'; sub = 'Yeşili gördüğün an bas'; }
+    else { state = 'go'; txt = 'ŞİMDİ BAS!'; }
+    return `<div class="g-score"><span>${pav(me, 26)} Sen <b>${sc[me] || 0}</b></span><em>Tur ${s.round} · 2 alan kazanır</em><span><b>${sc[op] || 0}</b> ${esc(pname(op))} ${pav(op, 26)}</span></div>
+      <button type="button" class="rx-pad st-${state}" data-reflex="${esc(g.id)}" ${state === 'wait' ? `data-gwait="${s.goAt}"` : ''} ${s.res ? 'disabled' : ''}><b>${txt}</b><small>${sub}</small></button>`;
+  },
+  turnText(g, s) { return s.rw ? 'Tur bitti' : 'Odaklan…'; }
+};
+
+/* ---------- 5. Emoji Hafıza ---------- */
+GAMES.memory = {
+  name: 'Emoji Hafıza', emoji: '🧠', desc: 'Sırayla kart çevir, eşleşenleri topla.', time: '2–3 dk', players: '2 kişi',
+  init(players) {
+    const pool = ['🐱', '🐶', '🦊', '🐼', '🍕', '🚀', '🎧', '🌈', '⚽', '🍩', '🎨', '🌵', '🦄', '🍓', '📸', '🎲'];
+    const pick = shuffle(pool).slice(0, 8);
+    return { d: shuffle([...pick, ...pick]).join(','), m: '-'.repeat(16), o: '', turn: players[0], hideAt: 0, sc: { [players[0]]: 0, [players[1]]: 0 } };
+  },
+  flip(id, i) {
+    GameHub.move(id, (s, g) => {
+      const me = Auth.current; if (s.res || s.turn !== me || s.hideAt || s.m[i] !== '-') return;
+      const open = s.o ? s.o.split(',').map(Number) : []; if (open.includes(i) || open.length >= 2) return;
+      open.push(i); s.o = open.join(',');
+      if (open.length === 2) {
+        const d = s.d.split(','), [a, b] = open;
+        if (d[a] === d[b]) {
+          const mk = me === g.players[0] ? 'a' : 'b';
+          s.m = [...s.m].map((c, k) => (k === a || k === b) ? mk : c).join(''); s.o = '';
+          const sc = obj(s.sc); sc[me] = (sc[me] || 0) + 1; s.sc = sc;
+          if (!s.m.includes('-')) { const [p, q] = g.players; s.res = sc[p] === sc[q] ? { w: 'draw', txt: `${sc[p]}–${sc[q]} berabere` } : { w: sc[p] > sc[q] ? p : q, txt: `${pname(sc[p] > sc[q] ? p : q)} ${Math.max(sc[p], sc[q])}–${Math.min(sc[p], sc[q])} kazandı` }; }
+        } else s.hideAt = NOW() + 1100;
+      }
+      return s;
+    });
+  },
+  due(s, g, t) { return s.hideAt && t >= s.hideAt && !s.res; },
+  settle(s, g, t) { if (!s.hideAt || t < s.hideAt) return; s.o = ''; s.hideAt = 0; s.turn = other(g, s.turn); return s; },
+  view(g, s, me) {
+    const d = s.d.split(','), open = s.o ? s.o.split(',').map(Number) : [], my = s.turn === me && !s.res && !s.hideAt, sc = obj(s.sc), op = other(g, me);
+    const ca = DB.find('users', g.players[0])?.color, cb = DB.find('users', g.players[1])?.color;
+    return `<div class="g-score"><span>${pav(me, 26)} Sen <b>${sc[me] || 0}</b></span><em>${8 - (s.m.split('').filter(c => c !== '-').length / 2)} çift kaldı</em><span><b>${sc[op] || 0}</b> ${esc(pname(op))} ${pav(op, 26)}</span></div>
+      <div class="mm-grid ${my ? 'my-turn' : ''}">${d.map((e, i) => { const own = s.m[i]; const up = own !== '-' || open.includes(i); return `<button type="button" class="mm-card ${up ? 'up' : ''} ${own !== '-' ? 'matched' : ''} ${s.hideAt && open.includes(i) ? 'miss' : ''}" style="${own !== '-' ? `--own:${own === 'a' ? ca : cb}` : ''}" ${my && !up ? `data-act="gMem" data-id="${esc(g.id)}" data-i="${i}"` : 'disabled'}><span class="mc-back">?</span><span class="mc-face">${e}</span></button>`; }).join('')}</div>`;
+  },
+  turnText(g, s, me) { return s.hideAt ? 'Eşleşmedi…' : s.turn === me ? 'Sıra sende · iki kart çevir' : `${esc(pname(s.turn))} kart çeviriyor…`; }
+};
+
+/* ---------- 6. Adam Asmaca ---------- */
+const HM_WORDS = [
+  ['Ajans', ['KAMPANYA', 'HEDEF KİTLE', 'MARKA', 'SLOGAN', 'REKLAM', 'ETKİLEŞİM', 'İÇERİK', 'TAKİPÇİ', 'BRİF', 'SUNUM', 'LOGO', 'AFİŞ', 'VİDEO', 'HİKAYE', 'PAYLAŞIM', 'TASARIM', 'MÜŞTERİ', 'BÜTÇE']],
+  ['Meyve', ['KARPUZ', 'ÇİLEK', 'ŞEFTALİ', 'MANDALİNA', 'ANANAS', 'KAYISI', 'ÜZÜM', 'İNCİR']],
+  ['Şehir', ['İSTANBUL', 'İZMİR', 'ANTALYA', 'TRABZON', 'ESKİŞEHİR', 'GAZİANTEP', 'MUĞLA', 'ÇANAKKALE']],
+  ['Teknoloji', ['BİLGİSAYAR', 'KLAVYE', 'YAZILIM', 'TELEFON', 'KULAKLIK', 'ŞARJ', 'KAMERA', 'İNTERNET']],
+  ['Hayvan', ['ZÜRAFA', 'PENGUEN', 'KAPLUMBAĞA', 'TİLKİ', 'SİNCAP', 'KELEBEK', 'YUNUS', 'BAYKUŞ']]
+];
+const TR_ALPHA = 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ'.split('');
+GAMES.hangman = {
+  name: 'Adam Asmaca', emoji: '🪢', desc: 'Harf harf kelimeyi bul. Hazır kelimeyle yarış ya da kelimeyi sen belirle.', time: '2–3 dk', players: '2 kişi', MAX: 6,
+  init(players, opts) {
+    if (opts.hmMode === 'custom' && opts.word) return { mode: 'custom', w: TR_UP(opts.word).trim(), hint: String(opts.hint || '').slice(0, 40), g: '', wrong: 0, turn: players[1], setter: players[0], sc: {} };
+    const [cat, words] = HM_WORDS[Math.floor(Math.random() * HM_WORDS.length)];
+    return { mode: 'race', w: words[Math.floor(Math.random() * words.length)], hint: cat, g: '', wrong: 0, turn: players[0], sc: { [players[0]]: 0, [players[1]]: 0 } };
+  },
+  solved(s) { return [...s.w].every(ch => ch === ' ' || s.g.includes(ch)); },
+  finish(s, g) {
+    if (s.mode === 'custom') return;
+    const [a, b] = g.players, sc = obj(s.sc);
+    s.res = sc[a] === sc[b] ? { w: 'draw', txt: `Kelime: ${s.w} · berabere` } : { w: sc[a] > sc[b] ? a : b, txt: `Kelime: ${s.w}` };
+  },
+  guess(id, L) {
+    GameHub.move(id, (s, g) => {
+      const me = Auth.current; L = TR_UP(L);
+      if (s.res || s.turn !== me || !L || s.g.includes(L)) return;
+      s.g += L;
+      const n = [...s.w].filter(ch => ch === L).length;
+      if (n) {
+        if (s.mode === 'race') { const sc = obj(s.sc); sc[me] = (sc[me] || 0) + n; s.sc = sc; }
+        if (this.solved(s)) { if (s.mode === 'custom') s.res = { w: me, txt: `${pname(me)} kelimeyi buldu: ${s.w}` }; else this.finish(s, g); }
+      } else {
+        s.wrong++;
+        if (s.wrong >= this.MAX) { if (s.mode === 'custom') s.res = { w: s.setter, txt: `Adam asıldı! Kelime: ${s.w}` }; else this.finish(s, g); }
+        else if (s.mode === 'race') s.turn = other(g, me);
+      }
+      return s;
+    });
+  },
+  solve(id, word) {
+    GameHub.move(id, (s, g) => {
+      const me = Auth.current, w = TR_UP(word).trim().replace(/\s+/g, ' ');
+      if (s.res || s.turn !== me || !w) return;
+      if (w === s.w) {
+        if (s.mode === 'race') { const sc = obj(s.sc); sc[me] = (sc[me] || 0) + [...new Set([...s.w].filter(ch => ch !== ' ' && !s.g.includes(ch)))].length + 3; s.sc = sc; }
+        s.g = [...new Set([...s.g, ...s.w.replace(/ /g, '')])].join('');
+        s.res = { w: me, txt: `${pname(me)} kelimeyi tahmin etti: ${s.w}` };
+      } else {
+        s.wrong = Math.min(this.MAX, s.wrong + 2);
+        if (s.wrong >= this.MAX) { if (s.mode === 'custom') s.res = { w: s.setter, txt: `Adam asıldı! Kelime: ${s.w}` }; else this.finish(s, g); }
+        else if (s.mode === 'race') s.turn = other(g, me);
+      }
+      return s;
+    });
+  },
+  svg(wrong) {
+    const p = ['<circle cx="70" cy="38" r="10"/>', '<path d="M70 48v30"/>', '<path d="M70 56l-14 12"/>', '<path d="M70 56l14 12"/>', '<path d="M70 78l-12 18"/>', '<path d="M70 78l12 18"/>'];
+    return `<svg class="hm-svg" viewBox="0 0 110 120" aria-hidden="true"><path class="hm-gal" d="M10 114h60M25 114V8h45v20"/>${p.map((d, i) => `<g class="hm-part ${i < wrong ? 'on' : ''}">${d}</g>`).join('')}</svg>`;
+  },
+  view(g, s, me) {
+    const my = s.turn === me && !s.res, sc = obj(s.sc), op = other(g, me), reveal = !!s.res;
+    const word = [...s.w].map(ch => ch === ' ' ? '<i class="hm-gap"></i>' : `<span class="hm-l ${s.g.includes(ch) ? 'on' : reveal ? 'miss' : ''}">${s.g.includes(ch) || reveal ? ch : ''}</span>`).join('');
+    const head = s.mode === 'custom'
+      ? `<div class="g-score"><span>${s.setter === me ? 'Kelimeyi sen belirledin' : `Tahmin eden: <b>sen</b>`}</span><em>İpucu: ${esc(s.hint || '—')}</em><span>Hata ${s.wrong}/${this.MAX}</span></div>`
+      : `<div class="g-score"><span>${pav(me, 26)} Sen <b>${sc[me] || 0}</b></span><em>Kategori: ${esc(s.hint)} · hata ${s.wrong}/${this.MAX}</em><span><b>${sc[op] || 0}</b> ${esc(pname(op))} ${pav(op, 26)}</span></div>`;
+    return `${head}<div class="hm-wrap">${this.svg(s.wrong)}<div class="hm-word">${word}</div></div>
+      ${s.res ? '' : `<div class="hm-keys">${TR_ALPHA.map(L => { const used = s.g.includes(L), hit = used && s.w.includes(L); return `<button type="button" class="hm-key ${used ? (hit ? 'hit' : 'miss') : ''}" ${my && !used ? `data-act="gHm" data-id="${esc(g.id)}" data-v="${L}"` : 'disabled'}>${L}</button>`; }).join('')}</div>
+      ${my ? `<form class="hm-solve" data-hmsolve="${esc(g.id)}" autocomplete="off"><input class="input" id="hmSolve" maxlength="40" placeholder="Kelimeyi biliyorsan yaz (yanlışsa 2 hata)…"><button class="btn btn-ghost" type="submit">Tahmin et</button></form>` : ''}`}`;
+  },
+  turnText(g, s, me) { return s.mode === 'custom' && s.setter === me ? `${esc(pname(s.turn))} tahmin ediyor…` : s.turn === me ? 'Sıra sende · bir harf seç' : `${esc(pname(s.turn))} harf seçiyor…`; }
+};
+
+/* ---------- 7. Açık Artırma ----------
+   • 2–4 teklif veren oyuncu. Kurucu isterse "sunucu" olur: teklif vermez, gerçek değerleri görür ve
+     başlamadan önce ürün adlarını/değerlerini düzenleyebilir. Sunucu yoksa değerleri sistem üretir.
+   • Canlı artırma: her teklif 10 sn sayacı baştan başlatır. Kapalı zarf: herkes tek gizli teklif verir.
+   • Sonunda: kalan para + aldığın ürünlerin gerçek değeri = servet → kâr/zarar ve sıralama. */
+const AUCTION_ITEMS = [
+  ['⌚', 'Vintage kol saati', 'Aksesuar', 400, 3200], ['🎸', 'İmzalı gitar', 'Müzik', 800, 5000], ['🖼️', 'Anonim yağlı boya tablo', 'Sanat', 200, 6000],
+  ['📷', 'Analog fotoğraf makinesi', 'Elektronik', 300, 2400], ['💎', '"Pırlanta" yüzük', 'Mücevher', 600, 7000], ['🏺', 'Antika vazo', 'Antika', 150, 4500],
+  ['📱', 'Kutusu açılmamış telefon', 'Elektronik', 900, 3800], ['🛵', 'Retro scooter', 'Taşıt', 1200, 5500], ['🎮', 'Koleksiyonluk oyun konsolu', 'Oyun', 300, 2600],
+  ['👟', 'Sınırlı üretim sneaker', 'Moda', 350, 3000], ['🧳', 'Deri seyahat çantası', 'Moda', 250, 1800], ['🍷', '20 yıllık şarap', 'Gurme', 200, 2800],
+  ['📚', 'İlk baskı roman', 'Kitap', 100, 3500], ['🪑', 'Tasarım sandalye', 'Mobilya', 300, 2200], ['🎨', 'Dijital sanat (NFT) sertifikası', 'Sanat', 50, 4000],
+  ['🕹️', 'Atari salonu makinesi', 'Oyun', 700, 4200], ['🧸', 'Koleksiyon oyuncak ayı', 'Koleksiyon', 80, 1600], ['🎧', 'Stüdyo kulaklığı', 'Elektronik', 250, 1500],
+  ['🪙', 'Osmanlı sikkesi', 'Antika', 300, 5200], ['🚲', 'Karbon yol bisikleti', 'Spor', 600, 3400], ['💼', 'Gizemli kutu', 'Sürpriz', 100, 6000],
+  ['🔭', 'Pirinç teleskop', 'Bilim', 250, 2000], ['🏆', 'Turnuva kupası', 'Koleksiyon', 150, 2500], ['☕', 'El yapımı espresso makinesi', 'Mutfak', 400, 2100]
+];
+GAMES.auction = {
+  name: 'Açık Artırma', emoji: '🔨', desc: 'Gizli değerli ürünlere teklif ver; sonunda kim kâr etti, kim battı görün.', time: '5–10 dk', players: '2–4 kişi', multi: true,
+  OPEN: 15000, STEP: 10000, SEALED: 20000, SOLD: 3200,
+  genLots(count, budget) {
+    const k = (budget || 10000) / 10000;
+    return shuffle(AUCTION_ITEMS).slice(0, count).map(([e, n, c, lo, hi]) => {
+      lo = Math.round(lo * k / 50) * 50; hi = Math.round(hi * k / 50) * 50;
+      const r = Math.random(); let v;
+      if (r < .14) v = hi * (1.4 + Math.random() * 1.2);            // büyük ikramiye
+      else if (r < .3) v = lo * (.1 + Math.random() * .35);           // sahte / değersiz
+      else v = lo + (hi - lo) * Math.pow(Math.random(), 1.3);
+      return { e, n, c, lo, hi, v: Math.max(10, Math.round(v / 10) * 10) };
+    });
+  },
+  init(players, o, g) {
+    const budget = +o.budget || 10000, bud = {}, own = {};
+    players.forEach(p => { bud[p] = budget; own[p] = ''; });
+    const s = { lots: this.genLots(+o.count || 10, budget), i: 0, bud, own, log: {}, bid: 0, bidder: '', sb: {}, mode: o.mode === 'sealed' ? 'sealed' : 'live', budget };
+    if (g && g.sunucu) { s.phase = 'setup'; s.endsAt = 0; }
+    else { s.phase = 'lot'; s.endsAt = NOW() + (s.mode === 'sealed' ? this.SEALED : this.OPEN); }
+    return s;
+  },
+  begin(id) { GameHub.move(id, (s, g) => { if (s.phase !== 'setup' || g.sunucu !== Auth.current) return; s.phase = 'lot'; s.endsAt = NOW() + (s.mode === 'sealed' ? this.SEALED : this.OPEN); return s; }); },
+  editLot(id, i, field, val) {
+    GameHub.move(id, (s, g) => {
+      if (s.phase !== 'setup' || g.sunucu !== Auth.current || !s.lots[i]) return;
+      if (field === 'v') { const v = Math.max(0, Math.round(+val || 0)); if (s.lots[i].v === v) return; s.lots[i].v = v; }
+      else { const n = String(val || '').trim().slice(0, 40); if (!n || s.lots[i].n === n) return; s.lots[i].n = n; }
+      return s;
+    });
+  },
+  bid(id, amount) {
+    amount = Math.round(+amount || 0);
+    return GameHub.move(id, (s, g) => {
+      const me = Auth.current, t = NOW(), bud = obj(s.bud);
+      if (s.phase !== 'lot' || !g.players.includes(me) || t >= s.endsAt) return;
+      if (s.mode === 'live') {
+        if (amount <= (s.bid || 0) || amount < 50 || amount > (bud[me] || 0) || s.bidder === me) return;
+        s.bid = amount; s.bidder = me; s.endsAt = t + this.STEP;
+      } else {
+        const sb = obj(s.sb); if (sb[me]) return;
+        if (amount < 0 || amount > (bud[me] || 0)) return;
+        sb[me] = { a: amount, t }; s.sb = sb;
+        if (g.players.every(p => sb[p])) s.endsAt = t;
+      }
+      return s;
+    }).then(ok => { if (!ok) toast('Teklif geçersiz — bütçeni ve güncel teklifi kontrol et', 'error'); return ok; });
+  },
+  due(s, g, t) { return (s.phase === 'lot' && s.endsAt && t >= s.endsAt + 250) || (s.phase === 'sold' && t >= (s.soldAt || 0) + this.SOLD); },
+  settle(s, g, t) {
+    if (s.phase === 'lot' && t >= s.endsAt) {
+      let w = '', p = 0;
+      if (s.mode === 'live') { w = s.bidder || ''; p = s.bid || 0; }
+      else { const sb = obj(s.sb); const best = Object.entries(sb).filter(([, x]) => x && x.a > 0).sort((a, b) => b[1].a - a[1].a || a[1].t - b[1].t)[0]; if (best) { w = best[0]; p = best[1].a; } }
+      const bud = obj(s.bud), own = obj(s.own), log = obj(s.log);
+      if (w) { bud[w] = (bud[w] || 0) - p; own[w] = own[w] ? own[w] + ',' + s.i : String(s.i); }
+      log['l' + s.i] = { w, p, sb: s.mode === 'sealed' ? obj(s.sb) : null };
+      Object.assign(s, { bud, own, log, phase: 'sold', soldAt: t });
+      return s;
+    }
+    if (s.phase === 'sold' && t >= (s.soldAt || 0) + this.SOLD) {
+      s.i++; s.bid = 0; s.bidder = ''; s.sb = {};
+      if (s.i >= s.lots.length) { s.phase = 'end'; const r = this.results(s, g); s.res = { w: r[0] ? r[0].u : '', txt: r[0] ? `${pname(r[0].u)} ${r[0].profit >= 0 ? '+' : ''}${money(r[0].profit)} ile kazandı` : '' }; }
+      else { s.phase = 'lot'; s.endsAt = t + (s.mode === 'sealed' ? this.SEALED : this.OPEN); }
+      return s;
+    }
+  },
+  results(s, g) {
+    const bud = obj(s.bud), own = obj(s.own), log = obj(s.log);
+    return g.players.map(u => {
+      const items = (own[u] ? String(own[u]).split(',').map(Number) : []).map(i => ({ ...s.lots[i], i, paid: (log['l' + i] || {}).p || 0 }));
+      const value = items.reduce((a, x) => a + x.v, 0), spent = items.reduce((a, x) => a + x.paid, 0);
+      return { u, items, value, spent, cash: bud[u] || 0, net: (bud[u] || 0) + value, profit: (bud[u] || 0) + value - s.budget };
+    }).sort((a, b) => b.net - a.net);
+  },
+  view(g, s, me) {
+    const host = g.sunucu === me, playing = g.players.includes(me), bud = obj(s.bud), lot = s.lots[Math.min(s.i, s.lots.length - 1)];
+    const people = `<div class="au-people">${g.players.map(u => `<div class="au-p ${s.bidder === u && s.phase === 'lot' ? 'lead' : ''} ${u === me ? 'me' : ''}">${pav(u, 26)}<div><b>${esc(pname(u))}${u === me ? ' (sen)' : ''}</b><small>${money(bud[u])} · ${(obj(s.own)[u] ? String(obj(s.own)[u]).split(',').length : 0)} ürün</small></div>${s.mode === 'sealed' && s.phase === 'lot' ? `<em class="${obj(s.sb)[u] ? 'ok' : ''}">${obj(s.sb)[u] ? '✓ teklif verdi' : 'düşünüyor'}</em>` : ''}</div>`).join('')}${g.sunucu ? `<div class="au-p host">${pav(g.sunucu, 26)}<div><b>${esc(pname(g.sunucu))}</b><small>🎙️ Sunucu</small></div></div>` : ''}</div>`;
+    if (s.phase === 'setup') {
+      if (!host) return `${people}<div class="au-wait">🎙️ ${esc(pname(g.sunucu))} ürünleri hazırlıyor… Birazdan başlıyoruz.</div>`;
+      return `${people}<div class="au-setup"><p class="g-hint">Ürünleri ve <b>gerçek değerlerini</b> düzenleyebilirsin — oyuncular değerleri göremez, sadece ipucu aralığını görür.</p>
+        <div class="au-lots">${s.lots.map((l, i) => `<div class="au-lot-row"><span>${l.e}</span><input class="input" data-aulot="${esc(g.id)}" data-i="${i}" data-f="n" value="${esc(l.n)}" maxlength="40"><small>${money(l.lo)}–${money(l.hi)}</small><input class="input au-v" type="number" min="0" data-aulot="${esc(g.id)}" data-i="${i}" data-f="v" value="${l.v}"></div>`).join('')}</div>
+        <button class="btn btn-primary" data-act="gAuBegin" data-id="${esc(g.id)}">${ic('play', 15)} Açık artırmayı başlat</button></div>`;
+    }
+    if (s.phase === 'end' || s.res) return people + this.endView(g, s, me);
+    const log = obj(s.log)['l' + s.i], sold = s.phase === 'sold';
+    const valueTag = host || sold && host ? `<span class="au-real">🎙️ Gerçek değer: <b>${money(lot.v)}</b></span>` : '';
+    let center;
+    if (sold) {
+      center = log && log.w ? `<div class="au-sold"><b>SATILDI!</b><span>${pav(log.w, 30)} ${esc(pname(log.w))} · ${money(log.p)}</span>${s.mode === 'sealed' && log.sb ? `<small>${Object.entries(obj(log.sb)).map(([u, x]) => `${esc(pname(u))}: ${money(x.a)}`).join(' · ')}</small>` : ''}</div>`
+        : `<div class="au-sold none"><b>Satılmadı</b><span>Kimse teklif vermedi</span></div>`;
+    } else if (s.mode === 'live') {
+      const cur = s.bid || 0, mine = s.bidder === me, can = playing && !mine;
+      center = `<div class="au-bid"><span>Güncel teklif</span><b>${cur ? money(cur) : '—'}</b><small>${s.bidder ? `${pav(s.bidder, 22)} ${esc(pname(s.bidder))}${mine ? ' (sen)' : ''}` : 'İlk teklifi ver'}</small></div>
+        ${playing ? `<div class="au-actions">${[100, 500, 1000].map(inc => { const a = Math.max(cur, 0) + inc; return `<button class="btn btn-ghost" ${can && a <= (bud[me] || 0) ? `data-act="gAuBid" data-id="${esc(g.id)}" data-v="${a}"` : 'disabled'}>+${inc.toLocaleString('tr-TR')}<small>${money(a)}</small></button>`; }).join('')}
+          <form class="au-custom" data-aubid="${esc(g.id)}" autocomplete="off"><input class="input" id="auAmt" type="number" min="${cur + 50}" step="50" placeholder="Özel teklif"><button class="btn btn-primary" type="submit" ${can ? '' : 'disabled'}>Teklif ver</button></form></div>
+          ${mine ? '<p class="g-hint">🟢 En yüksek teklif sende — biri geçerse tekrar artırabilirsin.</p>' : ''}` : ''}`;
+    } else {
+      const sb = obj(s.sb), done = sb[me];
+      center = `<div class="au-bid"><span>Kapalı zarf</span><b>🤫</b><small>Teklifler süre bitince ya da herkes verince açılır</small></div>
+        ${playing ? (done ? `<p class="g-hint">Gizli teklifin: <b>${money(done.a)}</b> — diğerleri bekleniyor…</p>` : `<form class="au-custom" data-aubid="${esc(g.id)}" autocomplete="off"><input class="input" id="auAmt" type="number" min="0" step="50" max="${bud[me] || 0}" placeholder="Gizli teklifin (₺)"><button class="btn btn-primary" type="submit">Zarfı gönder</button><button class="btn btn-ghost" type="button" data-act="gAuBid" data-id="${esc(g.id)}" data-v="0">Pas geç</button></form>`) : ''}`;
+    }
+    return `${people}<div class="au-stage ${sold ? 'sold' : ''}">
+      <div class="au-lot"><span class="au-emoji">${lot.e}</span><div class="au-info"><small>Ürün ${s.i + 1}/${s.lots.length} · ${esc(lot.c)}</small><h3>${esc(lot.n)}</h3><span class="au-hint">Tahmini değer: ${money(lot.lo)} – ${money(lot.hi)}</span>${valueTag}</div>
+        ${!sold ? `<span class="au-timer" data-gcount="${s.endsAt}">${Math.max(0, Math.ceil((s.endsAt - NOW()) / 1000))} sn</span>` : ''}</div>
+      ${center}</div>`;
+  },
+  endView(g, s, me) {
+    const r = this.results(s, g), medal = ['🥇', '🥈', '🥉', '4.'];
+    return `<div class="au-end"><h3>🔨 Açık artırma bitti — sonuçlar</h3>
+      ${r.map((x, k) => `<div class="au-res ${x.profit >= 0 ? 'up' : 'down'}" style="--d:${k * .25}s"><div class="au-res-head"><span class="au-medal">${medal[k] || ''}</span>${pav(x.u, 30)}<b>${esc(pname(x.u))}${x.u === me ? ' (sen)' : ''}</b>
+        <span class="au-pl">${x.profit >= 0 ? '+' : ''}${money(x.profit)}</span></div>
+        <div class="au-res-sub">Harcanan ${money(x.spent)} · Ürünlerin gerçek değeri ${money(x.value)} · Kalan nakit ${money(x.cash)}</div>
+        ${x.items.length ? `<div class="au-items">${x.items.map(it => `<span class="${it.v >= it.paid ? 'good' : 'bad'}">${it.e} ${esc(it.n)} <small>${money(it.paid)} → ${money(it.v)}</small></span>`).join('')}</div>` : '<div class="au-res-sub">Hiç ürün almadı 🤷</div>'}</div>`).join('')}
+      <details class="au-all"><summary>Tüm ürünlerin gerçek değerleri</summary>${s.lots.map((l, i) => { const lg = obj(s.log)['l' + i] || {}; return `<div><span>${l.e} ${esc(l.n)}</span><small>${lg.w ? `${esc(pname(lg.w))} · ${money(lg.p)}` : 'satılmadı'}</small><b>${money(l.v)}</b></div>`; }).join('')}</details></div>`;
+  },
+  turnText(g, s, me) { return s.phase === 'setup' ? 'Hazırlık' : s.phase === 'sold' ? 'Çekiç indi!' : s.mode === 'sealed' ? 'Kapalı zarf turu' : 'Canlı artırma'; }
+};
+
+/* ---------- Sosyal Alan görünümleri ---------- */
+const GAME_ORDER = ['xox', 'c4', 'rps', 'reflex', 'memory', 'hangman', 'auction'];
+Views.gameStage = () => {
+  const me = Auth.current, g = GameHub.focus && GameHub.get(GameHub.focus);
+  if (!g || !(GameHub.inGame(g) || g.host === me)) return '';
+  const def = GAMES[g.type], s = g.s;
+  const head = (sub, btns = '') => `<div class="gs-head"><span class="gs-emoji">${def.emoji}</span><div><h3>${def.name}</h3><small>${sub}</small></div><div class="gs-btns">${btns}<button class="btn-icon sm" data-act="gClose" title="Oyunu küçült">${ic('x', 15)}</button></div></div>`;
+  const vs = (g.players || []).map(u => `<span class="gs-vs">${pav(u, 22)} ${esc(pname(u))}</span>`).join('<i>vs</i>');
+  if (g.status === 'invite' || g.status === 'lobby') {
+    const waiting = (g.invitees || []).filter(u => !(g.players || []).includes(u) && !obj(g.declined)[u]);
+    const declined = (g.invitees || []).filter(u => obj(g.declined)[u]);
+    return `<section class="card game-stage" data-game="${esc(g.id)}">${head(g.status === 'lobby' ? 'Lobi · oyuncular toplanıyor' : 'Davet gönderildi')}
+      <div class="gs-lobby">${(g.players || []).map(u => `<span class="gl-p ok">${pav(u, 30)} ${esc(pname(u))} ✓</span>`).join('')}${waiting.map(u => `<span class="gl-p wait">${pav(u, 30)} ${esc(pname(u))} <em>bekleniyor…</em></span>`).join('')}${declined.map(u => `<span class="gl-p no">${pav(u, 30)} ${esc(pname(u))} <em>reddetti</em></span>`).join('')}
+        ${g.sunucu ? `<span class="gl-p host">${pav(g.sunucu, 30)} ${esc(pname(g.sunucu))} <em>🎙️ sunucu</em></span>` : ''}</div>
+      ${GameHub.expired(g) ? '<p class="g-hint">Davetin süresi doldu.</p>' : `<p class="g-hint">Davet süresi: <span data-gcount="${(g.createdAt || 0) + (g.status === 'lobby' ? 10 * MIN : GameHub.INVITE_TTL)}"></span></p>`}
+      <div class="row-btns">${g.host === me && g.status === 'lobby' ? `<button class="btn btn-primary" data-act="gStart" data-id="${esc(g.id)}" ${(g.players || []).length >= 2 ? '' : 'disabled'}>${ic('play', 15)} Oyunu başlat (${(g.players || []).length} oyuncu)</button>` : ''}
+        ${g.host === me ? `<button class="btn btn-ghost" data-act="gCancel" data-id="${esc(g.id)}">Daveti iptal et</button>` : ''}</div></section>`;
+  }
+  if (!s) return '';
+  const done = g.status === 'done' || s.res, r = s.res || {};
+  const winTxt = g.status === 'done' && !s.res ? (g.result || 'Oyun bitti') : r.w === 'draw' ? '🤝 Berabere' : r.w === me ? '🏆 Kazandın!' : r.w ? `${esc(pname(r.w))} kazandı` : 'Oyun bitti';
+  const banner = done ? `<div class="gs-result ${r.w === me ? 'win' : r.w === 'draw' ? 'draw' : 'lose'}"><b>${winTxt}</b><small>${esc(r.txt || g.result || '')}</small>
+    <div class="row-btns"><button class="btn btn-primary btn-sm" data-act="gRematch" data-id="${esc(g.id)}">${ic('refresh', 14)} Rövanş</button><button class="btn btn-ghost btn-sm" data-act="gClose">Kapat</button></div></div>` : '';
+  const btns = !done ? `<button class="btn btn-ghost btn-sm" data-act="gForfeit" data-id="${esc(g.id)}">${g.type === 'auction' && (g.host === me) ? 'Bitir' : 'Pes et'}</button>` : '';
+  return `<section class="card game-stage g-${g.type} ${done ? 'is-done' : ''}" data-game="${esc(g.id)}">
+    ${head(`${vs}${!done ? ` · <span class="gs-turn">${def.turnText(g, s, me)}</span>` : ''}`, btns)}
+    ${banner}<div class="gs-body">${def.view(g, s, me)}</div></section>`;
+};
+Views.social = () => {
+  const me = Auth.current, users = DB.get('users').filter(u => u.id !== me);
+  const active = GameHub.myActive(me), inv = GameHub.myInvites(me), st = GameHub.stats();
+  if (!GameHub.focus && active[0]) GameHub.focus = active[0].id;
+  const recent = GameHub.list().filter(g => g.status === 'done' && GameHub.inGame(g)).sort((a, b) => (b.endedAt || 0) - (a.endedAt || 0)).slice(0, 6);
+  const board = DB.get('users').map(u => ({ u, w: (st.w[u.id] || {}).total || 0, by: (st.w[u.id] || {}).by || {} })).sort((a, b) => b.w - a.w);
+  return `<div class="social">
+    <div id="gameStage">${Views.gameStage()}</div>
+    ${inv.length ? `<section class="card soc-inv"><div class="card-head"><h3>${ic('bell', 17)} Sana gelen davetler</h3></div>${inv.map(g => `<div class="soc-inv-row"><span class="gs-emoji sm">${GAMES[g.type].emoji}</span><div><b>${esc(pname(g.host))} · ${GAMES[g.type].name}</b><small data-gcount="${(g.createdAt || 0) + (g.status === 'lobby' ? 10 * MIN : GameHub.INVITE_TTL)}"></small></div><button class="btn btn-primary btn-sm" data-act="gameAccept" data-id="${esc(g.id)}">Katıl</button><button class="btn btn-ghost btn-sm" data-act="gameDecline" data-id="${esc(g.id)}">Reddet</button></div>`).join('')}</section>` : ''}
+    ${active.filter(g => g.id !== GameHub.focus).length ? `<section class="card soc-inv"><div class="card-head"><h3>${ic('play', 16)} Devam eden oyunların</h3></div>${active.filter(g => g.id !== GameHub.focus).map(g => `<div class="soc-inv-row"><span class="gs-emoji sm">${GAMES[g.type].emoji}</span><div><b>${GAMES[g.type].name}</b><small>${(g.players || []).map(pname).join(' vs ')}</small></div><button class="btn btn-ghost btn-sm" data-act="gFocus" data-id="${esc(g.id)}">Oyuna dön</button></div>`).join('')}</section>` : ''}
+    <section class="card soc-games"><div class="card-head"><h3>${ic('game', 18)} Oyun salonu</h3><span class="sub">Bir oyun seç, ekipten birini davet et</span></div>
+      <div class="soc-grid">${GAME_ORDER.map(k => { const d = GAMES[k]; return `<button type="button" class="soc-card" data-act="gNew" data-v="${k}"><span class="soc-emoji">${d.emoji}</span><b>${d.name}</b><small>${d.desc}</small><em>${d.players} · ${d.time}</em></button>`; }).join('')}</div></section>
+    <div class="grid g-2 soc-bottom">
+      <section class="card"><div class="card-head"><h3>${ic('target', 17)} Skor tablosu</h3><span class="sub">${st.played} oyun oynandı</span></div>
+        <div class="soc-board">${board.map((x, i) => `<div class="sb-row ${x.u.id === me ? 'me' : ''}"><span class="sb-rank">${['🥇', '🥈', '🥉'][i] || i + 1}</span>${avatar(x.u, 30)}<b>${esc(x.u.name)}</b><span class="sb-by">${Object.entries(x.by).map(([k, n]) => `${GAMES[k] ? GAMES[k].emoji : ''}${n}`).join(' ')}</span><em>${x.w} galibiyet</em></div>`).join('')}</div></section>
+      <section class="card"><div class="card-head"><h3>${ic('clock', 17)} Son oyunların</h3></div>
+        ${recent.length ? `<div class="soc-recent">${recent.map(g => `<div class="sr-row"><span>${GAMES[g.type].emoji}</span><div><b>${GAMES[g.type].name}</b><small>${(g.players || []).map(pname).join(' vs ')} · ${g.endedAt ? T.ago(g.endedAt) : ''}</small></div><em class="${g.winner === me ? 'w' : g.winner === 'draw' ? 'd' : 'l'}">${g.winner === me ? 'Kazandın' : g.winner === 'draw' ? 'Berabere' : g.winner ? esc(pname(g.winner)) + ' kazandı' : esc(g.result || 'Bitti')}</em></div>`).join('')}</div>` : '<p class="muted sm" style="padding:6px 2px">Henüz bitmiş oyun yok — ilk maçı başlat!</p>'}</section>
+    </div>
+    ${users.length ? '' : '<p class="muted">Oyun oynamak için ekipte en az bir kişi daha olmalı.</p>'}
+  </div>`;
+};
+/** Oyun kurma penceresi: rakip(ler)i ve ayarları seç */
+function gameSetup(type) {
+  const def = GAMES[type], me = Auth.current, users = DB.get('users').filter(u => u.id !== me);
+  if (!users.length) return toast('Ekipte davet edebileceğin kimse yok', 'error');
+  const multi = !!def.multi;
+  const people = users.map(u => `<label class="gp-opt"><input type="${multi ? 'checkbox' : 'radio'}" name="gpPick" value="${u.id}"><span>${avatarDot(u, 34, Presence.online(u.id) ? { key: 'active', color: '#22c55e' } : { key: 'offline', color: '#94a3b8' })}<b>${esc(u.name)}</b><small>${Presence.online(u.id) ? 'çevrimiçi' : 'çevrimdışı'}</small></span></label>`).join('');
+  const extra = type === 'hangman' ? `<div class="gp-sec"><label class="lbl">Mod</label><div class="seg gp-seg"><button type="button" class="on" data-hm="race">🏁 Hazır kelimeyle yarış</button><button type="button" data-hm="custom">✍️ Kelimeyi ben belirleyeyim</button></div>
+      <div class="gp-custom" hidden><input class="input" id="hmWord" maxlength="30" placeholder="Gizli kelime (ör. KAMPANYA)"><input class="input" id="hmHint" maxlength="40" placeholder="İpucu (ör. Ajans terimi)"></div></div>`
+    : type === 'auction' ? `<div class="gp-sec gp-grid">
+        <label class="lbl">Teklif şekli<select class="input" id="auMode"><option value="live">🔨 Canlı artırma</option><option value="sealed">✉️ Kapalı zarf</option></select></label>
+        <label class="lbl">Ürün sayısı<select class="input" id="auCount"><option>5</option><option>8</option><option selected>10</option><option>15</option></select></label>
+        <label class="lbl">Başlangıç parası<select class="input" id="auBudget"><option value="5000">5.000 ₺</option><option value="10000" selected>10.000 ₺</option><option value="20000">20.000 ₺</option><option value="50000">50.000 ₺</option></select></label>
+        <label class="lbl">Senin rolün<select class="input" id="auRole"><option value="player">Ben de teklif veririm</option><option value="host">🎙️ Sunucuyum (değerleri görürüm)</option></select></label></div>` : '';
+  Modal.open({
+    title: `${def.emoji} ${def.name} · davet et`,
+    body: `<p class="muted sm" style="margin-bottom:10px">${def.desc}</p><div class="gp-people">${people}</div>${extra}`,
+    actions: [{ label: 'Vazgeç' }, { label: 'Davet gönder', cls: 'btn-primary', onClick: m => {
+      const picks = $$('input[name="gpPick"]:checked', m).map(i => i.value);
+      if (!picks.length) { toast(multi ? 'En az bir kişi seç' : 'Bir rakip seç', 'error'); return false; }
+      const opts = {};
+      if (type === 'hangman') {
+        const mode = $('.gp-seg button.on', m).dataset.hm; opts.hmMode = mode;
+        if (mode === 'custom') { const w = TR_UP($('#hmWord', m).value).trim(); if (!/^[A-ZÇĞIİÖŞÜ ]{3,30}$/.test(w)) { toast('Kelime 3–30 harf olmalı (sadece harf ve boşluk)', 'error'); return false; } opts.word = w; opts.hint = $('#hmHint', m).value.trim(); }
+      }
+      if (type === 'auction') {
+        Object.assign(opts, { mode: $('#auMode', m).value, count: +$('#auCount', m).value, budget: +$('#auBudget', m).value, hostRole: $('#auRole', m).value });
+        if (opts.hostRole === 'host' && picks.length < 2) { toast('Sunucu olarak en az 2 oyuncu davet etmelisin', 'error'); return false; }
+        if (picks.length > (opts.hostRole === 'host' ? 4 : 3)) { toast('En fazla 4 teklif veren oyuncu olabilir', 'error'); return false; }
+      }
+      setTimeout(() => GameHub.create(type, picks, opts), 0);
+    } }],
+    onMount: m => {
+      const md = m.querySelector('.modal'); if (md) md.classList.add('modal-game');
+      $$('.gp-seg button', m).forEach(b => b.onclick = () => { $$('.gp-seg button', m).forEach(x => x.classList.toggle('on', x === b)); const c = $('.gp-custom', m); if (c) c.hidden = b.dataset.hm !== 'custom'; });
+    }
+  });
+}
 
 Views.chatSideItems = () => {
   const item = (ch, av, title, m, extra = '') => {
@@ -4902,6 +5752,23 @@ const Actions = {
     DB.multi({ messages: null }); toast('Sohbet temizlendi'); App.render();
   },
   sendChat() { Chat.send(); },
+  gNew(el) { gameSetup(el.dataset.v); },
+  gameAccept(el) { GameHub.accept(el.dataset.id); },
+  gameDecline(el) { GameHub.decline(el.dataset.id); },
+  gCancel(el) { GameHub.cancel(el.dataset.id); },
+  gStart(el) { GameHub.start(el.dataset.id); },
+  async gForfeit(el) { const g = GameHub.get(el.dataset.id); if (!g) return; if (await confirmBox(g.type === 'auction' ? 'Oyunu bitir' : 'Pes et', g.type === 'auction' ? 'Açık artırma şimdi sona erecek.' : 'Pes edersen rakibin kazanır.', g.type === 'auction' ? 'Bitir' : 'Pes et')) GameHub.forfeit(g.id); },
+  gRematch(el) { GameHub.rematch(el.dataset.id); },
+  gClose() { GameHub.focus = null; App.render(); },
+  gFocus(el) { GameHub.focus = el.dataset.id; GameHub.hideStarted(); if (App.view !== 'social') App.go('social'); else App.render(); },
+  gStartedClose() { GameHub.hideStarted(); },
+  gXox(el) { GAMES.xox.play(el.dataset.id, +el.dataset.i); },
+  gC4(el) { GAMES.c4.drop(el.dataset.id, +el.dataset.c); },
+  gRps(el) { GAMES.rps.pick(el.dataset.id, el.dataset.v); },
+  gMem(el) { GAMES.memory.flip(el.dataset.id, +el.dataset.i); },
+  gHm(el) { GAMES.hangman.guess(el.dataset.id, el.dataset.v); },
+  gAuBid(el) { GAMES.auction.bid(el.dataset.id, +el.dataset.v); },
+  gAuBegin(el) { GAMES.auction.begin(el.dataset.id); },
   nudge() { Nudge.send(); },
   clientAdd() { Clients.form(); },
   clientEdit(el) { const c = DB.find('clients', el.dataset.id); if (c) Clients.form(c); },
@@ -4979,7 +5846,7 @@ const Actions = {
   },
   async resetAll() {
     if (!await confirmBox('Fabrika ayarlarına dön', 'Tüm üyeler, ayarlar ve kayıtlar veritabanından silinip başlangıç kurulumu yeniden oluşturulacak.', 'Sıfırla')) return;
-    await DB.multi({ settings: null, users: null, sessions: null, days: null, presence: null, messages: null, ai_logs: null, clients: null, meta: null });
+    await DB.multi({ settings: null, users: null, sessions: null, days: null, presence: null, messages: null, ai_logs: null, clients: null, games: null, meta: null });
     await Seed.run(); Auth.logout(); Theme.apply(Theme.defaults); App.go('dashboard'); toast('Uygulama sıfırlandı');
   },
 
@@ -5038,6 +5905,20 @@ const App = {
     // Müşteri listesi: arama ve sıralama (yalnızca liste yeniden çizilir)
     document.addEventListener('input', e => { if (e.target && e.target.id === 'clSearch') { Clients.ui.q = e.target.value; const l = $('#clList'); if (l) l.innerHTML = Views.clientList(); } });
     document.addEventListener('change', e => { if (e.target && e.target.id === 'clSort') { Clients.ui.sort = e.target.value; const l = $('#clList'); if (l) l.innerHTML = Views.clientList(); } });
+    // Sosyal Alan: hız testi (anında tepki için pointerdown), formlar, klavye, sayaç
+    document.addEventListener('pointerdown', e => { const pad = e.target.closest && e.target.closest('[data-reflex]'); if (pad && !pad.disabled) { e.preventDefault(); GAMES.reflex.press(pad.dataset.reflex); } });
+    document.addEventListener('submit', e => {
+      const f = e.target; if (!f || !f.dataset) return;
+      if (f.dataset.hmsolve) { e.preventDefault(); const i = f.querySelector('input'); const v = i.value; i.value = ''; if (v.trim()) GAMES.hangman.solve(f.dataset.hmsolve, v); }
+      if (f.dataset.aubid) { e.preventDefault(); const i = f.querySelector('input'); const v = +i.value; if (!v && v !== 0) return; GAMES.auction.bid(f.dataset.aubid, v).then(ok => { if (ok) { const n = $('#auAmt'); if (n) n.value = ''; } }); }
+    });
+    document.addEventListener('change', e => { const t = e.target; if (t && t.dataset && t.dataset.aulot) GAMES.auction.editLot(t.dataset.aulot, +t.dataset.i, t.dataset.f, t.value); });
+    document.addEventListener('keydown', e => {
+      if (this.view !== 'social' || e.ctrlKey || e.metaKey || e.altKey || /INPUT|TEXTAREA|SELECT/.test((e.target && e.target.tagName) || '') || Modal.el) return;
+      const g = GameHub.focus && GameHub.get(GameHub.focus); if (!g || g.type !== 'hangman' || g.status !== 'active' || !g.s || g.s.turn !== Auth.current) return;
+      const L = TR_UP(e.key); if (L.length === 1 && TR_ALPHA.includes(L)) { e.preventDefault(); GAMES.hangman.guess(g.id, L); }
+    });
+    setInterval(() => GameHub.clock(), 200);
     // Panoya kopyalanan görseli yapıştırma
     document.addEventListener('paste', e => { if (!e.target || e.target.id !== 'chatInput') return; const fl = [...((e.clipboardData && e.clipboardData.files) || [])]; if (fl.length) { e.preventDefault(); Composer.add(fl); } });
     // Sohbete dosya sürükle-bırak
@@ -5172,7 +6053,8 @@ const App = {
     if (!this.started) return;
     if (col === 'messages' || col === '*') this.onMessages();
     if (col === 'messages') return;
-    if (col === 'ai_logs') { if (this.view === 'aipanel' && AdminGate.unlocked) this.scheduleRender(); return; }   // sohbet mesajları sayfanın tamamını yeniden çizmez
+    if (col === 'ai_logs') { if (this.view === 'aipanel' && AdminGate.unlocked) this.scheduleRender(); return; }
+    if (col === 'games') { GameHub.checkInvites(); if (this.view === 'social') this.scheduleRender(); return; }   // oyun hamleleri diğer sayfaları yeniden çizmez   // sohbet mesajları sayfanın tamamını yeniden çizmez
     if (Auth.current && !DB.find('users', Auth.current)) { Auth.logout(); }
     this.scheduleRender();
   },
@@ -5227,6 +6109,7 @@ const App = {
     BreakGuard.check();
     NotifyGate.check();
     Pet.check();
+    GameHub.checkInvites();
     this.updateChatBadge();
     this.tick(true);
   },
