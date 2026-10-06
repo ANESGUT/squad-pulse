@@ -2021,6 +2021,185 @@ html[data-mode="light"] .soc-card{background:linear-gradient(rgba(255,255,255,.6
   .au-lot-row{grid-template-columns:28px minmax(0,1fr) 96px}.au-lot-row small{display:none}
   .gi-card{flex-wrap:wrap}.gi-btns{flex-direction:row;width:100%}.gi-btns .btn{flex:1}
 }
+/* =========================================================
+   TOPLANTI ODASI
+   ========================================================= */
+.cs-tabs{display:flex;margin-top:10px;width:100%}
+.cs-tabs button{flex:1;justify-content:center;position:relative}
+.meet-count{position:absolute;top:2px;right:6px;min-width:17px;height:17px;padding:0 5px;border-radius:999px;background:#22c55e;color:#fff;font-size:10.5px;font-weight:800;display:inline-grid;place-items:center;font-style:normal}
+.meet-count[hidden]{display:none}
+.chat-main.meet-mode{display:flex;flex-direction:column;min-height:0}
+#meetStage{flex:1;min-height:0;display:flex;flex-direction:column;position:relative;z-index:1}
+.mt-pre{flex:1;display:grid;place-items:center;padding:24px}
+.mt-pre-card{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;max-width:420px;padding:28px 24px;border-radius:26px;background:var(--glass-sheen,none),linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.05));border:1px solid var(--glass-border,var(--border));box-shadow:var(--glass-hi,none)}
+html[data-mode="light"] .mt-pre-card{background:linear-gradient(rgba(255,255,255,.7),rgba(255,255,255,.7))}
+.mt-pre-ic{font-size:44px}
+.mt-pre-card h3{font-size:20px}
+.mt-pre-people{display:flex;gap:6px;justify-content:center}
+.mt-pre-people span{position:relative}
+.mt-pre-people i{position:absolute;right:-4px;bottom:-4px;font-style:normal;font-size:12px}
+.mt-pre-toggles{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:6px 0}
+.mt-tg{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;border:1px solid var(--glass-border,var(--border));background:rgba(239,68,68,.12);color:#ef4444;font-weight:650;font-size:13px;transition:.2s}
+.mt-tg.on{background:rgba(34,197,94,.12);color:#22c55e;border-color:rgba(34,197,94,.3)}
+.mt-join{min-width:200px;height:46px}
+.mt-room{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:14px}
+.mt-grid{flex:1;min-height:0;display:grid;gap:10px;grid-template-columns:1fr;grid-auto-rows:1fr}
+.mt-grid[data-n="2"]{grid-template-columns:1fr 1fr}
+.mt-grid[data-n="3"],.mt-grid[data-n="4"]{grid-template-columns:1fr 1fr}
+.mt-grid[data-n="5"],.mt-grid[data-n="6"]{grid-template-columns:repeat(3,1fr)}
+.mt-grid[data-n="7"],.mt-grid[data-n="8"],.mt-grid[data-n="9"]{grid-template-columns:repeat(3,1fr)}
+.mt-tile{position:relative;min-height:150px;border-radius:20px;overflow:hidden;background:linear-gradient(160deg,color-mix(in srgb,var(--uc) 28%,#0f172a),#0b1020);border:2px solid transparent;transition:border-color .2s,box-shadow .2s}
+.mt-tile.speaking{border-color:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.25)}
+.mt-tile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.mt-tile video.mirror{transform:scaleX(-1)}
+.mt-tile.screen video{object-fit:contain}
+.mt-tile.cam-off video{visibility:hidden}
+.mt-avatar{position:absolute;inset:0;display:none;place-items:center}
+.mt-tile.cam-off .mt-avatar{display:grid}
+.mt-tile.speaking .mt-avatar>*{animation:pulse 1.2s infinite}
+.mt-name{position:absolute;left:10px;bottom:10px;display:inline-flex;align-items:center;gap:6px;max-width:calc(100% - 20px);padding:5px 10px;border-radius:10px;background:rgba(8,10,18,.6);color:#fff;font-size:12.5px;font-weight:650;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mt-mute{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#ef4444;color:#fff;flex-shrink:0}
+.mt-wave{display:inline-flex;align-items:flex-end;gap:2px;height:12px;width:12px}
+.mt-wave i{width:3px;height:4px;border-radius:2px;background:#fff;opacity:.6}
+.mt-tile.speaking .mt-wave i{background:#22c55e;opacity:1;animation:mtWave .6s ease-in-out infinite}
+.mt-tile.speaking .mt-wave i:nth-child(2){animation-delay:.15s}.mt-tile.speaking .mt-wave i:nth-child(3){animation-delay:.3s}
+@keyframes mtWave{50%{height:12px}}
+.mt-conn{position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:999px;font-size:11.5px;font-weight:650;color:#fff;background:rgba(8,10,18,.6)}
+.mt-conn.bad{background:rgba(239,68,68,.8)}
+.mt-tile.me{order:9}
+.mt-grid[data-n="2"] .mt-tile.me{order:0}
+.mt-bar{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-radius:22px;background:var(--glass-sheen,none),linear-gradient(var(--glass-bg-strong,var(--surface)),var(--glass-bg-strong,var(--surface)));border:1px solid var(--glass-border-hi,var(--border));box-shadow:var(--glass-hi,none)}
+.mt-info{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-right:auto}
+.mt-ctl{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 16px;border-radius:999px;border:1px solid var(--glass-border,var(--border));background:rgba(var(--ink),.06);color:var(--text);font-weight:650;font-size:13px;transition:.2s}
+.mt-ctl *{pointer-events:none}
+.mt-ctl:hover{background:rgba(var(--ink),.1)}
+.mt-ctl.off{background:#ef4444;border-color:#ef4444;color:#fff}
+.mt-ctl.active{background:rgba(var(--accent-rgb),.2);border-color:var(--accent);color:var(--text)}
+.mt-ctl.leave{background:#dc2626;border-color:#dc2626;color:#fff}
+.mt-ctl.leave:hover{background:#b91c1c}
+.mt-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:30px;text-align:center}
+/* başka sayfadayken kapsül */
+#meetPill{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:8600;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 16px;border-radius:999px;
+  background:var(--glass-sheen,none),linear-gradient(var(--pop-bg,var(--surface-solid)),var(--pop-bg,var(--surface-solid)));border:1px solid rgba(34,197,94,.45);box-shadow:0 18px 40px -16px rgba(0,0,0,.6),var(--glass-hi,none);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);animation:attIn .3s var(--ease)}
+#meetPill b{font-size:13px}#meetPill small{font-size:12px;color:var(--muted)}
+.mp-dot{width:9px;height:9px;border-radius:50%;background:#22c55e;animation:pulse 1.6s infinite}
+.mp-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--glass-border,var(--border));background:rgba(var(--ink),.06);color:var(--text);display:grid;place-items:center}
+.mp-btn *{pointer-events:none}
+.mp-btn.off{background:#ef4444;color:#fff;border-color:#ef4444}
+.mp-btn.leave{background:#dc2626;color:#fff;border-color:#dc2626}
+#meetInvite{position:fixed;left:50%;top:16px;z-index:9550;width:min(520px,calc(100vw - 24px));transform:translate(-50%,-140%);opacity:0;transition:transform .35s var(--ease),opacity .25s}
+#meetInvite.show{transform:translate(-50%,0);opacity:1}
+@media (max-width:900px){
+  #meetPill{bottom:calc(92px + env(safe-area-inset-bottom))}
+  .mt-ctl span{display:none}
+  .mt-ctl{width:50px;padding:0;justify-content:center}
+  .mt-info{display:none}
+  .mt-screen{display:none}
+}
+@media (max-width:900px){.chat-wrap:has(.meet-mode){height:calc(100dvh - 300px - env(safe-area-inset-bottom));min-height:420px}}
+@media (max-width:640px){
+  .mt-room{padding:8px}
+  .mt-grid[data-n="2"]{grid-template-columns:1fr;grid-template-rows:1fr 1fr}
+  .mt-grid[data-n="3"],.mt-grid[data-n="4"]{grid-template-columns:1fr 1fr}
+  .mt-tile{min-height:120px}
+}
+/* ---------- Yardım İste ---------- */
+.help-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(239,68,68,.35);background:rgba(239,68,68,.1);color:color-mix(in srgb,#ef4444 80%,var(--text));font-weight:700;font-size:12.5px;white-space:nowrap;transition:.2s}
+.help-btn:hover{background:rgba(239,68,68,.18)}
+.modal.modal-help{width:min(560px,100%)}
+.hp-people{display:flex;flex-direction:column;gap:6px;max-height:300px;overflow:auto}
+.hp-opt input{display:none}
+.hp-opt>span{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:14px;border:1.5px solid var(--glass-border,var(--border));background:rgba(var(--ink),.03);cursor:pointer;transition:.2s}
+.hp-opt input:checked+span{border-color:var(--accent);background:rgba(var(--accent-rgb),.12)}
+.hp-opt.busy>span{opacity:.5;cursor:not-allowed}
+.hp-meta{flex:1;min-width:0;display:flex;flex-direction:column}
+.hp-meta b{font-size:13.5px}.hp-meta small{font-size:12px;color:var(--muted)}
+.hp-opt em{font-style:normal;font-size:11px;font-weight:700;color:#ef4444;padding:2px 8px;border-radius:999px;background:rgba(239,68,68,.12)}
+.hp-none{margin-top:8px;padding:10px;border-radius:12px;background:rgba(245,158,11,.1);font-size:13px}
+.hp-lbl{display:flex;flex-direction:column;gap:6px;margin-top:14px;font-size:12.5px;font-weight:650;color:var(--muted)}
+.hp-urg{margin-top:10px}
+.hp-card{align-self:center;width:min(440px,92%);margin:12px auto 6px;padding:12px 14px;border-radius:18px;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.28);box-shadow:var(--glass-hi,none)}
+.hp-card.urgent{border-color:rgba(239,68,68,.6);background:rgba(239,68,68,.12)}
+.hp-card.st-accepted{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.35)}
+.hp-card.st-declined{opacity:.75}
+.hp-head{display:flex;align-items:center;gap:6px;font-size:13px}
+.hp-head em{font-style:normal;font-size:11px;font-weight:700;color:#ef4444}
+.hp-head time{margin-left:auto;font-size:11px;color:var(--muted)}
+.hp-card p{margin:6px 0 8px;font-size:14px;line-height:1.45;white-space:pre-wrap;word-break:break-word}
+.hp-st{display:inline-block;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px}
+.hp-st.ok{color:#22c55e;background:rgba(34,197,94,.13)}.hp-st.no{color:var(--muted);background:rgba(var(--ink),.06)}.hp-st.wait{color:#f59e0b;background:rgba(245,158,11,.12)}
+.hp-acts{display:flex;gap:6px;flex-wrap:wrap}
+#helpAlert{position:fixed;left:50%;top:16px;z-index:9560;width:min(560px,calc(100vw - 24px));transform:translate(-50%,-140%);opacity:0;transition:transform .35s var(--ease),opacity .25s}
+#helpAlert.show{transform:translate(-50%,0);opacity:1}
+#helpAlert .gi-card{border-color:rgba(239,68,68,.45);background:var(--glass-sheen,none),linear-gradient(rgba(239,68,68,.12),rgba(239,68,68,.04)),linear-gradient(var(--pop-bg,var(--surface-solid)),var(--pop-bg,var(--surface-solid)))}
+.hp-quote{display:block;margin-top:2px;font-style:italic;color:var(--text) !important;opacity:.85;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+/* ---------- Özel Günler & Çekim Takvimi ---------- */
+.sd-card .card-head{flex-wrap:wrap}
+.sd-legend{display:flex;flex-wrap:wrap;gap:6px}
+.lg{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:650;padding:3px 9px;border-radius:999px;color:var(--muted);background:rgba(var(--ink),.05)}
+.lg.red{color:#ef4444;background:rgba(239,68,68,.12)}.lg.green{color:#16a34a;background:rgba(34,197,94,.14)}.lg.yellow{color:#ca8a04;background:rgba(234,179,8,.16)}
+.lg.ev{color:color-mix(in srgb,var(--tc) 80%,var(--text));background:color-mix(in srgb,var(--tc) 13%,transparent)}
+.sd-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);gap:18px}
+.sd-nav{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.sd-nav b{font-size:16px;min-width:130px;text-align:center;text-transform:capitalize}
+.sd-add{margin-left:auto}
+.sd-week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px}
+.sd-week span{text-align:center;font-size:11px;font-weight:750;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.sd-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.sd-cell{position:relative;min-height:92px;display:flex;flex-direction:column;gap:4px;padding:7px;border-radius:14px;text-align:left;color:var(--text);background:rgba(var(--ink),.035);border:1px solid var(--glass-border,var(--border));transition:transform .2s,border-color .2s,background .2s;overflow:hidden}
+.sd-cell:hover{transform:translateY(-2px);border-color:rgba(var(--accent-rgb),.4)}
+.sd-cell *{pointer-events:none}
+.sd-cell.out{opacity:.38}
+.sd-cell.sel{border-color:var(--accent);box-shadow:0 0 0 2px rgba(var(--accent-rgb),.2)}
+.sd-num{font-size:13px;font-weight:750}
+.sd-cell.today .sd-num{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--on-accent)}
+.sd-cell.tone-red{background:rgba(239,68,68,.16);border-color:rgba(239,68,68,.55)}
+.sd-cell.tone-green{background:rgba(34,197,94,.14);border-color:rgba(34,197,94,.5)}
+.sd-cell.tone-yellow{background:rgba(234,179,8,.15);border-color:rgba(234,179,8,.5)}
+.sd-chips{display:flex;flex-direction:column;gap:3px;min-width:0}
+.sd-chips i{display:flex;align-items:center;gap:4px;font-style:normal;font-size:11px;font-weight:600;padding:2px 5px;border-radius:7px;background:rgba(var(--ink),.06);white-space:nowrap;overflow:hidden;min-width:0}
+.sd-chips i span{overflow:hidden;text-overflow:ellipsis}
+.sd-chips i.ev{background:color-mix(in srgb,var(--tc) 22%,transparent);border-left:3px solid var(--tc)}
+.sd-chips i.more{color:var(--muted);background:none}
+.sd-side{display:flex;flex-direction:column;gap:14px;min-width:0}
+.sd-sel,.sd-up{padding:12px;border-radius:18px;background:rgba(var(--ink),.035);border:1px solid var(--glass-border,var(--border));display:flex;flex-direction:column;gap:6px}
+.sd-sel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.sd-up{max-height:430px;overflow:auto}
+.sd-up h4{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.sd-item{display:flex;align-items:center;gap:10px;width:100%;padding:8px 10px;border-radius:13px;text-align:left;color:var(--text);background:rgba(var(--ink),.04);border:1px solid transparent;border-left:4px solid rgba(var(--ink),.15)}
+button.sd-item{cursor:pointer}button.sd-item *{pointer-events:none}
+.sd-item.ev{border-left-color:var(--tc)}
+.sd-item.tone-red{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4);border-left-color:#ef4444}
+.sd-item.tone-green{background:rgba(34,197,94,.11);border-color:rgba(34,197,94,.35);border-left-color:#22c55e}
+.sd-item.tone-yellow{background:rgba(234,179,8,.12);border-color:rgba(234,179,8,.4);border-left-color:#eab308}
+.sd-item.ev.tone-red,.sd-item.ev.tone-green,.sd-item.ev.tone-yellow{border-left-color:var(--tc)}
+.sd-item.done{opacity:.6}
+.sd-e{font-size:20px;flex-shrink:0}
+.sd-meta{flex:1;min-width:0;display:flex;flex-direction:column}
+.sd-meta b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sd-meta small{font-size:11.5px;color:var(--muted)}
+.sd-note{white-space:pre-wrap}
+.sd-left{font-style:normal;font-size:11.5px;font-weight:750;white-space:nowrap;color:var(--muted)}
+.tone-red .sd-left{color:#ef4444}.tone-green .sd-left{color:#16a34a}.tone-yellow .sd-left{color:#ca8a04}
+.sd-prep{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:999px;border:1px solid var(--glass-border,var(--border));background:rgba(var(--ink),.05);color:var(--text);font-size:11.5px;font-weight:700}
+.sd-prep.on{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.4);color:#16a34a}
+.sd-src{margin-top:10px}
+.link-btn{border:0;background:none;color:var(--accent);font-weight:650;padding:0;cursor:pointer;text-decoration:underline}
+.ev-types{display:flex;flex-wrap:wrap;gap:6px}
+.ev-type input{display:none}
+.ev-type span{display:inline-block;padding:8px 12px;border-radius:12px;font-size:12.5px;font-weight:650;border:1.5px solid var(--glass-border,var(--border));background:rgba(var(--ink),.03);cursor:pointer;transition:.2s}
+.ev-type input:checked+span{border-color:var(--tc);background:color-mix(in srgb,var(--tc) 16%,transparent);color:var(--text)}
+.sd-due-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px}
+@media (max-width:1100px){.sd-layout{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){
+  .sd-cell{min-height:54px;padding:5px;border-radius:10px}
+  .sd-chips i span{display:none}
+  .sd-chips{flex-direction:row;flex-wrap:wrap;gap:2px}
+  .sd-chips i{padding:1px 3px;font-size:10px}
+  .sd-grid,.sd-week{gap:3px}
+  .sd-add{margin-left:0;width:100%}
+  .help-btn span{display:none}
+}
 </style>
 </head>
 <body>
@@ -2155,6 +2334,11 @@ const ICONS = {
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   vibrate: '<path d="m2 8 2 2-2 2 2 2-2 2"/><path d="m22 8-2 2 2 2-2 2 2 2"/><rect x="8" y="5" width="8" height="14" rx="1.5"/>',
   game: '<rect x="2" y="6" width="20" height="12" rx="5"/><path d="M6 12h4M8 10v4"/><circle cx="15.5" cy="11" r="1"/><circle cx="18" cy="13.5" r="1"/>',
+  mic: '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v4M8 22h8"/>',
+  micOff: '<path d="M2 2l20 20"/><path d="M9 9v2a3 3 0 0 0 5.1 2.1M15 9.3V5a3 3 0 0 0-5.9-.7"/><path d="M19 10v1a7 7 0 0 1-1.1 3.8M5 10v1a7 7 0 0 0 11.3 5.5M12 18v4M8 22h8"/>',
+  videoOff: '<path d="M2 2l20 20"/><path d="M10.7 6H14a2 2 0 0 1 2 2v3.3l5-3.3v9M16 16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"/>',
+  monitor: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  phoneOff: '<path d="M10.7 13.3a16 16 0 0 0 3.4 2.6l1.3-1.3a2 2 0 0 1 2.1-.4 12.8 12.8 0 0 0 2.8.7 2 2 0 0 1 1.7 2v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 4.2 2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.4 2.1L9.1 9.9"/><path d="M22 2 2 22"/>',
   minus: '<path d="M5 12h14"/>',
   clip: '<path d="m21.4 11.6-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/>',
   file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
@@ -2204,7 +2388,7 @@ const FirebaseBackend = {
     const since = NOW() - HISTORY_DAYS * DAY, loaded = new Set();
     const bind = (col, ref) => ref.on('value', snap => {
       DB.setCache(col, snap.val());
-      if (!loaded.has(col)) { loaded.add(col); if (loaded.size === 9) resolve(); }
+      if (!loaded.has(col)) { loaded.add(col); if (loaded.size === 13) resolve(); }
       else App.onRemote(col);
     }, err => { if (!Net.ready) reject(err); else { Net.error = err; App.render(); } });
     bind('settings', this.root.child('settings'));
@@ -2216,6 +2400,10 @@ const FirebaseBackend = {
     bind('ai_logs', this.root.child('ai_logs').orderByChild('at').limitToLast(2000));
     bind('clients', this.root.child('clients'));
     bind('games', this.root.child('games').orderByChild('createdAt').limitToLast(150));
+    bind('meet', this.root.child('meet'));
+    bind('events', this.root.child('events'));
+    bind('dayprep', this.root.child('dayprep'));
+    bind('signals', this.root.child('signals').orderByChild('at').limitToLast(400));
   },
   ref(path) { return this.root.child(path); },
   set(path, v) { return this.root.child(path).set(v).catch(onWriteError); },
@@ -2235,7 +2423,7 @@ const LocalBackend = {
     Net.connected = true;
     return Promise.resolve();
   },
-  load() { ['settings', 'users', 'sessions', 'days', 'presence', 'messages', 'ai_logs', 'clients', 'games'].forEach(c => DB.setCache(c, this.data[c])); },
+  load() { ['settings', 'users', 'sessions', 'days', 'presence', 'messages', 'ai_logs', 'clients', 'games', 'meet', 'signals', 'events', 'dayprep'].forEach(c => DB.setCache(c, this.data[c])); },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) { toast('Kaydedilemedi: depolama alanı dolu olabilir.', 'error'); } },
   put(path, v) {
     const p = path.split('/'); let o = this.data;
@@ -2258,7 +2446,7 @@ const LocalBackend = {
 /* Uygulamanın konuştuğu tek veri arayüzü — önbellek + seçili backend */
 const DB = {
   backend: null,
-  cache: { settings: null, users: {}, sessions: {}, days: {}, presence: {}, messages: {}, ai_logs: {}, clients: {}, games: {} },
+  cache: { settings: null, users: {}, sessions: {}, days: {}, presence: {}, messages: {}, ai_logs: {}, clients: {}, games: {}, meet: {}, signals: {}, events: {}, dayprep: {} },
   _arr: {},
   setCache(col, val) {
     if (col === 'settings') this.cache.settings = normalizeSettings(val);
@@ -2682,7 +2870,8 @@ const RULES_SNIPPET = `{
         "days": { ".indexOn": ["date"] },
         "messages": { ".indexOn": ["at"] },
         "ai_logs": { ".indexOn": ["at"] },
-        "games": { ".indexOn": ["createdAt"] }
+        "games": { ".indexOn": ["createdAt"] },
+        "signals": { ".indexOn": ["at"] }
       }
     }
   }
@@ -2837,6 +3026,7 @@ Views.dashboard = () => {
     ${pomoCard(u)}
     ${Views.petCard(u)}
     ${Views.taskCard(u)}
+    ${Views.sdDueCard()}
     ${Views.clientDueCard()}
     <div class="span-3 grid g-4">
       ${kpi('clock', 'Net çalışma', T.dur(today.work), `Hedef ${String(s.dailyGoal).replace('.', ',')} sa`, sumLive(u.id, 'work'), '', `<div class="progress"><i style="width:${pct.toFixed(1)}%" data-live="bar" data-uid="${u.id}"></i></div>`)}
@@ -3173,6 +3363,7 @@ const Chat = {
   /** Konuşma ekranı gerçekten görünüyor mu? (mobilde liste paneli açıkken okundu sayılmaz) */
   convVisible() { const el = $('#chatList'); return !!(el && el.offsetParent !== null); },
   open(ch) {
+    Meet.view = false;
     if (ch !== 'general' && !DB.find('users', ch)) ch = 'general';
     this.channel = ch; this.pane = 'conv'; this.stick = true; this.forceBottom = true;
     if (App.view !== 'chat') App.go('chat'); else App.render();
@@ -4327,7 +4518,8 @@ Views.clients = () => {
         <button class="btn btn-primary cl-add" data-act="clientAdd">${ic('plus', 16)} Yeni Firma / Proje</button>
       </div>
       <div class="cl-list" id="clList">${Views.clientList()}</div>
-    </section>`;
+    </section>
+    ${Views.specialDays()}`;
 };
 /** Panelim: bugün paylaşılacaklar (müşteri varsa) */
 Views.clientDueCard = () => {
@@ -5010,6 +5202,569 @@ function gameSetup(type) {
   });
 }
 
+/* =========================================================
+   TOPLANTI ODASI — WebRTC (kişiden kişiye) + Firebase sinyalleşme
+   • meet/{oda_kullanıcı}   → odadaki kişiler: { room, uid, sess, joinedAt, at, mic, cam, screen }
+   • signals/{id}            → bağlantı kurulum mesajları (offer / answer / ice), okununca silinir
+   Her katılımcı diğer herkese doğrudan bağlanır (mesh) → 4–5 kişiye kadar idealdir.
+   Görüntü/ses Firebase'den geçmez; Firebase yalnızca tanışma mesajlarını taşır.
+   ========================================================= */
+const Meet = {
+  ROOM: 'team', STALE: 50000, HB: 15000,
+  ICE: [{ urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302'] }],
+  view: false, joined: false, sess: null, joinedAt: 0,
+  local: null, screen: null, mic: true, cam: true, sharing: false, hasMic: false, hasCam: false,
+  pcs: {}, streams: {}, done: new Set(), audioEls: {}, levels: {}, pre: { mic: true, cam: true },
+  stageEl: null, _hb: null, _lvl: null, _prevCount: 0, inviteEl: null, dismissedAt: 0,
+  supported() { return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.RTCPeerConnection); },
+  members(room = this.ROOM) { const t = NOW(); return DB.get('meet').filter(m => m && m.room === room && m.uid && t - (m.at || 0) < this.STALE && DB.find('users', m.uid)).sort((a, b) => (a.joinedAt || 0) - (b.joinedAt || 0)); },
+  others() { return this.members().filter(m => m.uid !== Auth.current); },
+  docId(uidv = Auth.current) { return `${this.ROOM}_${uidv}`; },
+
+  /* ---------- katıl / ayrıl ---------- */
+  async join() {
+    if (this.joined || this._joining) return;
+    if (!this.supported()) return toast('Bu tarayıcı görüntülü görüşmeyi desteklemiyor', 'error');
+    if (!window.isSecureContext) return toast('Kamera ve mikrofon için site HTTPS üzerinden açılmalı', 'error');
+    this._joining = true; this.renderStage();
+    const want = { audio: this.pre.mic, video: this.pre.cam };
+    let stream = null;
+    if (want.audio || want.video) {
+      try { stream = await navigator.mediaDevices.getUserMedia({ audio: want.audio ? { echoCancellation: true, noiseSuppression: true } : false, video: want.video ? { width: { ideal: 640 }, height: { ideal: 360 }, facingMode: 'user' } : false }); }
+      catch (e) {
+        if (want.video) { try { stream = await navigator.mediaDevices.getUserMedia({ audio: want.audio }); toast('Kamera açılamadı — yalnızca mikrofonla katıldın', 'error'); } catch (e2) { stream = null; } }
+        if (!stream) toast(e && e.name === 'NotAllowedError' ? 'Kamera/mikrofon izni verilmedi — adres çubuğundaki kilit simgesinden izin verebilirsin. Şimdilik dinleyici olarak katıldın.' : 'Kamera/mikrofon bulunamadı — dinleyici olarak katıldın', 'error');
+      }
+    }
+    this.local = stream || new MediaStream();
+    this.hasMic = !!this.local.getAudioTracks()[0]; this.hasCam = !!this.local.getVideoTracks()[0];
+    this.mic = this.hasMic && this.pre.mic; this.cam = this.hasCam && this.pre.cam;
+    this.local.getAudioTracks().forEach(t => t.enabled = this.mic);
+    this.local.getVideoTracks().forEach(t => t.enabled = this.cam);
+    this.sess = uid('ms'); this.joinedAt = NOW(); this.joined = true; this._joining = false; this.view = true;
+    const doc = { id: this.docId(), room: this.ROOM, uid: Auth.current, sess: this.sess, joinedAt: this.joinedAt, at: NOW(), mic: this.mic, cam: this.cam, screen: false };
+    DB.insert('meet', doc);
+    try { if (DB.backend.ref) DB.backend.ref(`meet/${doc.id}`).onDisconnect().remove(); } catch (e) {}
+    this._hb = setInterval(() => { if (!this.joined) return; DB.update('meet', this.docId(), { at: NOW() }); const old = NOW() - 120000; DB.remove('signals', x => x && (x.at || 0) < old); this.sync(); }, this.HB);
+    this._lvl = setInterval(() => this.meter(), 220);
+    this.watchLevel(Auth.current, this.local);
+    try { Sound.prime(); } catch (e) {}
+    this.hideInvite();
+    App.render(); this.sync();
+  },
+  leave(silent) {
+    if (!this.joined) return;
+    Object.keys(this.pcs).forEach(u => this.closePeer(u));
+    [this.local, this.screen].forEach(s => s && s.getTracks().forEach(t => t.stop()));
+    this.local = this.screen = null; this.sharing = false;
+    clearInterval(this._hb); clearInterval(this._lvl);
+    DB.remove('meet', this.docId());
+    DB.remove('signals', s => s.from === Auth.current);
+    Object.values(this.levels).forEach(l => { try { l.ctx.close(); } catch (e) {} }); this.levels = {};
+    this.joined = false; this.sess = null;
+    if (!silent) { toast('Toplantıdan ayrıldın'); App.render(); }
+  },
+
+  /* ---------- eşlerle bağlantı ---------- */
+  sync() {
+    if (!this.joined) return;
+    const others = this.others(), seen = new Set();
+    others.forEach(m => {
+      seen.add(m.uid);
+      const pc = this.pcs[m.uid];
+      if (pc && pc._sess !== m.sess) this.closePeer(m.uid);
+      if (!this.pcs[m.uid] && Auth.current < m.uid) this.offer(m);   // küçük kimlikli taraf aramayı başlatır
+    });
+    Object.keys(this.pcs).forEach(u => { if (!seen.has(u)) this.closePeer(u); });
+    this.handleSignals();
+    this.renderTiles();
+  },
+  peer(m) {
+    const pc = new RTCPeerConnection({ iceServers: this.ICE });
+    pc._sess = m.sess; pc._q = [];
+    pc.onicecandidate = e => { if (e.candidate) this.send(m, 'ice', e.candidate.toJSON()); };
+    pc.ontrack = e => { const st = e.streams[0] || new MediaStream([e.track]); this.streams[m.uid] = st; this.attachAudio(m.uid, st); this.watchLevel(m.uid, st); this.renderTiles(); };
+    pc.onconnectionstatechange = () => { if (pc.connectionState === 'failed') { this.closePeer(m.uid); setTimeout(() => this.sync(), 1500); } this.renderTiles(); };
+    this.pcs[m.uid] = pc;
+    return pc;
+  },
+  attachLocal(pc) {
+    const a = this.local && this.local.getAudioTracks()[0], v = (this.sharing && this.screen) ? this.screen.getVideoTracks()[0] : (this.local && this.local.getVideoTracks()[0]);
+    pc.getTransceivers().forEach(tr => {
+      const kind = tr.receiver && tr.receiver.track && tr.receiver.track.kind;
+      if (!kind) return;
+      try { tr.direction = 'sendrecv'; } catch (e) {}
+      tr.sender.replaceTrack(kind === 'audio' ? (a || null) : (v || null)).catch(() => {});
+      if (kind === 'video' || kind === 'audio') { const s = tr.sender; try { s.setStreams && s.setStreams(this.local); } catch (e) {} }
+    });
+  },
+  async offer(m) {
+    const pc = this.peer(m);
+    pc.addTransceiver('audio', { direction: 'sendrecv' }); pc.addTransceiver('video', { direction: 'sendrecv' });
+    this.attachLocal(pc);
+    try { const o = await pc.createOffer(); await pc.setLocalDescription(o); this.send(m, 'offer', { type: o.type, sdp: o.sdp }); } catch (e) { console.warn('offer', e); }
+  },
+  send(m, type, data) {
+    DB.insert('signals', { id: uid('sg'), room: this.ROOM, from: Auth.current, fromSess: this.sess, to: m.uid, toSess: m.sess, type, data, at: NOW() });
+  },
+  async handleSignals() {
+    if (!this.joined) return;
+    if (this._sigBusy) { this._sigAgain = true; return; }
+    this._sigBusy = true;
+    try {
+      const mine = DB.get('signals').filter(s => s && s.to === Auth.current && s.toSess === this.sess && !this.done.has(s.id)).sort((a, b) => (a.at || 0) - (b.at || 0));
+      for (const s of mine) {
+        this.done.add(s.id);
+        const m = this.others().find(x => x.uid === s.from && x.sess === s.fromSess);
+        if (m) {
+          try {
+            if (s.type === 'offer') {
+              if (this.pcs[m.uid]) this.closePeer(m.uid);
+              const pc = this.peer(m);
+              await pc.setRemoteDescription(s.data);
+              this.attachLocal(pc);
+              const ans = await pc.createAnswer(); await pc.setLocalDescription(ans);
+              this.send(m, 'answer', { type: ans.type, sdp: ans.sdp });
+              for (const c of pc._q.splice(0)) await pc.addIceCandidate(c).catch(() => {});
+            } else if (s.type === 'answer') {
+              const pc = this.pcs[m.uid]; if (pc && pc.signalingState === 'have-local-offer') { await pc.setRemoteDescription(s.data); for (const c of pc._q.splice(0)) await pc.addIceCandidate(c).catch(() => {}); }
+            } else if (s.type === 'ice') {
+              const pc = this.pcs[m.uid]; if (pc) { if (pc.remoteDescription) await pc.addIceCandidate(s.data).catch(() => {}); else pc._q.push(s.data); }
+            }
+          } catch (e) { console.warn('signal', s.type, e); }
+        }
+        DB.remove('signals', s.id);
+      }
+    } finally { this._sigBusy = false; if (this._sigAgain) { this._sigAgain = false; setTimeout(() => this.handleSignals(), 0); } }
+  },
+  closePeer(u) {
+    const pc = this.pcs[u]; if (pc) { try { pc.close(); } catch (e) {} delete this.pcs[u]; }
+    delete this.streams[u];
+    const a = this.audioEls[u]; if (a) { a.srcObject = null; a.remove(); delete this.audioEls[u]; }
+    const l = this.levels[u]; if (l) { try { l.ctx.close(); } catch (e) {} delete this.levels[u]; }
+  },
+  /** Uzak ses, sayfa yeniden çizilse de kesilmesin diye kalıcı <audio> öğesinde çalar */
+  attachAudio(u, st) {
+    let a = this.audioEls[u];
+    if (!a) { a = document.createElement('audio'); a.autoplay = true; a.playsInline = true; a.dataset.meetAudio = u; a.style.display = 'none'; document.body.appendChild(a); this.audioEls[u] = a; }
+    if (a.srcObject !== st) a.srcObject = st;
+    a.play().catch(() => {});
+  },
+  /* ---------- konuşma göstergesi ---------- */
+  watchLevel(u, st) {
+    if (!st || !st.getAudioTracks().length || this.levels[u]) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)(), an = ctx.createAnalyser(); an.fftSize = 256;
+      ctx.createMediaStreamSource(st).connect(an);
+      this.levels[u] = { ctx, an, buf: new Uint8Array(an.frequencyBinCount), v: 0 };
+    } catch (e) {}
+  },
+  meter() {
+    Object.entries(this.levels).forEach(([u, l]) => {
+      l.an.getByteFrequencyData(l.buf); let sum = 0; for (const x of l.buf) sum += x;
+      const v = sum / l.buf.length; l.v = l.v * .5 + v * .5;
+      const muted = u === Auth.current ? !this.mic : (this.others().find(m => m.uid === u) || {}).mic === false;
+      $$(`.mt-tile[data-u="${u}"]`).forEach(el => el.classList.toggle('speaking', !muted && l.v > 14));
+    });
+  },
+  /* ---------- kontroller ---------- */
+  toggleMic() {
+    if (!this.joined) { this.pre.mic = !this.pre.mic; return this.renderStage(); }
+    if (!this.hasMic) return toast('Mikrofon bulunamadı ya da izin verilmedi', 'error');
+    this.mic = !this.mic; this.local.getAudioTracks().forEach(t => t.enabled = this.mic);
+    DB.update('meet', this.docId(), { mic: this.mic, at: NOW() }); this.renderStage(); this.renderPill();
+  },
+  async toggleCam() {
+    if (!this.joined) { this.pre.cam = !this.pre.cam; return this.renderStage(); }
+    if (!this.hasCam) {
+      // sonradan kamera açma: izin iste, mevcut bağlantılara ekle
+      try { const s = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 360 } } }); const t = s.getVideoTracks()[0]; this.local.addTrack(t); this.hasCam = true; this.cam = false; }
+      catch (e) { return toast('Kamera açılamadı — izin verildiğinden emin ol', 'error'); }
+    }
+    this.cam = !this.cam; this.local.getVideoTracks().forEach(t => t.enabled = this.cam);
+    if (!this.sharing) Object.values(this.pcs).forEach(pc => this.attachLocal(pc));
+    DB.update('meet', this.docId(), { cam: this.cam, at: NOW() }); this.renderStage();
+  },
+  async toggleScreen() {
+    if (!this.joined) return;
+    if (this.sharing) return this.stopScreen();
+    if (!navigator.mediaDevices.getDisplayMedia) return toast('Bu cihaz ekran paylaşımını desteklemiyor', 'error');
+    try { this.screen = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: false }); }
+    catch (e) { return; }
+    this.sharing = true;
+    this.screen.getVideoTracks()[0].onended = () => this.stopScreen();
+    Object.values(this.pcs).forEach(pc => this.attachLocal(pc));
+    DB.update('meet', this.docId(), { screen: true, at: NOW() }); this.renderStage();
+  },
+  stopScreen() {
+    if (!this.sharing) return;
+    if (this.screen) this.screen.getTracks().forEach(t => t.stop());
+    this.screen = null; this.sharing = false;
+    Object.values(this.pcs).forEach(pc => this.attachLocal(pc));
+    DB.update('meet', this.docId(), { screen: false, at: NOW() }); this.renderStage();
+  },
+  /* ---------- uzak değişiklikler ---------- */
+  onRemote() {
+    const ms = this.members(), n = ms.length;
+    if (this.joined) {
+      if (!ms.some(m => m.uid === Auth.current)) { const d = { id: this.docId(), room: this.ROOM, uid: Auth.current, sess: this.sess, joinedAt: this.joinedAt, at: NOW(), mic: this.mic, cam: this.cam, screen: this.sharing }; DB.insert('meet', d); }
+      this.sync();
+    } else {
+      // biri toplantı başlattıysa haber ver
+      const first = ms[0];
+      if (n && !this._prevCount && first && first.uid !== Auth.current && NOW() - (first.joinedAt || 0) < 60000 && NOW() - this.dismissedAt > 30000) this.showInvite(first.uid);
+      if (!n) this.hideInvite();
+      this.renderStage();
+    }
+    this._prevCount = n;
+    this.updateBadges(); this.renderPill();
+  },
+  updateBadges() { const n = this.members().length; $$('.meet-count').forEach(el => { el.textContent = n; el.hidden = !n; }); },
+
+  /* ---------- görünüm ---------- */
+  tileHtml(u, isMe) {
+    const user = DB.find('users', u); if (!user) return '';
+    const m = isMe ? { mic: this.mic, cam: this.cam, screen: this.sharing } : (this.others().find(x => x.uid === u) || {});
+    const pc = this.pcs[u], st = pc ? pc.connectionState : '';
+    const camOn = isMe ? (this.cam || this.sharing) : (m.cam !== false || m.screen);
+    const conn = !isMe && (!pc || ['new', 'connecting'].includes(st)) ? '<span class="mt-conn">Bağlanıyor…</span>' : !isMe && st === 'failed' ? '<span class="mt-conn bad">Bağlantı kurulamadı</span>' : '';
+    return `<div class="mt-tile ${camOn ? 'cam-on' : 'cam-off'} ${isMe ? 'me' : ''} ${m.screen ? 'screen' : ''}" data-u="${u}" style="--uc:${user.color}">
+      <video autoplay playsinline muted data-v="${u}"></video>
+      <div class="mt-avatar">${avatar(user, 84)}</div>
+      ${conn}
+      <div class="mt-name">${m.mic === false ? `<span class="mt-mute" title="Mikrofon kapalı">${ic('micOff', 13)}</span>` : `<span class="mt-wave"><i></i><i></i><i></i></span>`}${esc(isMe ? firstName(user.name) + ' (sen)' : user.name)}${m.screen ? ' · 🖥️ ekran' : ''}</div>
+    </div>`;
+  },
+  bindVideos() {
+    $$('.mt-tile video').forEach(v => {
+      const u = v.dataset.v, isMe = u === Auth.current;
+      const st = isMe ? (this.sharing && this.screen ? this.screen : this.local) : this.streams[u];
+      if (st && v.srcObject !== st) v.srcObject = st;
+      if (isMe) v.classList.toggle('mirror', !this.sharing);
+      if (st) v.play().catch(() => {});
+    });
+  },
+  renderTiles() {
+    const g = $('#mtGrid'); if (!g || !this.joined) return;
+    const ids = [Auth.current, ...this.others().map(m => m.uid)];
+    g.dataset.n = ids.length;
+    g.innerHTML = ids.map(u => this.tileHtml(u, u === Auth.current)).join('');
+    this.bindVideos();
+    const c = $('#mtCount'); if (c) c.textContent = ids.length;
+  },
+  renderStage() { const el = $('#meetStage'); if (el) { el.innerHTML = Views.meetStage(); this.bindPreview(); this.renderTiles(); } },
+  bindPreview() {},
+  /* toplantıdayken başka sayfadaysan küçük kontrol kapsülü */
+  renderPill() {
+    let p = $('#meetPill');
+    const show = this.joined && !(App.view === 'chat' && this.view);
+    if (!show) { if (p) p.remove(); return; }
+    if (!p) { p = document.createElement('div'); p.id = 'meetPill'; document.body.appendChild(p); }
+    p.innerHTML = `<span class="mp-dot"></span><b>Toplantıdasın</b><small>${this.members().length} kişi</small>
+      <button type="button" class="mp-btn ${this.mic ? '' : 'off'}" data-act="meetMic" title="${this.mic ? 'Mikrofonu kapat' : 'Mikrofonu aç'}">${ic(this.mic ? 'mic' : 'micOff', 16)}</button>
+      <button type="button" class="mp-btn" data-act="meetGo" title="Toplantıya dön">${ic('video', 16)}</button>
+      <button type="button" class="mp-btn leave" data-act="meetLeave" title="Ayrıl">${ic('phoneOff', 16)}</button>`;
+  },
+  showInvite(from) {
+    if (this.inviteEl || this.joined) return;
+    const el = document.createElement('div'); el.id = 'meetInvite'; el.setAttribute('role', 'alert');
+    el.innerHTML = `<div class="gi-card"><span class="gi-emoji">📹</span><div class="gi-txt"><b>${esc(pname(from))} toplantı odasını açtı</b><small>Katılmak için kamera/mikrofon izni istenecek</small></div>
+      <div class="gi-btns"><button type="button" class="btn btn-primary btn-sm" data-act="meetGo">${ic('video', 14)} Katıl</button><button type="button" class="btn btn-ghost btn-sm" data-act="meetInviteClose">Sonra</button></div></div>`;
+    document.body.appendChild(el); this.inviteEl = el;
+    requestAnimationFrame(() => el.classList.add('show'));
+    try { Sound.prime(); Sound.beep(); } catch (e) {}
+    try { Notify.show({ title: '📹 Toplantı başladı', body: `${pname(from)} ekip toplantı odasında — katılmak için Squad Pulse'u aç`, tag: 'sp-meet' }); } catch (e) {}
+  },
+  hideInvite() { const el = this.inviteEl; if (!el) return; this.inviteEl = null; el.classList.remove('show'); setTimeout(() => el.remove(), 250); }
+};
+
+Views.meetStage = () => {
+  const ms = Meet.members(), me = Auth.current;
+  if (!Meet.supported()) return `<div class="mt-empty">${ic('video', 34)}<h3>Bu tarayıcı görüntülü görüşmeyi desteklemiyor</h3><p class="muted">Chrome, Edge, Safari ya da Firefox'un güncel sürümünü kullan.</p></div>`;
+  if (!Meet.joined) {
+    const p = Meet.pre;
+    return `<div class="mt-pre">
+      <div class="mt-pre-card">
+        <span class="mt-pre-ic">📹</span>
+        <h3>Ekip toplantı odası</h3>
+        <p class="muted">${ms.length ? `Şu an odada <b>${ms.length} kişi</b> var` : 'Oda şu an boş — toplantıyı sen başlat'}</p>
+        ${ms.length ? `<div class="mt-pre-people">${ms.map(m => { const u = DB.find('users', m.uid); return u ? `<span title="${esc(u.name)}">${avatar(u, 38)}${m.mic === false ? '<i>🔇</i>' : ''}</span>` : ''; }).join('')}</div>` : ''}
+        <div class="mt-pre-toggles">
+          <button type="button" class="mt-tg ${p.mic ? 'on' : ''}" data-act="meetMic">${ic(p.mic ? 'mic' : 'micOff', 18)} Mikrofon ${p.mic ? 'açık' : 'kapalı'}</button>
+          <button type="button" class="mt-tg ${p.cam ? 'on' : ''}" data-act="meetCam">${ic(p.cam ? 'video' : 'videoOff', 18)} Kamera ${p.cam ? 'açık' : 'kapalı'}</button>
+        </div>
+        <button type="button" class="btn btn-primary mt-join" data-act="meetJoin" ${Meet._joining ? 'disabled' : ''}>${Meet._joining ? 'İzin bekleniyor…' : `${ic('video', 17)} ${ms.length ? 'Toplantıya katıl' : 'Toplantıyı başlat'}`}</button>
+        <small class="muted">Katıldığında tarayıcı kamera ve mikrofon izni ister. İstediğin an kapatabilirsin.</small>
+      </div></div>`;
+  }
+  return `<div class="mt-room">
+    <div class="mt-grid" id="mtGrid" data-n="${ms.length || 1}"></div>
+    <div class="mt-bar">
+      <span class="mt-info">${ic('users', 15)} <b id="mtCount">${ms.length}</b> kişi</span>
+      <button type="button" class="mt-ctl ${Meet.mic ? '' : 'off'}" data-act="meetMic" title="${Meet.mic ? 'Mikrofonu kapat' : 'Mikrofonu aç'}" aria-pressed="${!Meet.mic}">${ic(Meet.mic ? 'mic' : 'micOff', 20)}<span>${Meet.mic ? 'Sessize al' : 'Sesi aç'}</span></button>
+      <button type="button" class="mt-ctl ${Meet.cam ? '' : 'off'}" data-act="meetCam" title="${Meet.cam ? 'Kamerayı kapat' : 'Kamerayı aç'}" aria-pressed="${!Meet.cam}">${ic(Meet.cam ? 'video' : 'videoOff', 20)}<span>${Meet.cam ? 'Kamerayı kapat' : 'Kamerayı aç'}</span></button>
+      <button type="button" class="mt-ctl ${Meet.sharing ? 'active' : ''} mt-screen" data-act="meetScreen" title="Ekran paylaş">${ic('monitor', 20)}<span>${Meet.sharing ? 'Paylaşımı durdur' : 'Ekran paylaş'}</span></button>
+      <button type="button" class="mt-ctl leave" data-act="meetLeave" title="Toplantıdan ayrıl">${ic('phoneOff', 20)}<span>Ayrıl</span></button>
+    </div></div>`;
+};
+
+/* ---- Yardım İste ----
+   Takılan kişi, o an yoğun olmayan bir ekip arkadaşına not ile yardım talebi gönderir.
+   Yoğun sayılanlar: Deep Work'te, Pomodoro odak süresinde, toplantıda ya da çevrimdışı olanlar.
+   Talep özel mesaj olarak gider ({ help: { note, urg, status } }); alıcı her sayfada açılan kartla
+   "Yardım ediyorum" / "Şu an müsait değilim" diyebilir, yanıt talep edene anında bildirilir. */
+const Help = {
+  shown: {}, told: {}, el: null, elId: null,
+  availability(u) {
+    const t = NOW(), st = Tracker.status(u.id), inMeet = Meet.members().some(m => m.uid === u.id);
+    const online = Net.mode !== 'firebase' || Presence.online(u.id);
+    if (!online) return { ok: false, label: 'Çevrimdışı', icon: '⚫' };
+    if (inMeet) return { ok: false, label: 'Toplantıda', icon: '📹' };
+    if (st.key === 'active' && st.deep) return { ok: false, label: 'Deep Work — rahatsız etme', icon: '🧠' };
+    if (u.pomo && u.pomo.phase === 'focus' && u.pomo.endsAt > t) return { ok: false, label: `Pomodoro odakta · ${T.mmss(u.pomo.endsAt - t)}`, icon: '🍅' };
+    if (st.key === 'break') return { ok: true, label: `Molada · ${st.label}`, icon: '☕' };
+    if (st.key === 'active') return { ok: true, label: `Müsait · ${st.label}`, icon: '🟢' };
+    if (st.key === 'done') return { ok: true, label: 'Günü bitirdi', icon: '🌙' };
+    return { ok: true, label: 'Müsait', icon: '🟢' };
+  },
+  open(preset) {
+    const me = Auth.current, users = DB.get('users').filter(u => u.id !== me);
+    if (!users.length) return toast('Ekipte yardım isteyebileceğin kimse yok', 'error');
+    const rows = users.map(u => ({ u, a: this.availability(u) })).sort((x, y) => (y.a.ok - x.a.ok) || x.u.name.localeCompare(y.u.name, 'tr'));
+    const first = rows.find(r => r.a.ok);
+    Modal.open({
+      title: '🆘 Yardım iste',
+      body: `<p class="muted sm" style="margin-bottom:10px">Takıldığın konuyu kısaca yaz ve o an yoğun olmayan bir ekip arkadaşını seç.</p>
+        <div class="hp-people">${rows.map(({ u, a }) => `<label class="hp-opt ${a.ok ? '' : 'busy'}"><input type="radio" name="hpTo" value="${u.id}" ${a.ok ? '' : 'disabled'} ${(preset ? preset === u.id && a.ok : first && first.u.id === u.id) ? 'checked' : ''}>
+          <span>${avatar(u, 36)}<span class="hp-meta"><b>${esc(u.name)}</b><small>${a.icon} ${esc(a.label)}</small></span>${a.ok ? '' : '<em>Yoğun</em>'}</span></label>`).join('')}</div>
+        ${first ? '' : '<p class="hp-none">Şu an herkes yoğun görünüyor 😕 Biraz sonra tekrar dene ya da Genel Sohbet\'e yaz.</p>'}
+        <label class="lbl hp-lbl">Neye takıldın?<textarea class="input" id="hpNote" rows="3" maxlength="400" placeholder="Örn. Nova Kahve'nin reels kapağında font lisansı sorunu var, 10 dk bakabilir misin?"></textarea></label>
+        <div class="seg hp-urg"><button type="button" class="on" data-urg="normal">🙂 Müsait olunca</button><button type="button" data-urg="urgent">🔥 Acil</button></div>`,
+      actions: [{ label: 'Vazgeç' }, { label: 'Talep gönder', cls: 'btn-primary', onClick: m => {
+        const to = ($('input[name="hpTo"]:checked', m) || {}).value, note = $('#hpNote', m).value.trim();
+        if (!to) { toast('Müsait bir kişi seç', 'error'); return false; }
+        if (note.length < 3) { $('#hpNote', m).focus(); toast('Kısaca neye takıldığını yaz', 'error'); return false; }
+        const urg = $('.hp-urg button.on', m).dataset.urg;
+        this.send(to, note, urg);
+      } }],
+      onMount: m => {
+        const md = m.querySelector('.modal'); if (md) md.classList.add('modal-help');
+        $$('.hp-urg button', m).forEach(b => b.onclick = () => $$('.hp-urg button', m).forEach(x => x.classList.toggle('on', x === b)));
+        setTimeout(() => $('#hpNote', m).focus(), 60);
+      }
+    });
+  },
+  send(to, note, urg) {
+    const me = Auth.current, t = NOW();
+    const m = { id: 'm' + t.toString(36) + Math.random().toString(36).slice(2, 7), userId: me, recipientId: to, at: t,
+      text: `🆘 ${urg === 'urgent' ? 'ACİL ' : ''}Yardım talebi: ${note}`, help: { note, urg, status: 'open' } };
+    App.seenMsgs.add(m.id); DB.insert('messages', m);
+    this.told[m.id] = 'open';
+    toast(`Yardım talebin ${esc(firstName(DB.find('users', to)?.name || ''))} adlı kişiye gönderildi`, 'success');
+    if (App.view === 'chat') Chat.open(to); else { Chat.channel = to; Chat.pane = 'conv'; }
+  },
+  respond(id, ok) {
+    const m = DB.find('messages', id); if (!m || !m.help || m.recipientId !== Auth.current || m.help.status !== 'open') return;
+    DB.update('messages', id, { help: { ...m.help, status: ok ? 'accepted' : 'declined', at: NOW() } });
+    this.hide();
+    if (ok) {
+      const t = NOW(), r = { id: 'm' + t.toString(36) + Math.random().toString(36).slice(2, 7), userId: Auth.current, recipientId: m.userId, at: t, text: '🙋 Yardıma geliyorum! Hemen bakıyorum.' };
+      App.seenMsgs.add(r.id); DB.insert('messages', r);
+      Chat.open(m.userId);
+    } else toast('Talep reddedildi — karşı tarafa bildirildi');
+    if (App.view === 'chat') Chat.renderList();
+  },
+  /** Gelen / güncellenen talepleri izle (her mesaj değişikliğinde) */
+  check() {
+    const me = Auth.current; if (!me) return this.hide();
+    const all = DB.get('messages').filter(m => m && m.help);
+    const pending = all.filter(m => m.recipientId === me && m.help.status === 'open' && NOW() - m.at < 6 * HOUR).sort((a, b) => b.at - a.at);
+    const top = pending.find(m => !this.shown[m.id]);
+    if (top && !this.el) this.show(top);
+    if (this.el && !pending.some(m => m.id === this.elId)) this.hide();
+    all.filter(m => m.userId === me && m.help.status !== 'open').forEach(m => {
+      if (this.told[m.id] === m.help.status) return;
+      const first = this.told[m.id] === undefined; this.told[m.id] = m.help.status;
+      if (first && NOW() - (m.help.at || 0) > 60000) return;   // eski yanıtları yeniden bildirme
+      const who = firstName(DB.find('users', m.recipientId)?.name || 'Ekip arkadaşın');
+      if (m.help.status === 'accepted') { toast(`🙋 ${esc(who)} yardıma geliyor!`, 'success'); try { Sound.prime(); Sound.beep(); } catch (e) {} }
+      else toast(`${esc(who)} şu an müsait değil — başka birinden yardım isteyebilirsin`, 'error');
+    });
+  },
+  show(m) {
+    this.shown[m.id] = 1; this.elId = m.id;
+    const u = DB.find('users', m.userId);
+    const el = document.createElement('div'); el.id = 'helpAlert'; el.setAttribute('role', 'alertdialog');
+    el.innerHTML = `<div class="gi-card ${m.help.urg === 'urgent' ? 'urgent' : ''}"><span class="gi-emoji">🆘</span><div class="gi-txt"><b>${esc(u ? firstName(u.name) : 'Biri')} senden yardım istiyor${m.help.urg === 'urgent' ? ' · 🔥 Acil' : ''}</b><small class="hp-quote">“${esc(m.help.note)}”</small></div>
+      <div class="gi-btns"><button type="button" class="btn btn-primary btn-sm" data-act="helpYes" data-id="${esc(m.id)}">🙋 Yardım ediyorum</button><button type="button" class="btn btn-ghost btn-sm" data-act="helpNo" data-id="${esc(m.id)}">Şu an müsait değilim</button></div></div>`;
+    document.body.appendChild(el); this.el = el;
+    requestAnimationFrame(() => el.classList.add('show'));
+    try { Sound.prime(); Sound.beep(); if ('vibrate' in navigator) navigator.vibrate([150, 80, 150]); } catch (e) {}
+  },
+  hide() { const el = this.el; if (!el) return; this.el = null; this.elId = null; el.classList.remove('show'); setTimeout(() => el.remove(), 250); }
+};
+Views.helpCard = (m, me) => {
+  const h = m.help, mine = m.userId === me, other = DB.find('users', mine ? m.recipientId : m.userId);
+  const st = h.status === 'accepted' ? `<span class="hp-st ok">🙋 ${mine ? esc(firstName(other?.name || '')) + ' yardıma geliyor' : 'Yardım etmeyi kabul ettin'}</span>`
+    : h.status === 'declined' ? `<span class="hp-st no">${mine ? esc(firstName(other?.name || '')) + ' şu an müsait değil' : 'Müsait değilim dedin'}</span>`
+    : mine ? '<span class="hp-st wait">Yanıt bekleniyor…</span>'
+    : `<div class="hp-acts"><button type="button" class="btn btn-primary btn-sm" data-act="helpYes" data-id="${esc(m.id)}">🙋 Yardım ediyorum</button><button type="button" class="btn btn-ghost btn-sm" data-act="helpNo" data-id="${esc(m.id)}">Müsait değilim</button></div>`;
+  return `<div class="hp-card ${h.urg === 'urgent' ? 'urgent' : ''} st-${h.status}" data-mid="${esc(m.id)}"><div class="hp-head">🆘 <b>${mine ? 'Yardım talebin' : esc(firstName(DB.find('users', m.userId)?.name || '')) + ' yardım istiyor'}</b>${h.urg === 'urgent' ? '<em>🔥 Acil</em>' : ''}<time>${T.hm(m.at)}</time></div>
+    <p>${esc(h.note)}</p>${st}</div>`;
+};
+
+/* ---- Özel Günler & Çekim Takvimi (Müşteriler bölümü) ----
+   • Türkiye'de kabul gören özel günler otomatik gelir (sabit tarihliler + Anneler/Babalar Günü gibi hesaplananlar
+     + Diyanet takvimine göre dini günler).
+   • Renkler: bugün → kırmızı · 3 gün içinde → yeşil · 7 gün içinde → sarı.
+   • "İçerik hazır" işareti ekipte ortaktır (dayprep/{gün}). Ajans kendi etkinliklerini de ekler (events/{id}):
+     🎬 Video çekimi · 🏬 Mağaza çekimi · 📅 Özel gün / müşteri teslimi. Hepsi localStorage'a da yedeklenir. */
+const SD_FIXED = [
+  ['01-01', 'Yılbaşı', 'Kutlama', '🎉'], ['01-10', 'Çalışan Gazeteciler Günü', 'Meslek', '📰'], ['02-14', 'Sevgililer Günü', 'Ticari', '❤️'],
+  ['03-08', 'Dünya Kadınlar Günü', 'Sosyal', '👩'], ['03-12', 'İstiklal Marşı\'nın Kabulü', 'Milli', '🇹🇷'], ['03-14', 'Tıp Bayramı', 'Meslek', '🩺'],
+  ['03-18', 'Çanakkale Zaferi ve Şehitleri Anma Günü', 'Anma', '🕊️'], ['03-21', 'Nevruz · Dünya Ormancılık Günü', 'Sosyal', '🌱'],
+  ['04-07', 'Dünya Sağlık Günü', 'Sosyal', '💚'], ['04-23', 'Ulusal Egemenlik ve Çocuk Bayramı', 'Milli', '🎈'], ['05-01', 'Emek ve Dayanışma Günü', 'Resmi', '✊'],
+  ['05-12', 'Hemşireler Günü', 'Meslek', '👩‍⚕️'], ['05-19', 'Atatürk\'ü Anma, Gençlik ve Spor Bayramı', 'Milli', '🇹🇷'], ['06-05', 'Dünya Çevre Günü', 'Sosyal', '🌍'],
+  ['07-15', 'Demokrasi ve Milli Birlik Günü', 'Anma', '🕊️'], ['08-30', 'Zafer Bayramı', 'Milli', '🇹🇷'], ['10-01', 'Dünya Kahve Günü', 'Ticari', '☕'],
+  ['10-04', 'Hayvanları Koruma Günü', 'Sosyal', '🐾'], ['10-29', 'Cumhuriyet Bayramı', 'Milli', '🇹🇷'], ['11-10', 'Atatürk\'ü Anma Günü', 'Anma', '🖤'],
+  ['11-24', 'Öğretmenler Günü', 'Meslek', '🍎'], ['12-03', 'Dünya Engelliler Günü', 'Sosyal', '♿'], ['12-05', 'Kadınlara Seçme ve Seçilme Hakkı', 'Sosyal', '🗳️'],
+  ['12-31', 'Yılbaşı Gecesi', 'Kutlama', '🎆']
+];
+/* Diyanet takvimi (kaynak: Diyanet dini günler takvimi). Yeni yıllar eklendikçe genişletilmeli. */
+const SD_RELIGIOUS = {
+  2026: [['01-15', 'Miraç Kandili'], ['02-02', 'Berat Kandili'], ['02-19', 'Ramazan Başlangıcı'], ['03-16', 'Kadir Gecesi'], ['03-19', 'Ramazan Bayramı Arifesi'], ['03-20', 'Ramazan Bayramı (1. gün)'],
+    ['05-26', 'Kurban Bayramı Arifesi'], ['05-27', 'Kurban Bayramı (1. gün)'], ['06-16', 'Hicri Yılbaşı'], ['06-25', 'Aşure Günü'], ['08-24', 'Mevlid Kandili'], ['12-10', 'Regaip Kandili']],
+  2027: [['01-04', 'Miraç Kandili'], ['01-22', 'Berat Kandili'], ['02-08', 'Ramazan Başlangıcı'], ['03-05', 'Kadir Gecesi'], ['03-08', 'Ramazan Bayramı Arifesi'], ['03-09', 'Ramazan Bayramı (1. gün)'],
+    ['05-15', 'Kurban Bayramı Arifesi'], ['05-16', 'Kurban Bayramı (1. gün)'], ['06-06', 'Hicri Yılbaşı'], ['06-15', 'Aşure Günü'], ['08-13', 'Mevlid Kandili'], ['12-02', 'Regaip Kandili']]
+};
+const EVENT_TYPES = {
+  video: { label: 'Video Çekimi', icon: '🎬', color: '#3b82f6' },
+  store: { label: 'Mağaza / Store Çekimi', icon: '🏬', color: '#22c55e' },
+  special: { label: 'Özel Gün / Müşteri Teslimi', icon: '📅', color: '#f59e0b' }
+};
+const SpecialDays = {
+  ui: { month: null, sel: null },
+  nthSunday(y, m, n) { const d = new Date(y, m, 1); const first = (7 - d.getDay()) % 7 + 1; return new Date(y, m, first + (n - 1) * 7); },
+  lastFriday(y, m) { const d = new Date(y, m + 1, 0); while (d.getDay() !== 5) d.setDate(d.getDate() - 1); return d; },
+  /** Bir yılın tüm Türkiye özel günleri */
+  year(y) {
+    const k = (mm, dd) => `${y}-${mm}-${dd}`, out = [];
+    SD_FIXED.forEach(([md, n, c, e]) => { const [mm, dd] = md.split('-'); out.push({ key: k(mm, dd), name: n, cat: c, e }); });
+    const anne = this.nthSunday(y, 4, 2), baba = this.nthSunday(y, 5, 3), cuma = this.lastFriday(y, 10);
+    out.push({ key: T.key(anne.getTime()), name: 'Anneler Günü', cat: 'Ticari', e: '💐' }, { key: T.key(baba.getTime()), name: 'Babalar Günü', cat: 'Ticari', e: '👔' }, { key: T.key(cuma.getTime()), name: 'Efsane Cuma / Black Friday', cat: 'Ticari', e: '🛍️' });
+    (SD_RELIGIOUS[y] || []).forEach(([md, n]) => { const [mm, dd] = md.split('-'); out.push({ key: k(mm, dd), name: n, cat: 'Dini', e: /Bayram/.test(n) ? '🌙' : '🕌' }); });
+    return out.map(x => ({ ...x, id: 'sd_' + x.key + '_' + x.name.replace(/[^a-zA-ZçğıöşüÇĞİÖŞÜ0-9]/g, '').slice(0, 24) }));
+  },
+  /** a–b (gün anahtarı) aralığındaki özel günler + ajans etkinlikleri */
+  range(fromKey, toKey) {
+    const y1 = +fromKey.slice(0, 4), y2 = +toKey.slice(0, 4), out = [];
+    for (let y = y1; y <= y2; y++) out.push(...this.year(y).filter(d => d.key >= fromKey && d.key <= toKey).map(d => ({ ...d, kind: 'sd' })));
+    DB.get('events').filter(e => e && e.date >= fromKey && e.date <= toKey).forEach(e => out.push({ ...e, key: e.date, kind: 'ev' }));
+    return out.sort((a, b) => a.key.localeCompare(b.key) || String(a.time || '').localeCompare(String(b.time || '')));
+  },
+  daysLeft(key) { return Math.round((Clients.dateTs(key) - T.sod()) / DAY); },
+  /** Renk: bugün kırmızı · ≤3 gün yeşil · ≤7 gün sarı */
+  tone(key) { const d = this.daysLeft(key); return d === 0 ? 'red' : d > 0 && d <= 3 ? 'green' : d > 3 && d <= 7 ? 'yellow' : d < 0 ? 'past' : 'far'; },
+  leftText(key) { const d = this.daysLeft(key); return d === 0 ? 'Bugün!' : d === 1 ? 'Yarın' : d > 0 ? `${d} gün kaldı` : `${-d} gün önce`; },
+  prep(id) { return DB.find('dayprep', id); },
+  togglePrep(id) {
+    const p = this.prep(id);
+    if (p && p.done) DB.remove('dayprep', id); else DB.insert('dayprep', { id, done: true, by: Auth.current, at: NOW() });
+    this.backup();
+  },
+  backup() { try { localStorage.setItem('squadpulse.days.backup', JSON.stringify({ at: NOW(), events: DB.cache.events || {}, dayprep: DB.cache.dayprep || {} })); } catch (e) {} },
+  monthStart() { const m = this.ui.month || T.sod(); const d = new Date(m); d.setDate(1); return d.getTime(); },
+  shift(n) { const d = new Date(this.monthStart()); d.setMonth(d.getMonth() + n); this.ui.month = d.getTime(); },
+  /* --- etkinlik formu --- */
+  form(ev, dateKey) {
+    const isNew = !ev; ev = ev || { type: 'video', date: dateKey || T.key(T.sod()), time: '10:00', clientId: '', title: '', notes: '' };
+    const clients = Clients.list().sort((a, b) => a.name.localeCompare(b.name, 'tr'));
+    Modal.open({
+      title: isNew ? '➕ Yeni çekim / özel gün' : `✏️ ${esc(ev.title || EVENT_TYPES[ev.type].label)}`,
+      body: `<div class="cl-form">
+        <div class="lbl full">Tür<div class="ev-types">${Object.entries(EVENT_TYPES).map(([k, t]) => `<label class="ev-type" style="--tc:${t.color}"><input type="radio" name="evType" value="${k}" ${ev.type === k ? 'checked' : ''}><span>${t.icon} ${t.label}</span></label>`).join('')}</div></div>
+        <label class="lbl full">Başlık<input class="input" id="evTitle" maxlength="80" value="${esc(ev.title || '')}" placeholder="örn. Yeni sezon ürün çekimi"></label>
+        <label class="lbl">Tarih<input type="date" class="input" id="evDate" value="${esc(ev.date)}"></label>
+        <label class="lbl">Saat<input type="time" class="input" id="evTime" value="${esc(ev.time || '')}"></label>
+        <label class="lbl full">Firma / müşteri<select class="input" id="evClient"><option value="">— Seçilmedi —</option>${clients.map(c => `<option value="${esc(c.id)}" ${ev.clientId === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}<option value="__other" ${ev.clientId === '' && ev.clientName ? 'selected' : ''}>Listede olmayan firma…</option></select></label>
+        <label class="lbl full ev-other" ${ev.clientId === '' && ev.clientName ? '' : 'hidden'}>Firma adı<input class="input" id="evClientName" maxlength="60" value="${esc(ev.clientName || '')}"></label>
+        <label class="lbl full">Notlar<textarea class="input" id="evNotes" rows="3" maxlength="500" placeholder="Lokasyon, ekip, ekipman, teslim detayları…">${esc(ev.notes || '')}</textarea></label>
+      </div>`,
+      actions: [...(isNew ? [] : [{ label: 'Sil', cls: 'btn-danger', onClick: () => { DB.remove('events', ev.id); this.backup(); toast('Etkinlik silindi'); setTimeout(() => App.render(), 0); } }]),
+        { label: 'Vazgeç' }, { label: isNew ? 'Takvime ekle' : 'Kaydet', cls: 'btn-primary', onClick: m => {
+          const type = ($('input[name="evType"]:checked', m) || {}).value || 'video', date = $('#evDate', m).value;
+          if (!date) { toast('Tarih seç', 'error'); return false; }
+          let clientId = $('#evClient', m).value, clientName = '';
+          if (clientId === '__other') { clientName = $('#evClientName', m).value.trim(); clientId = ''; } else if (clientId) clientName = DB.find('clients', clientId)?.name || '';
+          const title = $('#evTitle', m).value.trim() || (clientName ? `${clientName} · ${EVENT_TYPES[type].label}` : EVENT_TYPES[type].label);
+          const doc = { ...ev, id: ev.id || uid('ev'), type, date, time: $('#evTime', m).value, clientId, clientName, title, notes: $('#evNotes', m).value.trim(), updatedAt: NOW(), updatedBy: Auth.current };
+          if (isNew) { doc.createdAt = NOW(); doc.createdBy = Auth.current; DB.insert('events', doc); } else DB.update('events', ev.id, doc);
+          this.backup(); toast(isNew ? 'Takvime eklendi' : 'Güncellendi', 'success'); this.ui.sel = date; setTimeout(() => App.render(), 0);
+        } }],
+      onMount: m => {
+        const md = m.querySelector('.modal'); if (md) md.classList.add('modal-client');
+        $('#evClient', m).addEventListener('change', e => { $('.ev-other', m).hidden = e.target.value !== '__other'; });
+        setTimeout(() => $('#evTitle', m).focus(), 60);
+      }
+    });
+  }
+};
+
+Views.sdItem = (x, compact) => {
+  if (x.kind === 'ev') {
+    const t = EVENT_TYPES[x.type] || EVENT_TYPES.video;
+    return `<button type="button" class="sd-item ev tone-${SpecialDays.tone(x.key)}" style="--tc:${t.color}" data-act="evEdit" data-id="${esc(x.id)}">
+      <span class="sd-e">${t.icon}</span><span class="sd-meta"><b>${esc(x.title)}</b><small>${t.label}${x.time ? ' · ' + esc(x.time) : ''}${x.clientName ? ' · ' + esc(x.clientName) : ''}</small>${!compact && x.notes ? `<small class="sd-note">${esc(x.notes)}</small>` : ''}</span>
+      <em class="sd-left">${SpecialDays.leftText(x.key)}</em></button>`;
+  }
+  const p = SpecialDays.prep(x.id), done = !!(p && p.done);
+  return `<div class="sd-item tone-${SpecialDays.tone(x.key)} ${done ? 'done' : ''} cat-${x.cat === 'Anma' ? 'anma' : 'x'}">
+    <span class="sd-e">${x.e}</span><span class="sd-meta"><b>${esc(x.name)}</b><small>${T.fmt(Clients.dateTs(x.key), { day: 'numeric', month: 'long', weekday: 'long' })} · ${x.cat}${x.cat === 'Anma' ? ' · ağırbaşlı içerik' : ''}</small></span>
+    <em class="sd-left">${SpecialDays.leftText(x.key)}</em>
+    <button type="button" class="sd-prep ${done ? 'on' : ''}" data-act="sdPrep" data-id="${esc(x.id)}" title="${done ? 'Hazır işaretini kaldır' : 'İçerikler hazır olarak işaretle'}">${done ? ic('check', 13) + ' Hazır' : 'Hazırla'}</button>
+  </div>`;
+};
+Views.specialDays = () => {
+  const ms = SpecialDays.monthStart(), d0 = new Date(ms), y = d0.getFullYear(), mo = d0.getMonth();
+  const gridStart = T.sow(ms), last = new Date(y, mo + 1, 0).getTime(), gridEnd = T.addDays(T.sow(last), 6);
+  const items = SpecialDays.range(T.key(gridStart), T.key(gridEnd)), byDay = {};
+  items.forEach(x => (byDay[x.key] = byDay[x.key] || []).push(x));
+  const today = T.key(T.sod()), sel = SpecialDays.ui.sel || today;
+  let cells = '';
+  for (let t = gridStart; t <= gridEnd; t = T.addDays(t, 1)) {
+    const k = T.key(t), list = byDay[k] || [], inMonth = new Date(t).getMonth() === mo, tone = list.length ? SpecialDays.tone(k) : '';
+    cells += `<button type="button" class="sd-cell ${inMonth ? '' : 'out'} ${k === today ? 'today' : ''} ${k === sel ? 'sel' : ''} ${tone ? 'tone-' + tone : ''}" data-act="sdDay" data-v="${k}">
+      <span class="sd-num">${new Date(t).getDate()}</span>
+      <span class="sd-chips">${list.slice(0, 3).map(x => x.kind === 'ev' ? `<i class="ev" style="--tc:${(EVENT_TYPES[x.type] || EVENT_TYPES.video).color}" title="${esc(x.title)}">${(EVENT_TYPES[x.type] || EVENT_TYPES.video).icon}<span>${esc(x.title)}</span></i>` : `<i class="sd" title="${esc(x.name)}">${x.e}<span>${esc(x.name)}</span></i>`).join('')}${list.length > 3 ? `<i class="more">+${list.length - 3}</i>` : ''}</span></button>`;
+  }
+  const up = SpecialDays.range(today, T.key(T.addDays(T.sod(), 30)));
+  const selList = SpecialDays.range(sel, sel);
+  return `<section class="card sd-card mt">
+    <div class="card-head"><h3>${ic('calendar', 18)} Özel Günler & Çekim Takvimi</h3>
+      <div class="sd-legend"><span class="lg red">Bugün</span><span class="lg green">3 gün içinde</span><span class="lg yellow">1 hafta içinde</span>${Object.values(EVENT_TYPES).map(t => `<span class="lg ev" style="--tc:${t.color}">${t.icon} ${t.label.split(' / ')[0]}</span>`).join('')}</div></div>
+    <div class="sd-layout">
+      <div class="sd-cal">
+        <div class="sd-nav"><button class="btn-icon sm" data-act="sdMonth" data-v="-1" title="Önceki ay">${ic('left', 16)}</button><b>${T.fmt(ms, { month: 'long', year: 'numeric' })}</b><button class="btn-icon sm" data-act="sdMonth" data-v="1" title="Sonraki ay">${ic('right', 16)}</button><button class="btn btn-ghost btn-sm" data-act="sdMonth" data-v="0">Bugün</button><button class="btn btn-primary btn-sm sd-add" data-act="evAdd" data-v="${sel}">${ic('plus', 15)} Çekim / gün ekle</button></div>
+        <div class="sd-week">${DAYS_SHORT.map(d => `<span>${d}</span>`).join('')}</div>
+        <div class="sd-grid">${cells}</div>
+      </div>
+      <aside class="sd-side">
+        <div class="sd-sel"><div class="sd-sel-head"><b>${T.fmt(Clients.dateTs(sel), { day: 'numeric', month: 'long', weekday: 'long' })}</b><button class="btn-icon sm" data-act="evAdd" data-v="${sel}" title="Bu güne ekle">${ic('plus', 15)}</button></div>
+          ${selList.length ? selList.map(x => Views.sdItem(x)).join('') : `<p class="muted sm">Bu gün için plan yok. <button class="link-btn" data-act="evAdd" data-v="${sel}">Çekim ya da özel gün ekle</button></p>`}</div>
+        <div class="sd-up"><h4>Yaklaşan 30 gün</h4>${up.length ? up.map(x => Views.sdItem(x, true)).join('') : '<p class="muted sm">Yaklaşan özel gün yok.</p>'}</div>
+      </aside>
+    </div>
+    <p class="muted sm sd-src">Dini günler Diyanet takvimine göredir (${Object.keys(SD_RELIGIOUS).join(', ')}).</p>
+  </section>`;
+};
+/** Panelim: 7 gün içinde hazırlanmamış özel gün uyarısı */
+Views.sdDueCard = () => {
+  const today = T.key(T.sod()), list = SpecialDays.range(today, T.key(T.addDays(T.sod(), 7))).filter(x => x.kind === 'ev' || !(SpecialDays.prep(x.id) || {}).done);
+  if (!list.length) return '';
+  return `<section class="card span-3 sd-due"><div class="card-head"><h3>${ic('calendar', 17)} Bu hafta kaçırma</h3><button class="btn btn-ghost btn-sm" data-act="clientGo">Takvim ${ic('right', 14)}</button></div>
+    <div class="sd-due-list">${list.slice(0, 8).map(x => Views.sdItem(x, true)).join('')}</div></section>`;
+};
+
 Views.chatSideItems = () => {
   const item = (ch, av, title, m, extra = '') => {
     const n = Chat.unread(ch), on = Chat.channel === ch;
@@ -5036,6 +5791,7 @@ Views.chatMessages = (pop = new Set()) => {
     if (day !== lastDay) { html += `<div class="day-sep">${Chat.dayLabel(m.at)}</div>`; lastDay = day; }
     const sameAsPrev = prev && !prev.nudge && prev.userId === m.userId && T.key(prev.at) === day && m.at - prev.at < 5 * MIN;
     const sameAsNext = next && !next.nudge && next.userId === m.userId && T.key(next.at) === day && next.at - m.at < 5 * MIN;
+    if (m.help) { html += Views.helpCard(m, me); return; }
     if (m.nudge) {
       html += `<div class="msg-sys ${pop.has(m.id) ? 'pop' : ''}" data-mid="${esc(m.id)}" role="status">${ic('vibrate', 15)} ⚠️ ${esc(Nudge.label(m, me))} <time>${T.hm(m.at)}</time></div>`;
       return;
@@ -5069,18 +5825,29 @@ Views.chat = () => {
   const head = dm
     ? `${avatarDot(peer, 40, Presence.online(peer.id) ? { key: 'active', color: '#22c55e' } : { key: 'offline', color: '#94a3b8' })}
        <div class="grow"><h3>${esc(peer.name)}</h3><p>${Presence.online(peer.id) ? 'Çevrimiçi' : (Presence.lastSeen(peer.id) ? 'Son görülme ' + T.ago(Presence.lastSeen(peer.id)) : 'Çevrimdışı')} · ${esc(peer.title || '')}</p></div>
+       <button type="button" class="help-btn" data-act="helpOpen" data-id="${esc(peer.id)}" title="Yardım iste">🆘 <span>Yardım İste</span></button>
        <span class="dm-chip">${ic('lock', 13)} Özel sohbet</span>`
     : `<span class="kpi-ic">${ic('users', 20)}</span>
        <div class="grow"><h3>Genel Sohbet</h3><p>${esc(DB.get('settings').teamName)} · ${online.length}/${users.length} çevrimiçi</p></div>
+       <button type="button" class="help-btn" data-act="helpOpen" title="Takıldıysan müsait bir ekip arkadaşından yardım iste">🆘 <span>Yardım İste</span></button>
        <button class="gem-chip" data-act="gemHint" title="Gemini'a soru sor">🤖 @Gemini</button>
        <div class="chat-members">${users.map(u => `<span title="${esc(u.name)} — ${Presence.online(u.id) ? 'çevrimiçi' : 'çevrimdışı'}">${avatarDot(u, 32, Presence.online(u.id) ? { key: 'active', color: '#22c55e' } : { key: 'offline', color: '#94a3b8' })}</span>`).join('')}</div>`;
   return `<section class="card chat chat-wrap" data-pane="${Chat.pane}">
     <aside class="chat-side">
       <div class="cs-head"><h3>Mesajlar</h3><span class="sub">Genel sohbet ve birebir konuşmalar</span>
+        <div class="seg cs-tabs" role="tablist"><button type="button" class="${Meet.view ? '' : 'on'}" data-act="meetTab" data-v="chat">${ic('chat', 15)} Sohbet</button><button type="button" class="${Meet.view ? 'on' : ''}" data-act="meetTab" data-v="meet">${ic('video', 15)} Toplantı <em class="meet-count" ${Meet.members().length ? '' : 'hidden'}>${Meet.members().length}</em></button></div>
         ${Notify.permission() === 'default' ? `<button type="button" class="bell-btn" data-act="notifyAsk">${ic('bell', 14)} Masaüstü bildirimlerini aç</button>` : ''}</div>
       <div class="cs-list" id="chatSide">${Views.chatSideItems()}</div>
     </aside>
-    <div class="chat-main">
+    ${Meet.view ? `<div class="chat-main meet-mode">
+      <header class="chat-head">
+        <button type="button" class="btn-icon sm only-mobile" data-act="chatBack" title="Konuşmalar">${ic('left', 16)}</button>
+        <span class="kpi-ic">${ic('video', 20)}</span>
+        <div class="grow"><h3>Ekip toplantı odası</h3><p>${Meet.joined ? 'Görüşmedesin — mikrofon ve kamerayı istediğin an kapatabilirsin' : 'Kamera ve mikrofonla anlık görüşme'}</p></div>
+        <div class="chat-members">${Meet.members().map(m => { const u = DB.find('users', m.uid); return u ? `<span title="${esc(u.name)}${m.mic === false ? ' · sessizde' : ''}">${avatarDot(u, 32, { key: 'active', color: '#22c55e' })}</span>` : ''; }).join('')}</div>
+      </header>
+      <div id="meetStage">${Views.meetStage()}</div>
+    </div>` : `<div class="chat-main">
       <header class="chat-head">
         <button type="button" class="btn-icon sm only-mobile" data-act="chatBack" title="Konuşmalar">${ic('left', 16)}</button>
         ${head}
@@ -5116,7 +5883,7 @@ Views.chat = () => {
         </div>
       </div>
       <div class="composer-hint">${dm ? 'Enter: gönder · Shift + Enter: yeni satır · Görsel yapıştırabilir ya da dosyaları sürükleyip bırakabilirsin · Özel mesajlarda @Gemini çalışmaz' : 'Enter: gönder · Shift + Enter: yeni satır · <b>@Ad</b> ile birini, <b>@herkes</b> ile tüm ekibi etiketle · <b>@Gemini</b> ile yapay zekaya sor'}</div>
-    </div>
+    </div>`}
   </section>`;
 };
 
@@ -5644,7 +6411,7 @@ const Actions = {
   useLocal() { try { localStorage.setItem('squadpulse.forceLocal', '1'); } catch (e) {} location.reload(); },
   useFirebase() { try { localStorage.removeItem('squadpulse.forceLocal'); } catch (e) {} location.reload(); },
   pickUser(el) { const u = DB.find('users', el.dataset.id); if (!u) return; if (u.pin) return pinPrompt(u); doLogin(u); },
-  logout() { Auth.logout(); Theme.apply(Theme.defaults); App.render(); },
+  logout() { Meet.leave(true); Auth.logout(); Theme.apply(Theme.defaults); App.render(); },
   toggleMode(el) { const p = Theme.prefs(Auth.user()); Smooth.run(() => updatePrefs({ mode: Theme.effectiveMode(p) === 'dark' ? 'light' : 'dark' }), { kind: 'reveal', origin: el }); },
 
   startDay(el) {
@@ -5731,7 +6498,7 @@ const Actions = {
   restoreActivity(el) { updateActivity(el.dataset.id, { archived: false }); toast('Aktivite geri alındı', 'success'); App.renderMain(); },
 
   exportJson() {
-    const data = { app: 'squad-pulse', version: 2, exportedAt: new Date(NOW()).toISOString(), data: { settings: DB.get('settings'), users: DB.cache.users, sessions: DB.cache.sessions, days: DB.cache.days, messages: DB.cache.messages, ai_logs: DB.cache.ai_logs, clients: DB.cache.clients } };
+    const data = { app: 'squad-pulse', version: 2, exportedAt: new Date(NOW()).toISOString(), data: { settings: DB.get('settings'), users: DB.cache.users, sessions: DB.cache.sessions, days: DB.cache.days, messages: DB.cache.messages, ai_logs: DB.cache.ai_logs, clients: DB.cache.clients, events: DB.cache.events, dayprep: DB.cache.dayprep } };
     download(`squad-pulse-yedek-${T.key(NOW())}.json`, JSON.stringify(data, null, 2), 'application/json'); toast('Yedek indirildi', 'success');
   },
   importJson() { $('#fileImport').click(); },
@@ -5752,6 +6519,22 @@ const Actions = {
     DB.multi({ messages: null }); toast('Sohbet temizlendi'); App.render();
   },
   sendChat() { Chat.send(); },
+  helpOpen(el) { Help.open(el.dataset.id); },
+  helpYes(el) { Help.respond(el.dataset.id, true); },
+  helpNo(el) { Help.respond(el.dataset.id, false); },
+  sdDay(el) { SpecialDays.ui.sel = el.dataset.v; App.render(); },
+  sdMonth(el) { const n = +el.dataset.v; if (n) SpecialDays.shift(n); else { SpecialDays.ui.month = T.sod(); SpecialDays.ui.sel = T.key(T.sod()); } App.render(); },
+  sdPrep(el) { SpecialDays.togglePrep(el.dataset.id); App.render(); },
+  evAdd(el) { SpecialDays.form(null, el.dataset.v); },
+  evEdit(el) { const e = DB.find('events', el.dataset.id); if (e) SpecialDays.form(e); },
+  meetTab(el) { Meet.view = el.dataset.v === 'meet'; Chat.pane = 'conv'; App.render(); },
+  meetJoin() { Meet.join(); },
+  meetLeave() { Meet.leave(); },
+  meetMic() { Meet.toggleMic(); },
+  meetCam() { Meet.toggleCam(); },
+  meetScreen() { Meet.toggleScreen(); },
+  meetGo() { Meet.view = true; Chat.pane = 'conv'; Meet.hideInvite(); Meet.dismissedAt = NOW(); if (App.view !== 'chat') App.go('chat'); else App.render(); },
+  meetInviteClose() { Meet.dismissedAt = NOW(); Meet.hideInvite(); },
   gNew(el) { gameSetup(el.dataset.v); },
   gameAccept(el) { GameHub.accept(el.dataset.id); },
   gameDecline(el) { GameHub.decline(el.dataset.id); },
@@ -5846,7 +6629,7 @@ const Actions = {
   },
   async resetAll() {
     if (!await confirmBox('Fabrika ayarlarına dön', 'Tüm üyeler, ayarlar ve kayıtlar veritabanından silinip başlangıç kurulumu yeniden oluşturulacak.', 'Sıfırla')) return;
-    await DB.multi({ settings: null, users: null, sessions: null, days: null, presence: null, messages: null, ai_logs: null, clients: null, games: null, meta: null });
+    await DB.multi({ settings: null, users: null, sessions: null, days: null, presence: null, messages: null, ai_logs: null, clients: null, games: null, events: null, dayprep: null, meta: null });
     await Seed.run(); Auth.logout(); Theme.apply(Theme.defaults); App.go('dashboard'); toast('Uygulama sıfırlandı');
   },
 
@@ -5940,7 +6723,7 @@ const App = {
     document.addEventListener('pointerdown', press, true);
     document.addEventListener('touchstart', press, { capture: true, passive: true });
     ['pointerup', 'pointercancel', 'touchend', 'touchcancel'].forEach(ev => document.addEventListener(ev, () => { clearTimeout(this.pressTimer); this.pressTimer = setTimeout(() => this.release(), 350); }, { capture: true, passive: true }));
-    window.addEventListener('beforeunload', () => { if ($('#pulseInput')) savePulse(true); });
+    window.addEventListener('beforeunload', () => { if ($('#pulseInput')) savePulse(true); Meet.leave(true); });
     matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => { const u = Auth.user(); if (u && Theme.prefs(u).mode === 'system') this.render(); });
 
     Theme.apply(Theme.defaults);
@@ -5996,6 +6779,7 @@ const App = {
     }
     // Yeni mesajlar: sayfa arka plandaysa sistem bildirimi, öndeyse (açık konuşmada değilse) toast
     Notify.handle(fresh, convVisible);
+    Help.check();
     this.updateChatBadge();
   },
   updateChatBadge() {
@@ -6051,6 +6835,7 @@ const App = {
   /** Uzak değişiklik geldiğinde — kısa gecikmeyle toplu yeniden çizim */
   onRemote(col) {
     if (!this.started) return;
+    if (col === 'meet' || col === 'signals' || col === '*') { Meet.onRemote(); if (col !== '*') return; }
     if (col === 'messages' || col === '*') this.onMessages();
     if (col === 'messages') return;
     if (col === 'ai_logs') { if (this.view === 'aipanel' && AdminGate.unlocked) this.scheduleRender(); return; }
@@ -6102,6 +6887,7 @@ const App = {
     this.bindNav();
     if (Auth.current && !Tasks.map(Auth.current)) setTimeout(() => Tasks.ensure(), 0);   // örnek görevleri bir kez oluştur
     document.body.dataset.view = this.view;
+    Meet.renderTiles(); Meet.renderPill(); Help.check();
     Nudge.afterRender();
     ChatBg.apply();
     SoftMode.apply();
@@ -6126,7 +6912,7 @@ const App = {
         if (!d.users || !d.settings) throw new Error('Geçersiz yedek dosyası.');
         const users = toMap(d.users);
         if (!await confirmBox('Yedekten yükle', `${Object.keys(users).length} üye ve ${Object.keys(toMap(d.sessions)).length} kayıt yüklenecek. Mevcut veriler HERKES için değiştirilecek.`, 'Yükle')) return;
-        await DB.multi({ settings: { ...Seed.settings(), ...d.settings }, users, sessions: toMap(d.sessions), days: toMap(d.days), messages: toMap(d.messages), ai_logs: toMap(d.ai_logs), clients: toMap(d.clients) });
+        await DB.multi({ settings: { ...Seed.settings(), ...d.settings }, users, sessions: toMap(d.sessions), days: toMap(d.days), messages: toMap(d.messages), ai_logs: toMap(d.ai_logs), clients: toMap(d.clients), events: toMap(d.events), dayprep: toMap(d.dayprep) });
         if (!DB.find('users', Auth.current)) Auth.logout();
         toast('Yedek yüklendi', 'success'); this.render();
       } catch (err) { toast(err.message || 'Dosya okunamadı', 'error'); }
