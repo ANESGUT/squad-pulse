@@ -2413,11 +2413,90 @@ html.perf-lite .bubble.bot.streaming{-webkit-backdrop-filter:none;backdrop-filte
 #meetPill~#voicePill{bottom:84px}
 @media (max-width:900px){#voicePill{bottom:calc(92px + env(safe-area-inset-bottom))}}
 @media (max-width:640px){.vc-meta small{display:none}.vc-box{padding:8px 10px;gap:8px}.vm{min-width:190px}}
+
+/* ===== Hareketli duvar kağıdı ===== */
+.wp{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;display:none;filter:blur(var(--wp-blur,0px));transform:scale(1.04)}
+html.has-wp .wp{display:block}
+html.has-wp .ambient,html.has-wp .texture{display:none}
+html.has-wp body{background:#05060a}
+.wp::after{content:"";position:absolute;inset:0;background:rgba(2,4,10,var(--wp-dim,.35))}
+html[data-mode="light"] .wp::after{background:rgba(245,247,252,var(--wp-dim,.35))}
+.wp-cv,.wp-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background-size:cover;background-position:center}
+.wp.paused *{animation-play-state:paused!important}
+.wp[data-wp="aurora"]{background:#020617}
+.wp[data-wp="aurora"] i{position:absolute;width:70vmax;height:70vmax;border-radius:50%;filter:blur(80px);opacity:.55;animation:wpDrift 26s ease-in-out infinite alternate}
+.wp[data-wp="aurora"] .a1{background:#22d3ee;left:-20vmax;top:-25vmax}
+.wp[data-wp="aurora"] .a2{background:#a855f7;right:-25vmax;top:-10vmax;animation-duration:32s;animation-delay:-8s}
+.wp[data-wp="aurora"] .a3{background:#22c55e;left:10vmax;bottom:-35vmax;animation-duration:38s;animation-delay:-14s;opacity:.35}
+.wp[data-wp="aurora"] .a4{background:#ec4899;right:-10vmax;bottom:-30vmax;animation-duration:29s;animation-delay:-20s;opacity:.35}
+@keyframes wpDrift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(12vw,8vh) scale(1.15)}100%{transform:translate(-8vw,14vh) scale(.92)}}
+.wp[data-wp="waves"]{background:linear-gradient(180deg,#020c1b,#082f49 55%,#0c4a6e)}
+.wp[data-wp="waves"] .wv{position:absolute;left:0;bottom:0;width:200%;height:38vh;animation:wpWave 18s linear infinite}
+.wp[data-wp="waves"] .wv path{fill:#0369a1;opacity:.55}
+.wp[data-wp="waves"] .wv1{height:30vh;animation-duration:12s;animation-direction:reverse}.wp[data-wp="waves"] .wv1 path{fill:#0ea5e9;opacity:.4}
+.wp[data-wp="waves"] .wv2{height:22vh;animation-duration:9s}.wp[data-wp="waves"] .wv2 path{fill:#38bdf8;opacity:.35}
+@keyframes wpWave{to{transform:translateX(-50%)}}
+.wp[data-wp="synth"]{background:#12002a}
+.sw-sky{position:absolute;inset:0 0 45% 0;background:linear-gradient(180deg,#0b0120,#3b0764 70%,#a21caf)}
+.sw-sun{position:absolute;left:50%;top:22%;width:34vmin;height:34vmin;margin-left:-17vmin;border-radius:50%;background:linear-gradient(180deg,#fde047,#fb923c 50%,#ec4899);-webkit-mask:repeating-linear-gradient(180deg,#000 0 14px,transparent 14px 18px);mask:repeating-linear-gradient(180deg,#000 0 62%,#000 62%,transparent 62% 64%,#000 64% 72%,transparent 72% 75%,#000 75% 82%,transparent 82% 86%,#000 86%);box-shadow:0 0 80px #f472b6;animation:wpSun 6s ease-in-out infinite alternate}
+@keyframes wpSun{to{filter:brightness(1.2) drop-shadow(0 0 30px #f472b6)}}
+.sw-floor{position:absolute;left:0;right:0;bottom:0;height:45%;perspective:300px;overflow:hidden;background:linear-gradient(180deg,#3b0764,#12002a)}
+.sw-grid{position:absolute;left:-50%;right:-50%;top:0;height:200%;transform-origin:top;transform:rotateX(62deg);background-image:linear-gradient(#f0abfc 2px,transparent 2px),linear-gradient(90deg,#f0abfc 2px,transparent 2px);background-size:60px 60px;opacity:.55;animation:wpGrid 1.6s linear infinite}
+@keyframes wpGrid{to{background-position:0 60px,0 0}}
+.wp[data-wp="bokeh"]{background:radial-gradient(ellipse at top,#1e1b4b,#0b0715)}
+.wp[data-wp="bokeh"] i{position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 35%,hsla(var(--h),95%,72%,.95),hsla(var(--h),95%,60%,.25) 60%,transparent 70%);filter:blur(2px);animation:wpFloat 20s ease-in-out infinite alternate}
+@keyframes wpFloat{0%{transform:translate(0,0)}50%{transform:translate(4vw,-6vh) scale(1.1)}100%{transform:translate(-3vw,5vh) scale(.9)}}
+.wp[data-wp="lava"]{background:linear-gradient(180deg,#1c0a12,#3b0a1c)}
+.wp[data-wp="lava"] .lv{position:absolute;inset:0;filter:blur(36px)}
+.wp[data-wp="lava"] .lv i{position:absolute;bottom:-30vh;border-radius:45% 55% 50% 50%;background:hsl(var(--h),90%,55%);opacity:.8;animation:wpLava 26s ease-in-out infinite}
+@keyframes wpLava{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-95vh) scale(1.25,0.85)}100%{transform:translateY(0) scale(1)}}
+.wp[data-wp="flow"]{background:linear-gradient(125deg,#4338ca,#be185d,#c2410c,#15803d,#0e7490,#4338ca);background-size:400% 400%;animation:wpFlow 30s ease infinite}
+@keyframes wpFlow{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+.wp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.wp-tile{display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:16px;border:1.5px solid var(--glass-border,var(--border));background:rgba(255,255,255,.03);color:var(--text);font:inherit;cursor:pointer;transition:transform .18s var(--ease),border-color .2s}
+.wp-tile:hover{transform:translateY(-2px)}
+.wp-tile.on{border-color:var(--accent);box-shadow:0 0 0 3px rgba(var(--accent-rgb),.22)}
+.wp-th{display:grid;place-items:center;aspect-ratio:16/10;border-radius:11px;background-size:cover;color:var(--muted)}
+.wp-tile.up .wp-th{border:1.5px dashed var(--glass-border,var(--border));background:rgba(127,127,127,.08)}
+.wp-tile b{font-size:11.5px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.wp-url{display:flex;gap:8px;margin-top:12px}.wp-url .input{flex:1;min-width:0}
+.wp-sliders{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 6px}
+.wp-sliders label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:650;color:var(--muted)}
+.wp-sliders label span{display:flex;justify-content:space-between}.wp-sliders em{font-style:normal;color:var(--text)}
+.wp-inline{margin-bottom:6px}
+@media (max-width:640px){.wp-sliders{grid-template-columns:1fr}}
+/* ===== Müzik botu ===== */
+.mu-box{display:flex;flex-direction:column;gap:8px;padding:9px 16px;border-bottom:1px solid var(--glass-border,var(--border));background:linear-gradient(90deg,rgba(239,68,68,.07),rgba(168,85,247,.04))}
+.mu-now{display:flex;align-items:center;gap:10px;min-width:0}
+.mu-th{width:56px;height:32px;border-radius:8px;object-fit:cover;flex-shrink:0;box-shadow:0 6px 14px -8px #000}
+.mu-meta{flex:1;min-width:0}
+.mu-meta b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mu-meta small{display:block;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mu-bar{height:4px;border-radius:99px;background:rgba(127,127,127,.2);overflow:hidden;margin-top:5px}
+.mu-bar i{display:block;height:100%;background:linear-gradient(90deg,#ef4444,#a855f7);border-radius:inherit;transition:width 1s linear}
+.mu-listen{background:linear-gradient(135deg,#ef4444,#a855f7);color:#fff;border:0;flex-shrink:0}
+.mu-add{display:flex;gap:8px}.mu-add .input{flex:1;min-width:0;min-height:36px;padding:7px 12px;font-size:13px}
+.mu-q summary{cursor:pointer;font-size:12.5px;font-weight:650;color:var(--muted)}
+.mu-q ol{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;max-height:180px;overflow:auto}
+.mu-q li{display:flex;align-items:center;gap:8px;font-size:12.5px}
+.mu-q li img{width:44px;height:25px;border-radius:6px;object-fit:cover}
+.mu-q li span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mu-q li small{margin-left:6px;color:var(--muted)}
+#musicMini{position:fixed;left:292px;bottom:20px;z-index:8580;width:250px;border-radius:18px;overflow:hidden;background:var(--glass-sheen,none),linear-gradient(var(--pop-bg,var(--surface-solid)),var(--pop-bg,var(--surface-solid)));border:1px solid rgba(168,85,247,.4);box-shadow:0 18px 40px -16px rgba(0,0,0,.65),var(--glass-hi,none);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);animation:pop .25s var(--ease)}
+#musicMini[hidden]{display:block!important;visibility:hidden;pointer-events:none;width:1px;height:1px;left:-9999px}
+.mm-video{aspect-ratio:16/9;background:#000}.mm-video iframe,.mm-video>div{width:100%!important;height:100%!important;display:block;pointer-events:none}
+.mm-body{padding:8px 10px 10px;display:flex;flex-direction:column;gap:6px}
+.mm-row{display:flex;align-items:center;gap:6px}
+.mm-row b{flex:1;min-width:0;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mm-b{width:30px;height:30px;border-radius:10px;border:1px solid var(--glass-border,var(--border));background:rgba(255,255,255,.05);color:var(--text);display:grid;place-items:center;cursor:pointer;flex-shrink:0}
+.mm-vol{flex:1;display:flex;align-items:center;gap:4px;font-size:12px;min-width:0}.mm-vol input{flex:1;min-width:0}
+@media (max-width:900px){#musicMini{left:auto;right:10px;bottom:auto;top:calc(10px + env(safe-area-inset-top));width:200px}.mu-box{padding:8px 10px}}
 </style>
 </head>
 <body>
 <div class="ambient" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <div id="texture" class="texture tx-mesh"></div>
+<div id="wallpaper" class="wp" aria-hidden="true"></div>
 <div id="root"></div>
 <div id="toasts"></div>
 <input type="file" id="fileAvatar" accept="image/*" hidden>
@@ -3160,6 +3239,7 @@ Views.shell = () => {
           ${netBadge()}
           <span class="clock-pill">${ic('clock', 16)}<span data-live="clock">${new Date(NOW()).toLocaleTimeString('tr-TR')}</span></span>
           ${statusPill(st)}
+          <button class="btn-icon" data-act="wpOpen" title="Hareketli duvar kağıdı" aria-label="Hareketli duvar kağıdı">${ic('image')}</button>
           <button class="btn-icon" data-act="toggleMode" title="${dark ? 'Açık moda geç' : 'Koyu moda geç'}">${ic(dark ? 'sun' : 'moon')}</button>
           <button class="btn-icon only-mobile" data-act="logout" title="Çıkış yap">${ic('logout')}</button>
         </div>
@@ -3513,6 +3593,8 @@ Views.profile = () => {
       <label class="lbl">Performans <span>${({ auto: 'Otomatik', on: 'Hafif mod', off: 'Tam görünüm' })[Perf.pref()]}</span></label>
       <div class="seg perf-seg"><button type="button" class="${Perf.pref() === 'auto' ? 'on' : ''}" data-act="perfSet" data-v="auto">⚙️ Otomatik</button><button type="button" class="${Perf.pref() === 'on' ? 'on' : ''}" data-act="perfSet" data-v="on">⚡ Hafif mod</button><button type="button" class="${Perf.pref() === 'off' ? 'on' : ''}" data-act="perfSet" data-v="off">✨ Tam görünüm</button></div>
       <p class="help" style="margin-top:6px">Site yavaşsa Hafif mod; bulanık cam efektlerini ve hareketli arka planları kapatır, renkler ve tasarım aynı kalır.</p>
+      <label class="lbl">Hareketli duvar kağıdı <span>${esc((WP_PRESETS.find(x => x.id === Wallpaper.get().id) || { name: 'Kendi duvar kağıdın' }).name)}</span></label>
+      <div data-wp-box class="wp-inline">${Views.wpPicker()}</div>
       <label class="lbl">Sohbet arka planı <span class="cbg-current">${esc(ChatBg.name(ChatBg.get().id))}</span></label>
       ${Views.chatBgPicker(false)}
       <p class="help" style="margin-top:8px">Sohbet arka planı yalnızca bu tarayıcıda saklanır; sohbet ekranındaki 🎨 butonundan da değiştirebilirsin.</p>
@@ -3600,6 +3682,7 @@ const Chat = {
     if (files.some(f => f.status === 'loading')) { toast('Ekler hazırlanıyor, bir saniye sonra tekrar dene', 'error'); return; }
     const att = files.filter(f => f.status === 'ready' && f.data).map(f => ({ kind: f.kind, name: f.name, size: f.size, type: f.type, data: f.data }));
     if (!text && !att.length) { inp.focus(); return; }
+    if (text && Chat.isRoom() && /^\s*[!/](çal|cal|play|p|geç|gec|skip|dur|pause|devam|resume)\b/i.test(text)) Music.command(text);   // müzik botu komutları
     const m = { id: 'm' + NOW().toString(36) + Math.random().toString(36).slice(2, 7), userId: Auth.current, text, at: NOW() };
     if (att.length) m.att = att;                                     // fotoğraf / video / dosya ekleri
     if (this.channel === 'lounge') m.room = 'lounge';                // serbest sohbet odası
@@ -6123,6 +6206,310 @@ Views.voiceBox = () => {
     <button type="button" class="vc-btn leave" data-act="voiceLeave" title="Sesli odadan ayrıl">${ic('phoneOff', 17)}</button>`;
 };
 
+/* =========================================================
+   HAREKETLİ DUVAR KAĞIDI — herkes kendi seçer / kendi videosunu yükler
+   • Hazır temalar kod ile çizilir (ek dosya indirmez).
+   • Yüklenen video/GIF yalnızca bu tarayıcıda (IndexedDB) saklanır; seçim kullanıcı başına hatırlanır.
+   ========================================================= */
+const WP_PRESETS = [
+  { id: 'none', name: 'Kapalı', thumb: 'linear-gradient(135deg,#334155,#0f172a)' },
+  { id: 'aurora', name: 'Kuzey ışıkları', thumb: 'radial-gradient(circle at 25% 40%,#22d3ee99,transparent 45%),radial-gradient(circle at 75% 60%,#a855f799,transparent 45%),#020617' },
+  { id: 'stars', name: 'Yıldızlı gece', canvas: true, thumb: 'radial-gradient(circle at 20% 30%,#fff 0 1px,transparent 1.5px),radial-gradient(circle at 70% 20%,#fff 0 1.2px,transparent 2px),radial-gradient(circle at 45% 70%,#c7d2fe 0 1px,transparent 1.5px),radial-gradient(circle at 85% 80%,#fff 0 1px,transparent 1.5px),linear-gradient(#020617,#1e1b4b)' },
+  { id: 'waves', name: 'Okyanus', thumb: 'linear-gradient(180deg,#082f49 0 45%,#0369a1 45% 65%,#0ea5e9 65% 80%,#38bdf8 80%)' },
+  { id: 'synth', name: 'Synthwave', thumb: 'radial-gradient(circle at 50% 52%,#fb923c 0 18%,transparent 19%),linear-gradient(180deg,#1a0533 0 55%,#3b0764 55%)' },
+  { id: 'bokeh', name: 'Bokeh ışıklar', thumb: 'radial-gradient(circle at 30% 40%,#fbbf24cc 0 9%,transparent 10%),radial-gradient(circle at 70% 60%,#ec4899bb 0 13%,transparent 14%),radial-gradient(circle at 55% 25%,#60a5fa99 0 7%,transparent 8%),#0f0a1e' },
+  { id: 'lava', name: 'Lav lambası', thumb: 'radial-gradient(circle at 40% 62%,#f43f5e 0 20%,transparent 21%),radial-gradient(circle at 64% 34%,#f97316 0 14%,transparent 15%),#1c0a12' },
+  { id: 'snow', name: 'Kar yağışı', canvas: true, thumb: 'radial-gradient(circle,#fff 0 1.4px,transparent 2px) 0 0/14px 14px,linear-gradient(#0f172a,#334155)' },
+  { id: 'rain', name: 'Yağmurlu lo-fi', canvas: true, thumb: 'repeating-linear-gradient(100deg,#94a3b855 0 1px,transparent 1px 8px),linear-gradient(#0b1120,#1e293b)' },
+  { id: 'flow', name: 'Renk akışı', thumb: 'linear-gradient(135deg,#6366f1,#ec4899,#f59e0b,#22c55e)' },
+  { id: 'net', name: 'Parçacık ağı', canvas: true, thumb: 'radial-gradient(circle at 30% 30%,#818cf8 0 2px,transparent 3px),radial-gradient(circle at 70% 55%,#818cf8 0 2px,transparent 3px),linear-gradient(32deg,transparent 48%,#818cf855 49% 51%,transparent 52%),#0b1020' },
+  { id: 'sakura', name: 'Sakura', canvas: true, thumb: 'radial-gradient(circle at 30% 30%,#f9a8d4 0 4px,transparent 5px),radial-gradient(circle at 70% 65%,#fbcfe8 0 3px,transparent 4px),linear-gradient(#3b1d3a,#1e1b2e)' }
+];
+const WpStore = {
+  db: null,
+  open() { return this.db || (this.db = new Promise((res, rej) => { const r = indexedDB.open('squadpulse-wp', 1); r.onupgradeneeded = () => r.result.createObjectStore('f'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); })); },
+  async run(mode, fn) { const db = await this.open(); return new Promise((res, rej) => { const tx = db.transaction('f', mode), st = tx.objectStore('f'), rq = fn(st); tx.oncomplete = () => res(rq && rq.result); tx.onerror = () => rej(tx.error); }); },
+  put(k, v) { return this.run('readwrite', st => st.put(v, k)); },
+  get(k) { return this.run('readonly', st => st.get(k)); },
+  del(k) { return this.run('readwrite', st => st.delete(k)); }
+};
+const Wallpaper = {
+  MAX_FILE: 80 * 1024 * 1024,
+  key() { return 'squadpulse.wp.' + (Auth.current || 'anon'); },
+  get() { let c = {}; try { c = JSON.parse(localStorage.getItem(this.key()) || '{}') || {}; } catch (e) {} return { id: 'none', dim: .35, blur: 0, ...c }; },
+  save(patch) { const c = { ...this.get(), ...patch }; try { localStorage.setItem(this.key(), JSON.stringify(c)); } catch (e) {} this.sync(); this.refreshUI(); return c; },
+  frozen() { return document.documentElement.classList.contains('perf-lite') || matchMedia('(prefers-reduced-motion: reduce)').matches; },
+  sync() {
+    const el = $('#wallpaper'); if (!el) return;
+    const c = Auth.current ? this.get() : { id: 'none', dim: 0, blur: 0 };
+    const k = c.id + '|' + (c.id === 'custom' ? (c.url || 'file:' + (c.ver || 0)) : '') + '|' + Auth.current;
+    if (k !== this._k) { this._k = k; this.build(el, c); }
+    const root = document.documentElement;
+    root.classList.toggle('has-wp', c.id !== 'none');
+    root.style.setProperty('--wp-dim', c.dim); root.style.setProperty('--wp-blur', (c.blur || 0) + 'px');
+    el.classList.toggle('paused', this.frozen());
+  },
+  build(el, c) {
+    cancelAnimationFrame(this._raf); this._raf = null; this._draw = null;
+    if (this._url) { URL.revokeObjectURL(this._url); this._url = null; }
+    el.dataset.wp = c.id; el.innerHTML = '';
+    const P = WP_PRESETS.find(x => x.id === c.id);
+    const rnd = (a, b) => a + Math.random() * (b - a);
+    if (c.id === 'aurora') el.innerHTML = '<i class="a1"></i><i class="a2"></i><i class="a3"></i><i class="a4"></i>';
+    else if (c.id === 'waves') el.innerHTML = [0, 1, 2].map(i => `<svg class="wv wv${i}" viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0 100 C 240 ${40 + i * 20} 480 ${160 - i * 15} 720 100 S 1200 ${40 + i * 25} 1440 100 V200 H0Z"/></svg>`).join('');
+    else if (c.id === 'synth') el.innerHTML = '<div class="sw-sky"></div><div class="sw-sun"></div><div class="sw-floor"><div class="sw-grid"></div></div>';
+    else if (c.id === 'bokeh') el.innerHTML = Array.from({ length: 22 }, () => { const sz = rnd(40, 180), hue = [40, 330, 210, 280, 160][Math.floor(rnd(0, 5))]; return `<i style="left:${rnd(-5, 100)}%;top:${rnd(-5, 100)}%;width:${sz}px;height:${sz}px;--h:${hue};animation-duration:${rnd(14, 30)}s;animation-delay:-${rnd(0, 30)}s;opacity:${rnd(.25, .6).toFixed(2)}"></i>`; }).join('');
+    else if (c.id === 'lava') el.innerHTML = '<div class="lv">' + Array.from({ length: 7 }, (_, i) => `<i style="left:${10 + i * 12}%;width:${rnd(140, 280)}px;height:${rnd(140, 280)}px;animation-duration:${rnd(18, 34)}s;animation-delay:-${rnd(0, 30)}s;--h:${[350, 15, 330, 25, 5, 340, 20][i]}"></i>`).join('') + '</div>';
+    else if (c.id === 'custom') this.buildCustom(el, c);
+    if (P && P.canvas) this.canvas(el, c.id);
+  },
+  async buildCustom(el, c) {
+    let src = c.url || '', type = c.type || '';
+    if (!src) { try { const f = await WpStore.get('file.' + Auth.current); if (f && f.blob) { src = this._url = URL.createObjectURL(f.blob); type = f.blob.type; } } catch (e) {} }
+    if (!src || el.dataset.wp !== 'custom') return;
+    const isVid = /^video\//.test(type) || /\.(mp4|webm|mov|m4v)(\?|#|$)/i.test(src);
+    el.innerHTML = isVid ? `<video class="wp-media" src="${esc(src)}" autoplay muted loop playsinline></video>` : `<div class="wp-media" style="background-image:url('${esc(src).replace(/'/g, '%27')}')"></div>`;
+    const v = el.querySelector('video'); if (v) { v.muted = true; v.play().catch(() => {}); v.onerror = () => toast('Duvar kağıdı videosu açılamadı — bağlantı doğrudan bir video dosyası olmalı (.mp4/.webm)', 'error'); }
+  },
+  /** Kanvas temaları: saniyede ~30 kare, sekme gizliyken ve hafif modda durur */
+  canvas(el, id) {
+    const cv = document.createElement('canvas'); cv.className = 'wp-cv'; el.appendChild(cv);
+    const ctx = cv.getContext('2d'); let W = 0, H = 0, parts = [], last = 0;
+    const R = (a, b) => a + Math.random() * (b - a);
+    const resize = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; init(); };
+    const init = () => {
+      const n = id === 'stars' ? Math.min(260, W * H / 6000) : id === 'snow' ? Math.min(180, W / 8) : id === 'rain' ? Math.min(260, W / 5) : id === 'sakura' ? Math.min(60, W / 25) : Math.min(90, W * H / 16000);
+      parts = Array.from({ length: Math.round(n) }, () => ({ x: R(0, W), y: R(0, H), z: R(.3, 1), a: R(0, 6.28), s: R(.2, 1), vx: R(-.3, .3), vy: R(-.3, .3), r: R(0, 6.28) }));
+      this._shoot = null;
+    };
+    const bg = { stars: ['#020617', '#1e1b4b'], snow: ['#0f172a', '#334155'], rain: ['#0b1120', '#1e293b'], net: ['#0b1020', '#111827'], sakura: ['#2a1530', '#1e1b2e'] }[id];
+    const draw = t => {
+      const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, bg[0]); g.addColorStop(1, bg[1]); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      if (id === 'stars') {
+        parts.forEach(p => { const tw = .55 + .45 * Math.sin(t / 700 * p.s + p.a); ctx.globalAlpha = tw * p.z; ctx.fillStyle = p.z > .85 ? '#c7d2fe' : '#fff'; ctx.beginPath(); ctx.arc(p.x, p.y, p.z * 1.4, 0, 6.28); ctx.fill(); });
+        if (!this._shoot && Math.random() < .004) this._shoot = { x: R(W * .2, W), y: R(0, H * .4), l: 0 };
+        const sh = this._shoot; if (sh) { sh.l += 14; const g2 = ctx.createLinearGradient(sh.x, sh.y, sh.x - 120, sh.y - 50); g2.addColorStop(0, '#fff'); g2.addColorStop(1, 'transparent'); ctx.globalAlpha = Math.max(0, 1 - sh.l / 500); ctx.strokeStyle = g2; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(sh.x, sh.y); ctx.lineTo(sh.x - 120, sh.y - 50); ctx.stroke(); sh.x += 12; sh.y += 5; if (sh.l > 500) this._shoot = null; }
+      } else if (id === 'snow' || id === 'sakura') {
+        parts.forEach(p => {
+          p.y += p.z * (id === 'snow' ? 1.1 : .8); p.x += Math.sin(t / 1600 + p.a) * .6; p.r += .01 * p.s;
+          if (p.y > H + 10) { p.y = -10; p.x = R(0, W); }
+          ctx.globalAlpha = .45 + p.z * .5;
+          if (id === 'snow') { ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(p.x, p.y, p.z * 2.6, 0, 6.28); ctx.fill(); }
+          else { ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.s > .5 ? '#f9a8d4' : '#fbcfe8'; ctx.beginPath(); ctx.ellipse(0, 0, 7 * p.z + 3, 4 * p.z + 2, 0, 0, 6.28); ctx.fill(); ctx.restore(); }
+        });
+      } else if (id === 'rain') {
+        ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 1;
+        parts.forEach(p => { p.y += 9 * p.z + 4; p.x += 1.5; if (p.y > H) { p.y = R(-60, 0); p.x = R(-50, W); } ctx.globalAlpha = .15 + p.z * .35; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - 3, p.y - 14 * p.z - 6); ctx.stroke(); });
+      } else {
+        parts.forEach(p => { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1; });
+        ctx.lineWidth = 1;
+        for (let i = 0; i < parts.length; i++) for (let j = i + 1; j < parts.length; j++) { const a = parts[i], b = parts[j], dx = a.x - b.x, dy = a.y - b.y, d = dx * dx + dy * dy; if (d < 16000) { ctx.globalAlpha = (1 - d / 16000) * .45; ctx.strokeStyle = '#818cf8'; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); } }
+        ctx.globalAlpha = .85; ctx.fillStyle = '#a5b4fc'; parts.forEach(p => { ctx.beginPath(); ctx.arc(p.x, p.y, 1.8, 0, 6.28); ctx.fill(); });
+      }
+      ctx.globalAlpha = 1;
+    };
+    const loop = t => {
+      this._raf = requestAnimationFrame(loop);
+      if (document.hidden || this.frozen() || t - last < 33) return;
+      last = t; draw(t);
+    };
+    resize(); draw(0);
+    if (!this._resizeBound) { this._resizeBound = true; addEventListener('resize', () => { if (this._resize) this._resize(); }); }
+    this._resize = () => { if (cv.isConnected) { resize(); draw(performance.now()); } };
+    this._raf = requestAnimationFrame(loop);
+  },
+  async upload(file) {
+    if (!file) return;
+    if (!/^(video|image)\//.test(file.type)) return toast('Video (mp4/webm) ya da GIF/resim seçmelisin', 'error');
+    if (file.size > this.MAX_FILE) return toast(`Dosya çok büyük (en fazla ${fmtSize(this.MAX_FILE)})`, 'error');
+    try { await WpStore.put('file.' + Auth.current, { blob: file, name: file.name, at: NOW() }); }
+    catch (e) { return toast('Dosya kaydedilemedi — tarayıcı depolama alanı dolu olabilir', 'error'); }
+    this.save({ id: 'custom', url: '', type: file.type, name: file.name, ver: NOW() });
+    toast('🖼️ Duvar kağıdın ayarlandı — yalnızca bu tarayıcıda saklanır', 'success');
+  },
+  setUrl(url) {
+    url = String(url || '').trim();
+    if (!/^https:\/\/\S+$/i.test(url)) return toast('https:// ile başlayan doğrudan bir video/GIF bağlantısı yapıştır', 'error');
+    this.save({ id: 'custom', url, type: '', name: url.split('/').pop().slice(0, 40), ver: NOW() });
+  },
+  pickFile() {
+    let i = $('#fileWp');
+    if (!i) { i = document.createElement('input'); i.type = 'file'; i.id = 'fileWp'; i.accept = 'video/mp4,video/webm,video/quicktime,image/gif,image/webp,image/png,image/jpeg'; i.hidden = true; document.body.appendChild(i); i.addEventListener('change', () => { const f = i.files[0]; i.value = ''; this.upload(f); }); }
+    i.click();
+  },
+  refreshUI() { $$('[data-wp-box]').forEach(el => { const a = document.activeElement; if (!(a && el.contains(a) && a.type === 'range')) el.innerHTML = Views.wpPicker(); }); },
+  open() { Modal.open({ title: '🖼️ Hareketli duvar kağıdı', body: `<div data-wp-box>${Views.wpPicker()}</div>`, actions: [{ label: 'Tamam', cls: 'btn-primary' }] }); }
+};
+Views.wpPicker = () => {
+  const c = Wallpaper.get();
+  const tiles = WP_PRESETS.map(p => `<button type="button" class="wp-tile ${c.id === p.id ? 'on' : ''}" data-act="wpSet" data-v="${p.id}" title="${esc(p.name)}"><span class="wp-th" style="background:${p.thumb}"></span><b>${esc(p.name)}</b></button>`).join('')
+    + `<button type="button" class="wp-tile up ${c.id === 'custom' ? 'on' : ''}" data-act="wpUpload" title="Kendi videonu ya da GIF'ini yükle"><span class="wp-th">${ic('upload', 22)}</span><b>${c.id === 'custom' ? esc(c.name || 'Kendi duvar kağıdın') : 'Video / GIF yükle'}</b></button>`;
+  return `<div class="wp-grid">${tiles}</div>
+    <div class="wp-url"><input class="input" id="wpUrlIn" type="url" placeholder="ya da doğrudan .mp4 / .webm / .gif bağlantısı yapıştır" value="${c.id === 'custom' && c.url ? esc(c.url) : ''}"><button type="button" class="btn btn-ghost btn-sm" data-act="wpUrlSave">Uygula</button></div>
+    <div class="wp-sliders">
+      <label><span>Karartma <em id="wpDimVal">%${Math.round(c.dim * 100)}</em></span><input type="range" class="range" min="0" max="0.85" step="0.05" value="${c.dim}" data-wp-range="dim"></label>
+      <label><span>Bulanıklık <em id="wpBlurVal">${c.blur}px</em></span><input type="range" class="range" min="0" max="16" step="1" value="${c.blur}" data-wp-range="blur"></label>
+    </div>
+    <p class="help">Herkes kendi duvar kağıdını seçer; seçimin yalnızca sende görünür. Yüklediğin video bu tarayıcıda saklanır (en fazla ${fmtSize(Wallpaper.MAX_FILE)}). Hafif modda animasyon durur.</p>`;
+};
+
+/* =========================================================
+   MÜZİK BOTU — YouTube'dan ortak çalma listesi (Discord botu gibi)
+   • Şarkı YouTube'un kendi oynatıcısıyla her kişinin cihazında çalar; herkes aynı saniyede senkron dinler.
+   • Kuyruk ekip ayarlarında (settings.music) tutulur. Sohbette: !çal <link>, !geç, !dur, !devam
+   ========================================================= */
+const Music = {
+  player: null, ready: false, _loaded: null, _apiP: null, _lastTitleFix: null,
+  LKEY: 'squadpulse.music',
+  local() { try { return { on: false, vol: 60, ...(JSON.parse(localStorage.getItem(this.LKEY) || '{}') || {}) }; } catch (e) { return { on: false, vol: 60 }; } },
+  setLocal(p) { const v = { ...this.local(), ...p }; try { localStorage.setItem(this.LKEY, JSON.stringify(v)); } catch (e) {} return v; },
+  state() { const m = (DB.get('settings') || {}).music || {}; const q = Array.isArray(m.queue) ? m.queue : Object.values(m.queue || {}); return { cur: m.cur || null, queue: q.filter(x => x && x.vid) }; },
+  write(cur, queue) { DB.patchSettings({ music: { cur: cur || null, queue: (queue || []).slice(0, 50) } }); setTimeout(() => this.sync(), 30); },
+  parse(u) {
+    u = String(u || '').trim();
+    const m = /(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/|v\/))([A-Za-z0-9_-]{11})/.exec(u);
+    return m ? m[1] : (/^[A-Za-z0-9_-]{11}$/.test(u) ? u : null);
+  },
+  pos(c) { return c.paused ? (c.pos || 0) : Math.max(0, (NOW() - c.startedAt) / 1000); },
+  add(url) {
+    const vid = this.parse(url);
+    if (!vid) { toast('Geçerli bir YouTube bağlantısı yapıştır (youtube.com/watch?v=… ya da youtu.be/…)', 'error'); return false; }
+    const st = this.state(), item = { id: uid('mq'), vid, title: '', by: Auth.current, at: NOW() };
+    if (!st.cur) this.write({ ...item, startedAt: NOW() + 1500, paused: false }, st.queue);
+    else this.write(st.cur, [...st.queue, item]);
+    toast(st.cur ? `🎵 Sıraya eklendi (${st.queue.length + 1}. sırada)` : '🎵 Çalmaya başlıyor', 'success');
+    if (!this.local().on) this.listen(true);
+    return true;
+  },
+  toggle() { const { cur, queue } = this.state(); if (!cur) return; this.write(cur.paused ? { ...cur, paused: false, startedAt: NOW() - (cur.pos || 0) * 1000 } : { ...cur, paused: true, pos: this.pos(cur) }, queue); },
+  skip(fromId) {
+    const { cur, queue } = this.state();
+    if (fromId && (!cur || cur.id !== fromId)) return;
+    const [next, ...rest] = queue;
+    this.write(next ? { ...next, startedAt: NOW() + 1000, paused: false } : null, rest);
+  },
+  remove(id) { const { cur, queue } = this.state(); this.write(cur, queue.filter(x => x.id !== id)); },
+  stopAll() { this.write(null, []); },
+  listen(on) {
+    this.setLocal({ on });
+    if (on) { this.ensurePlayer(); toast('🎧 Ortak müziği dinliyorsun — ses seviyesini mini oynatıcıdan ayarlayabilirsin', 'success'); }
+    else if (this.player && this.ready) { try { this.player.pauseVideo(); } catch (e) {} }
+    this.sync();
+  },
+  setVol(v) { v = Math.max(0, Math.min(100, +v || 0)); this.setLocal({ vol: v }); if (this.player && this.ready) try { this.player.setVolume(v); } catch (e) {} },
+  loadApi() {
+    if (window.YT && YT.Player) return Promise.resolve();
+    return this._apiP || (this._apiP = new Promise((res, rej) => {
+      const prev = window.onYouTubeIframeAPIReady; window.onYouTubeIframeAPIReady = () => { if (prev) try { prev(); } catch (e) {} res(); };
+      const sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; sc.async = true;
+      sc.onerror = () => { this._apiP = null; rej(new Error('YouTube oynatıcısı yüklenemedi')); };
+      document.head.appendChild(sc);
+    }));
+  },
+  host() {
+    let h = $('#musicMini');
+    if (!h) {
+      h = document.createElement('div'); h.id = 'musicMini'; h.hidden = true;
+      h.innerHTML = `<div class="mm-video"><div id="musicFrame"></div></div><div class="mm-body" id="mmBody"></div>`;
+      document.body.appendChild(h);
+    }
+    return h;
+  },
+  async ensurePlayer() {
+    if (this.player || this._creating) return;
+    this._creating = true; this.host();
+    try { await this.loadApi(); } catch (e) { this._creating = false; toast('YouTube oynatıcısı yüklenemedi — reklam engelleyiciyi kontrol et', 'error'); return; }
+    this.player = new YT.Player('musicFrame', {
+      width: 160, height: 90,
+      playerVars: { autoplay: 1, controls: 0, disablekb: 1, modestbranding: 1, playsinline: 1, rel: 0, fs: 0, iv_load_policy: 3 },
+      events: {
+        onReady: () => { this.ready = true; this._creating = false; try { this.player.setVolume(this.local().vol); } catch (e) {} this._loaded = null; this.sync(); },
+        onStateChange: e => this.onState(e),
+        onError: e => this.onErr(e)
+      }
+    });
+  },
+  onState(e) {
+    const { cur, queue } = this.state(); if (!cur) return;
+    if (e.data === 0) { this.skip(cur.id); return; }   // bitti → sıradaki
+    if (e.data === 1) {
+      try {
+        const d = this.player.getVideoData(), dur = Math.round(this.player.getDuration() || 0);
+        if (d && d.video_id === cur.vid && (!cur.title || !cur.dur) && this._lastTitleFix !== cur.id) { this._lastTitleFix = cur.id; this.write({ ...cur, title: cur.title || d.title || '', dur: cur.dur || dur }, queue); }
+      } catch (err) {}
+    }
+    this.renderUI();
+  },
+  onErr(e) {
+    const { cur } = this.state(); if (!cur) return;
+    const why = e.data === 101 || e.data === 150 ? 'sahibi başka sitelerde oynatılmasına izin vermiyor' : e.data === 100 ? 'video bulunamadı / kaldırılmış' : 'oynatılamadı';
+    toast(`🎵 Bu şarkı ${why} — sıradakine geçiliyor`, 'error');
+    if (cur.by === Auth.current || !DB.find('users', cur.by)) this.skip(cur.id); else setTimeout(() => this.skip(cur.id), 2500);
+  },
+  /** Herkesi aynı saniyeye getirir (her ayar değişikliğinde ve 5 sn'de bir) */
+  sync() {
+    const { cur } = this.state(), on = this.local().on && !!Auth.current;
+    if (cur && cur.dur && !cur.paused && this.pos(cur) > cur.dur + 4) { this.skip(cur.id); return; }   // kimse dinlemese de liste ilerler
+    this.renderUI();
+    if (!on || !cur) { if (this.player && this.ready) try { if (!cur) { this.player.stopVideo(); this._loaded = null; } else this.player.pauseVideo(); } catch (e) {} return; }
+    if (!this.player || !this.ready) { this.ensurePlayer(); return; }
+    const want = this.pos(cur), p = this.player;
+    try {
+      if (this._loaded !== cur.id) { this._loaded = cur.id; p.loadVideoById({ videoId: cur.vid, startSeconds: Math.floor(want) }); if (cur.paused) setTimeout(() => { try { p.pauseVideo(); } catch (e) {} }, 800); return; }
+      const st = p.getPlayerState();
+      if (cur.paused) { if (st === 1 || st === 3) p.pauseVideo(); if (Math.abs(p.getCurrentTime() - want) > 1.5) p.seekTo(want, true); }
+      else { if (Math.abs(p.getCurrentTime() - want) > 2.5) p.seekTo(want, true); if (st !== 1 && st !== 3) p.playVideo(); }
+    } catch (e) {}
+  },
+  tick() {
+    const { cur } = this.state();
+    $$('[data-mu-prog]').forEach(el => { const d = cur && cur.dur, p = cur ? this.pos(cur) : 0; el.style.width = d ? Math.min(100, p / d * 100).toFixed(1) + '%' : '0%'; });
+    $$('[data-mu-time]').forEach(el => { el.textContent = cur ? VoiceMsg.fmt(this.pos(cur) * 1000) + (cur.dur ? ' / ' + VoiceMsg.fmt(cur.dur * 1000) : '') : ''; });
+    if (++this._n % 5 === 0) this.sync();
+  },
+  _n: 0,
+  renderUI() {
+    $$('[data-music-box]').forEach(el => { const a = document.activeElement; if (!(a && el.contains(a) && a.tagName === 'INPUT')) el.innerHTML = Views.musicBox(); });
+    const { cur } = this.state(), l = this.local(), h = $('#musicMini');
+    const show = !!(cur && l.on && Auth.current);
+    if (h) { h.hidden = !show; if (show) { const b = $('#mmBody'); if (b && !b.contains(document.activeElement)) b.innerHTML = Views.musicMini(); } }
+  },
+  /** Sohbet komutları: !çal <link> · !geç · !dur · !devam */
+  command(text) {
+    const m = /^\s*[!/](çal|cal|play|p|geç|gec|skip|dur|pause|devam|resume)\b\s*(.*)$/i.exec(text || ''); if (!m) return false;
+    const c = m[1].toLowerCase();
+    if (/^(çal|cal|play|p)$/.test(c)) return this.add(m[2]);
+    if (/^(geç|gec|skip)$/.test(c)) { if (this.state().cur) { this.skip(); toast('⏭️ Sıradaki şarkıya geçildi'); } return true; }
+    const cur = this.state().cur; if (!cur) return true;
+    if (/^(dur|pause)$/.test(c) && !cur.paused) this.toggle();
+    if (/^(devam|resume)$/.test(c) && cur.paused) this.toggle();
+    return true;
+  }
+};
+const ytThumb = vid => `https://i.ytimg.com/vi/${encodeURIComponent(vid)}/mqdefault.jpg`;
+Views.musicBox = () => {
+  const { cur, queue } = Music.state(), l = Music.local();
+  const by = id => { const u = DB.find('users', id); return u ? firstName(u.name) : 'biri'; };
+  const now = cur ? `<img class="mu-th" src="${ytThumb(cur.vid)}" alt="" loading="lazy">
+      <div class="mu-meta"><b title="${esc(cur.title || '')}">${esc(cur.title || 'YouTube şarkısı yükleniyor…')}</b>
+        <small>${cur.paused ? '⏸ Duraklatıldı' : '▶ Çalıyor'} · ${esc(by(cur.by))} ekledi · <span data-mu-time>${VoiceMsg.fmt(Music.pos(cur) * 1000)}</span></small>
+        <div class="mu-bar"><i data-mu-prog style="width:${cur.dur ? Math.min(100, Music.pos(cur) / cur.dur * 100).toFixed(1) : 0}%"></i></div></div>
+      <button type="button" class="vc-btn" data-act="muToggle" title="${cur.paused ? 'Devam ettir (herkes için)' : 'Duraklat (herkes için)'}">${ic(cur.paused ? 'play' : 'pause', 16)}</button>
+      <button type="button" class="vc-btn" data-act="muSkip" title="Sıradaki (herkes için)">${ic('skip', 16)}</button>
+      <button type="button" class="btn btn-sm ${l.on ? 'btn-ghost' : 'mu-listen'}" data-act="muListen" data-v="${l.on ? 0 : 1}">${l.on ? '🔇 Dinlemeyi bırak' : '🎧 Dinle'}</button>`
+    : `<span class="vc-ic">🎵</span><div class="mu-meta"><b>Müzik botu</b><small>YouTube bağlantısı ekle ya da sohbete <code>!çal link</code> yaz — herkes aynı anda dinler</small></div>`;
+  return `<div class="mu-now">${now}</div>
+    <form class="mu-add" data-mu-form autocomplete="off"><input class="input" id="muUrl" placeholder="YouTube bağlantısı yapıştır…" inputmode="url"><button type="submit" class="btn btn-sm btn-primary">${ic('plus', 14)} Ekle</button></form>
+    ${queue.length ? `<details class="mu-q"><summary>Sırada ${queue.length} şarkı</summary><ol>${queue.map(q => `<li><img src="${ytThumb(q.vid)}" alt="" loading="lazy"><span>${esc(q.title || 'YouTube · ' + q.vid)}<small>${esc(by(q.by))}</small></span><button type="button" class="btn-icon sm" data-act="muRemove" data-id="${esc(q.id)}" title="Sıradan çıkar">${ic('x', 13)}</button></li>`).join('')}</ol></details>` : ''}`;
+};
+Views.musicMini = () => {
+  const { cur } = Music.state(), l = Music.local(); if (!cur) return '';
+  return `<div class="mm-row"><b title="${esc(cur.title || '')}">${esc(cur.title || 'YouTube')}</b><button type="button" class="btn-icon sm" data-act="muListen" data-v="0" title="Dinlemeyi bırak">${ic('x', 13)}</button></div>
+    <div class="mu-bar"><i data-mu-prog style="width:0%"></i></div>
+    <div class="mm-row"><button type="button" class="mm-b" data-act="muToggle">${ic(cur.paused ? 'play' : 'pause', 14)}</button><button type="button" class="mm-b" data-act="muSkip">${ic('skip', 14)}</button>
+      <span class="mm-vol">🔊<input type="range" class="range" min="0" max="100" value="${l.vol}" data-mu-vol aria-label="Ses seviyesi"></span><button type="button" class="mm-b" data-act="muGo" title="Serbest Sohbet'e git">☕</button></div>`;
+};
+
 /* ---- Yardım İste ----
    Takılan kişi, o an yoğun olmayan bir ekip arkadaşına not ile yardım talebi gönderir.
    Yoğun sayılanlar: Deep Work'te, Pomodoro odak süresinde, toplantıda ya da çevrimdışı olanlar.
@@ -6508,7 +6895,7 @@ Views.chat = () => {
         ${Views.chatBgPicker(true)}
         <div class="cbg-foot"><span>Bu tarayıcıda saklanır</span><button type="button" class="btn btn-ghost btn-sm" data-act="chatBgReset">${ic('undo', 14)} Sıfırla</button></div>
       </div>
-      ${Chat.channel === 'lounge' ? `<div class="vc-box" data-voice-box>${Views.voiceBox()}</div>` : ''}
+      ${Chat.channel === 'lounge' ? `<div class="vc-box" data-voice-box>${Views.voiceBox()}</div><div class="mu-box" data-music-box>${Views.musicBox()}</div>` : ''}
       <div class="chat-list" id="chatList" role="log" aria-live="polite">${Views.chatMessages()}</div>
       <div class="composer-wrap">
         <div class="att-tray" id="attTray" aria-label="Eklenecek dosyalar">${Views.attTray()}</div>
@@ -7570,6 +7957,15 @@ const Actions = {
   meetScreen() { Meet.toggleScreen(); },
   meetDevices() { MeetDev.open(); },
   voiceRec() { VoiceMsg.start(); },
+  wpOpen() { Wallpaper.open(); },
+  wpSet(el) { Wallpaper.save({ id: el.dataset.v }); },
+  wpUpload() { Wallpaper.pickFile(); },
+  wpUrlSave() { const i = $('#wpUrlIn'); if (i) Wallpaper.setUrl(i.value); },
+  muToggle() { Music.toggle(); },
+  muSkip() { Music.skip(); },
+  muRemove(el) { Music.remove(el.dataset.id); },
+  muListen(el) { Music.listen(el.dataset.v === '1'); },
+  muGo() { Meet.view = false; Chat.open('lounge'); },
   voiceSend() { VoiceMsg.stop(true); },
   voiceCancel() { VoiceMsg.stop(false); },
   vmPlay(el) { VoiceMsg.play(el.dataset.k); },
@@ -7813,6 +8209,9 @@ const App = {
     if (Auth.current) Presence.attach(Auth.current);
     Tracker.autoClose();
     setInterval(() => this.tick(), 1000);
+    setInterval(() => { if (Auth.current) Music.tick(); }, 1000);
+    document.addEventListener('submit', e => { const f = e.target; if (f && f.matches && f.matches('[data-mu-form]')) { e.preventDefault(); const i = f.querySelector('#muUrl'); if (Music.add(i.value)) i.value = ''; } });
+    document.addEventListener('visibilitychange', () => Wallpaper.sync());
     Perf.apply(); Perf.measure();
     Notify.initSW();
     NotifyGate.watch();
@@ -7905,6 +8304,7 @@ const App = {
     if (col === 'ai_logs') { if (this.view === 'aipanel' && AdminGate.unlocked) this.scheduleRender(); if (this.view === 'assistant') AiWeekly.refresh(); return; }
     if (col === 'games') { GameHub.checkInvites(); if (this.view === 'social') this.scheduleRender(); return; }   // oyun hamleleri diğer sayfaları yeniden çizmez   // sohbet mesajları sayfanın tamamını yeniden çizmez
     if (Auth.current && !DB.find('users', Auth.current)) { Auth.logout(); }
+    if (col === 'settings' || col === '*') Music.sync();
     this.scheduleRender();
   },
   scheduleRender() {
@@ -7920,7 +8320,7 @@ const App = {
     if (!this.started) return;
     if (Net.error && Net.ready) { $('#root').innerHTML = Views.setup(Net.error); return; }
     const u = Auth.user();
-    if (!u) { NotifyGate.hide(); BreakGuard.hide(); Pet.hidePicker(); Widget.render(); delete document.body.dataset.view; Theme.apply(Theme.defaults); $('#root').innerHTML = Views.login(); return; }
+    if (!u) { Wallpaper.sync(); Music.renderUI(); NotifyGate.hide(); BreakGuard.hide(); Pet.hidePicker(); Widget.render(); delete document.body.dataset.view; Theme.apply(Theme.defaults); $('#root').innerHTML = Views.login(); return; }
     if (!this.allowed(this.view)) this.view = 'dashboard';
     // Yazı yazarken gelen canlı güncellemeler odağı ve imleci bozmasın
     const ae = document.activeElement, y = window.scrollY;
@@ -7952,6 +8352,7 @@ const App = {
     if (Auth.current && !Tasks.map(Auth.current)) setTimeout(() => Tasks.ensure(), 0);   // örnek görevleri bir kez oluştur
     document.body.dataset.view = this.view;
     Meet.mount(); Meet.renderPill(); Voice.render(); Help.check();
+    Wallpaper.sync(); Music.renderUI();
     if (VoiceMsg.rec && !$('#vrecSlot')) VoiceMsg.stop(false);   // sohbetten çıkılınca yarım kayıt iptal
     else if (VoiceMsg.rec) VoiceMsg.renderUI();
     if (VoiceMsg.cur) VoiceMsg.paint();
@@ -8019,6 +8420,8 @@ const App = {
     if (t.id === 'pulseInput') savePulse(false);
     if (t.id === 'chatInput') { Chat.drafts[Chat.channel] = t.value; Chat.autoGrow(t); }
     if (t.id === 'aiInput') { AiChat.draft = t.value; AiChat.grow(t); }
+    if (t.dataset.wpRange) { const k = t.dataset.wpRange, v = +t.value; Wallpaper.save({ [k]: v }); const o = $(k === 'dim' ? '#wpDimVal' : '#wpBlurVal'); if (o) o.textContent = k === 'dim' ? '%' + Math.round(v * 100) : v + 'px'; }
+    if (t.dataset.muVol != null) Music.setVol(t.value);
     if (t.dataset.pref === 'texOpacity') { document.documentElement.style.setProperty('--tex-opacity', t.value); const v = $('#texVal'); if (v) v.textContent = '%' + Math.round(t.value * 100); }
   },
 
