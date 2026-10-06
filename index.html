@@ -2200,6 +2200,98 @@ button.sd-item{cursor:pointer}button.sd-item *{pointer-events:none}
   .sd-add{margin-left:0;width:100%}
   .help-btn span{display:none}
 }
+/* =========================================================
+   PERFORMANS — bulanıklık (backdrop-filter) yalnızca gerçekten içeriğin üstünde
+   yüzen katmanlarda kalır (üst bar, pencereler, açılır paneller, bildirimler, widget).
+   Kart içi ve düz zemin üstündeki bulanıklıklar kaldırıldı; cam görünümü daha opak
+   yarı saydam zeminle korunur. "Hafif mod" ayrıca tüm animasyonlu arka planları kapatır.
+   ========================================================= */
+html[data-mode="dark"]{--glass-bg:rgba(15,23,42,.58)}
+html[data-mode="light"]{--glass-bg:rgba(255,255,255,.62)}
+.card,.sidebar .side,.input,.btn-icon,.seg,.clock-pill,.leave-btn,.day-sep,.att-card,.att-x,.att-tag,.chat-head,
+.chat-main .composer-wrap,.login-user,.member-card,.cl-row,.soc-card,.mt-name,.cmp-btn,.cbg-opt,
+.card *:not(.cmp-pop):not(.cbg-pop):not(.att-x){-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+/* açılır paneller kartın içinde olsa da arkasını göremediği için opak zemin */
+.ambient i{will-change:auto}
+.ambient i:nth-child(3),.ambient i:nth-child(4){display:none}
+.ambient i:nth-child(1){animation-duration:70s}.ambient i:nth-child(2){animation-duration:90s}
+/* hareketli dokular: döndürme/eğme yerine yalnızca yavaş kayma (çok daha hafif) */
+.texture{contain:strict}
+@keyframes lqDriftA{0%{transform:translate3d(-4%,-3%,0)}100%{transform:translate3d(4%,4%,0)}}
+@keyframes lqDriftB{0%{transform:translate3d(3%,4%,0)}100%{transform:translate3d(-4%,-3%,0)}}
+@keyframes lqAurora{0%{transform:translate3d(-5%,0,0)}100%{transform:translate3d(5%,2%,0)}}
+.texture.tx-mesh::before,.texture.tx-mesh::after,.texture.tx-aurora::before,.texture.tx-aurora::after{will-change:auto;inset:-12%}
+/* mesh/aurora dokusu zaten ışık lekesi içerdiği için ek ışık katmanı gizlenir */
+html:has(.texture.tx-mesh) .ambient,html:has(.texture.tx-aurora) .ambient{display:none}
+/* Hafif mod: tüm bulanıklık ve sürekli animasyonlar kapalı */
+html.perf-lite *,html.perf-lite *::before,html.perf-lite *::after{-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+html.perf-lite .ambient{display:none}
+html.perf-lite[data-mode="dark"]{--pop-bg:rgb(17,24,43);--modal-bg:rgb(17,24,43);--topbar-bg:rgba(2,6,23,.6);--topbar-bg-stuck:rgba(2,6,23,.94)}
+html.perf-lite[data-mode="light"]{--pop-bg:#fff;--modal-bg:#fff;--topbar-bg-stuck:rgba(242,243,248,.96)}
+html.perf-lite[data-soft="on"][data-mode="dark"]{--pop-bg:rgb(36,30,54);--modal-bg:rgb(36,30,54)}
+html.perf-lite .texture::before,html.perf-lite .texture::after,html.perf-lite .chat-main,html.perf-lite .pet-body,html.perf-lite .tw-dot,html.perf-lite .lv-pill i,html.perf-lite .mp-dot,html.perf-lite .gi-emoji,html.perf-lite .ba-orb{animation:none !important}
+html.perf-lite .modal-backdrop,html.perf-lite #bigAlert,html.perf-lite #petPicker,html.perf-lite #petLoss{background:rgba(2,6,23,.72)}
+html.perf-lite[data-mode="light"] .modal-backdrop{background:rgba(20,28,60,.45)}
+/* ---------- Toplantı v2: kalıcı oda, konuşmacı görünümü, sohbet, tam ekran ---------- */
+.mt-mount{flex:1;min-height:0;display:flex}
+.mt-room{flex:1;min-height:0;min-width:0;display:flex;flex-direction:column;gap:10px;padding:12px;background:transparent}
+.mt-room:fullscreen{padding:16px;background:#05070f}
+.mt-body{flex:1;min-height:0;display:flex;gap:10px}
+.mt-stage{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}
+.mt-grid{flex:1;min-height:0}
+.mt-strip{display:flex;gap:8px;overflow-x:auto;flex-shrink:0;padding-bottom:2px}
+.mt-strip[hidden]{display:none}
+.mt-strip .mt-tile{flex:0 0 168px;height:100px;min-height:0;border-radius:14px}
+.mt-strip .mt-avatar>*{transform:scale(.55)}
+.mt-strip .mt-name{font-size:11px;padding:3px 7px;left:6px;bottom:6px}
+.mt-strip .mt-tools{display:none}
+.mt-room.spot .mt-grid{grid-template-columns:1fr !important;grid-auto-rows:1fr}
+.mt-tile.focus video{object-fit:contain}
+.mt-tile.me{order:0}
+.mt-tile:fullscreen{border-radius:0;border:0}
+.mt-tile:fullscreen video{object-fit:contain}
+.mt-tools{position:absolute;top:8px;right:8px;display:flex;gap:4px;opacity:0;transition:opacity .2s}
+.mt-tile:hover .mt-tools,.mt-tile.pinned .mt-tools{opacity:1}
+@media (hover:none){.mt-tools{opacity:1}}
+.mt-tb{width:30px;height:30px;border-radius:9px;border:0;background:rgba(8,10,18,.6);color:#fff;display:grid;place-items:center}
+.mt-tb *{pointer-events:none}
+.mt-tb:hover{background:rgba(8,10,18,.85)}
+.mt-tile.pinned .mt-tb:first-child{background:var(--accent)}
+.mt-conn[hidden]{display:none}
+.mt-share-note{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;font-weight:700;font-size:15px;text-align:center;background:linear-gradient(160deg,rgba(var(--accent-rgb),.45),#0b1020)}
+.mt-share-note small{font-weight:500;font-size:12px;opacity:.8}
+.mt-tile.self-share .mt-share-note{display:flex}
+.mt-tile.self-share video,.mt-tile.self-share .mt-avatar{visibility:hidden}
+.mt-ctl{position:relative}
+.mt-badge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#ef4444;color:#fff;font-style:normal;font-size:10.5px;font-weight:800;display:grid;place-items:center}
+/* toplantı sohbeti */
+.mt-chat{display:none;width:300px;flex-shrink:0;flex-direction:column;border-radius:18px;background:var(--glass-bg-strong,var(--surface));border:1px solid var(--glass-border,var(--border));overflow:hidden}
+.mt-room.chat-open .mt-chat{display:flex}
+.mtc-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--glass-border,var(--border))}
+.mtc-head b{display:inline-flex;align-items:center;gap:6px;font-size:13.5px}
+.mtc-list{flex:1;min-height:0;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.mtc-msg{display:flex;flex-direction:column;gap:1px;padding:7px 10px;border-radius:12px;background:rgba(var(--ink),.05);font-size:13px}
+.mtc-msg.mine{background:rgba(var(--accent-rgb),.14)}
+.mtc-msg b{font-size:11.5px}
+.mtc-msg span{white-space:pre-wrap;word-break:break-word}
+.mtc-msg time{align-self:flex-end;font-size:10.5px;color:var(--muted)}
+.mtc-empty{font-size:12.5px;color:var(--muted);text-align:center;padding:16px 6px}
+.mtc-form{display:flex;gap:6px;padding:8px;border-top:1px solid var(--glass-border,var(--border))}
+.mtc-form .input{min-width:0;padding:9px 12px;font-size:13px}
+.mtc-form .send-btn{width:40px;height:40px;border-radius:12px}
+.mt-room:fullscreen .mt-chat{background:rgba(15,23,42,.9)}
+#meetPill{cursor:pointer}
+@media (max-width:1100px){
+  .mt-room.chat-open .mt-stage{display:none}
+  .mt-room.chat-open .mt-chat{width:100%}
+}
+@media (max-width:900px){.mt-strip .mt-tile{flex-basis:120px;height:80px}}
+.mt-ctl.icon{width:46px;padding:0;justify-content:center}
+.mt-ctl.icon span{display:none}
+@media (min-width:901px){.chat-wrap.meeting-live .chat-side{display:none}}
+.mt-backchat{flex-shrink:0}
+@media (max-width:900px){.mt-backchat{display:none}}
+@media (max-width:640px){.mt-bar{gap:6px;padding:8px}.mt-ctl,.mt-ctl.icon{width:42px;height:42px}}
 </style>
 </head>
 <body>
@@ -2339,6 +2431,7 @@ const ICONS = {
   videoOff: '<path d="M2 2l20 20"/><path d="M10.7 6H14a2 2 0 0 1 2 2v3.3l5-3.3v9M16 16a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2"/>',
   monitor: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
   phoneOff: '<path d="M10.7 13.3a16 16 0 0 0 3.4 2.6l1.3-1.3a2 2 0 0 1 2.1-.4 12.8 12.8 0 0 0 2.8.7 2 2 0 0 1 1.7 2v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 4.2 2 2 0 0 1 5.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.4 2.1L9.1 9.9"/><path d="M22 2 2 22"/>',
+  expand: '<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>',
   minus: '<path d="M5 12h14"/>',
   clip: '<path d="m21.4 11.6-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/>',
   file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
@@ -3294,6 +3387,9 @@ Views.profile = () => {
       <div class="swatches">${bgList.map(c => sw(c, 'setBg', c === p.bg)).join('')}<label class="swatch custom ${p.bg && !bgList.includes(p.bg) ? 'on' : ''}"><input type="color" data-pref="bg" value="${p.bg || (mode === 'dark' ? '#0b0d14' : '#f2f3f8')}"></label>${p.bg ? `<button class="btn btn-ghost btn-sm" data-act="resetBg">${ic('undo', 14)} Varsayılan</button>` : ''}</div>
       <label class="lbl">Arka plan dokusu</label><div class="tex-grid">${Theme.textures.map(t => `<button class="tex-opt ${p.texture === t.id ? 'on' : ''}" data-act="setTexture" data-v="${t.id}"><span class="tex-thumb"><span class="texture-mini tx-${t.id}"></span></span>${t.label}</button>`).join('')}</div>
       <label class="lbl">Doku yoğunluğu <span id="texVal">%${Math.round(p.texOpacity * 100)}</span></label><input type="range" class="range" min="0" max="1" step="0.05" value="${p.texOpacity}" data-pref="texOpacity">
+      <label class="lbl">Performans <span>${({ auto: 'Otomatik', on: 'Hafif mod', off: 'Tam görünüm' })[Perf.pref()]}</span></label>
+      <div class="seg perf-seg"><button type="button" class="${Perf.pref() === 'auto' ? 'on' : ''}" data-act="perfSet" data-v="auto">⚙️ Otomatik</button><button type="button" class="${Perf.pref() === 'on' ? 'on' : ''}" data-act="perfSet" data-v="on">⚡ Hafif mod</button><button type="button" class="${Perf.pref() === 'off' ? 'on' : ''}" data-act="perfSet" data-v="off">✨ Tam görünüm</button></div>
+      <p class="help" style="margin-top:6px">Site yavaşsa Hafif mod; bulanık cam efektlerini ve hareketli arka planları kapatır, renkler ve tasarım aynı kalır.</p>
       <label class="lbl">Sohbet arka planı <span class="cbg-current">${esc(ChatBg.name(ChatBg.get().id))}</span></label>
       ${Views.chatBgPicker(false)}
       <p class="help" style="margin-top:8px">Sohbet arka planı yalnızca bu tarayıcıda saklanır; sohbet ekranındaki 🎨 butonundan da değiştirebilirsin.</p>
@@ -3341,7 +3437,7 @@ const Chat = {
   /** Bu kullanıcının görebileceği tüm mesajlar: genel + dahil olduğu özel mesajlar */
   all() {
     const me = Auth.current;
-    return DB.get('messages').filter(m => m && (m.text || m.pending || m.nudge || attsOf(m).length) && (!m.recipientId || m.userId === me || m.recipientId === me))
+    return DB.get('messages').filter(m => m && !m.mt && (m.text || m.pending || m.nudge || attsOf(m).length) && (!m.recipientId || m.userId === me || m.recipientId === me))
       .sort((a, b) => (a.at - b.at) || (a.id < b.id ? -1 : 1));
   },
   list(ch = this.channel) { return this.all().filter(m => this.inChannel(m, ch)); },
@@ -5262,6 +5358,8 @@ const Meet = {
     DB.remove('signals', s => s.from === Auth.current);
     Object.values(this.levels).forEach(l => { try { l.ctx.close(); } catch (e) {} }); this.levels = {};
     this.joined = false; this.sess = null;
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    if (this.roomEl) { this.roomEl.remove(); this.roomEl = null; } this.tiles = {}; this.pinned = null; this.speaker = null; this.chatUnread = 0;
     if (!silent) { toast('Toplantıdan ayrıldın'); App.render(); }
   },
 
@@ -5365,6 +5463,7 @@ const Meet = {
       const v = sum / l.buf.length; l.v = l.v * .5 + v * .5;
       const muted = u === Auth.current ? !this.mic : (this.others().find(m => m.uid === u) || {}).mic === false;
       $$(`.mt-tile[data-u="${u}"]`).forEach(el => el.classList.toggle('speaking', !muted && l.v > 14));
+      if (u !== Auth.current && !muted && l.v > 18 && this.speaker !== u && NOW() - this._spkAt > 1800) { this.speaker = u; this._spkAt = NOW(); if (this.layout === 'speaker' && !this.pinned) this.renderTiles(); }
     });
   },
   /* ---------- kontroller ---------- */
@@ -5372,7 +5471,7 @@ const Meet = {
     if (!this.joined) { this.pre.mic = !this.pre.mic; return this.renderStage(); }
     if (!this.hasMic) return toast('Mikrofon bulunamadı ya da izin verilmedi', 'error');
     this.mic = !this.mic; this.local.getAudioTracks().forEach(t => t.enabled = this.mic);
-    DB.update('meet', this.docId(), { mic: this.mic, at: NOW() }); this.renderStage(); this.renderPill();
+    DB.update('meet', this.docId(), { mic: this.mic, at: NOW() }); this.renderBar(); this.renderTiles(); this.renderPill();
   },
   async toggleCam() {
     if (!this.joined) { this.pre.cam = !this.pre.cam; return this.renderStage(); }
@@ -5383,25 +5482,26 @@ const Meet = {
     }
     this.cam = !this.cam; this.local.getVideoTracks().forEach(t => t.enabled = this.cam);
     if (!this.sharing) Object.values(this.pcs).forEach(pc => this.attachLocal(pc));
-    DB.update('meet', this.docId(), { cam: this.cam, at: NOW() }); this.renderStage();
+    DB.update('meet', this.docId(), { cam: this.cam, at: NOW() }); this.renderBar(); this.renderTiles();
   },
   async toggleScreen() {
     if (!this.joined) return;
     if (this.sharing) return this.stopScreen();
     if (!navigator.mediaDevices.getDisplayMedia) return toast('Bu cihaz ekran paylaşımını desteklemiyor', 'error');
-    try { this.screen = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: false }); }
+    try { this.screen = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: { ideal: 15, max: 20 }, width: { max: 1920 }, height: { max: 1080 } }, audio: false, selfBrowserSurface: 'exclude', surfaceSwitching: 'include' }); }
     catch (e) { return; }
     this.sharing = true;
-    this.screen.getVideoTracks()[0].onended = () => this.stopScreen();
+    const st = this.screen.getVideoTracks()[0]; try { st.contentHint = 'detail'; } catch (e) {}
+    st.onended = () => this.stopScreen();
     Object.values(this.pcs).forEach(pc => this.attachLocal(pc));
-    DB.update('meet', this.docId(), { screen: true, at: NOW() }); this.renderStage();
+    DB.update('meet', this.docId(), { screen: true, at: NOW() }); this.renderBar(); this.renderTiles();
   },
   stopScreen() {
     if (!this.sharing) return;
     if (this.screen) this.screen.getTracks().forEach(t => t.stop());
     this.screen = null; this.sharing = false;
     Object.values(this.pcs).forEach(pc => this.attachLocal(pc));
-    DB.update('meet', this.docId(), { screen: false, at: NOW() }); this.renderStage();
+    DB.update('meet', this.docId(), { screen: false, at: NOW() }); this.renderBar(); this.renderTiles();
   },
   /* ---------- uzak değişiklikler ---------- */
   onRemote() {
@@ -5422,45 +5522,122 @@ const Meet = {
   updateBadges() { const n = this.members().length; $$('.meet-count').forEach(el => { el.textContent = n; el.hidden = !n; }); },
 
   /* ---------- görünüm ---------- */
-  tileHtml(u, isMe) {
-    const user = DB.find('users', u); if (!user) return '';
-    const m = isMe ? { mic: this.mic, cam: this.cam, screen: this.sharing } : (this.others().find(x => x.uid === u) || {});
-    const pc = this.pcs[u], st = pc ? pc.connectionState : '';
-    const camOn = isMe ? (this.cam || this.sharing) : (m.cam !== false || m.screen);
-    const conn = !isMe && (!pc || ['new', 'connecting'].includes(st)) ? '<span class="mt-conn">Bağlanıyor…</span>' : !isMe && st === 'failed' ? '<span class="mt-conn bad">Bağlantı kurulamadı</span>' : '';
-    return `<div class="mt-tile ${camOn ? 'cam-on' : 'cam-off'} ${isMe ? 'me' : ''} ${m.screen ? 'screen' : ''}" data-u="${u}" style="--uc:${user.color}">
-      <video autoplay playsinline muted data-v="${u}"></video>
-      <div class="mt-avatar">${avatar(user, 84)}</div>
-      ${conn}
-      <div class="mt-name">${m.mic === false ? `<span class="mt-mute" title="Mikrofon kapalı">${ic('micOff', 13)}</span>` : `<span class="mt-wave"><i></i><i></i><i></i></span>`}${esc(isMe ? firstName(user.name) + ' (sen)' : user.name)}${m.screen ? ' · 🖥️ ekran' : ''}</div>
-    </div>`;
+  /* ---------- görünüm (kalıcı DOM: sayfa yeniden çizilse de videolar yeniden yüklenmez) ---------- */
+  roomEl: null, tiles: {}, layout: 'grid', pinned: null, speaker: null, _spkAt: 0, chatOpen: null, chatUnread: 0,
+  ensureRoom() {
+    if (this.roomEl) return this.roomEl;
+    if (this.chatOpen === null) this.chatOpen = matchMedia('(min-width: 1100px)').matches;
+    const el = document.createElement('div'); el.className = 'mt-room'; el.id = 'mtRoom';
+    el.innerHTML = `<div class="mt-body"><div class="mt-stage"><div class="mt-grid" id="mtGrid"></div><div class="mt-strip" id="mtStrip"></div></div>
+      <aside class="mt-chat" id="mtChat"><div class="mtc-head"><b>${ic('chat', 15)} Toplantı sohbeti</b><button type="button" class="btn-icon sm" data-act="meetChat" title="Sohbeti gizle">${ic('x', 14)}</button></div>
+        <div class="mtc-list" id="mtcList"></div>
+        <form class="mtc-form" id="mtcForm" autocomplete="off"><input class="input" id="mtcInput" maxlength="500" placeholder="Toplantıya mesaj yaz…"><button class="send-btn" type="submit" title="Gönder">${ic('send', 17)}</button></form></aside></div>
+      <div class="mt-bar" id="mtBar"></div>`;
+    el.querySelector('#mtcForm').addEventListener('submit', e => { e.preventDefault(); const i = el.querySelector('#mtcInput'); this.sendChat(i.value); i.value = ''; i.focus(); });
+    this.roomEl = el; return el;
   },
-  bindVideos() {
-    $$('.mt-tile video').forEach(v => {
-      const u = v.dataset.v, isMe = u === Auth.current;
-      const st = isMe ? (this.sharing && this.screen ? this.screen : this.local) : this.streams[u];
-      if (st && v.srcObject !== st) v.srcObject = st;
-      if (isMe) v.classList.toggle('mirror', !this.sharing);
-      if (st) v.play().catch(() => {});
-    });
+  /** Sayfa çizildikten sonra kalıcı oda öğesini yerine taşır */
+  mount() {
+    const slot = $('#meetRoomMount');
+    if (!slot || !this.joined) return;
+    const el = this.ensureRoom();
+    if (el.parentElement !== slot) { slot.appendChild(el); el.querySelectorAll('video').forEach(v => v.srcObject && v.play().catch(() => {})); }
+    this.renderTiles(); this.renderBar(); this.renderChat();
+  },
+  tileFor(u) {
+    let t = this.tiles[u];
+    if (t) return t;
+    const user = DB.find('users', u);
+    t = document.createElement('div'); t.className = 'mt-tile'; t.dataset.u = u;
+    t.innerHTML = `<video autoplay playsinline muted></video><div class="mt-avatar"></div><div class="mt-share-note">🖥️ Ekranını paylaşıyorsun<small>Diğerleri ekranını görüyor</small></div><span class="mt-conn"></span>
+      <div class="mt-name"></div><div class="mt-tools"><button type="button" class="mt-tb" data-act="meetPin" data-u="${u}" title="Büyüt / sabitle">${ic('target', 14)}</button><button type="button" class="mt-tb" data-act="meetFull" data-u="${u}" title="Tam ekran">${ic('expand', 14)}</button></div>`;
+    t.addEventListener('dblclick', () => this.fullscreen(u));
+    this.tiles[u] = t; t._v = t.querySelector('video');
+    return t;
   },
   renderTiles() {
-    const g = $('#mtGrid'); if (!g || !this.joined) return;
-    const ids = [Auth.current, ...this.others().map(m => m.uid)];
-    g.dataset.n = ids.length;
-    g.innerHTML = ids.map(u => this.tileHtml(u, u === Auth.current)).join('');
-    this.bindVideos();
+    if (!this.joined || !this.roomEl) return;
+    const me = Auth.current, others = this.others(), ids = [me, ...others.map(m => m.uid)];
+    Object.keys(this.tiles).forEach(u => { if (!ids.includes(u)) { this.tiles[u].remove(); delete this.tiles[u]; } });
+    if (this.pinned && !ids.includes(this.pinned)) this.pinned = null;
+    const sharer = others.find(m => m.screen);
+    const focus = this.layout === 'speaker' || this.pinned || sharer ? (this.pinned || (sharer && sharer.uid) || this.speaker || (others[0] && others[0].uid) || me) : null;
+    const grid = this.roomEl.querySelector('#mtGrid'), strip = this.roomEl.querySelector('#mtStrip');
+    this.roomEl.classList.toggle('spot', !!focus);
+    ids.forEach(u => {
+      const t = this.tileFor(u), isMe = u === me, user = DB.find('users', u); if (!user) return;
+      const m = isMe ? { mic: this.mic, cam: this.cam, screen: this.sharing } : (others.find(x => x.uid === u) || {});
+      const camOn = isMe ? (this.cam || this.sharing) : (m.cam !== false || !!m.screen);
+      t.className = `mt-tile ${camOn ? 'cam-on' : 'cam-off'} ${isMe ? 'me' : ''} ${m.screen ? 'screen' : ''} ${isMe && this.sharing ? 'self-share' : ''} ${focus === u ? 'focus' : ''} ${this.pinned === u ? 'pinned' : ''}`;
+      t.style.setProperty('--uc', user.color);
+      const av = t.querySelector('.mt-avatar'); if (av.dataset.k !== user.id + (user.avatar && user.avatar.value || '')) { av.innerHTML = avatar(user, 84); av.dataset.k = user.id + (user.avatar && user.avatar.value || ''); }
+      const name = `${m.mic === false ? `<span class="mt-mute" title="Mikrofon kapalı">${ic('micOff', 13)}</span>` : '<span class="mt-wave"><i></i><i></i><i></i></span>'}${esc(isMe ? firstName(user.name) + ' (sen)' : user.name)}${m.screen ? ' · 🖥️ ekran' : ''}${this.pinned === u ? ' · 📌' : ''}`;
+      const nm = t.querySelector('.mt-name'); if (nm.innerHTML !== name) nm.innerHTML = name;
+      const pc = this.pcs[u], st = pc ? pc.connectionState : '';
+      const conn = isMe ? '' : (!pc || st === 'new' || st === 'connecting') ? 'Bağlanıyor…' : st === 'disconnected' ? 'Bağlantı zayıf…' : st === 'failed' ? 'Bağlantı kurulamadı' : '';
+      const ce = t.querySelector('.mt-conn'); ce.textContent = conn; ce.hidden = !conn; ce.classList.toggle('bad', st === 'failed');
+      const v = t._v, stream = isMe ? this.local : this.streams[u];
+      if (stream && v.srcObject !== stream) { v.srcObject = stream; v.play().catch(() => {}); }
+      v.classList.toggle('mirror', isMe && !this.sharing);
+      const parent = focus && focus !== u ? strip : grid;
+      if (t.parentElement !== parent) { parent.appendChild(t); if (v.srcObject) v.play().catch(() => {}); }
+    });
+    grid.dataset.n = focus ? 1 : ids.length;
+    strip.hidden = !focus;
     const c = $('#mtCount'); if (c) c.textContent = ids.length;
   },
-  renderStage() { const el = $('#meetStage'); if (el) { el.innerHTML = Views.meetStage(); this.bindPreview(); this.renderTiles(); } },
-  bindPreview() {},
+  renderBar() {
+    const b = this.roomEl && this.roomEl.querySelector('#mtBar'); if (!b) return;
+    b.innerHTML = `<span class="mt-info">${ic('users', 15)} <b id="mtCount">${this.members().length}</b> kişi</span>
+      <button type="button" class="mt-ctl ${this.mic ? '' : 'off'}" data-act="meetMic" title="${this.mic ? 'Mikrofonu kapat' : 'Mikrofonu aç'}">${ic(this.mic ? 'mic' : 'micOff', 20)}<span>${this.mic ? 'Sessize al' : 'Sesi aç'}</span></button>
+      <button type="button" class="mt-ctl ${this.cam ? '' : 'off'}" data-act="meetCam" title="${this.cam ? 'Kamerayı kapat' : 'Kamerayı aç'}">${ic(this.cam ? 'video' : 'videoOff', 20)}<span>${this.cam ? 'Kamerayı kapat' : 'Kamerayı aç'}</span></button>
+      <button type="button" class="mt-ctl mt-screen ${this.sharing ? 'active' : ''}" data-act="meetScreen" title="Ekran paylaş">${ic('monitor', 20)}<span>${this.sharing ? 'Paylaşımı durdur' : 'Ekran paylaş'}</span></button>
+      <button type="button" class="mt-ctl icon ${this.layout === 'speaker' ? 'active' : ''}" data-act="meetLayout" title="Konuşmacı görünümü / ızgara">${ic(this.layout === 'speaker' ? 'users' : 'target', 20)}<span>${this.layout === 'speaker' ? 'Izgara' : 'Konuşmacı'}</span></button>
+      <button type="button" class="mt-ctl icon" data-act="meetFull" title="Tam ekran">${ic('expand', 20)}<span>Tam ekran</span></button>
+      <button type="button" class="mt-ctl icon ${this.chatOpen ? 'active' : ''}" data-act="meetChat" title="Toplantı sohbeti">${ic('chat', 20)}<span>Sohbet</span>${this.chatUnread && !this.chatOpen ? `<em class="mt-badge">${this.chatUnread}</em>` : ''}</button>
+      <button type="button" class="mt-ctl leave" data-act="meetLeave" title="Toplantıdan ayrıl">${ic('phoneOff', 20)}<span>Ayrıl</span></button>`;
+    this.roomEl.classList.toggle('chat-open', !!this.chatOpen);
+  },
+  /* ---------- toplantı sohbeti ---------- */
+  chatMsgs() { const from = NOW() - 6 * HOUR; return DB.get('messages').filter(m => m && m.mt === this.ROOM && m.at >= from).sort((a, b) => a.at - b.at); },
+  sendChat(text) {
+    text = String(text || '').trim().slice(0, 500); if (!text || !this.joined) return;
+    const t = NOW(), m = { id: 'm' + t.toString(36) + Math.random().toString(36).slice(2, 7), userId: Auth.current, text, at: t, mt: this.ROOM };
+    App.seenMsgs.add(m.id); DB.insert('messages', m); this.renderChat();
+  },
+  renderChat() {
+    const l = this.roomEl && this.roomEl.querySelector('#mtcList'); if (!l) return;
+    const me = Auth.current, ms = this.chatMsgs();
+    const atBottom = l.scrollHeight - l.scrollTop - l.clientHeight < 60;
+    l.innerHTML = ms.length ? ms.map(m => { const u = DB.find('users', m.userId); return `<div class="mtc-msg ${m.userId === me ? 'mine' : ''}"><b style="color:${u ? u.color : 'inherit'}">${esc(u ? (m.userId === me ? 'Sen' : firstName(u.name)) : 'Eski üye')}</b><span>${esc(m.text)}</span><time>${T.hm(m.at)}</time></div>`; }).join('')
+      : '<p class="mtc-empty">Toplantı sırasında link, not ya da soru paylaşmak için yaz. Mesajlar yalnızca toplantı odasında görünür.</p>';
+    if (atBottom || this._chatFirst !== false) { l.scrollTop = l.scrollHeight; this._chatFirst = false; }
+  },
+  onChat(fresh) {
+    const mine = fresh.filter(m => m && m.mt === this.ROOM);
+    if (!mine.length || !this.joined) return;
+    if (!this.chatOpen) { this.chatUnread += mine.filter(m => m.userId !== Auth.current).length; this.renderBar(); }
+    this.renderChat();
+  },
+  toggleChat() { this.chatOpen = !this.chatOpen; if (this.chatOpen) this.chatUnread = 0; this.renderBar(); this.renderChat(); },
+  setLayout() { this.layout = this.layout === 'speaker' ? 'grid' : 'speaker'; if (this.layout === 'grid') this.pinned = null; this.renderBar(); this.renderTiles(); },
+  pin(u) { this.pinned = this.pinned === u ? null : u; this.renderTiles(); },
+  fullscreen(u) {
+    const el = u ? this.tiles[u] : this.roomEl; if (!el) return;
+    if (document.fullscreenElement) { document.exitFullscreen().catch(() => {}); return; }
+    const req = el.requestFullscreen || el.webkitRequestFullscreen;
+    if (req) Promise.resolve(req.call(el)).catch(() => toast('Tam ekran açılamadı', 'error'));
+    else if (u && el._v && el._v.webkitEnterFullscreen) el._v.webkitEnterFullscreen();   // iPhone Safari
+  },
+  renderStage() { const el = $('#meetStage'); if (el) { el.innerHTML = Views.meetStage(); this.mount(); } },
   /* toplantıdayken başka sayfadaysan küçük kontrol kapsülü */
   renderPill() {
     let p = $('#meetPill');
     const show = this.joined && !(App.view === 'chat' && this.view);
     if (!show) { if (p) p.remove(); return; }
     if (!p) { p = document.createElement('div'); p.id = 'meetPill'; document.body.appendChild(p); }
-    p.innerHTML = `<span class="mp-dot"></span><b>Toplantıdasın</b><small>${this.members().length} kişi</small>
+    p.setAttribute('data-act', 'meetGo'); p.title = 'Toplantıya dön';
+    p.innerHTML = `<span class="mp-dot"></span><b>Toplantıdasın</b><small>${this.members().length} kişi · dönmek için tıkla</small>
       <button type="button" class="mp-btn ${this.mic ? '' : 'off'}" data-act="meetMic" title="${this.mic ? 'Mikrofonu kapat' : 'Mikrofonu aç'}">${ic(this.mic ? 'mic' : 'micOff', 16)}</button>
       <button type="button" class="mp-btn" data-act="meetGo" title="Toplantıya dön">${ic('video', 16)}</button>
       <button type="button" class="mp-btn leave" data-act="meetLeave" title="Ayrıl">${ic('phoneOff', 16)}</button>`;
@@ -5497,15 +5674,7 @@ Views.meetStage = () => {
         <small class="muted">Katıldığında tarayıcı kamera ve mikrofon izni ister. İstediğin an kapatabilirsin.</small>
       </div></div>`;
   }
-  return `<div class="mt-room">
-    <div class="mt-grid" id="mtGrid" data-n="${ms.length || 1}"></div>
-    <div class="mt-bar">
-      <span class="mt-info">${ic('users', 15)} <b id="mtCount">${ms.length}</b> kişi</span>
-      <button type="button" class="mt-ctl ${Meet.mic ? '' : 'off'}" data-act="meetMic" title="${Meet.mic ? 'Mikrofonu kapat' : 'Mikrofonu aç'}" aria-pressed="${!Meet.mic}">${ic(Meet.mic ? 'mic' : 'micOff', 20)}<span>${Meet.mic ? 'Sessize al' : 'Sesi aç'}</span></button>
-      <button type="button" class="mt-ctl ${Meet.cam ? '' : 'off'}" data-act="meetCam" title="${Meet.cam ? 'Kamerayı kapat' : 'Kamerayı aç'}" aria-pressed="${!Meet.cam}">${ic(Meet.cam ? 'video' : 'videoOff', 20)}<span>${Meet.cam ? 'Kamerayı kapat' : 'Kamerayı aç'}</span></button>
-      <button type="button" class="mt-ctl ${Meet.sharing ? 'active' : ''} mt-screen" data-act="meetScreen" title="Ekran paylaş">${ic('monitor', 20)}<span>${Meet.sharing ? 'Paylaşımı durdur' : 'Ekran paylaş'}</span></button>
-      <button type="button" class="mt-ctl leave" data-act="meetLeave" title="Toplantıdan ayrıl">${ic('phoneOff', 20)}<span>Ayrıl</span></button>
-    </div></div>`;
+  return '<div id="meetRoomMount" class="mt-mount"></div>';
 };
 
 /* ---- Yardım İste ----
@@ -5765,6 +5934,31 @@ Views.sdDueCard = () => {
     <div class="sd-due-list">${list.slice(0, 8).map(x => Views.sdItem(x, true)).join('')}</div></section>`;
 };
 
+/* ---- Performans / Hafif mod ----
+   'auto' (varsayılan): zayıf cihazda ya da ekran kare hızı düşükse bulanıklık ve sürekli animasyonları kapatır.
+   'on' her zaman hafif, 'off' her zaman tam görünüm. Tercih bu tarayıcıda saklanır. */
+const Perf = {
+  KEY: 'squadpulse.perf',
+  pref() { try { return localStorage.getItem(this.KEY) || 'auto'; } catch (e) { return 'auto'; } },
+  set(v) { try { localStorage.setItem(this.KEY, v); } catch (e) {} this.auto = null; this.apply(); if (v === 'auto') this.measure(true); },
+  weak() { const c = navigator.hardwareConcurrency || 8, m = navigator.deviceMemory || 8; return c <= 2 || m <= 2; },
+  apply() {
+    const p = this.pref(), lite = p === 'on' || (p === 'auto' && (this.weak() || this.auto === true));
+    document.documentElement.classList.toggle('perf-lite', !!lite);
+    $$('[data-act="perfSet"]').forEach(b => b.classList.toggle('on', b.dataset.v === p));
+  },
+  measure(force) {
+    if (this.pref() !== 'auto' || (this._measured && !force)) return;
+    this._measured = true;
+    setTimeout(() => {
+      if (document.hidden) { this._measured = false; return; }
+      let n = 0; const t0 = performance.now();
+      const f = () => { n++; if (performance.now() - t0 < 1500) requestAnimationFrame(f); else { const fps = n / 1.5; if (fps < 32 && this.pref() === 'auto') { this.auto = true; this.apply(); toast('Ekran yavaş çizildiği için hafif mod açıldı — Profil & Tema\'dan değiştirebilirsin'); } } };
+      requestAnimationFrame(f);
+    }, 3500);
+  }
+};
+
 Views.chatSideItems = () => {
   const item = (ch, av, title, m, extra = '') => {
     const n = Chat.unread(ch), on = Chat.channel === ch;
@@ -5832,7 +6026,7 @@ Views.chat = () => {
        <button type="button" class="help-btn" data-act="helpOpen" title="Takıldıysan müsait bir ekip arkadaşından yardım iste">🆘 <span>Yardım İste</span></button>
        <button class="gem-chip" data-act="gemHint" title="Gemini'a soru sor">🤖 @Gemini</button>
        <div class="chat-members">${users.map(u => `<span title="${esc(u.name)} — ${Presence.online(u.id) ? 'çevrimiçi' : 'çevrimdışı'}">${avatarDot(u, 32, Presence.online(u.id) ? { key: 'active', color: '#22c55e' } : { key: 'offline', color: '#94a3b8' })}</span>`).join('')}</div>`;
-  return `<section class="card chat chat-wrap" data-pane="${Chat.pane}">
+  return `<section class="card chat chat-wrap ${Meet.view && Meet.joined ? 'meeting-live' : ''}" data-pane="${Chat.pane}">
     <aside class="chat-side">
       <div class="cs-head"><h3>Mesajlar</h3><span class="sub">Genel sohbet ve birebir konuşmalar</span>
         <div class="seg cs-tabs" role="tablist"><button type="button" class="${Meet.view ? '' : 'on'}" data-act="meetTab" data-v="chat">${ic('chat', 15)} Sohbet</button><button type="button" class="${Meet.view ? 'on' : ''}" data-act="meetTab" data-v="meet">${ic('video', 15)} Toplantı <em class="meet-count" ${Meet.members().length ? '' : 'hidden'}>${Meet.members().length}</em></button></div>
@@ -5843,6 +6037,7 @@ Views.chat = () => {
       <header class="chat-head">
         <button type="button" class="btn-icon sm only-mobile" data-act="chatBack" title="Konuşmalar">${ic('left', 16)}</button>
         <span class="kpi-ic">${ic('video', 20)}</span>
+        ${Meet.joined ? `<button type="button" class="btn btn-ghost btn-sm mt-backchat" data-act="meetTab" data-v="chat" title="Mesajlara dön (toplantı devam eder)">${ic('left', 14)} Mesajlar</button>` : ''}
         <div class="grow"><h3>Ekip toplantı odası</h3><p>${Meet.joined ? 'Görüşmedesin — mikrofon ve kamerayı istediğin an kapatabilirsin' : 'Kamera ve mikrofonla anlık görüşme'}</p></div>
         <div class="chat-members">${Meet.members().map(m => { const u = DB.find('users', m.uid); return u ? `<span title="${esc(u.name)}${m.mic === false ? ' · sessizde' : ''}">${avatarDot(u, 32, { key: 'active', color: '#22c55e' })}</span>` : ''; }).join('')}</div>
       </header>
@@ -5955,6 +6150,7 @@ const Notify = {
   },
   /** Bu mesaj bana hangi tür bildirim olarak gelir? null = bildirim yok */
   kind(m, me = Auth.current) {
+    if (m && m.mt) return null;   // toplantı sohbeti yalnızca odada görünür
     if (!m || m.userId === me || m.pending || (!m.text && !m.nudge && !attsOf(m).length)) return null;
     if (m.recipientId) return m.recipientId === me ? 'dm' : null;
     if (m.bot) return m.askedBy === me ? 'mention' : 'all';
@@ -6519,6 +6715,7 @@ const Actions = {
     DB.multi({ messages: null }); toast('Sohbet temizlendi'); App.render();
   },
   sendChat() { Chat.send(); },
+  perfSet(el) { Perf.set(el.dataset.v); App.render(); toast(el.dataset.v === 'on' ? '⚡ Hafif mod açıldı' : el.dataset.v === 'off' ? '✨ Tam görünüm açıldı' : 'Performans otomatik ayarlanacak', 'success'); },
   helpOpen(el) { Help.open(el.dataset.id); },
   helpYes(el) { Help.respond(el.dataset.id, true); },
   helpNo(el) { Help.respond(el.dataset.id, false); },
@@ -6533,6 +6730,10 @@ const Actions = {
   meetMic() { Meet.toggleMic(); },
   meetCam() { Meet.toggleCam(); },
   meetScreen() { Meet.toggleScreen(); },
+  meetChat() { Meet.toggleChat(); },
+  meetLayout() { Meet.setLayout(); },
+  meetPin(el) { Meet.pin(el.dataset.u); },
+  meetFull(el) { Meet.fullscreen(el.dataset.u || null); },
   meetGo() { Meet.view = true; Chat.pane = 'conv'; Meet.hideInvite(); Meet.dismissedAt = NOW(); if (App.view !== 'chat') App.go('chat'); else App.render(); },
   meetInviteClose() { Meet.dismissedAt = NOW(); Meet.hideInvite(); },
   gNew(el) { gameSetup(el.dataset.v); },
@@ -6701,7 +6902,7 @@ const App = {
       const g = GameHub.focus && GameHub.get(GameHub.focus); if (!g || g.type !== 'hangman' || g.status !== 'active' || !g.s || g.s.turn !== Auth.current) return;
       const L = TR_UP(e.key); if (L.length === 1 && TR_ALPHA.includes(L)) { e.preventDefault(); GAMES.hangman.guess(g.id, L); }
     });
-    setInterval(() => GameHub.clock(), 200);
+    setInterval(() => { if (this.view === 'social' || GameHub.inviteEl || GameHub.myActive().length) GameHub.clock(); }, 250);
     // Panoya kopyalanan görseli yapıştırma
     document.addEventListener('paste', e => { if (!e.target || e.target.id !== 'chatInput') return; const fl = [...((e.clipboardData && e.clipboardData.files) || [])]; if (fl.length) { e.preventDefault(); Composer.add(fl); } });
     // Sohbete dosya sürükle-bırak
@@ -6750,6 +6951,7 @@ const App = {
     if (Auth.current) Presence.attach(Auth.current);
     Tracker.autoClose();
     setInterval(() => this.tick(), 1000);
+    Perf.apply(); Perf.measure();
     Notify.initSW();
     NotifyGate.watch();
     this.started = true;
@@ -6779,7 +6981,7 @@ const App = {
     }
     // Yeni mesajlar: sayfa arka plandaysa sistem bildirimi, öndeyse (açık konuşmada değilse) toast
     Notify.handle(fresh, convVisible);
-    Help.check();
+    Help.check(); Meet.onChat(fresh);
     this.updateChatBadge();
   },
   updateChatBadge() {
@@ -6887,7 +7089,7 @@ const App = {
     this.bindNav();
     if (Auth.current && !Tasks.map(Auth.current)) setTimeout(() => Tasks.ensure(), 0);   // örnek görevleri bir kez oluştur
     document.body.dataset.view = this.view;
-    Meet.renderTiles(); Meet.renderPill(); Help.check();
+    Meet.mount(); Meet.renderPill(); Help.check();
     Nudge.afterRender();
     ChatBg.apply();
     SoftMode.apply();
