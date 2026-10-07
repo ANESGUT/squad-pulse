@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Squad Pulse">
+<meta name="format-detection" content="telephone=no">
 <title>Squad Pulse · Canlı Ekip Takip</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%236366f1'/%3E%3Cpath d='M5 17h5l3-7 5 13 3-6h6' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
@@ -2671,6 +2676,284 @@ html[data-mode="light"] .wp::after{background:rgba(245,247,252,var(--wp-dim,.35)
 @media (prefers-reduced-motion:reduce){.pn,.pn.drop,.pn.drop .pn-pin,.pn-stamp.stamp-in,.pn-btn.on{animation:none!important;transition:none!important}}
 @media (max-width:640px){.cork{padding:28px 12px 20px;border-width:9px}.cork-grid{gap:30px 14px}}
 
+
+/* ---- İŞLER ---- */
+.jb-toolbar{display:grid;grid-template-columns:minmax(180px,1fr) 200px auto auto;gap:10px;align-items:center;margin-bottom:16px}
+.jb-board{display:grid;grid-template-columns:repeat(6,minmax(210px,1fr));gap:12px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity}
+.jb-col{display:flex;flex-direction:column;gap:8px;min-width:0;scroll-snap-align:start}
+.jb-col-h{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:650;padding:2px 4px}
+.jb-col-h i{width:9px;height:9px;border-radius:50%;background:var(--c);flex-shrink:0}
+.jb-col-h span{margin-left:auto;font-size:11.5px;color:var(--muted);background:var(--surface-3);padding:2px 8px;border-radius:999px}
+.jb-col-b{display:flex;flex-direction:column;gap:8px;padding:8px;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--border);border-top:3px solid var(--c);min-height:110px}
+.jb-empty{color:var(--faint);text-align:center;padding:14px 0;font-size:12px}
+.jb-add{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border-radius:12px;border:1px dashed var(--border);background:transparent;color:var(--muted);font-size:12.5px;font-weight:600}
+.jb-add:hover{border-color:rgba(var(--accent-rgb),.5);color:var(--accent)}
+.jb-card{display:flex;flex-direction:column;gap:6px;padding:10px 10px 8px 12px;border-radius:13px;background:var(--surface-solid);border:1px solid var(--border);border-left:4px solid var(--cc);box-shadow:var(--shadow-sm);min-width:0}
+.jb-card.late{box-shadow:0 0 0 1px rgba(239,68,68,.45),var(--shadow-sm)}
+.jb-card.running{box-shadow:0 0 0 2px rgba(var(--accent-rgb),.55),var(--shadow-sm)}
+.jb-open{display:flex;flex-direction:column;gap:3px;text-align:left;background:none;border:0;padding:0;color:inherit;font:inherit;min-width:0}
+.jb-open b{font-size:13.5px;line-height:1.3;overflow-wrap:anywhere}
+.jb-client{font-size:11px;font-weight:700;color:var(--cc);text-transform:uppercase;letter-spacing:.03em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jb-meta{display:flex;flex-wrap:wrap;gap:4px 8px;font-size:11px;color:var(--muted)}
+.jb-meta .late{color:#ef4444;font-weight:700}
+.jb-pr{font-style:normal;font-weight:700;color:var(--pr)}
+.jb-ap{font-weight:700;padding:0 6px;border-radius:999px;background:rgba(236,72,153,.14);color:#ec4899}
+.jb-ap.approved{background:rgba(16,185,129,.15);color:#10b981}.jb-ap.changes{background:rgba(245,158,11,.16);color:#f59e0b}
+.jb-foot{display:flex;align-items:center;gap:6px}
+.jb-ppl{display:flex;gap:2px;min-width:0;overflow:hidden}
+.jb-live{color:#22c55e;font-size:12px;animation:pulse 1.4s infinite}
+.jb-acts{display:flex;gap:2px;margin-left:auto}
+.jb-acts .btn-icon:disabled{opacity:.3;pointer-events:none}
+.jb-acts .btn-icon.on{background:var(--accent);color:#fff}
+.jb-running{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 14px;border-radius:14px;background:rgba(var(--accent-rgb),.1);border:1px solid rgba(var(--accent-rgb),.35);font-size:13px}
+.jb-running .btn{margin-left:auto}
+.jb-tick{font-variant-numeric:tabular-nums;font-weight:800;color:var(--accent)}
+.jb-form .jb-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.jb-form .jb-2>div{display:flex;flex-direction:column;min-width:0}
+.jb-people{display:flex;flex-wrap:wrap;gap:6px}
+.jb-people button{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 4px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:12.5px;opacity:.6}
+.jb-people button.on{opacity:1;border-color:rgba(var(--accent-rgb),.6);background:rgba(var(--accent-rgb),.14)}
+.jb-sec{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:8px}
+.jb-sec h5{display:flex;align-items:center;gap:6px;font-size:13px;flex-wrap:wrap}
+.jb-sec h5>span:last-child{margin-left:auto;font-weight:500;color:var(--muted);font-size:12px}
+.jb-time{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px}
+.jb-time span{display:inline-flex;align-items:center;gap:6px}
+.jb-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.jb-row .input{flex:1;min-width:120px}
+.jb-row .jb-min{flex:0 0 80px;min-width:0}
+.jb-apnote{font-size:13px;padding:8px 10px;border-radius:10px;background:var(--surface-2);white-space:pre-wrap}
+.jb-comments{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow:auto;font-size:12.5px;line-height:1.45}
+.jb-comments div{overflow-wrap:anywhere}
+.jb-comments div.sys{color:var(--muted)}
+.jb-comments time{font-size:11px;color:var(--faint)}
+.jc-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.jc-head b{font-size:15px;text-transform:capitalize;min-width:120px;text-align:center}
+.jc-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.jc-wd{font-size:11px;font-weight:700;color:var(--muted);text-align:center;padding:4px 0}
+.jc-cell{min-height:92px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border);padding:5px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.jc-cell.pad{background:transparent;border-color:transparent}
+.jc-cell.today{border-color:rgba(var(--accent-rgb),.7);box-shadow:inset 0 0 0 1px rgba(var(--accent-rgb),.4)}
+.jc-d{font-size:11.5px;font-weight:700;color:var(--muted)}
+.jc-job{display:block;text-align:left;font-size:11px;font-weight:600;line-height:1.25;padding:3px 5px;border-radius:6px;border:0;background:color-mix(in srgb,var(--cc) 22%,transparent);border-left:3px solid var(--cc);color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:100%}
+.jc-job.done{opacity:.55;text-decoration:line-through}
+.jc-sd,.jc-lv{font-size:10.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jc-lv{color:#f59e0b;font-weight:600}
+.jb-table{overflow-x:auto;border:1px solid var(--border);border-radius:14px}
+.jb-table table{width:100%;border-collapse:collapse;font-size:13px;min-width:680px}
+.jb-table th,.jb-table td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:middle}
+.jb-table th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--surface-2)}
+.jb-table td small{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.jb-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--cc);margin-right:7px}
+.jb-pay{padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted);font-size:12px;font-weight:700}
+.jb-pay.ok{background:rgba(16,185,129,.15);border-color:transparent;color:#10b981}
+.switch-row{display:flex;align-items:center;gap:8px;font-size:13px;margin:10px 0 2px}
+/* görev tekrar günleri */
+.tk-add:has(#tkRepeat){grid-template-columns:minmax(0,1fr) 170px 130px auto}
+.tk-days{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tk-days button{padding:6px 11px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted);font-size:12.5px;font-weight:700}
+.tk-days button.on{background:rgba(var(--accent-rgb),.18);border-color:rgba(var(--accent-rgb),.55);color:var(--accent)}
+.tk-editable{cursor:pointer}
+/* izin onayı */
+.lva-list{display:flex;flex-direction:column;gap:8px}
+.lva-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border)}
+.lva-row .grow{flex:1;min-width:180px;display:flex;flex-direction:column}
+.lva-row small{color:var(--muted);font-size:12px}
+/* sohbet araçları */
+.msg-more{border:0;background:transparent;color:inherit;opacity:.55;font-size:14px;line-height:1;padding:0 2px;margin-left:4px;cursor:pointer}
+.msg-more:hover{opacity:1}
+.msg-edited{font-style:italic;opacity:.75;margin-right:4px}
+.ct-res{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:52vh;overflow:auto}
+.ct-hit{display:flex;flex-direction:column;gap:3px;text-align:left;padding:9px 11px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:13px;line-height:1.45}
+.ct-hit:hover{border-color:rgba(var(--accent-rgb),.5)}
+.ct-ch{font-size:11.5px;color:var(--muted);font-weight:600}
+.ct-hit mark{background:rgba(250,204,21,.45);color:inherit;border-radius:3px;padding:0 1px}
+.ct-prev{white-space:pre-wrap;padding:10px 12px;border-radius:12px;background:var(--surface-2);font-size:13.5px;overflow-wrap:anywhere}
+.ct-flash .bubble{animation:ctFlash 2s ease}
+@keyframes ctFlash{0%,60%{box-shadow:0 0 0 3px rgba(250,204,21,.8)}100%{box-shadow:none}}
+/* müşteri onay sayfası */
+.ca-card{max-width:620px;width:100%;display:flex;flex-direction:column;gap:10px}
+.ca-kicker{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+.ca-title{font-size:24px;line-height:1.25}
+.ca-notes{white-space:pre-wrap;padding:12px 14px;border-radius:14px;background:var(--surface-2);border:1px solid var(--border);font-size:14px;line-height:1.6}
+.ca-links{display:flex;flex-wrap:wrap;gap:8px}
+.ca-links a{padding:8px 14px;border-radius:999px;background:rgba(var(--accent-rgb),.14);color:var(--accent);font-weight:700;font-size:13.5px}
+.ca-done{padding:12px 14px;border-radius:14px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);font-size:14px;font-weight:700}
+.ca-done.ok{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.45)}
+.ca-done p{font-weight:500;margin-top:6px}
+.ca-done small{display:block;font-weight:500;color:var(--muted);margin-top:6px}
+@media (max-width:900px){.jb-toolbar{grid-template-columns:minmax(0,1fr) 1fr}.jb-board{grid-template-columns:repeat(6,minmax(220px,78%))}.jc-cell{min-height:70px}}
+@media (max-width:640px){.jb-toolbar{grid-template-columns:minmax(0,1fr)}.jb-form .jb-2{grid-template-columns:1fr}.tk-add:has(#tkRepeat){grid-template-columns:1fr 1fr}.jc-grid{gap:2px}.jc-cell{padding:3px;min-height:58px}.jc-job{font-size:10px;padding:2px 3px}.jc-sd{display:none}}
+
+/* ---- ÇEKİM EKİPMANI ---- */
+.jg-sec>summary{list-style:none;cursor:pointer}
+.jg-sec>summary::-webkit-details-marker{display:none}
+.jg-sec>summary h5::before{content:'▸';display:inline-block;margin-right:2px;transition:transform .2s}
+.jg-sec[open]>summary h5::before{transform:rotate(90deg)}
+.jg-inv{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.jg-cat{display:flex;flex-direction:column;gap:5px;margin-top:6px}
+.jg-cat>small{font-size:11.5px;font-weight:700;color:var(--muted)}
+.jg-chips{display:flex;flex-wrap:wrap;gap:6px}
+.jg-chip{padding:6px 11px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted);font-size:12.5px;font-weight:600}
+.jg-chip.on{background:rgba(var(--accent-rgb),.16);border-color:rgba(var(--accent-rgb),.6);color:var(--text)}
+.jg-chip.on::before{content:'✓ ';color:var(--accent);font-weight:800}
+.jg-chip.x::before{content:''}
+.jg-warn{color:#f59e0b!important;font-weight:600}
+.jb-gear{padding:2px 8px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);color:var(--muted);font-size:11.5px;font-weight:700;white-space:nowrap}
+.jb-gear.ok{background:rgba(16,185,129,.15);border-color:transparent;color:#10b981}
+.gp-list{display:flex;flex-direction:column;gap:6px;max-height:55vh;overflow:auto}
+.gp-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);font-size:14px;cursor:pointer}
+.gp-item input{width:18px;height:18px;accent-color:#10b981}
+.gp-item.on{border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.1)}
+.gp-item.on span{text-decoration:line-through;opacity:.7}
+.gp-item small{font-size:11px;color:var(--muted)}
+.jg-add{display:grid;grid-template-columns:minmax(0,1fr) 200px auto;gap:10px;margin-bottom:16px}
+.jg-group{margin-bottom:14px}
+.jg-group h5{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px}
+.jg-group h5 span{font-size:11.5px;color:var(--muted);background:var(--surface-3);padding:1px 8px;border-radius:999px}
+.jg-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);margin-bottom:6px;flex-wrap:wrap}
+.jg-item b{font-size:13.5px;min-width:170px}
+.jg-up{display:flex;gap:6px;flex-wrap:wrap;flex:1;min-width:0}
+.jg-up button{padding:3px 9px;border-radius:999px;border:0;background:rgba(var(--accent-rgb),.12);color:var(--accent);font-size:11.5px;font-weight:600;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jg-up em{font-size:12px;color:var(--faint)}
+.jc-job.shoot{background:transparent;border:1px dashed var(--cc);border-left:3px solid var(--cc)}
+@media (max-width:640px){.jg-add{grid-template-columns:minmax(0,1fr)}.jg-item b{min-width:0;width:100%}}
+
+.jb-apline{font-size:12.5px;color:var(--muted)}
+.jb-apline b{color:#f59e0b}
+.jb-linkopt{margin-top:4px}
+.jb-linkopt>summary{cursor:pointer;font-size:12.5px;color:var(--muted);font-weight:600;padding:4px 0}
+.jb-linkopt[open]>summary{margin-bottom:6px}
+.jb-wa{display:flex;flex-wrap:wrap;align-items:center;gap:5px;padding:6px 8px;border-radius:10px;background:rgba(236,72,153,.08);border:1px dashed rgba(236,72,153,.35);font-size:11.5px;color:var(--muted)}
+.jb-wa.late{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.5)}
+.jb-wa.late span{color:#f59e0b;font-weight:700}
+.jb-wa.ok{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.4);color:#10b981;font-weight:700}
+.jb-wa span{flex-basis:100%}
+.jb-wa button{padding:4px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:11.5px;font-weight:700}
+.jb-wa button.ok{border-color:rgba(16,185,129,.5);color:#10b981}
+.jb-wa button.no{border-color:rgba(245,158,11,.5);color:#f59e0b}
+
+/* ---- GÜNÜN İPUCU ---- */
+.tip-card{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:start;border:1px solid rgba(245,158,11,.35);background:linear-gradient(135deg,rgba(245,158,11,.10),transparent 60%),var(--surface)}
+.tip-ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:rgba(245,158,11,.16)}
+.tip-k{font-size:11.5px;font-weight:700;color:#f59e0b;text-transform:uppercase;letter-spacing:.04em;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tip-k span{color:var(--faint);font-weight:600;letter-spacing:0}
+.tip-body h3{font-size:17px;margin:4px 0 6px;line-height:1.3}
+.tip-body p{color:var(--muted);font-size:13.5px;line-height:1.6}
+.tip-do{margin-top:10px;padding:9px 12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);font-size:13.5px;line-height:1.5}
+.tip-acts{display:flex;flex-direction:column;gap:6px}
+@media (max-width:760px){.tip-card{grid-template-columns:auto minmax(0,1fr)}.tip-acts{grid-column:1/-1;flex-direction:row;flex-wrap:wrap}}
+
+.tp{position:fixed;top:90px;right:22px;z-index:9400;width:min(380px,calc(100vw - 28px));padding:14px 16px 16px;border-radius:18px;overflow:hidden;
+  background:linear-gradient(135deg,rgba(245,158,11,.14),transparent 60%),var(--surface-solid);border:1px solid rgba(245,158,11,.45);box-shadow:0 22px 50px -18px rgba(0,0,0,.6);
+  opacity:0;transform:translateY(-12px) scale(.98);transition:opacity .3s,transform .3s cubic-bezier(.2,.9,.3,1.2)}
+.tp.in{opacity:1;transform:none}
+.tp.out{opacity:0;transform:translateY(-8px)}
+.tp-k{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;color:#f59e0b;text-transform:uppercase;letter-spacing:.04em}
+.tp-x{margin-left:auto;border:0;background:var(--surface-2);color:var(--muted);width:24px;height:24px;border-radius:50%;font-size:12px;line-height:24px;padding:0}
+.tp h4{font-size:15.5px;line-height:1.3;margin:6px 0 4px}
+.tp p{font-size:13px;line-height:1.55;color:var(--muted)}
+.tp-do{margin-top:8px;padding:8px 10px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border);font-size:13px;line-height:1.5}
+.tp-a{display:flex;align-items:center;gap:10px;margin-top:10px}
+.tp-a small{font-size:11px;color:var(--faint)}
+.tp-bar{position:absolute;left:0;bottom:0;height:3px;width:100%;background:#f59e0b;transform-origin:left}
+.tp.paused .tp-a small{color:#f59e0b}
+@media (max-width:640px){.tp{top:auto;bottom:calc(84px + env(safe-area-inset-bottom));right:14px;left:14px;width:auto}}
+@media (prefers-reduced-motion:reduce){.tp{transition:none}}
+
+/* ---- AJANS KARNESİ ---- */
+.kr-kpis{margin-bottom:16px}
+.kr-row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px}
+.kr-box{padding:14px;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--border);min-width:0}
+.kr-box h5{display:flex;align-items:baseline;gap:8px;font-size:13px;margin-bottom:12px;flex-wrap:wrap}
+.kr-box h5 span{font-size:11.5px;color:var(--muted);font-weight:500}
+.kr-chart{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;height:210px;align-items:end}
+.kr-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px;min-width:0}
+.kr-col i{display:block;width:70%;min-height:3px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,rgba(var(--accent-rgb),.9),rgba(var(--accent-rgb),.45))}
+.kr-col.now i{background:linear-gradient(180deg,#f59e0b,rgba(245,158,11,.5))}
+.kr-n{font-size:11.5px;font-weight:800}
+.kr-d{display:flex;gap:2px;font-size:10.5px;min-height:14px}
+.kr-d .up{color:#10b981}.kr-d .dn{color:#ef4444}
+.kr-col small{font-size:10.5px;color:var(--muted);text-transform:capitalize}
+.kr-reasons-bar{display:flex;flex-direction:column;gap:7px}
+.kr-reasons-bar div{display:grid;grid-template-columns:150px minmax(0,1fr) 24px;gap:8px;align-items:center;font-size:12.5px}
+.kr-reasons-bar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kr-reasons-bar i{display:block;height:10px;border-radius:999px;background:var(--rc)}
+.kr-reasons-bar b{text-align:right}
+.kr-ins{margin:12px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:12.5px;line-height:1.5;color:var(--muted)}
+.kr-ins b{color:var(--text)}
+.kr-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 12px}
+.kr-actions .help{flex:1;min-width:220px}
+.kr-tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:700;background:color-mix(in srgb,var(--rc) 18%,transparent);color:var(--rc)}
+.kr-note{max-width:280px;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.kr-reasons{display:flex;flex-wrap:wrap;gap:6px}
+.kr-reasons label{cursor:pointer}
+.kr-reasons input{position:absolute;opacity:0;pointer-events:none}
+.kr-reasons span{display:inline-block;padding:6px 11px;border-radius:999px;border:1px solid var(--border);background:var(--surface-2);font-size:12.5px;font-weight:600;color:var(--muted)}
+.kr-reasons input:checked+span{border-color:var(--rc);color:var(--text);background:color-mix(in srgb,var(--rc) 18%,transparent)}
+.kr-reasons input:focus-visible+span{outline:2px solid var(--rc)}
+.kr-choice{display:flex;flex-direction:column;gap:6px;margin-bottom:6px}
+.kr-choice label{display:flex;align-items:center;gap:8px;padding:9px 11px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);font-size:13.5px;cursor:pointer}
+.kr-choice small{color:var(--muted);margin-left:auto;font-size:11.5px}
+.kr-pick{display:flex;flex-direction:column;gap:6px;max-height:50vh;overflow:auto}
+.kr-pick button{display:flex;align-items:center;gap:6px;text-align:left;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:14px;font-weight:600}
+@media (max-width:900px){.kr-row{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.kr-chart{gap:3px;height:170px}.kr-n{font-size:10px}.kr-reasons-bar div{grid-template-columns:110px minmax(0,1fr) 20px}}
+
+/* =========================================================
+   UYUMLULUK: iPhone Safari + Windows (Chrome / Edge / Firefox)
+   ========================================================= */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scrollbar-width:thin;scrollbar-color:var(--surface-3) transparent}
+button,a,label,[data-act]{-webkit-tap-highlight-color:transparent}
+/* iPhone'da adres çubuğu açılıp kapanınca ekran yüksekliği zıplamasın */
+@supports (height:100dvh){
+  .app{min-height:100dvh}.center-wrap{min-height:100dvh}
+  @media (min-width:901px){.sidebar{height:100dvh}}
+  .modal,.pp-card,.pl-card{max-height:calc(100dvh - 40px)}
+}
+/* Pencere ve listelerde kaydırma arkadaki sayfaya taşmasın (iOS'ta sayfa kayması) */
+.modal,.gp-list,.ct-res,.jb-comments,.kr-pick,.br-lb,.br-dev,.ay-log,.jb-board,.br-board,.jb-table,.ay-shots{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+/* Yalnızca iPhone/iPad Safari: yazı kutusuna dokununca sayfanın kendiliğinden yakınlaşmasını engelle (16px altı yazı yakınlaştırır) */
+@supports (-webkit-touch-callout:none){
+  input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]),select,textarea{font-size:16px!important}
+  input[type=date].input,input[type=time].input{-webkit-appearance:none;appearance:none;min-height:44px;display:block;text-align:left;line-height:1.3}
+  input[type=date].input::-webkit-date-and-time-value,input[type=time].input::-webkit-date-and-time-value{text-align:left;min-height:1.3em}
+  .kr-reasons span,.jg-chip,.tk-days button,.jb-wa button{min-height:34px}
+}
+/* Dokunmatik ekranlarda "üzerine gelme" efektleri dokunduktan sonra takılı kalmasın */
+@media (hover:none){
+  .pn:hover{transform:rotate(var(--rot));box-shadow:0 1px 1px rgba(0,0,0,.15),0 10px 18px -8px rgba(0,0,0,.55),inset 0 -14px 22px -18px rgba(0,0,0,.25)}
+  .pn-btn:hover,.jb-add:hover,.ct-hit:hover,.br-vote:hover{transform:none}
+  .tp-a small{display:none}
+}
+/* Windows: klasik kaydırma çubukları yatay panolarda yer kaplamasın, ince ve temaya uygun olsun */
+.jb-board::-webkit-scrollbar,.br-board::-webkit-scrollbar,.jb-table::-webkit-scrollbar,.ay-shots::-webkit-scrollbar,.ay-steps::-webkit-scrollbar{height:8px}
+.jb-board,.br-board,.jb-table,.ay-shots,.ay-steps{scrollbar-width:thin}
+/* Telefonda alt menü: sekme sayısı arttı, sığmayınca parmakla yana kaydırılabilsin */
+@media (max-width:900px){
+  #tabBar{overflow-x:auto;justify-content:flex-start;scrollbar-width:none;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 10px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 10px),transparent 100%)}
+  #tabBar::-webkit-scrollbar{display:none}
+  #tabBar .nav-item{flex:1 0 44px;min-width:44px;scroll-snap-align:center}
+}
+/* Masaüstü: kısa ekranlarda (ör. Windows %150 ölçek, 1280×720) sol menü sığmazsa menü kendi içinde kaysın, alttaki profil/çıkış hep görünsün */
+@media (min-width:901px){
+  .side{min-height:0}
+  .side #tabBar{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;margin-right:-6px;padding-right:6px}
+  .side #tabBar::-webkit-scrollbar{width:6px}
+  .side .side-foot{flex-shrink:0}
+}
+@media (min-width:901px) and (max-height:900px){
+  .side{gap:14px;padding:16px 12px}
+  .side #tabBar .nav-item{padding:9px 14px}
+}
+/* İşler sekme çubuğu telefonda yana kaydırılabilsin */
+.jb-tabs{max-width:100%;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
+.jb-tabs::-webkit-scrollbar{display:none}
+.jb-tabs button{white-space:nowrap;flex-shrink:0}
+@media (max-width:640px){.card-head:has(.jb-tabs){flex-wrap:wrap}.card-head .jb-tabs{width:100%}}
+/* Çentikli iPhone'larda yatay kullanımda kenar boşluğu */
+@supports (padding:max(0px)){
+  @media (max-width:900px){.tp{left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right))}}
+}
 </style>
 </head>
 <body>
@@ -2862,7 +3145,7 @@ const FirebaseBackend = {
     const since = NOW() - HISTORY_DAYS * DAY, loaded = new Set();
     const bind = (col, ref) => ref.on('value', snap => {
       DB.setCache(col, snap.val());
-      if (!loaded.has(col)) { loaded.add(col); if (loaded.size === 15) resolve(); }
+      if (!loaded.has(col)) { loaded.add(col); if (loaded.size === 20) resolve(); }
       else App.onRemote(col);
     }, err => { if (!Net.ready) reject(err); else { Net.error = err; App.render(); } });
     bind('settings', this.root.child('settings'));
@@ -2879,6 +3162,11 @@ const FirebaseBackend = {
     bind('dayprep', this.root.child('dayprep'));
     bind('ideas', this.root.child('ideas'));
     bind('pins', this.root.child('pins'));
+    bind('jobs', this.root.child('jobs'));
+    bind('approvals', this.root.child('approvals'));
+    bind('cmeta', this.root.child('cmeta'));
+    bind('gear', this.root.child('gear'));
+    bind('churn', this.root.child('churn'));
     bind('signals', this.root.child('signals').orderByChild('at').limitToLast(400));
   },
   ref(path) { return this.root.child(path); },
@@ -2899,7 +3187,7 @@ const LocalBackend = {
     Net.connected = true;
     return Promise.resolve();
   },
-  load() { ['settings', 'users', 'sessions', 'days', 'presence', 'messages', 'ai_logs', 'clients', 'games', 'meet', 'signals', 'events', 'dayprep', 'ideas', 'pins'].forEach(c => DB.setCache(c, this.data[c])); },
+  load() { ['settings', 'users', 'sessions', 'days', 'presence', 'messages', 'ai_logs', 'clients', 'games', 'meet', 'signals', 'events', 'dayprep', 'ideas', 'pins', 'jobs', 'approvals', 'cmeta', 'gear', 'churn'].forEach(c => DB.setCache(c, this.data[c])); },
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.data)); } catch (e) { toast('Kaydedilemedi: depolama alanı dolu olabilir.', 'error'); } },
   put(path, v) {
     const p = path.split('/'); let o = this.data;
@@ -2922,7 +3210,7 @@ const LocalBackend = {
 /* Uygulamanın konuştuğu tek veri arayüzü — önbellek + seçili backend */
 const DB = {
   backend: null,
-  cache: { settings: null, users: {}, sessions: {}, days: {}, presence: {}, messages: {}, ai_logs: {}, clients: {}, games: {}, meet: {}, signals: {}, events: {}, dayprep: {}, ideas: {}, pins: {} },
+  cache: { settings: null, users: {}, sessions: {}, days: {}, presence: {}, messages: {}, ai_logs: {}, clients: {}, games: {}, meet: {}, signals: {}, events: {}, dayprep: {}, ideas: {}, pins: {}, jobs: {}, approvals: {}, cmeta: {}, gear: {}, churn: {} },
   _arr: {},
   setCache(col, val) {
     if (col === 'settings') this.cache.settings = normalizeSettings(val);
@@ -3328,6 +3616,7 @@ const NAV = [
   { id: 'chat', label: 'Sohbet', icon: 'chat' },
   { id: 'assistant', label: 'Asistan', icon: 'sparkles' },
   { id: 'clients', label: 'Müşteriler', icon: 'briefcase' },
+  { id: 'jobs', label: 'İşler', icon: 'target' },
   { id: 'brainstorm', label: 'Beyin Fırtınası', icon: 'brain' },
   { id: 'social', label: 'Sosyal Alan', icon: 'game' },
   { id: 'reports', label: 'Raporlar', icon: 'chart', admin: true },
@@ -4098,7 +4387,70 @@ const Tasks = {
   list(userId = Auth.current) { return Object.entries(this.map(userId) || {}).map(([id, t]) => ({ ...t, id })).filter(t => t && t.title); },
   save(map, userId = Auth.current) { DB.update('users', userId, { tasks: map }); },
   ensure(userId = Auth.current) { if (!userId || this.map(userId) || !DB.find('users', userId)) return; this.save(this.sample(), userId); App.scheduleRender(); },
-  isDone(t, tk = T.key(NOW())) { return t.scope === 'daily' ? t.doneOn === tk : !!t.done; },
+  isDone(t, tk = T.key(NOW())) { return t.scope === 'daily' ? (t.repeat === 'once' ? !!t.doneOn && t.doneOn <= tk : t.doneOn === tk) : !!t.done; },
+  /** Günlük görevin tekrar düzeni: once = yalnızca o gün · every = her gün · weekdays = hafta içi · days = seçili günler (1=Pzt … 7=Paz) */
+  REPEAT: { once: 'Sadece bugün', every: 'Her gün', weekdays: 'Hafta içi (Pzt–Cum)', days: 'Seçtiğim günler' },
+  DAYS: ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'],
+  wd(tk) { const d = new Date(tk + 'T00:00').getDay(); return d === 0 ? 7 : d; },
+  /** Bu günlük görev verilen günde listede görünür mü? (tekrar ayarı olmayan eski görevler = her gün) */
+  activeOn(t, tk = T.key(NOW())) {
+    if (t.scope !== 'daily') return true;
+    const r = t.repeat || 'every';
+    if (r === 'once') { const on = t.on || T.key(t.createdAt || NOW()); return on <= tk && (!t.doneOn || t.doneOn >= tk); }
+    if (r === 'weekdays') return this.wd(tk) <= 5;
+    if (r === 'days') return (Array.isArray(t.days) ? t.days : []).map(Number).includes(this.wd(tk));
+    return true;
+  },
+  repeatLabel(t, tk = T.key(NOW())) {
+    const r = t.repeat || 'every';
+    if (r === 'once') { const on = t.on || T.key(t.createdAt || NOW()); return on < tk && !this.isDone(t, tk) ? 'Gecikti · ' + T.fmt(new Date(on + 'T00:00').getTime(), { day: 'numeric', month: 'short' }) : on === tk ? 'Sadece bugün' : 'Sadece ' + T.fmt(new Date(on + 'T00:00').getTime(), { day: 'numeric', month: 'short', weekday: 'short' }); }
+    if (r === 'weekdays') return 'Hafta içi her gün';
+    if (r === 'days') return (Array.isArray(t.days) ? t.days : []).map(Number).sort().map(d => this.DAYS[d - 1]).join(', ') || 'Gün seçilmedi';
+    return 'Her gün';
+  },
+  /** Ekleme formundaki tekrar seçimini okur */
+  formRepeat() {
+    const sel = $('#tkRepeat'); if (!sel) return {};
+    const repeat = sel.value, days = repeat === 'days' ? [...document.querySelectorAll('#tkDays .on')].map(b => +b.dataset.d) : null;
+    return { repeat, days };
+  },
+  /** Mevcut bir görevi düzenle (başlık, öncelik, tekrar, son tarih, günlük ↔ haftalık) */
+  edit(id) {
+    const t = (this.map() || {})[id]; if (!t) return;
+    const daily = t.scope === 'daily', r = t.repeat || 'every', days = (Array.isArray(t.days) ? t.days : []).map(Number);
+    Modal.open({
+      title: '✏️ Görevi düzenle',
+      body: `<div class="form">
+        <label class="lbl">Görev</label><input class="input" id="teTitle" maxlength="120" value="${esc(t.title)}">
+        <label class="lbl">Öncelik</label><select class="input" id="tePrio">${Object.entries(PRIO).reverse().map(([k, v]) => `<option value="${k}" ${t.priority === k ? 'selected' : ''}>${v.label}</option>`).join('')}</select>
+        <label class="lbl">Tür</label><select class="input" id="teScope"><option value="daily" ${daily ? 'selected' : ''}>Günlük (tekrar düzeniyle)</option><option value="weekly" ${daily ? '' : 'selected'}>Haftalık (son tarihli)</option></select>
+        <div id="teDaily" ${daily ? '' : 'hidden'}><label class="lbl">Ne zaman görünsün?</label>
+          <select class="input" id="teRepeat">${Object.entries(this.REPEAT).map(([k, v]) => `<option value="${k}" ${r === k ? 'selected' : ''}>${v}</option>`).join('')}</select>
+          <div class="tk-days" id="teDays" ${r === 'days' ? '' : 'hidden'}>${this.DAYS.map((d, i) => `<button type="button" class="${days.includes(i + 1) ? 'on' : ''}" data-d="${i + 1}">${d}</button>`).join('')}</div>
+          <div id="teOnWrap" ${r === 'once' ? '' : 'hidden'}><label class="lbl">Hangi gün?</label><input type="date" class="input" id="teOn" value="${esc(t.on || T.key(NOW()))}"></div></div>
+        <div id="teWeekly" ${daily ? 'hidden' : ''}><label class="lbl">Son tarih</label><input type="date" class="input" id="teDue" value="${esc(t.due || T.key(T.addDays(T.sod(), 3)))}"></div>
+        <p class="help" id="teErr" style="color:#ef4444;display:none"></p></div>`,
+      onMount: w => {
+        const sync = () => { const d = $('#teScope', w).value === 'daily', rv = $('#teRepeat', w).value; $('#teDaily', w).hidden = !d; $('#teWeekly', w).hidden = d; $('#teDays', w).hidden = rv !== 'days'; $('#teOnWrap', w).hidden = rv !== 'once'; };
+        $('#teScope', w).onchange = sync; $('#teRepeat', w).onchange = sync;
+        $$('#teDays button', w).forEach(b => b.onclick = () => b.classList.toggle('on'));
+      },
+      actions: [{ label: 'Vazgeç' }, { label: 'Kaydet', cls: 'btn-primary', onClick: w => {
+        const title = $('#teTitle', w).value.trim().slice(0, 120); if (!title) { const e = $('#teErr', w); e.textContent = 'Görev adı boş olamaz.'; e.style.display = 'block'; return false; }
+        const map = { ...(this.map() || {}) }, cur = map[id]; if (!cur) return;
+        const scope = $('#teScope', w).value, priority = $('#tePrio', w).value;
+        if (scope === 'daily') {
+          const repeat = $('#teRepeat', w).value, dsel = [...w.querySelectorAll('#teDays .on')].map(b => +b.dataset.d);
+          if (repeat === 'days' && !dsel.length) { const e = $('#teErr', w); e.textContent = 'En az bir gün seç.'; e.style.display = 'block'; return false; }
+          const nt = { title, priority, scope: 'daily', repeat, createdAt: cur.createdAt || NOW() };
+          if (repeat === 'days') nt.days = dsel; if (repeat === 'once') nt.on = $('#teOn', w).value || T.key(NOW());
+          if (cur.scope === 'daily' && cur.doneOn) nt.doneOn = cur.doneOn;
+          map[id] = nt;
+        } else map[id] = { title, priority, scope: 'weekly', due: $('#teDue', w).value || T.key(T.addDays(T.sod(), 3)), createdAt: cur.createdAt || NOW(), ...(cur.scope !== 'daily' && cur.done ? { done: true, doneAt: cur.doneAt || NOW() } : {}) };
+        this.save(map); toast('Görev güncellendi', 'success'); App.render();
+      } }]
+    });
+  },
   sample() {
     const today = T.sod(), k = n => T.key(T.addDays(today, n)), at = NOW(), m = {};
     [
@@ -4122,10 +4474,12 @@ const Tasks = {
     if (this.isDone(map[id], tk) && typeof Pet !== 'undefined') Pet.feed({ ...map[id], id });   // görev tamamlandı → pete mama
   },
   remove(id) { const map = { ...(this.map() || {}) }; delete map[id]; this.save(map); },
-  add(title, scope, priority, due) {
+  add(title, scope, priority, due, opt = {}) {
     title = String(title || '').trim().slice(0, 120); if (!title) return false;
     const map = { ...(this.map() || {}) };
-    map[uid('t')] = scope === 'daily' ? { title, scope, priority, createdAt: NOW() } : { title, scope: 'weekly', priority, due: due || T.key(T.addDays(T.sod(), 3)), createdAt: NOW() };
+    const rep = scope === 'daily' ? (this.REPEAT[opt.repeat] ? opt.repeat : 'every') : null;
+    if (rep === 'days' && !(opt.days || []).length) { toast('Tekrar için en az bir gün seç', 'error'); return false; }
+    map[uid('t')] = scope === 'daily' ? { title, scope, priority, repeat: rep, ...(rep === 'days' ? { days: opt.days } : {}), ...(rep === 'once' ? { on: T.key(NOW()) } : {}), createdAt: NOW() } : { title, scope: 'weekly', priority, due: due || T.key(T.addDays(T.sod(), 3)), createdAt: NOW() };
     this.save(map); return true;
   }
 };
@@ -4137,7 +4491,7 @@ const Leave = {
   analyze(userId = Auth.current, leaveTs = T.addDays(T.sod(), 1), half = false) {
     const today = T.sod(), tk = T.key(today), L = T.sod(leaveTs), lk = T.key(L), horizon = T.key(T.addDays(today, 7));
     const all = Tasks.list(userId), goal = (+DB.get('settings').dailyGoal || 8) * HOUR;
-    const daily = all.filter(t => t.scope === 'daily');
+    const daily = all.filter(t => t.scope === 'daily' && Tasks.activeOn(t, tk));
     const weekly = all.filter(t => t.scope !== 'daily' && t.due && (t.due < horizon || t.due <= lk) && (t.due >= tk || !t.done));
     const dDone = daily.filter(t => Tasks.isDone(t, tk)).length, wDone = weekly.filter(t => t.done).length;
     const open = weekly.filter(t => !t.done), before = open.filter(t => t.due <= lk);
@@ -4255,7 +4609,7 @@ const Leave = {
         .sort((x, y) => (Tasks.isDone(x, tk) - Tasks.isDone(y, tk)) || ((x.due || '') < (y.due || '') ? -1 : (x.due || '') > (y.due || '') ? 1 : 0) || (x.createdAt || 0) - (y.createdAt || 0));
       list.innerHTML = items.length ? items.map(t => {
         const done = Tasks.isDone(t, tk), pr = PRIO[t.priority] || PRIO.normal, late = !done && t.due && t.due < tk, crit = !done && t.due && t.due <= a.lk;
-        const dueTxt = t.scope === 'daily' ? 'Her gün' : t.due === tk ? 'Bugün' : late ? 'Gecikti · ' + T.fmt(new Date(t.due + 'T00:00').getTime(), { day: 'numeric', month: 'short' }) : T.fmt(new Date(t.due + 'T00:00').getTime(), { day: 'numeric', month: 'short', weekday: 'short' });
+        const dueTxt = t.scope === 'daily' ? Tasks.repeatLabel(t, tk) : t.due === tk ? 'Bugün' : late ? 'Gecikti · ' + T.fmt(new Date(t.due + 'T00:00').getTime(), { day: 'numeric', month: 'short' }) : T.fmt(new Date(t.due + 'T00:00').getTime(), { day: 'numeric', month: 'short', weekday: 'short' });
         return `<div class="lv-task ${done ? 'done' : ''} ${crit ? 'crit' : ''}" style="--p:${pr.color}">
           <button type="button" class="lv-check" data-act="taskToggle" data-id="${esc(t.id)}" aria-pressed="${done}" title="${done ? 'Tamamlanmadı olarak işaretle' : 'Tamamlandı olarak işaretle'}">${done ? ic('check', 13) : ''}</button>
           <div class="lv-tmeta"><b>${esc(t.title)}</b><small><span class="lv-prio">${pr.label}</span> · <span class="${late ? 'late' : ''}">${dueTxt}</span>${crit ? ' · <span class="late">izinden önce</span>' : ''}</small></div>
@@ -4266,7 +4620,7 @@ const Leave = {
     const hist = $('#lvHistory'), u = Auth.user();
     if (hist && u) {
       const reqs = Object.values(u.leaves || {}).filter(Boolean).sort((x, y) => y.at - x.at).slice(0, 3);
-      hist.innerHTML = reqs.length ? `<div class="lv-hist"><h5>Son taleplerin</h5>${reqs.map(r => `<div><span>${esc(T.fmt(new Date(r.date + 'T00:00').getTime(), { day: 'numeric', month: 'short', weekday: 'short' }))} · ${r.type === 'half' ? 'Yarım' : 'Tam'} gün</span><em style="--lv:${r.p >= 70 ? '#22c55e' : r.p >= 40 ? '#f59e0b' : '#ef4444'}">%${r.p}</em><small>Yöneticiye iletildi</small></div>`).join('')}</div>` : '';
+      hist.innerHTML = reqs.length ? `<div class="lv-hist"><h5>Son taleplerin</h5>${reqs.map(r => `<div><span>${esc(T.fmt(new Date(r.date + 'T00:00').getTime(), { day: 'numeric', month: 'short', weekday: 'short' }))} · ${r.type === 'half' ? 'Yarım' : 'Tam'} gün</span><em style="--lv:${r.p >= 70 ? '#22c55e' : r.p >= 40 ? '#f59e0b' : '#ef4444'}">%${r.p}</em><small>${LeaveAdmin.statusText(r)}</small></div>`).join('')}</div>` : '';
     }
   },
   send() {
@@ -4753,7 +5107,7 @@ Views.petCard = u => {
     if (Pet.cursed(u.id)) return '';
     return `<section class="card pet-card span-3 pet-empty"><div class="pet-orb idle"><span>🥚</span></div><div class="pet-info"><h3>Henüz petin yok</h3><p class="muted">Bir pet sahiplen, günlük görevlerinle onu besle.</p></div><button class="btn btn-primary" data-act="petOpen">Petini Seç</button></section>`;
   }
-  const tk = T.key(NOW()), daily = Tasks.list(u.id).filter(t => t.scope === 'daily');
+  const tk = T.key(NOW()), daily = Tasks.list(u.id).filter(t => t.scope === 'daily' && Tasks.activeOn(t, tk));
   const done = daily.filter(t => Tasks.isDone(t, tk)).length;
   if (s.lost) return `<section class="card pet-card span-3 lost"><div class="pet-orb gone"><span>🏚️</span></div>
     <div class="pet-info"><span class="pet-kicker">Boş kulübe</span><h3>${esc(s.name)} evden kaçtı</h3>
@@ -4787,16 +5141,17 @@ Views.petBadge = userId => {
 const TaskUI = { tab: 'daily' };
 Views.taskItem = (t, tk) => {
   const done = Tasks.isDone(t, tk), pr = PRIO[t.priority] || PRIO.normal, late = !done && t.due && t.due < tk;
-  const dueTxt = t.scope === 'daily' ? 'Her gün' : t.due === tk ? 'Bugün' : (late ? 'Gecikti · ' : '') + T.fmt(new Date(t.due + 'T00:00').getTime(), { day: 'numeric', month: 'short', weekday: 'short' });
+  const dueTxt = t.scope === 'daily' ? Tasks.repeatLabel(t, tk) : t.due === tk ? 'Bugün' : (late ? 'Gecikti · ' : '') + T.fmt(new Date(t.due + 'T00:00').getTime(), { day: 'numeric', month: 'short', weekday: 'short' });
   return `<div class="lv-task ${done ? 'done' : ''} ${late ? 'crit' : ''}" style="--p:${pr.color}">
     <button type="button" class="lv-check" data-act="taskToggle" data-id="${esc(t.id)}" aria-pressed="${done}" title="${done ? 'Tamamlanmadı olarak işaretle' : 'Tamamlandı olarak işaretle'}">${done ? ic('check', 13) : ''}</button>
-    <div class="lv-tmeta"><b>${esc(t.title)}</b><small><span class="lv-prio">${pr.label}</span> · <span class="${late ? 'late' : ''}">${dueTxt}</span></small></div>
+    <div class="lv-tmeta tk-editable" data-act="taskEdit" data-id="${esc(t.id)}" title="Düzenlemek için tıkla"><b>${esc(t.title)}</b><small><span class="lv-prio">${pr.label}</span> · <span class="${late ? 'late' : ''}">${dueTxt}</span></small></div>
+    <button type="button" class="lv-del" data-act="taskEdit" data-id="${esc(t.id)}" title="Görevi düzenle" aria-label="Görevi düzenle">${ic('edit', 14)}</button>
     <button type="button" class="lv-del" data-act="taskDel" data-id="${esc(t.id)}" title="Görevi sil" aria-label="Görevi sil">${ic('trash', 14)}</button>
   </div>`;
 };
 Views.taskCard = u => {
   const tk = T.key(NOW()), all = Tasks.list(u.id), tab = TaskUI.tab;
-  const daily = all.filter(t => t.scope === 'daily'), weekly = all.filter(t => t.scope !== 'daily' && (!t.done || (t.due && t.due >= T.key(T.addDays(T.sod(), -7)))));
+  const daily = all.filter(t => t.scope === 'daily' && Tasks.activeOn(t, tk)), weekly = all.filter(t => t.scope !== 'daily' && (!t.done || (t.due && t.due >= T.key(T.addDays(T.sod(), -7)))));
   const sortFn = (a, b) => (Tasks.isDone(a, tk) - Tasks.isDone(b, tk)) || ((a.due || '') < (b.due || '') ? -1 : (a.due || '') > (b.due || '') ? 1 : 0) || (a.createdAt || 0) - (b.createdAt || 0);
   const list = (tab === 'daily' ? daily : weekly).sort(sortFn);
   const dD = daily.filter(t => Tasks.isDone(t, tk)).length, wD = weekly.filter(t => t.done).length;
@@ -4808,12 +5163,14 @@ Views.taskCard = u => {
         <button type="button" class="${tab === 'weekly' ? 'on' : ''}" data-act="taskTab" data-v="weekly" role="tab" aria-selected="${tab === 'weekly'}">${ic('calendar', 15)} Haftalık <small>${wD}/${weekly.length}</small></button>
       </div></div>
     <form class="tk-add" id="tkAdd" autocomplete="off">
-      <input class="input" id="tkTitle" maxlength="120" placeholder="${tab === 'daily' ? 'Yeni günlük görev ekle (her gün tekrarlanır)…' : 'Yeni haftalık görev ekle…'}" aria-label="Görev adı">
+      <input class="input" id="tkTitle" maxlength="120" placeholder="${tab === 'daily' ? 'Yeni günlük görev ekle…' : 'Yeni haftalık görev ekle…'}" aria-label="Görev adı">
+      ${tab === 'daily' ? `<select class="input" id="tkRepeat" aria-label="Tekrar">${Object.entries(Tasks.REPEAT).map(([k, v]) => `<option value="${k}" ${(TaskUI.repeat || 'every') === k ? 'selected' : ''}>${v}</option>`).join('')}</select>` : ''}
       <select class="input" id="tkPrio" aria-label="Öncelik"><option value="normal">Normal</option><option value="high">Yüksek</option><option value="urgent">Acil</option></select>
       ${tab === 'weekly' ? `<input type="date" class="input" id="tkDue" value="${T.key(T.addDays(T.sod(), 3))}" min="${tk}" aria-label="Son tarih">` : ''}
       <button type="submit" class="btn btn-primary">${ic('plus', 16)} ${tab === 'daily' ? 'Günlük görev ekle' : 'Haftalık görev ekle'}</button>
+      ${tab === 'daily' ? `<div class="tk-days" id="tkDays" ${(TaskUI.repeat || 'every') === 'days' ? '' : 'hidden'}>${Tasks.DAYS.map((d, i) => `<button type="button" data-act="tkDay" data-d="${i + 1}" class="${(TaskUI.days || []).includes(i + 1) ? 'on' : ''}">${d}</button>`).join('')}</div>` : ''}
     </form>
-    <p class="tk-hint muted sm">${tab === 'daily' ? 'Günlük görevler her sabah yenilenir' : 'Haftalık görevlerin son tarihi vardır; İzin İste analizini etkiler'}${feed}.</p>
+    <p class="tk-hint muted sm">${tab === 'daily' ? 'Günlük görevler seçtiğin düzene göre görünür (sadece bugün, her gün, hafta içi veya seçtiğin günler) · düzenlemek için göreve tıkla' : 'Haftalık görevlerin son tarihi vardır; İzin İste analizini etkiler'}${feed}.</p>
     <div class="tk-list">${list.length ? list.map(t => Views.taskItem(t, tk)).join('') : `<div class="tk-empty">${ic(tab === 'daily' ? 'sunrise' : 'calendar', 26)}<b>${tab === 'daily' ? 'Henüz günlük görevin yok' : 'Bu hafta için görev yok'}</b><span>Yukarıdan ilk görevini ekle.</span></div>`}</div>
   </section>`;
 };
@@ -7026,7 +7383,7 @@ Views.chatMessages = (pop = new Set()) => {
     const txt = dm ? esc(m.text) : Mentions.highlight(esc(m.text));
     html += `<div class="msg ${mine ? 'mine' : 'theirs'} ${sameAsPrev ? '' : 'first'} ${sameAsNext ? '' : 'last'} ${pop.has(m.id) ? 'pop' : ''}" data-mid="${esc(m.id)}">
       ${mine ? '' : `<span class="av-slot">${sameAsNext ? '' : (u ? avatar(u, 30) : '')}</span>`}
-      <div class="bubble ${!mine && !dm && Mentions.hits(m.text, me) ? 'tagged' : ''}" style="--c:${color}"><span class="who">${esc(name)}</span>${Views.msgAtts(m)}${m.text ? `<div class="txt">${txt}</div>` : ''}<span class="meta">${T.hm(m.at)}</span></div>
+      <div class="bubble ${!mine && !dm && Mentions.hits(m.text, me) ? 'tagged' : ''}" style="--c:${color}"><span class="who">${esc(name)}</span>${Views.msgAtts(m)}${m.text ? `<div class="txt">${txt}</div>` : ''}<span class="meta">${m.editedAt ? '<i class="msg-edited">düzenlendi</i>' : ''}${T.hm(m.at)}${ChatTools.canDelete(m) ? `<button type="button" class="msg-more" data-act="msgMenu" data-id="${esc(m.id)}" title="Düzenle / sil" aria-label="Mesaj seçenekleri">⋯</button>` : ''}</span></div>
     </div>`;
   });
   return html;
@@ -7053,7 +7410,7 @@ Views.chat = () => {
        <div class="chat-members">${users.map(u => `<span title="${esc(u.name)} — ${Presence.online(u.id) ? 'çevrimiçi' : 'çevrimdışı'}">${avatarDot(u, 32, Presence.online(u.id) ? { key: 'active', color: '#22c55e' } : { key: 'offline', color: '#94a3b8' })}</span>`).join('')}</div>`;
   return `<section class="card chat chat-wrap ${Meet.view && Meet.joined ? 'meeting-live' : ''}" data-pane="${Chat.pane}">
     <aside class="chat-side">
-      <div class="cs-head"><h3>Mesajlar</h3><span class="sub">Genel sohbet ve birebir konuşmalar</span>
+      <div class="cs-head"><h3>Mesajlar</h3><span class="sub">Genel sohbet ve birebir konuşmalar</span><button type="button" class="bell-btn" data-act="chatSearch">${ic('search', 14)} Mesajlarda ara</button>
         <div class="seg cs-tabs" role="tablist"><button type="button" class="${Meet.view ? '' : 'on'}" data-act="meetTab" data-v="chat">${ic('chat', 15)} Sohbet</button><button type="button" class="${Meet.view ? 'on' : ''}" data-act="meetTab" data-v="meet">${ic('video', 15)} Toplantı <em class="meet-count" ${Meet.members().length ? '' : 'hidden'}>${Meet.members().length}</em></button></div>
         ${Notify.permission() === 'default' ? `<button type="button" class="bell-btn" data-act="notifyAsk">${ic('bell', 14)} Masaüstü bildirimlerini aç</button>` : ''}</div>
       <div class="cs-list" id="chatSide">${Views.chatSideItems()}</div>
@@ -8093,7 +8450,7 @@ const Actions = {
   restoreActivity(el) { updateActivity(el.dataset.id, { archived: false }); toast('Aktivite geri alındı', 'success'); App.renderMain(); },
 
   exportJson() {
-    const data = { app: 'squad-pulse', version: 2, exportedAt: new Date(NOW()).toISOString(), data: { settings: DB.get('settings'), users: DB.cache.users, sessions: DB.cache.sessions, days: DB.cache.days, messages: DB.cache.messages, ai_logs: DB.cache.ai_logs, clients: DB.cache.clients, events: DB.cache.events, dayprep: DB.cache.dayprep } };
+    const data = { app: 'squad-pulse', version: 2, exportedAt: new Date(NOW()).toISOString(), data: { settings: DB.get('settings'), users: DB.cache.users, sessions: DB.cache.sessions, days: DB.cache.days, messages: DB.cache.messages, ai_logs: DB.cache.ai_logs, clients: DB.cache.clients, events: DB.cache.events, dayprep: DB.cache.dayprep, jobs: DB.cache.jobs, cmeta: DB.cache.cmeta, gear: DB.cache.gear, churn: DB.cache.churn, ideas: DB.cache.ideas, pins: DB.cache.pins } };
     download(`squad-pulse-yedek-${T.key(NOW())}.json`, JSON.stringify(data, null, 2), 'application/json'); toast('Yedek indirildi', 'success');
   },
   importJson() { $('#fileImport').click(); },
@@ -8207,6 +8564,8 @@ const Actions = {
   taskToggle(el) { Tasks.toggle(el.dataset.id); Leave.refresh(); if (!Modal.el) App.render(); },
   taskDel(el) { Tasks.remove(el.dataset.id); Leave.refresh(); if (!Modal.el) App.render(); },
   taskTab(el) { TaskUI.tab = el.dataset.v === 'weekly' ? 'weekly' : 'daily'; App.render(); },
+  taskEdit(el) { Tasks.edit(el.dataset.id); },
+  tkDay(el) { el.classList.toggle('on'); TaskUI.days = [...document.querySelectorAll('#tkDays .on')].map(b => +b.dataset.d); },
   breakTake(el) { BreakGuard.dismiss(); Actions.takeBreak(el); },
   breakSnooze() { BreakGuard.snooze(); },
   twToggle() { Widget.toggle(); },
@@ -8259,7 +8618,7 @@ const Actions = {
   },
   async resetAll() {
     if (!await confirmBox('Fabrika ayarlarına dön', 'Tüm üyeler, ayarlar ve kayıtlar veritabanından silinip başlangıç kurulumu yeniden oluşturulacak.', 'Sıfırla')) return;
-    await DB.multi({ settings: null, users: null, sessions: null, days: null, presence: null, messages: null, ai_logs: null, clients: null, games: null, events: null, dayprep: null, ideas: null, ideaimgs: null, pins: null, meta: null });
+    await DB.multi({ settings: null, users: null, sessions: null, days: null, presence: null, messages: null, ai_logs: null, clients: null, games: null, events: null, dayprep: null, ideas: null, ideaimgs: null, pins: null, jobs: null, approvals: null, cmeta: null, gear: null, churn: null, meta: null });
     await Seed.run(); Auth.logout(); Theme.apply(Theme.defaults); App.go('dashboard'); toast('Uygulama sıfırlandı');
   },
 
@@ -9202,11 +9561,941 @@ Object.assign(Actions, {
   pinOpen(el) { PinBoard.open(el.dataset.id); }
 });
 
+/* =========================================================
+   İŞLER — ajansın ortak iş takibi
+   jobs/{id}    = { title, clientId, type, stage, priority, assignees{uid:true}, due, publishAt, platform,
+                    notes, links[], revisions, timer{uid:startTs}, log{lid:{u,ms,at}}, comments{cid:{u,text,at}},
+                    approval{token,status,note,at,handledAt}, by, at, doneAt }
+   cmeta/{clientId} = { contact, phone, email, fee, payDay, notes, paid{'YYYY-MM':true} }   (müşteri kartı)
+   approvals/{token} = müşterinin giriş yapmadan gördüğü onay sayfasının verisi
+   ========================================================= */
+const JOB_STAGES = [
+  { id: 'brief', label: 'Brief', color: '#94a3b8' },
+  { id: 'shoot', label: 'Çekim', color: '#f59e0b' },
+  { id: 'edit', label: 'Kurgu / Tasarım', color: '#8b5cf6' },
+  { id: 'review', label: 'İç onay', color: '#0ea5e9' },
+  { id: 'client', label: 'Müşteri onayı', color: '#ec4899' },
+  { id: 'live', label: 'Yayında', color: '#10b981' }
+];
+const JOB_TYPES = [
+  { id: 'reel', label: 'Reels / Video', emoji: '🎬' }, { id: 'post', label: 'Gönderi', emoji: '🖼️' },
+  { id: 'carousel', label: 'Carousel', emoji: '🗂️' }, { id: 'story', label: 'Story', emoji: '📱' },
+  { id: 'shoot', label: 'Çekim günü', emoji: '📸' }, { id: 'design', label: 'Tasarım', emoji: '🎨' },
+  { id: 'ads', label: 'Reklam', emoji: '📣' }, { id: 'other', label: 'Diğer', emoji: '📌' }
+];
+const jobUrlOk = u => /^https?:\/\/[^\s"'<>]+$/i.test(String(u || ''));
+const hm2 = ms => { ms = Math.max(0, ms || 0); const h = Math.floor(ms / HOUR), m = Math.round((ms % HOUR) / MIN); return h ? `${h} sa ${m} dk` : `${m} dk`; };
+const hmsClock = ms => { ms = Math.max(0, ms || 0); const s = Math.floor(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; return (h ? h + ':' : '') + String(m).padStart(2, '0') + ':' + String(x).padStart(2, '0'); };
+
+const Jobs = {
+  ui: { tab: 'board', client: 'all', mine: false, q: '', month: null },
+  _seen: null,
+
+  /* ---------- veri ---------- */
+  list() { return DB.get('jobs').filter(j => j && j.title); },
+  stage(id) { return JOB_STAGES.find(s => s.id === id) || JOB_STAGES[0]; },
+  type(id) { return JOB_TYPES.find(t => t.id === id) || JOB_TYPES[JOB_TYPES.length - 1]; },
+  client(id) { return id ? DB.find('clients', id) : null; },
+  clientName(id) { const c = this.client(id); if (c) return c.name; if (!id) return 'İç iş'; const ch = DB.get('churn').find(x => x && x.clientId === id); return ch ? ch.name + ' (ayrıldı)' : 'Silinmiş müşteri'; },
+  clientColor(id) { const c = this.client(id); return (c && c.color) || '#64748b'; },
+  meta(cid) { return DB.find('cmeta', cid) || {}; },
+  assignees(j) { return Object.keys(j.assignees || {}).filter(u => j.assignees[u] && DB.find('users', u)); },
+  isMine(j) { return !!(j.assignees && j.assignees[Auth.current]); },
+  canDelete(j) { return j.by === Auth.current || Auth.isAdmin(); },
+  logs(j) { return Object.values(j.log || {}).filter(l => l && l.ms > 0); },
+  spent(j, from = 0, to = Infinity) {
+    let t = this.logs(j).filter(l => l.at >= from && l.at < to).reduce((a, l) => a + l.ms, 0);
+    const now = NOW(); Object.values(j.timer || {}).forEach(st => { if (st && now >= from && st < to) t += now - Math.max(st, from); });
+    return t;
+  },
+  monthRange(d = NOW()) { const x = new Date(d); const a = new Date(x.getFullYear(), x.getMonth(), 1).getTime(), b = new Date(x.getFullYear(), x.getMonth() + 1, 1).getTime(); return { from: a, to: b, key: `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}` }; },
+  filtered() {
+    const u = this.ui, q = Mentions.norm(u.q.trim());
+    return this.list().filter(j => (u.client === 'all' || (u.client === 'none' ? !j.clientId : j.clientId === u.client))
+      && (!u.mine || this.isMine(j))
+      && (!q || Mentions.norm(j.title + ' ' + this.clientName(j.clientId) + ' ' + (j.notes || '')).includes(q)));
+  },
+  myRunning() { const me = Auth.current; return this.list().find(j => j.timer && j.timer[me]); },
+
+  /* ---------- işlemler ---------- */
+  save(j) {
+    if (j.id && DB.find('jobs', j.id)) { const { id, ...patch } = j; DB.update('jobs', id, patch); return id; }
+    const id = uid('job'); DB.insert('jobs', { ...j, id, by: Auth.current, at: NOW() }); return id;
+  },
+  move(id, d) {
+    const j = DB.find('jobs', id); if (!j) return;
+    const i = JOB_STAGES.findIndex(s => s.id === (j.stage || 'brief')), n = clamp(i + d, 0, JOB_STAGES.length - 1);
+    if (n === i) return;
+    const st = JOB_STAGES[n].id;
+    DB.update('jobs', id, { stage: st, doneAt: st === 'live' ? NOW() : null });
+    this.activity(id, `aşamayı "${JOB_STAGES[n].label}" yaptı`);
+    App.render();
+  },
+  toggleTimer(id) {
+    const j = DB.find('jobs', id), me = Auth.current; if (!j || !me) return;
+    if (j.timer && j.timer[me]) return this.stopTimer(id);
+    const other = this.myRunning(); if (other && other.id !== id) this.stopTimer(other.id, true);
+    DB.backend.set(`jobs/${id}/timer/${me}`, NOW());
+    DB.cache.jobs[id] = { ...DB.cache.jobs[id], timer: { ...(j.timer || {}), [me]: NOW() } }; delete DB._arr.jobs;
+    toast(`⏱️ Süre başladı: ${esc(j.title)}`); App.render();
+  },
+  stopTimer(id, silent) {
+    const j = DB.find('jobs', id), me = Auth.current; if (!j || !j.timer || !j.timer[me]) return;
+    const ms = NOW() - j.timer[me], lid = uid('tl');
+    const timer = { ...j.timer }; delete timer[me];
+    const log = { ...(j.log || {}) }; if (ms >= 30000) log[lid] = { u: me, ms, at: NOW() };
+    DB.backend.set(`jobs/${id}/timer/${me}`, null);
+    if (ms >= 30000) DB.backend.set(`jobs/${id}/log/${lid}`, log[lid]);
+    DB.cache.jobs[id] = { ...DB.cache.jobs[id], timer, log }; delete DB._arr.jobs;
+    if (!silent) toast(ms >= 30000 ? `${hm2(ms)} "${esc(j.title)}" işine yazıldı` : 'Süre 30 saniyeden kısa olduğu için kaydedilmedi');
+    App.render();
+  },
+  addManual(id, mins) {
+    const j = DB.find('jobs', id), me = Auth.current, ms = Math.round(+mins * MIN); if (!j || !me || !(ms > 0)) return;
+    const lid = uid('tl'); DB.backend.set(`jobs/${id}/log/${lid}`, { u: me, ms, at: NOW(), manual: true });
+    DB.cache.jobs[id] = { ...DB.cache.jobs[id], log: { ...(j.log || {}), [lid]: { u: me, ms, at: NOW(), manual: true } } }; delete DB._arr.jobs;
+  },
+  comment(id, text) {
+    text = String(text || '').trim().slice(0, 1000); if (!text) return;
+    const cid = uid('c'), c = { u: Auth.current, text, at: NOW() };
+    DB.backend.set(`jobs/${id}/comments/${cid}`, c);
+    const j = DB.find('jobs', id); DB.cache.jobs[id] = { ...DB.cache.jobs[id], comments: { ...((j && j.comments) || {}), [cid]: c } }; delete DB._arr.jobs;
+  },
+  activity(id, text) { this.comment(id, '· ' + text); },
+  remove(id) { DB.remove('jobs', id); App.render(); toast('İş silindi'); },
+
+  /* ---------- müşteri onayı (WhatsApp'tan belge olarak gönderilen işler) ---------- */
+  apLine(j) {
+    const a = j.approval; if (!a) return '';
+    const by = a.decidedBy ? DB.find('users', a.decidedBy) : null;
+    if (a.status === 'pending' && a.sentAt) { const d = Math.floor((NOW() - a.sentAt) / DAY); return `📤 ${esc(T.fmt(a.sentAt, { day: 'numeric', month: 'short' }))} ${esc(T.hm(a.sentAt))}’de ${a.via === 'link' ? 'link ile' : 'WhatsApp’tan'} gönderildi · <b>${d ? d + ' gündür' : 'bugünden beri'} cevap bekleniyor</b>`; }
+    if ((a.status === 'approved' || a.status === 'changes') && a.decidedAt) return `${a.status === 'approved' ? '✅' : '✏️'} ${esc(T.fmt(a.decidedAt, { day: 'numeric', month: 'short' }))} ${esc(T.hm(a.decidedAt))}${by ? ' · ' + esc(firstName(by.name)) + ' işledi' : ' · müşteri linkten cevapladı'}`;
+    return '';
+  },
+  waSent(id) {
+    const j = DB.find('jobs', id); if (!j) return;
+    DB.update('jobs', id, { stage: 'client', approval: { ...(j.approval || {}), status: 'pending', via: 'wa', sentAt: NOW(), note: null, who: null, decidedAt: null, decidedBy: null } });
+    this.activity(id, 'müşteriye WhatsApp’tan gönderdi');
+    toast('📤 Gönderildi olarak işaretlendi · cevap gelince buradan işle', 'success'); App.render();
+  },
+  /** Müşterinin WhatsApp'tan gelen cevabını işe işler */
+  record(id, decision, reopen) {
+    const j = DB.find('jobs', id); if (!j) return;
+    const ok = decision === 'approved';
+    Modal.open({
+      title: ok ? '✅ Müşteri onayladı' : '✏️ Müşteri değişiklik istedi',
+      body: `<p class="muted" style="margin-bottom:8px"><b>${esc(j.title)}</b>${j.clientId ? ' · ' + esc(this.clientName(j.clientId)) : ''}</p>
+        <label class="lbl">${ok ? 'Müşterinin mesajı <span>isteğe bağlı</span>' : 'Ne istedi? <span>WhatsApp mesajını buraya yapıştırabilirsin</span>'}</label>
+        <textarea class="input" id="rcNote" rows="4" maxlength="1000" placeholder="${ok ? 'örn. Çok güzel olmuş, yayınlayabilirsiniz 👍' : 'örn. Logo biraz daha büyük olsun, müzik daha enerjik olsun'}"></textarea>
+        <label class="lbl">Kim cevapladı? <span>isteğe bağlı</span></label><input class="input" id="rcWho" maxlength="60" value="${esc((this.meta(j.clientId) || {}).contact || '')}" placeholder="örn. Ahmet Bey">
+        ${ok ? '' : '<p class="help">İş otomatik olarak “Kurgu / Tasarım” sütununa döner ve revizyon sayısı 1 artar.</p>'}
+        <p class="help" id="rcErr" style="color:#ef4444;display:none"></p>`,
+      onMount: w => setTimeout(() => $('#rcNote', w).focus(), 60),
+      actions: [{ label: 'Vazgeç', onClick: () => { if (reopen) setTimeout(() => this.open(id), 340); } }, { label: 'Kaydet', cls: ok ? 'btn-primary' : 'btn-danger', onClick: w => {
+        const note = $('#rcNote', w).value.trim().slice(0, 1000), who = $('#rcWho', w).value.trim().slice(0, 60);
+        if (!ok && !note) { const e = $('#rcErr', w); e.textContent = 'Müşterinin ne istediğini yaz (sonra kaybolmasın).'; e.style.display = 'block'; return false; }
+        const cur = DB.find('jobs', id) || j, now = NOW();
+        const patch = { approval: { ...(cur.approval || {}), status: ok ? 'approved' : 'changes', note: note || null, who: who || null, via: (cur.approval && cur.approval.via) || 'wa', decidedAt: now, decidedBy: Auth.current, handledAt: now } };
+        if (!ok) { patch.revisions = (+cur.revisions || 0) + 1; patch.stage = 'edit'; }
+        else if (cur.stage !== 'live') patch.stage = 'client';
+        DB.update('jobs', id, patch);
+        this.comment(id, ok ? `✅ Müşteri onayladı${who ? ' (' + who + ')' : ''}${note ? ': ' + note : ''}` : `✏️ Müşteri değişiklik istedi${who ? ' (' + who + ')' : ''}: ${note}`);
+        toast(ok ? 'Onay kaydedildi · yayınlayınca “Yayında”ya taşı' : 'Değişiklik kaydedildi · iş Kurgu’ya döndü (revizyon +1)', 'success');
+        App.render(); if (reopen) setTimeout(() => this.open(id), 340);
+      } }]
+    });
+  },
+
+  /* ---------- müşteri onay linki ---------- */
+  approvalUrl(token) { return location.origin + location.pathname + '?onay=' + encodeURIComponent(token); },
+  makeApproval(id) {
+    const j = DB.find('jobs', id); if (!j) return;
+    if (Net.mode !== 'firebase') { toast('Müşteri onay linki için uygulamanın canlı (Firebase) modda açık olması gerekir', 'error'); return; }
+    const token = (crypto.getRandomValues ? [...crypto.getRandomValues(new Uint8Array(16))].map(b => b.toString(16).padStart(2, '0')).join('') : uid('a') + uid('b')).slice(0, 32);
+    const page = { title: j.title, client: this.clientName(j.clientId), type: this.type(j.type).label, publishAt: j.publishAt || null,
+      notes: String(j.notes || '').slice(0, 2000), links: (j.links || []).filter(jobUrlOk).slice(0, 10), team: DB.get('settings').teamName || 'Ajans', at: NOW() };
+    DB.backend.set(`approvals/${token}`, page);
+    DB.update('jobs', id, { approval: { token, status: 'pending', at: NOW(), sentAt: NOW(), via: 'link' }, stage: 'client' });
+    this.activity(id, 'müşteri onay linki oluşturdu');
+    this.copy(this.approvalUrl(token), 'Onay linki kopyalandı · müşteriye gönder');
+    App.render();
+  },
+  copy(t, msg) { (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast(msg || 'Kopyalandı', 'success'), () => { Modal.open({ title: 'Link', body: `<input class="input" value="${esc(t)}" readonly onfocus="this.select()">`, actions: [{ label: 'Kapat', cls: 'btn-primary' }] }); }); },
+  /** Müşterinin cevabını işe uygular (yalnızca bir istemci uygular: transaction) */
+  async applyApprovals() {
+    const ap = DB.cache.approvals || {};
+    for (const j of this.list()) {
+      const a = j.approval, r = a && a.token && ap[a.token] && ap[a.token].response;
+      if (!r || !r.at || (a.handledAt && a.handledAt >= r.at)) continue;
+      const claim = await DB.backend.transaction(`jobs/${j.id}/approval/handledAt`, cur => (cur && cur >= r.at) ? undefined : r.at);
+      if (!claim.committed) continue;
+      const ok = r.decision === 'approved';
+      const patch = { approval: { ...a, status: ok ? 'approved' : 'changes', note: String(r.note || '').slice(0, 1000), who: String(r.name || '').slice(0, 60), handledAt: r.at, decidedAt: r.at, decidedBy: null } };
+      if (!ok) { patch.revisions = (+j.revisions || 0) + 1; patch.stage = 'edit'; }
+      DB.update('jobs', j.id, patch);
+      this.comment(j.id, ok ? `✅ Müşteri onayladı${r.name ? ' (' + r.name + ')' : ''}${r.note ? ': ' + r.note : ''}` : `✏️ Müşteri değişiklik istedi${r.name ? ' (' + r.name + ')' : ''}: ${r.note || '—'}`);
+    }
+  },
+  /** Uzak değişiklik: bana yeni iş atandı mı, müşteri cevap verdi mi */
+  onRemote() {
+    const me = Auth.current; if (!me) return;
+    const now = {}; this.list().forEach(j => { now[j.id] = { mine: this.isMine(j), ap: j.approval && j.approval.status }; });
+    if (this._seen) {
+      this.list().forEach(j => {
+        const was = this._seen[j.id];
+        if (now[j.id].mine && (!was || !was.mine) && j.by !== me) toast(`📌 Sana yeni iş atandı: <b>${esc(j.title)}</b>`, 'success');
+        if (was && was.ap !== now[j.id].ap && (this.isMine(j) || j.by === me)) {
+          if (now[j.id].ap === 'approved') toast(`✅ Müşteri onayladı: <b>${esc(j.title)}</b>`, 'success');
+          if (now[j.id].ap === 'changes') toast(`✏️ Müşteri değişiklik istedi: <b>${esc(j.title)}</b>`);
+        }
+      });
+    }
+    this._seen = now;
+    this.applyApprovals();
+  },
+
+  /* ---------- iş formu ---------- */
+  open(id, preset = {}) {
+    const j = id ? DB.find('jobs', id) : { stage: 'brief', priority: 'normal', type: 'reel', assignees: { [Auth.current]: true }, clientId: this.ui.client !== 'all' && this.ui.client !== 'none' ? this.ui.client : '', ...preset };
+    if (!j) return;
+    const isNew = !id, users = DB.get('users'), clients = Clients.list().sort((a, b) => a.name.localeCompare(b.name, 'tr'));
+    const me = Auth.current, running = j.timer && j.timer[me];
+    const ap = j.approval, apUrl = ap && ap.token ? this.approvalUrl(ap.token) : '';
+    const per = {}; this.logs(j).forEach(l => { per[l.u] = (per[l.u] || 0) + l.ms; });
+    const comments = Object.entries(j.comments || {}).map(([cid, c]) => ({ ...c, cid })).filter(c => c && c.text).sort((a, b) => a.at - b.at);
+    Modal.open({
+      title: isNew ? '➕ Yeni iş' : '📋 ' + esc(j.title),
+      body: `<div class="form jb-form">
+        <label class="lbl">İş adı</label><input class="input" id="jbTitle" maxlength="120" value="${esc(j.title || '')}" placeholder="örn. Ekim kampanyası reels #2">
+        <div class="jb-2"><div><label class="lbl">Müşteri</label><select class="input" id="jbClient"><option value="">— İç iş (müşterisiz)</option>${clients.map(c => `<option value="${esc(c.id)}" ${j.clientId === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select></div>
+          <div><label class="lbl">Tür</label><select class="input" id="jbType">${JOB_TYPES.map(t => `<option value="${t.id}" ${j.type === t.id ? 'selected' : ''}>${t.emoji} ${t.label}</option>`).join('')}</select></div></div>
+        <div class="jb-2"><div><label class="lbl">Aşama</label><select class="input" id="jbStage">${JOB_STAGES.map(s => `<option value="${s.id}" ${(j.stage || 'brief') === s.id ? 'selected' : ''}>${s.label}</option>`).join('')}</select></div>
+          <div><label class="lbl">Öncelik</label><select class="input" id="jbPrio">${Object.entries(PRIO).reverse().map(([k, v]) => `<option value="${k}" ${(j.priority || 'normal') === k ? 'selected' : ''}>${v.label}</option>`).join('')}</select></div></div>
+        <div class="jb-2"><div><label class="lbl">Teslim tarihi <span>ekip için</span></label><input type="date" class="input" id="jbDue" value="${esc(j.due || '')}"></div>
+          <div><label class="lbl">Yayın tarihi <span>takvimde görünür</span></label><input type="date" class="input" id="jbPub" value="${esc(j.publishAt || '')}"></div></div>
+        <label class="lbl">Platform</label><select class="input" id="jbPlat"><option value="">—</option>${PLATFORMS.map(p => `<option value="${p.id}" ${j.platform === p.id ? 'selected' : ''}>${p.label}</option>`).join('')}</select>
+        ${Views.jobGearSec(j)}
+        <label class="lbl">Sorumlular <span>tıklayarak seç</span></label>
+        <div class="jb-people" id="jbPeople">${users.map(u => `<button type="button" class="${j.assignees && j.assignees[u.id] ? 'on' : ''}" data-u="${esc(u.id)}" title="${esc(u.name)}">${avatar(u, 26)}<span>${esc(firstName(u.name))}</span></button>`).join('')}</div>
+        <label class="lbl">Notlar / brief</label><textarea class="input" id="jbNotes" rows="3" maxlength="3000" placeholder="Müşterinin isteği, mesaj, referanslar…">${esc(j.notes || '')}</textarea>
+        <label class="lbl">Bağlantılar <span>her satıra bir link (Drive, WeTransfer, taslak…)</span></label><textarea class="input" id="jbLinks" rows="2" placeholder="https://…">${esc((j.links || []).join('\n'))}</textarea>
+        ${isNew ? '' : `
+        <div class="jb-sec"><h5>${ic('clock', 15)} Süre <span>${hm2(this.spent(j))} toplam</span></h5>
+          <div class="jb-time">${Object.entries(per).map(([u, ms]) => { const usr = DB.find('users', u); return `<span>${usr ? avatar(usr, 20) : ''} ${esc(usr ? firstName(usr.name) : 'Üye')} · <b>${hm2(ms)}</b></span>`; }).join('') || '<span class="muted">Henüz süre girilmedi</span>'}</div>
+          <div class="jb-row"><button type="button" class="btn ${running ? 'btn-danger' : 'btn-soft'} btn-sm" id="jbTimer">${ic(running ? 'pause' : 'play', 14)} ${running ? 'Süreyi durdur' : 'Bu işte süre başlat'}</button>
+            <input type="number" class="input jb-min" id="jbMin" min="1" max="600" placeholder="dk"><button type="button" class="btn btn-ghost btn-sm" id="jbAddMin">${ic('plus', 13)} Elle ekle</button></div></div>
+        <div class="jb-sec"><h5>🤝 Müşteri onayı ${ap && ap.status ? `<span class="jb-ap ${ap.status}">${ap.status === 'approved' ? 'Onaylandı' : ap.status === 'changes' ? 'Değişiklik istendi' : 'Cevap bekleniyor'}</span>` : ''} <span>revizyon: <b>${+j.revisions || 0}</b></span></h5>
+          ${Jobs.apLine(j) ? `<p class="jb-apline">${Jobs.apLine(j)}</p>` : ''}
+          ${ap && ap.note ? `<p class="jb-apnote">“${esc(ap.note)}”${ap.who ? ` — ${esc(ap.who)}` : ''}</p>` : ''}
+          <div class="jb-row jb-wa-row">
+            <button type="button" class="btn ${ap && ap.status === 'pending' ? 'btn-ghost' : 'btn-soft'} btn-sm" id="jbWaSent">📤 ${ap && ap.sentAt ? 'Tekrar gönderdim' : 'WhatsApp’tan gönderdim'}</button>
+            <button type="button" class="btn btn-primary btn-sm" id="jbWaOk">✅ Müşteri onayladı</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="jbWaNo">✏️ Değişiklik istedi</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="jbRevPlus">${ic('plus', 13)} Revizyon</button></div>
+          <p class="help">Dosyayı müşteriye WhatsApp’tan gönderince “Gönderdim”e bas; cevap gelince onayı ya da değişikliği buraya işle. Müşterinin mesajını yapıştırırsan sonra “ne istemişti” diye mesajlarda aramazsın.</p>
+          <details class="jb-linkopt"><summary>İsteğe bağlı: link ile onay</summary>
+          <div class="jb-row">${apUrl ? `<button type="button" class="btn btn-soft btn-sm" id="jbCopy">${ic('clip', 13)} Onay linkini kopyala</button>` : ''}
+            <button type="button" class="btn btn-ghost btn-sm" id="jbApprove">${ic('send', 13)} ${apUrl ? 'Yeni onay linki oluştur' : 'Müşteri onay linki oluştur'}</button></div>
+          <p class="help">Link giriş gerektirmez: müşteri açıklamayı ve bağlantıları görür, "Onaylıyorum" ya da "Değişiklik istiyorum" der. Cevap buraya ve işin yorumlarına düşer.</p></details></div>
+        <div class="jb-sec"><h5>${ic('chat', 15)} Yorumlar ve geçmiş</h5>
+          <div class="jb-comments">${comments.map(c => { const usr = DB.find('users', c.u); return `<div class="${c.text.startsWith('· ') ? 'sys' : ''}"><b>${esc(usr ? firstName(usr.name) : 'Sistem')}</b> ${esc(c.text.replace(/^· /, ''))} <time>${T.ago(c.at)}</time></div>`; }).join('') || '<span class="muted">Henüz yorum yok</span>'}</div>
+          <div class="jb-row"><input class="input" id="jbComment" maxlength="1000" placeholder="Yorum yaz…"><button type="button" class="btn btn-soft btn-sm" id="jbSendC">${ic('send', 13)}</button></div></div>`}
+        <p class="help" id="jbErr" style="color:#ef4444;display:none"></p></div>`,
+      onMount: w => {
+        $$('#jbPeople button', w).forEach(b => b.onclick = () => b.classList.toggle('on'));
+        jobGearBind(w, isNew ? null : j);
+        const t = $('#jbTimer', w); if (t) t.onclick = () => { Modal.close(); this.toggleTimer(id); };
+        const am = $('#jbAddMin', w); if (am) am.onclick = () => { const v = +$('#jbMin', w).value; if (!(v > 0 && v <= 600)) return toast('1–600 dakika arası bir değer yaz', 'error'); this.addManual(id, v); toast(`${v} dk eklendi`, 'success'); Modal.close(); this.open(id); };
+        const cp = $('#jbCopy', w); if (cp) cp.onclick = () => this.copy(apUrl, 'Onay linki kopyalandı');
+        const apb = $('#jbApprove', w); if (apb) apb.onclick = () => { Modal.close(); this.makeApproval(id); };
+        const ws = $('#jbWaSent', w); if (ws) ws.onclick = () => { Modal.close(); this.waSent(id); setTimeout(() => this.open(id), 340); };
+        const wo = $('#jbWaOk', w); if (wo) wo.onclick = () => { Modal.close(); setTimeout(() => this.record(id, 'approved', true), 340); };
+        const wn = $('#jbWaNo', w); if (wn) wn.onclick = () => { Modal.close(); setTimeout(() => this.record(id, 'changes', true), 340); };
+        const rp = $('#jbRevPlus', w); if (rp) rp.onclick = () => { DB.update('jobs', id, { revisions: (+j.revisions || 0) + 1 }); this.activity(id, 'revizyon ekledi'); Modal.close(); this.open(id); };
+        const sc = $('#jbSendC', w), ci = $('#jbComment', w);
+        const send = () => { if (!ci.value.trim()) return; this.comment(id, ci.value); Modal.close(); this.open(id); };
+        if (sc) { sc.onclick = send; ci.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); send(); } }; }
+        if (isNew) setTimeout(() => $('#jbTitle', w).focus(), 60);
+      },
+      actions: [
+        ...(!isNew && this.canDelete(j) ? [{ label: 'Sil', cls: 'btn-danger', onClick: () => { setTimeout(async () => { if (await confirmBox('İşi sil', `<b>${esc(j.title)}</b> ve tüm süre/yorum kayıtları silinecek.`, 'Sil')) this.remove(id); }, 320); } }] : []),
+        { label: 'Vazgeç' },
+        { label: isNew ? 'İşi ekle' : 'Kaydet', cls: 'btn-primary', onClick: w => {
+          const err = m => { const e = $('#jbErr', w); e.textContent = m; e.style.display = 'block'; return false; };
+          const title = $('#jbTitle', w).value.trim().slice(0, 120); if (title.length < 2) return err('İş adı yaz.');
+          const links = $('#jbLinks', w).value.split(/\s+/).map(x => x.trim()).filter(Boolean);
+          if (links.some(l => !jobUrlOk(l))) return err('Bağlantılar http:// veya https:// ile başlamalı.');
+          const assignees = {}; $$('#jbPeople .on', w).forEach(b => { assignees[b.dataset.u] = true; });
+          const stage = $('#jbStage', w).value;
+          const data = { title, clientId: $('#jbClient', w).value || null, type: $('#jbType', w).value, stage, priority: $('#jbPrio', w).value,
+            due: $('#jbDue', w).value || null, publishAt: $('#jbPub', w).value || null, platform: $('#jbPlat', w).value || null,
+            notes: $('#jbNotes', w).value.trim().slice(0, 3000), links: links.slice(0, 20), assignees: Object.keys(assignees).length ? assignees : null, ...jobGearRead(w, j) };
+          if (!isNew && stage !== j.stage) { data.doneAt = stage === 'live' ? NOW() : null; }
+          if (isNew) data.revisions = 0;
+          const nid = this.save(isNew ? data : { id, ...data });
+          if (!isNew && stage !== j.stage) this.activity(nid, `aşamayı "${this.stage(stage).label}" yaptı`);
+          if (isNew) this.activity(nid, 'işi oluşturdu');
+          toast(isNew ? 'İş eklendi' : 'İş güncellendi', 'success'); App.render();
+        } }
+      ]
+    });
+  },
+
+  /* ---------- müşteri kartı ---------- */
+  openClient(cid) {
+    const c = this.client(cid); if (!c) return;
+    const m = this.meta(cid), mk = this.monthRange().key, paid = !!(m.paid && m.paid[mk]);
+    Modal.open({
+      title: '🏷️ ' + esc(c.name) + ' · müşteri kartı',
+      body: `<div class="form">
+        <div class="jb-2"><div><label class="lbl">Yetkili kişi</label><input class="input" id="cmContact" maxlength="80" value="${esc(m.contact || '')}"></div>
+          <div><label class="lbl">Telefon</label><input class="input" id="cmPhone" maxlength="30" value="${esc(m.phone || '')}" inputmode="tel"></div></div>
+        <label class="lbl">E-posta</label><input class="input" id="cmEmail" type="email" maxlength="120" value="${esc(m.email || '')}">
+        <div class="jb-2"><div><label class="lbl">Aylık ücret (₺)</label><input class="input" id="cmFee" type="number" min="0" step="100" value="${esc(m.fee || '')}"></div>
+          <div><label class="lbl">Ödeme günü <span>ayın kaçı</span></label><input class="input" id="cmPay" type="number" min="1" max="31" value="${esc(m.payDay || '')}"></div></div>
+        <label class="switch-row"><input type="checkbox" id="cmPaid" ${paid ? 'checked' : ''}> Bu ayın (${esc(mk)}) ödemesi alındı</label>
+        <label class="lbl">Notlar <span>sözleşme, fatura bilgisi, tercihler</span></label><textarea class="input" id="cmNotes" rows="3" maxlength="2000">${esc(m.notes || '')}</textarea></div>`,
+      actions: [{ label: 'Vazgeç' }, { label: 'Kaydet', cls: 'btn-primary', onClick: w => {
+        const fee = Math.max(0, +$('#cmFee', w).value || 0), payDay = clamp(+$('#cmPay', w).value || 0, 0, 31);
+        const paidMap = { ...(m.paid || {}) }; if ($('#cmPaid', w).checked) paidMap[mk] = true; else delete paidMap[mk];
+        const doc = { id: cid, contact: $('#cmContact', w).value.trim(), phone: $('#cmPhone', w).value.trim(), email: $('#cmEmail', w).value.trim(),
+          fee: fee || null, payDay: payDay || null, notes: $('#cmNotes', w).value.trim(), paid: Object.keys(paidMap).length ? paidMap : null, at: NOW() };
+        DB.insert('cmeta', doc); toast('Müşteri kartı kaydedildi', 'success'); App.render();
+      } }]
+    });
+  },
+  togglePaid(cid) {
+    const m = this.meta(cid), mk = this.monthRange().key, paid = { ...(m.paid || {}) };
+    if (paid[mk]) delete paid[mk]; else paid[mk] = true;
+    DB.insert('cmeta', { ...m, id: cid, paid: Object.keys(paid).length ? paid : null, at: NOW() }); App.render();
+  },
+  /** Onaylı izinler: { 'YYYY-MM-DD': [user, …] } */
+  leavesByDay() {
+    const out = {};
+    DB.get('users').forEach(u => Object.values(u.leaves || {}).forEach(l => { if (l && l.status === 'approved' && l.date) (out[l.date] = out[l.date] || []).push({ u, half: l.type === 'half' }); }));
+    return out;
+  }
+};
+
+/* ---------- görünümler ---------- */
+Views.jobCard = j => {
+  const st = Jobs.stage(j.stage), ty = Jobs.type(j.type), pr = PRIO[j.priority] || PRIO.normal, tk = T.key(NOW());
+  const late = j.due && j.due < tk && j.stage !== 'live', me = Auth.current, run = j.timer && j.timer[me], othersRun = Object.keys(j.timer || {}).filter(u => u !== me);
+  const ppl = Jobs.assignees(j).map(u => avatar(DB.find('users', u), 22)).join('');
+  const ap = j.approval && j.approval.status;
+  return `<article class="jb-card ${late ? 'late' : ''} ${run ? 'running' : ''}" style="--cc:${Jobs.clientColor(j.clientId)};--pr:${pr.color}">
+    <button type="button" class="jb-open" data-act="jobOpen" data-id="${esc(j.id)}">
+      <span class="jb-client">${esc(Jobs.clientName(j.clientId))}</span>
+      <b>${ty.emoji} ${esc(j.title)}</b>
+      <span class="jb-meta">${j.priority !== 'normal' ? `<i class="jb-pr">${pr.label}</i>` : ''}${j.due ? `<span class="${late ? 'late' : ''}">${late ? 'Gecikti · ' : 'Teslim '}${T.fmt(new Date(j.due + 'T00:00').getTime(), { day: 'numeric', month: 'short' })}</span>` : ''}${j.publishAt ? `<span>📅 ${T.fmt(new Date(j.publishAt + 'T00:00').getTime(), { day: 'numeric', month: 'short' })}</span>` : ''}${+j.revisions ? `<span>↺ ${+j.revisions}</span>` : ''}${ap && j.stage !== 'client' ? `<span class="jb-ap ${ap}">${ap === 'approved' ? 'Onaylı' : ap === 'changes' ? 'Revize istendi' : 'Onayda'}</span>` : ''}</span>
+    </button>
+    ${j.stage === 'client' ? (() => { const a = j.approval || {}, d = a.sentAt ? Math.floor((NOW() - a.sentAt) / DAY) : null;
+      if (a.status === 'approved') return `<div class="jb-wa ok">✅ Müşteri onayladı · yayınlayınca → ile taşı</div>`;
+      return `<div class="jb-wa ${d >= 3 ? 'late' : ''}">${a.status === 'pending' && a.sentAt ? `<span>⏳ ${d ? d + ' gündür' : 'bugün gönderildi,'} cevap bekleniyor</span>` : `<button type="button" data-act="jobWaSent" data-id="${esc(j.id)}">📤 Gönderdim</button>`}
+        <button type="button" class="ok" data-act="jobWaOk" data-id="${esc(j.id)}" title="Müşteri onayladı">✅ Onayladı</button><button type="button" class="no" data-act="jobWaNo" data-id="${esc(j.id)}" title="Müşteri değişiklik istedi">✏️ Değişiklik</button></div>`; })() : ''}
+    <div class="jb-foot"><span class="jb-ppl">${ppl}</span>${(() => { const it = Gear.items(j); if (!it.length) return ''; const pk = it.filter(x => x.packed).length; return `<button type="button" class="jb-gear ${pk === it.length ? 'ok' : ''}" data-act="jobPack" data-id="${esc(j.id)}" title="Ekipman listesi · çantada işaretle">🎒 ${pk}/${it.length}</button>`; })()}
+      ${othersRun.length ? `<span class="jb-live" title="Şu an çalışılıyor">●</span>` : ''}
+      <span class="jb-acts">
+        <button type="button" class="btn-icon sm" data-act="jobMove" data-id="${esc(j.id)}" data-d="-1" title="Önceki aşama" ${st.id === 'brief' ? 'disabled' : ''}>${ic('left', 13)}</button>
+        <button type="button" class="btn-icon sm ${run ? 'on' : ''}" data-act="jobTimer" data-id="${esc(j.id)}" title="${run ? 'Süreyi durdur' : 'Süre başlat'}">${ic(run ? 'pause' : 'play', 13)}</button>
+        <button type="button" class="btn-icon sm" data-act="jobMove" data-id="${esc(j.id)}" data-d="1" title="Sonraki aşama" ${st.id === 'live' ? 'disabled' : ''}>${ic('right', 13)}</button>
+      </span></div>
+  </article>`;
+};
+
+Views.jobBoard = () => {
+  const list = Jobs.filtered(), old = T.addDays(T.sod(), -14);
+  return `<div class="jb-board">${JOB_STAGES.map(s => {
+    let items = list.filter(j => (j.stage || 'brief') === s.id);
+    if (s.id === 'live') items = items.filter(j => !j.doneAt || j.doneAt >= old);
+    items.sort((a, b) => ((a.due || '9') < (b.due || '9') ? -1 : (a.due || '9') > (b.due || '9') ? 1 : 0) || (b.at || 0) - (a.at || 0));
+    return `<div class="jb-col" style="--c:${s.color}"><div class="jb-col-h"><i></i>${s.label}<span>${items.length}</span></div>
+      <div class="jb-col-b">${items.map(Views.jobCard).join('') || '<div class="jb-empty">—</div>'}${s.id === 'brief' ? `<button type="button" class="jb-add" data-act="jobNew">${ic('plus', 14)} İş ekle</button>` : ''}</div></div>`;
+  }).join('')}</div>${list.some(j => j.stage === 'live' && j.doneAt && j.doneAt < old) ? '<p class="help">Yayında sütununda yalnızca son 14 gün gösteriliyor.</p>' : ''}`;
+};
+
+Views.jobCalendar = () => {
+  const base = Jobs.ui.month ? new Date(Jobs.ui.month + '-01T00:00') : new Date(T.sod());
+  const y = base.getFullYear(), m = base.getMonth(), first = new Date(y, m, 1), days = new Date(y, m + 1, 0).getDate();
+  const lead = (first.getDay() + 6) % 7, tk = T.key(NOW());
+  const jobs = Jobs.filtered(), leaves = Jobs.leavesByDay();
+  let sd = {}; try { (SpecialDays.year(y) || []).forEach(d => { (sd[d.key] = sd[d.key] || []).push(d); }); } catch (e) { sd = {}; }
+  const cells = [];
+  for (let i = 0; i < lead; i++) cells.push('<div class="jc-cell pad"></div>');
+  for (let d = 1; d <= days; d++) {
+    const k = `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const js = jobs.filter(j => (j.publishAt || j.due) === k), shoots = jobs.filter(j => j.shootAt === k && (j.publishAt || j.due) !== k);
+    const lv = leaves[k] || [], sp = sd[k] || [];
+    cells.push(`<div class="jc-cell ${k === tk ? 'today' : ''}"><span class="jc-d">${d}</span>
+      ${sp.slice(0, 1).map(x => `<span class="jc-sd" title="${esc(x.name)}">${esc(x.e || '⭐')} ${esc(x.name)}</span>`).join('')}
+      ${js.map(j => `<button type="button" class="jc-job ${j.stage === 'live' ? 'done' : ''}" style="--cc:${Jobs.clientColor(j.clientId)}" data-act="jobOpen" data-id="${esc(j.id)}" title="${esc(Jobs.clientName(j.clientId))} · ${esc(j.title)} · ${esc(Jobs.stage(j.stage).label)}">${j.publishAt ? '' : '⏳ '}${esc(j.title)}</button>`).join('')}
+      ${shoots.map(j => `<button type="button" class="jc-job shoot" style="--cc:${Jobs.clientColor(j.clientId)}" data-act="jobOpen" data-id="${esc(j.id)}" title="Çekim günü · ${esc(Jobs.clientName(j.clientId))} · ${esc(j.title)}">🎥 ${esc(j.title)}</button>`).join('')}
+      ${lv.map(x => `<span class="jc-lv" title="${esc(x.u.name)} izinli${x.half ? ' (yarım gün)' : ''}">🏖️ ${esc(firstName(x.u.name))}${x.half ? ' ½' : ''}</span>`).join('')}</div>`);
+  }
+  const mk = `${y}-${String(m + 1).padStart(2, '0')}`, prev = new Date(y, m - 1, 1), next = new Date(y, m + 1, 1);
+  const key = x => `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}`;
+  return `<div class="jc-head"><button type="button" class="btn-icon sm" data-act="jobMonth" data-m="${key(prev)}">${ic('left', 14)}</button>
+      <b>${T.fmt(first.getTime(), { month: 'long', year: 'numeric' })}</b>
+      <button type="button" class="btn-icon sm" data-act="jobMonth" data-m="${key(next)}">${ic('right', 14)}</button>
+      ${mk !== T.key(NOW()).slice(0, 7) ? `<button type="button" class="btn btn-ghost btn-sm" data-act="jobMonth" data-m="">Bugün</button>` : ''}
+      <span class="help" style="margin-left:auto">📅 yayın tarihi · 🎥 çekim günü · ⏳ yalnızca teslim tarihi olan iş · 🏖️ onaylı izin</span></div>
+    <div class="jc-grid">${Tasks.DAYS.map(d => `<div class="jc-wd">${d}</div>`).join('')}${cells.join('')}</div>`;
+};
+
+Views.jobClients = () => {
+  const { from, to, key } = Jobs.monthRange(), all = Jobs.list(), clients = Clients.list().sort((a, b) => a.name.localeCompare(b.name, 'tr'));
+  const rows = clients.map(c => {
+    const js = all.filter(j => j.clientId === c.id), open = js.filter(j => j.stage !== 'live').length;
+    const spent = js.reduce((a, j) => a + Jobs.spent(j, from, to), 0), m = Jobs.meta(c.id), fee = +m.fee || 0;
+    const rev = js.filter(j => (j.at || 0) >= from || (j.doneAt || 0) >= from).reduce((a, j) => a + (+j.revisions || 0), 0);
+    const hourly = fee && spent >= 30 * MIN ? Math.round(fee / (spent / HOUR)) : null, paid = !!(m.paid && m.paid[key]);
+    return `<tr><td><span class="jb-dot" style="--cc:${c.color || '#64748b'}"></span><b>${esc(c.name)}</b>${m.contact ? `<small>${esc(m.contact)}${m.phone ? ' · ' + esc(m.phone) : ''}</small>` : ''}</td>
+      <td>${open}</td><td>${hm2(spent)}</td><td>${rev}</td>
+      <td>${fee ? fee.toLocaleString('tr-TR') + ' ₺' : '—'}${hourly ? `<small>≈ ${hourly.toLocaleString('tr-TR')} ₺/sa</small>` : ''}</td>
+      <td>${fee ? `<button type="button" class="jb-pay ${paid ? 'ok' : ''}" data-act="jobPaid" data-id="${esc(c.id)}">${paid ? '✓ Ödendi' : (m.payDay ? `Bekliyor · ${m.payDay}'i` : 'Bekliyor')}</button>` : '—'}</td>
+      <td><button type="button" class="btn btn-ghost btn-sm" data-act="jobClient" data-id="${esc(c.id)}">${ic('edit', 13)} Kart</button></td></tr>`;
+  }).join('');
+  const intern = all.reduce((a, j) => a + (j.clientId ? 0 : Jobs.spent(j, from, to)), 0);
+  return clients.length ? `<div class="jb-table"><table><thead><tr><th>Müşteri</th><th>Açık iş</th><th>Bu ay süre</th><th>Revizyon</th><th>Aylık ücret</th><th>Bu ay ödeme</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>
+    <p class="help">Süreler İşler'deki ▶ sayaçtan ve elle eklenen dakikalardan gelir. İç işlere bu ay ${hm2(intern)} harcandı. Saatlik değer = aylık ücret ÷ bu ay harcanan süre.</p>`
+    : emptyBox('briefcase', 'Henüz müşteri yok', 'Müşteriler sekmesinden müşteri ekleyince burada süre, revizyon ve ödeme özeti görünür.', '');
+};
+
+Views.jobs = () => {
+  const u = Jobs.ui, all = Jobs.list(), tk = T.key(NOW()), wk = T.key(T.addDays(T.sod(), 7)), { from, to } = Jobs.monthRange();
+  const open = all.filter(j => j.stage !== 'live'), mine = open.filter(j => Jobs.isMine(j)).length;
+  const soon = open.filter(j => j.due && j.due <= wk).length, late = open.filter(j => j.due && j.due < tk).length;
+  const waiting = open.filter(j => j.stage === 'client').length, spent = all.reduce((a, j) => a + Jobs.spent(j, from, to), 0);
+  const run = Jobs.myRunning(), clients = Clients.list().sort((a, b) => a.name.localeCompare(b.name, 'tr'));
+  return `<div class="grid g-4">
+      ${kpi('target', 'Açık iş', open.length, `${mine} tanesi sende`)}
+      ${kpi('calendar', '7 gün içinde teslim', soon, late ? `${late} iş gecikmiş` : 'geciken yok', '', late ? 'brk' : '')}
+      ${kpi('send', 'Müşteri onayında', waiting, 'cevap bekleniyor')}
+      ${kpi('clock', 'Bu ay harcanan', hm2(spent), 'tüm işler')}
+    </div>
+    ${run ? `<div class="jb-running mt">${ic('clock', 16)} <b>${esc(run.title)}</b> <span class="muted">· ${esc(Jobs.clientName(run.clientId))}</span> <span class="jb-tick" data-start="${run.timer[Auth.current]}">${hmsClock(NOW() - run.timer[Auth.current])}</span><button type="button" class="btn btn-danger btn-sm" data-act="jobTimer" data-id="${esc(run.id)}">${ic('pause', 13)} Durdur</button></div>` : ''}
+    <section class="card mt">
+      <div class="card-head"><h3>${ic('target', 18)} İşler <span class="sub">müşteri işleri · sorumlu · aşama · süre · müşteri onayı</span></h3>
+        <div class="seg jb-tabs"><button type="button" class="${u.tab === 'board' ? 'on' : ''}" data-act="jobTab" data-v="board">Pano</button><button type="button" class="${u.tab === 'cal' ? 'on' : ''}" data-act="jobTab" data-v="cal">Yayın takvimi</button><button type="button" class="${u.tab === 'clients' ? 'on' : ''}" data-act="jobTab" data-v="clients">Müşteriler</button><button type="button" class="${u.tab === 'gear' ? 'on' : ''}" data-act="jobTab" data-v="gear">Ekipman</button><button type="button" class="${u.tab === 'karne' ? 'on' : ''}" data-act="jobTab" data-v="karne">📊 Karne</button></div></div>
+      ${u.tab !== 'clients' && u.tab !== 'gear' && u.tab !== 'karne' ? `<div class="jb-toolbar">
+        <div class="br-search">${ic('search', 16)}<input class="input" id="jbSearch" placeholder="İşlerde ara…" value="${esc(u.q)}" autocomplete="off"></div>
+        <select class="input" id="jbFilter" aria-label="Müşteri"><option value="all">Tüm müşteriler</option><option value="none" ${u.client === 'none' ? 'selected' : ''}>İç işler</option>${clients.map(c => `<option value="${esc(c.id)}" ${u.client === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</select>
+        <button type="button" class="btn ${u.mine ? 'btn-primary' : 'btn-ghost'}" data-act="jobMine">${ic('users', 15)} Benim işlerim</button>
+        <button type="button" class="btn btn-primary" data-act="jobNew">${ic('plus', 16)} Yeni iş</button></div>` : ''}
+      <div id="jbBody">${u.tab === 'cal' ? Views.jobCalendar() : u.tab === 'clients' ? Views.jobClients() : u.tab === 'gear' ? Views.jobGear() : u.tab === 'karne' ? Views.karne() : Views.jobBoard()}</div>
+    </section>`;
+};
+
+/* ---------- müşteri onay sayfası (giriş gerektirmez: ?onay=TOKEN) ---------- */
+const ClientApproval = {
+  token() { try { return new URLSearchParams(location.search).get('onay'); } catch (e) { return null; } },
+  async boot() {
+    const token = this.token(); if (!token) return false;
+    try { Theme.apply(Theme.defaults); } catch (e) {}
+    const root = $('#root');
+    if (!/^[a-f0-9]{16,64}$/i.test(token)) { root.innerHTML = this.shell('<h2>Geçersiz bağlantı</h2><p class="muted">Bu onay bağlantısı hatalı görünüyor.</p>'); return true; }
+    if (typeof firebase === 'undefined' || !firebase.database) { root.innerHTML = this.shell('<h2>Bağlanılamadı</h2><p class="muted">Sayfa yüklenemedi, internet bağlantını kontrol edip yenile.</p>'); return true; }
+    try { if (!firebase.apps || !firebase.apps.length) firebase.initializeApp(firebaseConfig); } catch (e) {}
+    const ref = firebase.database().ref(DB_ROOT + '/approvals/' + token);
+    root.innerHTML = this.shell('<div class="spinner"></div>');
+    ref.on('value', snap => { const d = snap.val(); root.innerHTML = this.shell(d ? this.body(d) : '<h2>Bağlantı bulunamadı</h2><p class="muted">Bu onay bağlantısı kaldırılmış ya da süresi dolmuş olabilir. Ajansla iletişime geç.</p>'); this.bind(ref, d); },
+      () => { root.innerHTML = this.shell('<h2>Erişilemedi</h2><p class="muted">Bağlantı şu an açılamıyor. Ajansla iletişime geç.</p>'); });
+    return true;
+  },
+  shell(inner) { return `<div class="center-wrap"><div class="card ca-card fade-in">${inner}</div><p class="login-foot">Onay bağlantısı · giriş gerekmez</p></div>`; },
+  body(d) {
+    const r = d.response;
+    const links = (Array.isArray(d.links) ? d.links : []).filter(jobUrlOk);
+    return `<span class="ca-kicker">${esc(d.team || 'Ajans')} · ${esc(d.client || '')}</span>
+      <h1 class="ca-title">${esc(d.title || 'İçerik onayı')}</h1>
+      <p class="muted">${esc(d.type || '')}${d.publishAt ? ' · planlanan yayın: ' + esc(T.fmt(new Date(d.publishAt + 'T00:00').getTime(), { day: 'numeric', month: 'long', weekday: 'long' })) : ''}</p>
+      ${d.notes ? `<div class="ca-notes">${esc(d.notes)}</div>` : ''}
+      ${links.length ? `<div class="ca-links">${links.map((l, i) => `<a href="${esc(l)}" target="_blank" rel="noopener noreferrer">🔗 İçeriği aç ${links.length > 1 ? i + 1 : ''}</a>`).join('')}</div>` : ''}
+      ${r ? `<div class="ca-done ${r.decision === 'approved' ? 'ok' : ''}">${r.decision === 'approved' ? '✅ Onayladınız' : '✏️ Değişiklik istediniz'} · ${esc(T.fmt(r.at, { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }))}${r.note ? `<p>“${esc(r.note)}”</p>` : ''}<small>Fikriniz değiştiyse aşağıdan yeniden cevap verebilirsiniz.</small></div>` : ''}
+      <div class="form ca-form"><label class="lbl">Adınız</label><input class="input" id="caName" maxlength="60" placeholder="Adınız Soyadınız" value="${esc((r && r.name) || '')}">
+        <label class="lbl">Notunuz <span>değişiklik istiyorsanız ne değişsin?</span></label><textarea class="input" id="caNote" rows="3" maxlength="1000"></textarea>
+        <p class="help" id="caErr" style="color:#ef4444;display:none"></p>
+        <div class="row-btns mt"><button type="button" class="btn btn-primary" id="caOk">${ic('check', 16)} Onaylıyorum</button><button type="button" class="btn btn-ghost" id="caNo">${ic('edit', 16)} Değişiklik istiyorum</button></div></div>`;
+  },
+  bind(ref, d) {
+    if (!d) return;
+    const send = async decision => {
+      const name = ($('#caName') || {}).value || '', note = ($('#caNote') || {}).value || '', e = $('#caErr');
+      if (decision === 'changes' && !note.trim()) { e.textContent = 'Lütfen neyin değişmesini istediğinizi yazın.'; e.style.display = 'block'; return; }
+      $$('.ca-form button').forEach(b => b.disabled = true);
+      try { await ref.child('response').set({ decision, name: name.trim().slice(0, 60), note: note.trim().slice(0, 1000), at: Date.now() }); }
+      catch (err) { e.textContent = 'Gönderilemedi, tekrar deneyin.'; e.style.display = 'block'; $$('.ca-form button').forEach(b => b.disabled = false); }
+    };
+    const ok = $('#caOk'), no = $('#caNo'); if (ok) ok.onclick = () => send('approved'); if (no) no.onclick = () => send('changes');
+  }
+};
+
+Object.assign(Actions, {
+  jobNew() { Jobs.open(null); },
+  jobOpen(el) { Jobs.open(el.dataset.id); },
+  jobMove(el) { Jobs.move(el.dataset.id, +el.dataset.d || 0); },
+  jobTimer(el) { Jobs.toggleTimer(el.dataset.id); },
+  jobTab(el) { Jobs.ui.tab = el.dataset.v; App.render(); },
+  jobMine() { Jobs.ui.mine = !Jobs.ui.mine; App.render(); },
+  jobMonth(el) { Jobs.ui.month = el.dataset.m || null; const b = $('#jbBody'); if (b) b.innerHTML = Views.jobCalendar(); },
+  jobClient(el) { Jobs.openClient(el.dataset.id); },
+  jobPaid(el) { Jobs.togglePaid(el.dataset.id); },
+  jobWaSent(el) { Jobs.waSent(el.dataset.id); },
+  jobWaOk(el) { Jobs.record(el.dataset.id, 'approved'); },
+  jobWaNo(el) { Jobs.record(el.dataset.id, 'changes'); }
+});
+document.addEventListener('input', e => { if (e.target && e.target.id === 'jbSearch') { Jobs.ui.q = e.target.value; const b = $('#jbBody'); if (b) b.innerHTML = Jobs.ui.tab === 'cal' ? Views.jobCalendar() : Views.jobBoard(); } });
+document.addEventListener('change', e => { if (e.target && e.target.id === 'jbFilter') { Jobs.ui.client = e.target.value; const b = $('#jbBody'); if (b) b.innerHTML = Jobs.ui.tab === 'cal' ? Views.jobCalendar() : Views.jobBoard(); } });
+setInterval(() => { document.querySelectorAll('.jb-tick[data-start]').forEach(el => { el.textContent = hmsClock(NOW() - +el.dataset.start); }); }, 1000);
+
+/* =========================================================
+   İZİN ONAYI (yönetici) — users/{id}/leaves/{lid}.status: pending → approved | rejected
+   ========================================================= */
+const LeaveAdmin = {
+  pending() {
+    const out = [];
+    DB.get('users').forEach(u => Object.entries(u.leaves || {}).forEach(([lid, l]) => { if (l && (l.status || 'pending') === 'pending') out.push({ u, lid, l }); }));
+    return out.sort((a, b) => (a.l.date < b.l.date ? -1 : 1));
+  },
+  decide(uidv, lid, status) {
+    const u = DB.find('users', uidv); if (!u || !u.leaves || !u.leaves[lid] || !Auth.isAdmin()) return;
+    const l = { ...u.leaves[lid], status, decidedBy: Auth.current, decidedAt: NOW() };
+    DB.update('users', uidv, { leaves: { ...u.leaves, [lid]: l } });
+    const day = T.fmt(new Date(l.date + 'T00:00').getTime(), { day: 'numeric', month: 'long', weekday: 'long' });
+    const me = Auth.user(), m = { id: 'm' + NOW().toString(36) + Math.random().toString(36).slice(2, 7), userId: me.id, recipientId: uidv, at: NOW(),
+      text: status === 'approved' ? `✅ ${day} için izin talebin onaylandı.` : `❌ ${day} için izin talebin uygun görülmedi. Detay için yazabilirsin.` };
+    if (uidv !== me.id) { App.seenMsgs.add(m.id); DB.insert('messages', m); }
+    toast(status === 'approved' ? 'İzin onaylandı' : 'İzin reddedildi', status === 'approved' ? 'success' : 'info'); App.render();
+  },
+  statusText(r) { const s = r.status || 'pending'; return s === 'approved' ? '✅ Onaylandı' : s === 'rejected' ? '❌ Reddedildi' : 'Yöneticiye iletildi · bekliyor'; }
+};
+Views.leaveAdmin = () => {
+  const list = LeaveAdmin.pending(); if (!list.length) return '';
+  return `<section class="card lv-admin" style="margin-bottom:16px"><div class="card-head"><h3>🏖️ Bekleyen izin talepleri <span class="sub">${list.length} talep</span></h3></div>
+    <div class="lva-list">${list.map(({ u, lid, l }) => `<div class="lva-row">${avatar(u, 34)}<div class="grow"><b>${esc(u.name)}</b><small>${esc(T.fmt(new Date(l.date + 'T00:00').getTime(), { day: 'numeric', month: 'long', weekday: 'long' }))} · ${l.type === 'half' ? 'Yarım gün' : 'Tam gün'}${l.p != null ? ` · sistem analizi %${+l.p}` : ''}${l.reason ? ` · “${esc(l.reason)}”` : ''}</small></div>
+      <button type="button" class="btn btn-primary btn-sm" data-act="lvDecide" data-u="${esc(u.id)}" data-id="${esc(lid)}" data-v="approved">${ic('check', 14)} Onayla</button>
+      <button type="button" class="btn btn-ghost btn-sm" data-act="lvDecide" data-u="${esc(u.id)}" data-id="${esc(lid)}" data-v="rejected">${ic('x', 14)} Reddet</button></div>`).join('')}</div></section>`;
+};
+Object.assign(Actions, { lvDecide(el) { LeaveAdmin.decide(el.dataset.u, el.dataset.id, el.dataset.v === 'approved' ? 'approved' : 'rejected'); } });
+{ const _members = Views.members; Views.members = (...a) => Views.leaveAdmin() + _members(...a); }
+
+/* =========================================================
+   SOHBET: arama · kendi mesajını düzenleme / silme (yönetici herkesinkini silebilir)
+   ========================================================= */
+const ChatTools = {
+  canEdit(m) { return m && m.userId === Auth.current && !m.bot && !m.nudge && !m.help && !m.deleted && !!m.text; },
+  canDelete(m) { return m && !m.bot && !m.deleted && (m.userId === Auth.current || Auth.isAdmin()); },
+  menu(id) {
+    const m = DB.find('messages', id); if (!m) return;
+    const acts = [];
+    if (this.canDelete(m)) acts.push({ label: 'Sil', cls: 'btn-danger', onClick: () => { setTimeout(() => this.remove(id), 320); } });
+    if (this.canEdit(m)) acts.push({ label: 'Düzenle', cls: 'btn-primary', onClick: () => { setTimeout(() => this.edit(id), 320); } });
+    if (!acts.length) return;
+    Modal.open({ title: 'Mesaj', body: `<div class="ct-prev">${esc(String(m.text || '📎 Ek').slice(0, 400))}</div>`, actions: [{ label: 'Vazgeç' }, ...acts] });
+  },
+  edit(id) {
+    const m = DB.find('messages', id); if (!this.canEdit(m)) return;
+    Modal.open({ title: '✏️ Mesajı düzenle', body: `<textarea class="input" id="ctEdit" rows="4" maxlength="4000">${esc(m.text)}</textarea>`,
+      onMount: w => { const t = $('#ctEdit', w); setTimeout(() => { t.focus(); t.setSelectionRange(t.value.length, t.value.length); }, 60); },
+      actions: [{ label: 'Vazgeç' }, { label: 'Kaydet', cls: 'btn-primary', onClick: w => {
+        const v = $('#ctEdit', w).value.trim(); if (!v && !attsOf(m).length) return false;
+        if (v !== m.text) { DB.update('messages', id, { text: v, editedAt: NOW() }); Chat.renderList([]); }
+      } }] });
+  },
+  async remove(id) {
+    const m = DB.find('messages', id); if (!this.canDelete(m)) return;
+    if (!(await confirmBox('Mesajı sil', 'Mesaj herkes için silinecek.', 'Sil'))) return;
+    DB.update('messages', id, { deleted: true, deletedBy: Auth.current, text: '', atts: null, att: null, editedAt: null });
+    Chat.renderList([]); toast('Mesaj silindi');
+  },
+  chName(m) { const me = Auth.current; if (!m.recipientId) return m.room === 'lounge' ? '☕ Serbest Sohbet' : '💬 Genel Sohbet'; const other = DB.find('users', m.userId === me ? m.recipientId : m.userId); return '🔒 ' + (other ? other.name : 'Özel'); },
+  chOf(m) { const me = Auth.current; return !m.recipientId ? (m.room === 'lounge' ? 'lounge' : 'general') : (m.userId === me ? m.recipientId : m.userId); },
+  results(q) {
+    const nq = Mentions.norm(q.trim()); if (nq.length < 2) return [];
+    return Chat.all().filter(m => !m.deleted && !m.nudge && m.text && Mentions.norm(m.text).includes(nq)).sort((a, b) => b.at - a.at).slice(0, 60);
+  },
+  hl(text, q) {
+    const t = String(text).slice(0, 220), nt = Mentions.norm(t), nq = Mentions.norm(q.trim()), i = nt.indexOf(nq);
+    if (i < 0 || nq.length < 2 || nt.length !== t.length) return esc(t);
+    return esc(t.slice(0, i)) + '<mark>' + esc(t.slice(i, i + nq.length)) + '</mark>' + esc(t.slice(i + nq.length));
+  },
+  search() {
+    const draw = (w, q) => {
+      const box = $('#ctRes', w), r = this.results(q);
+      box.innerHTML = q.trim().length < 2 ? '<p class="muted sm">En az 2 harf yaz.</p>' : r.length ? r.map(m => { const u = DB.find('users', m.userId);
+        return `<button type="button" class="ct-hit" data-id="${esc(m.id)}"><span class="ct-ch">${esc(this.chName(m))} · ${esc(u ? firstName(u.name) : '?')} · ${esc(T.fmt(m.at, { day: 'numeric', month: 'short' }))} ${esc(T.hm(m.at))}</span><span>${this.hl(m.text, q)}</span></button>`; }).join('') : '<p class="muted sm">Sonuç yok.</p>';
+      $$('.ct-hit', box).forEach(b => b.onclick = () => { const m = DB.find('messages', b.dataset.id); Modal.close(); if (m) this.jump(m); });
+    };
+    Modal.open({ title: '🔎 Mesajlarda ara', body: `<input class="input" id="ctQ" placeholder="Kelime, isim, link…" autocomplete="off"><div class="ct-res" id="ctRes"><p class="muted sm">Genel, serbest ve sana ait özel sohbetlerde arar.</p></div>`,
+      onMount: w => { const i = $('#ctQ', w); setTimeout(() => i.focus(), 60); i.oninput = () => draw(w, i.value); }, actions: [{ label: 'Kapat' }] });
+  },
+  jump(m) {
+    Chat.open(this.chOf(m));
+    setTimeout(() => { const el = document.querySelector(`#chatList [data-mid="${CSS.escape(m.id)}"]`); if (!el) return; Chat.stick = false; el.scrollIntoView({ block: 'center' }); el.classList.add('ct-flash'); setTimeout(() => el.classList.remove('ct-flash'), 2200); }, 260);
+  }
+};
+Object.assign(Actions, { msgMenu(el) { ChatTools.menu(el.dataset.id); }, chatSearch() { ChatTools.search(); } });
+
+document.addEventListener('change', e => { if (e.target && e.target.id === 'tkRepeat') { TaskUI.repeat = e.target.value; const d = $('#tkDays'); if (d) d.hidden = e.target.value !== 'days'; } });
+
+/* =========================================================
+   ÇEKİM EKİPMANI — envanter (gear/{id}) + işe özel seçim (jobs/{id}/gear, gearX, shootAt)
+   ========================================================= */
+const GEAR_CATS = [
+  { id: 'camera', label: 'Kamera', emoji: '🎥' }, { id: 'lens', label: 'Lens', emoji: '🔭' },
+  { id: 'light', label: 'Işık', emoji: '💡' }, { id: 'audio', label: 'Ses', emoji: '🎙️' },
+  { id: 'support', label: 'Tripod / Gimbal', emoji: '📐' }, { id: 'power', label: 'Batarya / Kart', emoji: '🔋' },
+  { id: 'other', label: 'Diğer', emoji: '🧰' }
+];
+const GEAR_DEFAULTS = [
+  { name: 'Sony FX3', cat: 'camera' }, { name: 'Sony A7 IV', cat: 'camera' },
+  { name: 'Sony 24-70mm f/2.8 GM II', cat: 'lens' }, { name: 'Sony 90mm Makro', cat: 'lens' },
+  { name: 'Amaran 120c', cat: 'light' }
+];
+const Gear = {
+  cat(id) { return GEAR_CATS.find(c => c.id === id) || GEAR_CATS[GEAR_CATS.length - 1]; },
+  list() { const ord = Object.fromEntries(GEAR_CATS.map((c, i) => [c.id, i])); return DB.get('gear').filter(g => g && g.name).sort((a, b) => (ord[a.cat] ?? 99) - (ord[b.cat] ?? 99) || a.name.localeCompare(b.name, 'tr')); },
+  add(name, cat) {
+    name = String(name || '').trim().slice(0, 60); if (!name) return false;
+    if (this.list().some(g => g.name.toLocaleLowerCase('tr') === name.toLocaleLowerCase('tr'))) { toast('Bu ekipman zaten listede', 'error'); return false; }
+    DB.insert('gear', { id: uid('g'), name, cat: GEAR_CATS.some(c => c.id === cat) ? cat : 'other', by: Auth.current, at: NOW() }); return true;
+  },
+  addDefaults() { let n = 0; GEAR_DEFAULTS.forEach(d => { if (!this.list().some(g => g.name === d.name)) { DB.insert('gear', { id: uid('g'), ...d, by: Auth.current, at: NOW() }); n++; } }); toast(`${n} ekipman eklendi`, 'success'); App.render(); },
+  async remove(id) {
+    const g = DB.find('gear', id); if (!g) return;
+    const used = Jobs.list().filter(j => j.stage !== 'live' && j.gear && j.gear[id]).length;
+    if (!(await confirmBox('Ekipmanı listeden çıkar', `<b>${esc(g.name)}</b> envanterden silinecek.${used ? ` ${used} açık işte seçili; o işlerden de düşecek.` : ''}`, 'Çıkar'))) return;
+    DB.remove('gear', id); App.render();
+  },
+  /** İşin seçili ekipmanları: envanterden + işe özel eklenenler */
+  items(j) {
+    const out = [];
+    Object.entries(j.gear || {}).forEach(([gid, v]) => { const g = DB.find('gear', gid); if (g && v) out.push({ key: 'g:' + gid, gid, name: g.name, cat: g.cat, packed: !!v.packed }); });
+    Object.entries(j.gearX || {}).forEach(([xid, v]) => { if (v && v.name) out.push({ key: 'x:' + xid, xid, name: v.name, cat: 'other', packed: !!v.packed, extra: true }); });
+    const ord = Object.fromEntries(GEAR_CATS.map((c, i) => [c.id, i]));
+    return out.sort((a, b) => (ord[a.cat] ?? 99) - (ord[b.cat] ?? 99) || a.name.localeCompare(b.name, 'tr'));
+  },
+  /** Aynı çekim gününde aynı ekipmanı seçmiş diğer açık işler */
+  conflicts(jobId, date, gids) {
+    if (!date || !gids.length) return [];
+    const out = [];
+    Jobs.list().filter(o => o.id !== jobId && o.stage !== 'live' && o.shootAt === date && o.gear).forEach(o => gids.forEach(gid => { if (o.gear[gid]) { const g = DB.find('gear', gid); if (g) out.push(`${g.name} → "${o.title}"`); } }));
+    return out;
+  },
+  /** Yaklaşan çekimlerde bu ekipmanı kullanan işler */
+  upcoming(gid) { const tk = T.key(NOW()); return Jobs.list().filter(j => j.stage !== 'live' && j.gear && j.gear[gid] && j.shootAt && j.shootAt >= tk).sort((a, b) => (a.shootAt < b.shootAt ? -1 : 1)); },
+  setPacked(jobId, key, on) {
+    const j = DB.find('jobs', jobId); if (!j) return;
+    const [kind, id] = key.split(':'), field = kind === 'g' ? 'gear' : 'gearX', cur = (j[field] || {})[id]; if (!cur) return;
+    const v = { ...cur, packed: !!on };
+    DB.backend.set(`jobs/${jobId}/${field}/${id}`, v);
+    DB.cache.jobs[jobId] = { ...DB.cache.jobs[jobId], [field]: { ...(j[field] || {}), [id]: v } }; delete DB._arr.jobs;
+  },
+  text(j) {
+    const it = this.items(j), d = j.shootAt ? T.fmt(new Date(j.shootAt + 'T00:00').getTime(), { day: 'numeric', month: 'long', weekday: 'long' }) : '';
+    return `🎒 ${j.title}${j.clientId ? ' · ' + Jobs.clientName(j.clientId) : ''}${d ? '\n📅 Çekim: ' + d : ''}\n` + it.map(x => `${x.packed ? '☑' : '☐'} ${x.name}`).join('\n');
+  },
+  /** Çekim günü hızlı paketleme listesi */
+  pack(jobId) {
+    const j = DB.find('jobs', jobId); if (!j) return;
+    const draw = w => {
+      const jj = DB.find('jobs', jobId), it = this.items(jj), done = it.filter(x => x.packed).length;
+      $('#gpList', w).innerHTML = it.length ? it.map(x => `<label class="gp-item ${x.packed ? 'on' : ''}"><input type="checkbox" data-k="${esc(x.key)}" ${x.packed ? 'checked' : ''}><span>${this.cat(x.cat).emoji} ${esc(x.name)}${x.extra ? ' <small>işe özel</small>' : ''}</span></label>`).join('') : '<p class="muted">Bu işte seçili ekipman yok. İşi açıp “Çekim ekipmanı” bölümünden seç.</p>';
+      $('#gpCount', w).textContent = it.length ? `${done}/${it.length} çantada` : '';
+      $$('#gpList input', w).forEach(c => c.onchange = () => { this.setPacked(jobId, c.dataset.k, c.checked); draw(w); });
+    };
+    Modal.open({
+      title: '🎒 ' + esc(j.title),
+      body: `<p class="muted" style="margin-bottom:8px">${j.shootAt ? 'Çekim: ' + esc(T.fmt(new Date(j.shootAt + 'T00:00').getTime(), { day: 'numeric', month: 'long', weekday: 'long' })) + ' · ' : ''}<b id="gpCount"></b></p><div class="gp-list" id="gpList"></div>`,
+      onMount: w => draw(w),
+      onClose: () => setTimeout(() => { if (!Modal.el) App.render(); }, 320),
+      actions: [
+        { label: 'Listeyi kopyala', onClick: () => { Jobs.copy(this.text(DB.find('jobs', jobId)), 'Ekipman listesi kopyalandı (WhatsApp’a yapıştırabilirsin)'); return false; } },
+        { label: 'Hepsi çantada', onClick: w => { this.items(DB.find('jobs', jobId)).forEach(x => this.setPacked(jobId, x.key, true)); draw(w); return false; } },
+        { label: 'Tamam', cls: 'btn-primary' }
+      ]
+    });
+  }
+};
+
+/** İş formundaki ekipman bölümü */
+Views.jobGearSec = j => {
+  const inv = Gear.list(), sel = j.gear || {}, extra = Object.entries(j.gearX || {}).filter(([, v]) => v && v.name);
+  const open = j.type === 'shoot' || Object.keys(sel).length || extra.length || j.shootAt;
+  const cats = GEAR_CATS.map(c => { const gs = inv.filter(g => g.cat === c.id); return gs.length ? `<div class="jg-cat"><small>${c.emoji} ${c.label}</small><div class="jg-chips">${gs.map(g => `<button type="button" class="jg-chip ${sel[g.id] ? 'on' : ''}" data-g="${esc(g.id)}" data-p="${sel[g.id] && sel[g.id].packed ? 1 : 0}">${esc(g.name)}</button>`).join('')}</div></div>` : ''; }).join('');
+  return `<details class="jb-sec jg-sec" ${open ? 'open' : ''}><summary><h5>🎒 Çekim ekipmanı <span id="jgSum">${Object.keys(sel).filter(k => sel[k] && DB.find('gear', k)).length + extra.length} seçili</span></h5></summary>
+    <p class="help">Her şeyi götürmek yerine sadece bu çekime gerekenleri seç. Çekim günü kartın üstündeki 🎒 ile “çantada” diye işaretlersiniz.</p>
+    <label class="lbl">Çekim tarihi <span>aynı gün başka çekimde kullanılan ekipman için uyarı verir</span></label><input type="date" class="input" id="jbShoot" value="${esc(j.shootAt || '')}">
+    ${inv.length ? `<div class="jg-inv" id="jgInv">${cats}</div>` : `<p class="muted sm">Ekipman listesi boş. İşler → <b>Ekipman</b> sekmesinden ajansın ekipmanlarını ekle${Auth.user() ? ' ya da' : ''} <button type="button" class="btn btn-ghost btn-sm" id="jgDefaults">örnek listeyi yükle</button></p>`}
+    <div class="jg-cat"><small>🧰 Bu çekime özel <span class="muted">(envanterde olmayan: kiralık drone, prop, kostüm…)</span></small>
+      <div class="jg-chips" id="jgExtra">${extra.map(([xid, v]) => `<button type="button" class="jg-chip on x" data-x="${esc(xid)}" data-name="${esc(v.name)}" data-p="${v.packed ? 1 : 0}" title="Kaldırmak için tıkla">${esc(v.name)} ✕</button>`).join('')}</div>
+      <div class="jb-row"><input class="input" id="jgNew" maxlength="60" placeholder="örn. Drone (kiralık), yedek batarya ×3"><button type="button" class="btn btn-soft btn-sm" id="jgAdd">${ic('plus', 13)} Ekle</button></div></div>
+    <p class="help jg-warn" id="jgWarn" hidden></p></details>`;
+};
+/** Formdaki ekipman seçimlerini okur */
+const jobGearRead = (w, j) => {
+  const gear = {}, gearX = {};
+  $$('#jgInv .jg-chip.on', w).forEach(b => { gear[b.dataset.g] = { packed: b.dataset.p === '1' }; });
+  $$('#jgExtra .jg-chip', w).forEach(b => { gearX[b.dataset.x || uid('gx')] = { name: b.dataset.name, packed: b.dataset.p === '1' }; });
+  return { gear: Object.keys(gear).length ? gear : null, gearX: Object.keys(gearX).length ? gearX : null, shootAt: ($('#jbShoot', w) || {}).value || null };
+};
+const jobGearBind = (w, j) => {
+  const warn = () => {
+    const box = $('#jgWarn', w); if (!box) return;
+    const gids = $$('#jgInv .jg-chip.on', w).map(b => b.dataset.g), c = Gear.conflicts(j && j.id, ($('#jbShoot', w) || {}).value, gids);
+    box.hidden = !c.length; box.innerHTML = c.length ? '⚠️ Aynı gün başka çekimde de seçili: ' + c.map(esc).join(' · ') : '';
+    const sum = $('#jgSum', w); if (sum) sum.textContent = `${gids.length + $$('#jgExtra .jg-chip', w).length} seçili`;
+  };
+  $$('#jgInv .jg-chip', w).forEach(b => b.onclick = () => { b.classList.toggle('on'); warn(); });
+  const ex = $('#jgExtra', w), bindX = () => $$('#jgExtra .jg-chip', w).forEach(b => b.onclick = () => { b.remove(); warn(); });
+  bindX();
+  const add = () => { const i = $('#jgNew', w), v = i.value.trim().slice(0, 60); if (!v) return; const b = document.createElement('button'); b.type = 'button'; b.className = 'jg-chip on x'; b.dataset.x = uid('gx'); b.dataset.name = v; b.dataset.p = '0'; b.title = 'Kaldırmak için tıkla'; b.textContent = v + ' ✕'; ex.appendChild(b); i.value = ''; bindX(); warn(); i.focus(); };
+  const ab = $('#jgAdd', w); if (ab) { ab.onclick = add; $('#jgNew', w).onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); add(); } }; }
+  const sh = $('#jbShoot', w); if (sh) sh.onchange = warn;
+  const ty = $('#jbType', w); if (ty) ty.addEventListener('change', () => { if (ty.value === 'shoot') { const d = w.querySelector('.jg-sec'); if (d) d.open = true; } });
+  const df = $('#jgDefaults', w); if (df) df.onclick = () => { Modal.close(); Gear.addDefaults(); setTimeout(() => Jobs.open(j && j.id ? j.id : null), 350); };
+  warn();
+};
+
+Views.jobGear = () => {
+  const inv = Gear.list();
+  return `<div class="jg-add"><input class="input" id="jgInvName" maxlength="60" placeholder="Ekipman adı (örn. Rode Wireless GO II)"><select class="input" id="jgInvCat">${GEAR_CATS.map(c => `<option value="${c.id}">${c.emoji} ${c.label}</option>`).join('')}</select><button type="button" class="btn btn-primary" data-act="gearAdd">${ic('plus', 15)} Ekle</button></div>
+    ${inv.length ? GEAR_CATS.map(c => { const gs = inv.filter(g => g.cat === c.id); return gs.length ? `<div class="jg-group"><h5>${c.emoji} ${c.label} <span>${gs.length}</span></h5>${gs.map(g => { const up = Gear.upcoming(g.id);
+      return `<div class="jg-item"><b>${esc(g.name)}</b><span class="jg-up">${up.length ? up.slice(0, 3).map(j => `<button type="button" data-act="jobOpen" data-id="${esc(j.id)}">📅 ${esc(T.fmt(new Date(j.shootAt + 'T00:00').getTime(), { day: 'numeric', month: 'short' }))} · ${esc(j.title)}</button>`).join('') : '<em>yaklaşan çekim yok</em>'}</span><button type="button" class="btn-icon sm" data-act="gearDel" data-id="${esc(g.id)}" title="Listeden çıkar">${ic('trash', 13)}</button></div>`; }).join('')}</div>` : ''; }).join('')
+      : `<div class="jg-emptybox">${emptyBox('briefcase', 'Ekipman listesi boş', 'Ajansın ekipmanlarını ekle; işlerde sadece gerekenleri seçersiniz.', `<button type="button" class="btn btn-soft" data-act="gearDefaults">${ic('plus', 15)} Örnek listeyi yükle (FX3, A7 IV, 24-70 GM II, 90mm Makro, Amaran 120c)</button>`)}</div>`}`;
+};
+Object.assign(Actions, {
+  gearAdd() { const n = $('#jgInvName'), c = $('#jgInvCat'); if (Gear.add(n.value, c.value)) { toast('Ekipman eklendi', 'success'); App.render(); setTimeout(() => { const i = $('#jgInvName'); if (i) i.focus(); }, 50); } },
+  gearDel(el) { Gear.remove(el.dataset.id); },
+  gearDefaults() { Gear.addDefaults(); },
+  jobPack(el) { Gear.pack(el.dataset.id); }
+});
+document.addEventListener('keydown', e => { if (e.target && e.target.id === 'jgInvName' && e.key === 'Enter') { e.preventDefault(); Actions.gearAdd(); } });
+
+/* =========================================================
+   GÜNÜN İPUCU — Panelim'in en altında; her gün ekip için aynı ipucu
+   ========================================================= */
+const AGENCY_TIPS = [{"c": "Müşteri tutma", "t": "Müşteri en çok \"ilgilenilmiyor\" hissiyle gider", "d": "Araştırmalar ajans değiştirmenin bir numaralı sebebini sonuç değil, ilgisizlik hissi olarak gösteriyor. Müşteri sizden haber almadığı her hafta \"ne yapıyorlar?\" diye düşünür.", "a": "Bu hafta hiç konuşmadığın her müşteriye 2 cümlelik bir durum mesajı at: ne yaptınız, sırada ne var."}, {"c": "Müşteri tutma", "t": "İlk 90 gün her şeyi belirler", "d": "Müşterilerin büyük kısmı ilk 3 ayda gider. Bu dönemde ilk ay 2–3 hızlı kazanım göstermek ve 30/60/90 günlük planı yazılı vermek güven kurar.", "a": "Son 3 ayda gelen müşteriler için 30-60-90 gün planını tek sayfa olarak yaz ve gönder."}, {"c": "Müşteri tutma", "t": "Beğeni değil, müşterinin derdi raporlanır", "d": "Restoran sahibi beğeniyle değil, rezervasyon ve gelen mesajla ilgilenir. Aylık raporda ilk satır müşterinin hedefi olmalı (DM, arama, rezervasyon, mağaza ziyareti).", "a": "Her müşteri için \"bu ay neyi artırmamızı istiyor?\" sorusunun cevabını müşteri kartının notuna yaz."}, {"c": "Müşteri tutma", "t": "Yeşil · sarı · kırmızı müşteri listesi", "d": "Her pazartesi müşterileri renklendirin: yeşil memnun, sarı sessiz/geç ödüyor/şikâyet etti, kırmızı gitmek üzere. Sarı ve kırmızılar için o hafta somut bir aksiyon seçin.", "a": "Bugün müşteri listesini 3 renge ayır; kırmızı olanı bu hafta yüz yüze ya da telefonla ara."}, {"c": "Müşteri tutma", "t": "Aylık 15 dakikalık görüşme", "d": "Rapor göndermek yetmez; ayda bir kısa görüşmede geçen ay ne oldu, gelecek ay ne yapacağız konuşulur. Müşteri değeri sesli duyduğunda daha zor bırakır.", "a": "Önümüzdeki 2 hafta için her müşteriyle 15 dakikalık aylık görüşme zamanı ayarla."}, {"c": "Müşteri tutma", "t": "Revizyon sayısı bir alarmdır", "d": "Aynı müşteride sürekli revizyon çıkıyorsa sorun genelde içerikte değil, briefte veya beklentidedir. İşler › Müşteriler sekmesinde revizyonu yüksek müşteriye bakın.", "a": "Revizyonu en yüksek müşteriyle \"beğendiğiniz 3 örnek gönderir misiniz?\" diye bir referans toplantısı yap."}, {"c": "Müşteri tutma", "t": "Cevap süresi bir hizmettir", "d": "Müşteri mesajına geç dönmek, iyi işi bile görünmez kılar. Ekipte \"iş saatinde en geç 2 saat içinde ilk dönüş\" gibi tek bir kural koyun.", "a": "Ekibe bir dönüş süresi kuralı öner ve Genel Sohbet’e sabitle."}, {"c": "Müşteri tutma", "t": "Kaybettiğin müşteriye neden gittiğini sor", "d": "Giden müşterinin gerçek sebebi çoğu zaman söylenmez. Kısa ve kibar bir \"neyi daha iyi yapabilirdik?\" mesajı, bir sonraki müşteriyi kurtarır.", "a": "Son ayrılan 2 müşteriye nedenini soran nazik bir mesaj gönder; cevabı not al."}, {"c": "Sözleşme & fiyat", "t": "Proje değil, aylık anlaşma", "d": "Proje bazlı çalışan ajanslarda müşteri ömrü aylık sabit (retainer) anlaşmalara göre belirgin şekilde kısa. Müşteri sayınızın 10’dan 2’ye inip 6’ya çıkmasının en olası sebeplerinden biri bu.", "a": "Tek seferlik iş yaptığın müşterilerden birine 3 aylık sabit paket öner."}, {"c": "Sözleşme & fiyat", "t": "En az 3–6 aylık başlangıç", "d": "Sosyal medyada sonuç 1 ayda görünmez. Baştan \"ilk 3 ay kurulum ve öğrenme dönemi\" deyip asgari süre koymak, müşterinin 1. ayın sonunda vazgeçmesini engeller.", "a": "Teklif şablonuna \"asgari 3 ay\" ve \"1. ay kurulum dönemi\" maddelerini ekle."}, {"c": "Sözleşme & fiyat", "t": "Paketler net olsun", "d": "\"Sosyal medya yönetimi\" belirsizdir; \"ayda 8 gönderi + 4 reels + 1 çekim günü + aylık rapor\" nettir. Net paket hem satışı kolaylaştırır hem \"bunu da yaparsınız\" yükünü keser.", "a": "Hizmetini 3 paket olarak yaz: Başlangıç, Büyüme, Tam yönetim. Her birinin içeriği sayılarla."}, {"c": "Sözleşme & fiyat", "t": "Revizyon hakkını yazılı yap", "d": "Sınırsız revizyon, ekibi yoran ve kârı yiyen en büyük kalemdir. Her içerik için 2 revizyon dahil, sonrası ek ücret gibi bir kural koyun.", "a": "Sözleşme ve tekliflerine \"içerik başı 2 revizyon dahil\" maddesini ekle."}, {"c": "Sözleşme & fiyat", "t": "Saatlik değerini bil", "d": "İşler › Müşteriler sekmesi aylık ücreti harcanan saate bölüyor. Saatlik değeri en düşük müşteri ya fiyat güncellemesi ya da kapsam daraltma gerektiriyor.", "a": "Bu ay saatlik değeri en düşük müşteriyi bul; fiyat mı, kapsam mı sorununu belirle."}, {"c": "Sözleşme & fiyat", "t": "Ödemeyi başta al", "d": "Ay başında peşin ödeme, hem nakit akışını hem müşterinin bağlılığını güçlendirir. Geç ödeyen müşteri genelde gitmeye hazırlanan müşteridir.", "a": "Bu ay ödemesi gecikenlerin listesini çıkar ve kibar bir hatırlatma gönder."}, {"c": "Sözleşme & fiyat", "t": "İndirim yerine ek değer", "d": "Fiyat itirazında indirim yapmak değeri düşürür. Bunun yerine paketi küçültün ya da aynı fiyata bir ek (ör. çeyreklik çekim günü) sunun.", "a": "Bir sonraki fiyat görüşmesi için \"indirim yerine sunabileceğim 2 ek\" listesi hazırla."}, {"c": "Satış", "t": "Bir alanda uzmanlaş", "d": "\"Herkese hizmet veren ajans\" yerine \"Adana’daki restoran ve kafelerin ajansı\" olmak; referansı, fiyatı ve satışı kolaylaştırır. Benzer müşterilerde öğrendiğiniz her şey diğerine de yarar.", "a": "Mevcut ve eski müşterilerin sektörlerini yaz; en iyi sonuç aldığınız 1–2 sektörü belirle."}, {"c": "Satış", "t": "Mutlu müşteriden referans iste", "d": "En ucuz ve en güvenilir yeni müşteri, memnun müşterinin tavsiyesidir. Bunu istemezseniz kendiliğinden nadiren olur.", "a": "Yeşil listedeki bir müşteriden kısa bir video yorum ya da tavsiye edebileceği 1 isim iste."}, {"c": "Satış", "t": "Vaka çalışması = en iyi satış belgesi", "d": "\"Şu restoranın Instagram’dan gelen rezervasyonu 3 ayda arttı\" gibi önce/sonra hikâyesi, portföyden daha çok satar.", "a": "En iyi sonucunu aldığın işi tek sayfalık önce/sonra hikâyesine çevir."}, {"c": "Satış", "t": "Satışı haftalık rutine bağla", "d": "Müşteri sayısı dalgalanıyorsa satış sadece müşteri gidince yapılıyordur. Her hafta sabit 2 saat yeni görüşmeye ayırın, dolu olsanız bile.", "a": "Takvime her hafta aynı gün 2 saatlik \"yeni müşteri\" bloğu koy."}, {"c": "Satış", "t": "Ücretsiz mini analiz", "d": "Potansiyel müşteriye hesabını 10 dakikada inceleyip 3 somut öneri göndermek, soğuk teklif mesajından çok daha iyi çalışır.", "a": "Bu hafta hedeflediğin 3 işletmeye kısa bir \"hesabınız için 3 öneri\" mesajı hazırla."}, {"c": "Satış", "t": "Doğru müşteriye hayır de", "d": "Bütçesi tutmayan, her şeyi dün isteyen ya da saygısız müşteri, ekibin enerjisini diğer müşterilerden çalar ve genelde zaten gider.", "a": "\"Çalışmayacağımız müşteri\" için 3 kriter yaz ve ekiple paylaş."}, {"c": "Operasyon", "t": "Brief olmadan iş başlamaz", "d": "Çoğu revizyon eksik brieften çıkar. Her işte amaç, hedef kitle, mesaj, referans ve teslim tarihi yazılı olmalı; Beyin Fırtınası’ndaki Ayar bunu adım adım sorar.", "a": "Bu haftaki ilk yeni işe Ayar ile 1. adım (İskelet) briefi çıkar."}, {"c": "Operasyon", "t": "Her iş tek bir sorumluya bağlı", "d": "\"Ekip halletsin\" denen iş kimseye ait olmaz. İşler’de her işin bir sorumlusu ve bir teslim tarihi olsun.", "a": "İşler panosunda sorumlusu veya teslim tarihi boş olan işleri doldur."}, {"c": "Operasyon", "t": "İçeriği 2 hafta önden hazırla", "d": "Son gün yetişen içerik hem kaliteyi düşürür hem müşteriye stresli görünür. Yayın takviminde 2 hafta önden hazır içerik tamponu hedefleyin.", "a": "Yayın takvimine bak: önümüzdeki 14 günde içeriği hazır olmayan günleri işaretle."}, {"c": "Operasyon", "t": "Çekimleri birleştir", "d": "Her içerik için ayrı çekim, en pahalı çalışma şeklidir. Tek çekim gününde bir ayın içeriğini toplamak hem zaman hem ekipman tasarrufu sağlar.", "a": "Önümüzdeki ayın içeriklerini müşteri bazında tek çekim gününe toplamayı planla."}, {"c": "Operasyon", "t": "Tekrarlanan işi şablona çevir", "d": "Her ay sıfırdan yazılan rapor, teklif, brief ve WhatsApp mesajı vakit kaybıdır. 5 şablon, haftada saatler kazandırır.", "a": "En sık tekrar ettiğin 1 belgeyi (rapor/teklif/mesaj) şablona çevir."}, {"c": "Operasyon", "t": "Müşteri onayını kayıt altına al", "d": "WhatsApp’ta kaybolan \"tamam\" ve \"şunu değiştirin\" mesajları ileride tartışma yaratır. İşler’de “Müşteri onayladı / Değişiklik istedi” ile cevabı kaydedin.", "a": "Onay bekleyen işlerin cevaplarını İşler’e işle."}, {"c": "Operasyon", "t": "Haftalık 20 dakikalık ekip toplantısı", "d": "Pazartesi kısa bir toplantı: bu hafta teslimler, riskli müşteriler, kimin neye ihtiyacı var. Sorunlar büyümeden görünür.", "a": "Her pazartesi aynı saatte 20 dakikalık ekip toplantısını takvime koy."}, {"c": "Operasyon", "t": "Ekipman listesiyle çık", "d": "Unutulan batarya ya da lens bir çekim gününü yakabilir. İşler’deki çekim ekipmanı listesini çekimden önceki akşam \"çantada\" diye işaretleyin.", "a": "Bu haftaki çekimlerin ekipman listesini kontrol et."}, {"c": "İçerik", "t": "Önce trend değil, müşterinin derdi", "d": "Trend sesi kovalamak yerine müşterinin satışını etkileyen soruya cevap veren içerik daha uzun ömürlüdür: \"Neden burası?\", \"Nasıl yapılıyor?\", \"Kimler geliyor?\".", "a": "Bir müşteri için müşterilerinin en sık sorduğu 5 soruyu yaz; her biri bir içerik olur."}, {"c": "İçerik", "t": "İlk 2 saniye her şey", "d": "Reels’te ilk 2 saniyede neden izlemesi gerektiği anlaşılmazsa izleyici kaydırır. Kancayı çekimden önce yazın.", "a": "Bu haftaki reels’ler için çekimden önce ilk cümle/ilk görüntüyü yaz."}, {"c": "İçerik", "t": "Yerel ol", "d": "Adana’ya özgü dil, mekân ve alışkanlıklar, genel stok içerikten daha çok etkileşim alır. Yabancı trendi kopyalamak yerine yerele uyarlayın.", "a": "Bir yabancı trendi seç ve \"Adana’da bu nasıl olurdu?\" sorusuyla uyarla."}, {"c": "İçerik", "t": "Seri içerik sadakat getirir", "d": "Her hafta aynı gün aynı formatta gelen seri (\"Cuma menüsü\", \"Üye hikâyesi\"), takipçiye geri gelme sebebi verir ve üretimi kolaylaştırır.", "a": "Bir müşteri için haftalık tekrar eden 1 içerik serisi öner."}, {"c": "İçerik", "t": "İçeriği yeniden kullan", "d": "Bir çekimden reels, 3 story, carousel ve kapak fotoğrafı çıkar. Aynı emeği 4 kat içeriğe çevirin.", "a": "Son çekimden henüz kullanılmamış 3 içerik daha çıkar."}, {"c": "İçerik", "t": "Sayılarla konuş, aylık 1 öğrenme", "d": "Her ay en iyi ve en kötü performans gösteren içeriğe bakıp tek bir öğrenme çıkarın. Rapor böylece müşteriye de akıllı görünür.", "a": "Bir müşteri için geçen ayın en iyi 1 ve en kötü 1 içeriğini karşılaştır."}, {"c": "Ekip", "t": "Herkes her işi yapmasın", "d": "Küçük ajanslarda herkes her şeyi yaparsa kimse bir şeyde ustalaşmaz. Çekim, kurgu, tasarım, müşteri ilişkisi için birincil sorumlular belirleyin.", "a": "Ekipte her rol için 1 birincil sorumlu yaz."}, {"c": "Ekip", "t": "Müşteri ilişkisini tek kişi yönetsin", "d": "Müşteri her konuda farklı kişiye yazınca hem kafa karışır hem işler düşer. Her müşterinin tek bir \"muhatap\" sorumlusu olsun.", "a": "Her müşteriye bir muhatap atayıp müşteri kartının notuna yaz."}, {"c": "Ekip", "t": "Odak saatini koru", "d": "Sürekli bildirime bakarak kurgu yapılmaz. Deep Work ve Pomodoro’yu kurgu/tasarım saatlerinde kullanın.", "a": "Bugün en zor işin için 90 dakikalık Deep Work bloğu aç."}, {"c": "Ekip", "t": "İşi bitir, sonra yenisini al", "d": "Aynı anda 6 işe başlamak yerine 2’sini bitirmek daha hızlıdır. İşler panosunda bir kişide \"Kurgu\"da 3’ten fazla iş birikiyorsa yük dağıtılmalı.", "a": "İşler panosunda en çok açık işi olan kişinin yükünü ekiple dengele."}, {"c": "Ekip", "t": "Başarıyı görünür yap", "d": "Müşteri onayı, iyi sonuç ya da teşekkür mesajını ekiple paylaşmak motivasyonu ve kaliteyi artırır.", "a": "Bu hafta gelen güzel bir müşteri geri bildirimini Genel Sohbet’te paylaş."}, {"c": "Strateji", "t": "Önce 3 numara: sayı, kayıp, sebep", "d": "Kaç müşteri var, bu ay kaç gitti, neden gitti? Bu üç rakamı her ay yazmadan sorunu düzeltmek zordur.", "a": "Son 6 ayda gelen ve giden müşterileri, gidiş sebepleriyle bir listeye yaz."}, {"c": "Strateji", "t": "Büyümeden önce sağlamlaş", "d": "Yeni müşteri kazanmak mevcut müşteriyi tutmaktan birkaç kat pahalıdır. Kayıp yüksekken önce tutmaya odaklanmak daha hızlı sonuç verir.", "a": "Bu ay hedefini \"yeni müşteri\" değil \"kimse gitmesin\" olarak koy."}, {"c": "Strateji", "t": "Bir şeyi çok iyi yap", "d": "Her hizmeti sunmak yerine en iyi yaptığınız 1–2 hizmeti (ör. reels + çekim günü) öne çıkarmak hem kaliteyi hem fiyatı yükseltir.", "a": "Ekipçe \"en iyi yaptığımız 2 şey\" sorusunu cevaplayın."}];
+const TIP_CAT = { 'Müşteri tutma': '🤝', 'Sözleşme & fiyat': '📄', 'Satış': '📈', 'Operasyon': '⚙️', 'İçerik': '🎬', 'Ekip': '👥', 'Strateji': '🧭' };
+const DailyTip = {
+  offset: 0,
+  dayIndex() { const d = new Date(T.sod()); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); },
+  index() { const n = AGENCY_TIPS.length; return (((this.dayIndex() * 7) + this.offset) % n + n) % n; },
+  current() { return AGENCY_TIPS[this.index()]; },
+  share() {
+    const t = this.current(), me = Auth.user(); if (!me) return;
+    const m = { id: 'm' + NOW().toString(36) + Math.random().toString(36).slice(2, 7), userId: me.id, at: NOW(),
+      text: `💡 Günün ipucu · ${t.t}\n${t.d}\n👉 Bugün: ${t.a}` };
+    App.seenMsgs.add(m.id); DB.insert('messages', m); toast('İpucu Genel Sohbet’te paylaşıldı', 'success');
+  }
+};
+Views.dailyTip = () => {
+  const t = DailyTip.current(), i = DailyTip.index(), today = DailyTip.offset === 0;
+  return `<section class="card mt tip-card" id="tipCard">
+    <div class="tip-ic">💡</div>
+    <div class="tip-body"><div class="tip-k">${today ? 'Günün ipucu' : 'Başka bir ipucu'} · ${TIP_CAT[t.c] || '💡'} ${esc(t.c)} <span>${i + 1}/${AGENCY_TIPS.length}</span></div>
+      <h3>${esc(t.t)}</h3><p>${esc(t.d)}</p>
+      <div class="tip-do"><b>👉 Bugün:</b> ${esc(t.a)}</div></div>
+    <div class="tip-acts"><button type="button" class="btn btn-ghost btn-sm" data-act="tipNext">${ic('refresh', 14)} Başka ipucu</button>
+      ${today ? '' : `<button type="button" class="btn btn-ghost btn-sm" data-act="tipToday">Günün ipucuna dön</button>`}
+      <button type="button" class="btn btn-soft btn-sm" data-act="tipShare">${ic('send', 14)} Ekiple paylaş</button></div>
+  </section>`;
+};
+Object.assign(Actions, {
+  tipNext() { DailyTip.offset++; const c = $('#tipCard'); if (c) c.outerHTML = Views.dailyTip(); },
+  tipToday() { DailyTip.offset = 0; const c = $('#tipCard'); if (c) c.outerHTML = Views.dailyTip(); },
+  tipShare() { DailyTip.share(); }
+});
+/* İpucu açılır penceresi: sitede aktif geçirilen her 1 saatte bir, 15 sn görünür (üzerine gelince bekler) */
+const TipPop = {
+  EVERY: 3600, SHOW_MS: 15000, el: null, mem: null, dirty: 0, timer: null, left: 0, t0: 0,
+  key() { return 'squadpulse.tips.' + (Auth.current || 'anon'); },
+  load() { if (this.mem && this.mem.u === Auth.current) return this.mem; let v = null; try { v = JSON.parse(localStorage.getItem(this.key()) || 'null'); } catch (e) {} this.mem = { u: Auth.current, s: +(v && v.s) || 0, i: v && Number.isInteger(v.i) ? v.i : null }; return this.mem; },
+  flush() { const v = this.mem; if (!v || !v.u) return; try { localStorage.setItem('squadpulse.tips.' + v.u, JSON.stringify({ s: v.s, i: v.i })); } catch (e) {} this.dirty = 0; },
+  tick() {
+    if (!App.started || !Auth.current || document.hidden || this.el) return;
+    const v = this.load(); v.s = Math.min(v.s + 1, this.EVERY);
+    if (++this.dirty >= 10) this.flush();
+    if (v.s < this.EVERY) return;
+    if (Modal.el || (typeof BreakGuard !== 'undefined' && BreakGuard.el)) return;   // pencere açıksa kapanınca göster
+    const n = AGENCY_TIPS.length;
+    v.i = v.i == null ? DailyTip.index() : (v.i + 1) % n; v.s = 0; this.flush();
+    this.show(v.i);
+  },
+  show(i) {
+    this.hide(true);
+    const t = AGENCY_TIPS[((i % AGENCY_TIPS.length) + AGENCY_TIPS.length) % AGENCY_TIPS.length];
+    const el = document.createElement('aside'); el.className = 'tp'; el.id = 'tipPop'; el.setAttribute('role', 'status'); el.dataset.i = i;
+    el.innerHTML = `<div class="tp-k">💡 İpucu · ${TIP_CAT[t.c] || ''} ${esc(t.c)}<button type="button" class="tp-x" data-act="tipPopClose" aria-label="Kapat">✕</button></div>
+      <h4>${esc(t.t)}</h4><p>${esc(t.d)}</p><div class="tp-do"><b>👉 Bugün:</b> ${esc(t.a)}</div>
+      <div class="tp-a"><button type="button" class="btn btn-soft btn-sm" data-act="tipPopShare">${ic('send', 13)} Ekiple paylaş</button><small>Üzerine gelince bekler</small></div>
+      <i class="tp-bar"></i>`;
+    document.body.appendChild(el); this.el = el;
+    requestAnimationFrame(() => el.classList.add('in'));
+    this.left = this.SHOW_MS; this.run();
+    el.addEventListener('mouseenter', () => this.pause()); el.addEventListener('mouseleave', () => this.run());
+    el.addEventListener('focusin', () => this.pause()); el.addEventListener('focusout', () => this.run());
+  },
+  run() { if (!this.el) return; clearTimeout(this.timer); this.t0 = Date.now(); this.el.classList.remove('paused'); const bar = this.el.querySelector('.tp-bar'); bar.style.transition = 'none'; bar.style.transform = `scaleX(${this.left / this.SHOW_MS})`; void bar.offsetWidth; bar.style.transition = `transform ${this.left}ms linear`; bar.style.transform = 'scaleX(0)'; this.timer = setTimeout(() => this.hide(), this.left); },
+  pause() { if (!this.el) return; clearTimeout(this.timer); this.left = Math.max(1500, this.left - (Date.now() - this.t0)); this.el.classList.add('paused'); const bar = this.el.querySelector('.tp-bar'); bar.style.transition = 'none'; bar.style.transform = `scaleX(${this.left / this.SHOW_MS})`; },
+  hide(now) { clearTimeout(this.timer); const el = this.el; this.el = null; if (!el) return; if (now) { el.remove(); return; } el.classList.remove('in'); el.classList.add('out'); setTimeout(() => el.remove(), 320); },
+  share() { const el = this.el; if (!el) return; const o = DailyTip.offset; const t = AGENCY_TIPS[+el.dataset.i % AGENCY_TIPS.length], me = Auth.user(); if (!me || !t) return;
+    const m = { id: 'm' + NOW().toString(36) + Math.random().toString(36).slice(2, 7), userId: me.id, at: NOW(), text: `💡 İpucu · ${t.t}\n${t.d}\n👉 Bugün: ${t.a}` };
+    App.seenMsgs.add(m.id); DB.insert('messages', m); toast('İpucu Genel Sohbet’te paylaşıldı', 'success'); DailyTip.offset = o; this.hide(); }
+};
+Object.assign(Actions, { tipPopClose() { TipPop.hide(); }, tipPopShare() { TipPop.share(); } });
+setInterval(() => TipPop.tick(), 1000);
+document.addEventListener('visibilitychange', () => { if (document.hidden) TipPop.flush(); });
+window.addEventListener('beforeunload', () => TipPop.flush());
+
+/* =========================================================
+   AJANS KARNESİ — müşteri gelişi/gidişi, sebepler, müşteri ömrü, aylık gelir
+   churn/{id} = { clientId, name, sector, start:'YYYY-MM-DD', end:'YYYY-MM-DD', reason, note, fee, by, at, manual }
+   ========================================================= */
+const CHURN_REASONS = [
+  { id: 'results', label: 'Sonuç görmedi', color: '#8b5cf6' }, { id: 'comms', label: 'İletişim / gecikme', color: '#f59e0b' },
+  { id: 'price', label: 'Fiyat / bütçe', color: '#ef4444' }, { id: 'inhouse', label: 'Kendi içinde yapmaya başladı', color: '#0ea5e9' },
+  { id: 'competitor', label: 'Başka ajansa geçti', color: '#ec4899' }, { id: 'business', label: 'İşletme kapandı / küçüldü', color: '#64748b' },
+  { id: 'project', label: 'Tek seferlik işti, bitti', color: '#14b8a6' }, { id: 'unknown', label: 'Bilmiyoruz', color: '#94a3b8' },
+  { id: 'other', label: 'Diğer', color: '#a3a3a3' }
+];
+const Karne = {
+  reason(id) { return CHURN_REASONS.find(r => r.id === id) || CHURN_REASONS[CHURN_REASONS.length - 2]; },
+  list() { return DB.get('churn').filter(c => c && c.name && c.end).sort((a, b) => (a.end < b.end ? 1 : -1)); },
+  /** Ayrıldı olarak işaretlenip listede tutulanlar aktif sayılmaz */
+  active() { const gone = new Set(this.list().map(c => c.clientId).filter(Boolean)); return Clients.list().filter(c => !gone.has(c.id)); },
+  startOf(c) { return c.start || (c.createdAt ? T.key(c.createdAt) : T.key(NOW())); },
+  monthsBetween(a, b) { const x = new Date(a + 'T00:00'), y = new Date(b + 'T00:00'); return Math.max(0, (y.getFullYear() - x.getFullYear()) * 12 + (y.getMonth() - x.getMonth()) + (y.getDate() >= x.getDate() ? 0 : -1)); },
+  months(n = 12) {
+    const out = [], now = new Date(T.sod()), tk = T.key(NOW());
+    const cur = this.active().map(c => ({ s: this.startOf(c), e: null })), gone = this.list().map(c => ({ s: c.start || c.end, e: c.end }));
+    const all = cur.concat(gone);
+    for (let i = n - 1; i >= 0; i--) {
+      const f = new Date(now.getFullYear(), now.getMonth() - i, 1), t = new Date(now.getFullYear(), now.getMonth() - i + 1, 1);
+      const fk = T.key(f.getTime()), tkey = T.key(t.getTime()), at = tkey <= tk ? tkey : tk;
+      out.push({ key: fk.slice(0, 7), label: T.fmt(f.getTime(), { month: 'short' }), year: f.getFullYear(),
+        active: all.filter(x => x.s < at && (!x.e || x.e > at)).length + (at === tk ? all.filter(x => x.s === tk && !x.e).length : 0),
+        added: all.filter(x => x.s >= fk && x.s < tkey).length, lost: gone.filter(x => x.e >= fk && x.e < tkey).length });
+    }
+    return out;
+  },
+  /** Müşteri ayrıldı: sebep sor, karneye işle, istenirse listeden kaldır */
+  leave(cid, opts = {}) {
+    const c = DB.find('clients', cid); if (!c) return;
+    const m = Jobs.meta(cid);
+    Modal.open({
+      title: opts.fromDelete ? 'Müşteriyi kaldır' : '👋 Müşteri ayrıldı',
+      body: `<div class="form"><p class="muted" style="margin-bottom:6px"><b>${esc(c.name)}</b>${c.sector ? ' · ' + esc(c.sector) : ''} · başlangıç ${esc(T.fmt(new Date(this.startOf(c) + 'T00:00').getTime(), { day: 'numeric', month: 'long', year: 'numeric' }))}</p>
+        ${opts.fromDelete ? `<div class="kr-choice"><label><input type="radio" name="krKind" value="left" checked> Müşteri ayrıldı <small>karneye işlenir</small></label><label><input type="radio" name="krKind" value="mistake"> Yanlışlıkla eklenmişti / deneme <small>karneye işlenmez</small></label></div>` : ''}
+        <div id="krFields"><label class="lbl">Ayrılış tarihi</label><input type="date" class="input" id="krEnd" value="${T.key(NOW())}">
+        <label class="lbl">Neden ayrıldı?</label><div class="kr-reasons">${CHURN_REASONS.map((r, i) => `<label><input type="radio" name="krReason" value="${r.id}" ${i === 7 ? 'checked' : ''}><span style="--rc:${r.color}">${r.label}</span></label>`).join('')}</div>
+        <label class="lbl">Not <span>müşteri ne dedi, ne öğrendik?</span></label><textarea class="input" id="krNote" rows="3" maxlength="1000" placeholder="örn. Raporları göremediğini, ne yaptığımızı bilmediğini söyledi"></textarea></div>
+        ${opts.fromDelete ? '' : `<label class="switch-row"><input type="checkbox" id="krRemove" checked> Müşteriyi Müşteriler listesinden de kaldır <small class="muted">(işaretsiz bırakırsan listede kalır ama karnede ayrılmış sayılır)</small></label>`}</div>`,
+      onMount: w => { $$('input[name=krKind]', w).forEach(r => r.onchange = () => { $('#krFields', w).hidden = r.value === 'mistake' && r.checked; }); },
+      actions: [{ label: 'Vazgeç' }, { label: opts.fromDelete ? 'Kaldır' : 'Kaydet', cls: 'btn-danger', onClick: w => {
+        const kind = (w.querySelector('input[name=krKind]:checked') || {}).value || 'left';
+        if (kind === 'left') {
+          const end = $('#krEnd', w).value || T.key(NOW()), reason = (w.querySelector('input[name=krReason]:checked') || {}).value || 'unknown';
+          DB.insert('churn', { id: uid('ch'), clientId: c.id, name: c.name, sector: c.sector || null, start: this.startOf(c), end, reason, note: $('#krNote', w).value.trim().slice(0, 1000) || null, fee: +m.fee || null, by: Auth.current, at: NOW() });
+        }
+        const remove = opts.fromDelete || ($('#krRemove', w) || {}).checked;
+        if (remove) { Clients.remove(c.id); toast(`${esc(c.name)} ${kind === 'left' ? 'karneye işlendi ve listeden kaldırıldı' : 'silindi'}`); }
+        else toast('Ayrılık karneye işlendi', 'success');
+        App.render();
+      } }]
+    });
+  },
+  /** Bu özellikten önce ayrılan müşterileri elle ekleme */
+  manual(id) {
+    const e = id ? DB.find('churn', id) : null;
+    Modal.open({
+      title: e ? 'Ayrılık kaydını düzenle' : '➕ Geçmiş ayrılık ekle',
+      body: `<div class="form"><label class="lbl">Müşteri adı</label><input class="input" id="kmName" maxlength="60" value="${esc((e && e.name) || '')}">
+        <div class="jb-2"><div><label class="lbl">Başlangıç</label><input type="date" class="input" id="kmStart" value="${esc((e && e.start) || '')}"></div><div><label class="lbl">Ayrılış</label><input type="date" class="input" id="kmEnd" value="${esc((e && e.end) || T.key(NOW()))}"></div></div>
+        <label class="lbl">Aylık ücret (₺) <span>isteğe bağlı</span></label><input class="input" id="kmFee" type="number" min="0" step="100" value="${esc((e && e.fee) || '')}">
+        <label class="lbl">Neden ayrıldı?</label><div class="kr-reasons">${CHURN_REASONS.map(r => `<label><input type="radio" name="kmReason" value="${r.id}" ${((e && e.reason) || 'unknown') === r.id ? 'checked' : ''}><span style="--rc:${r.color}">${r.label}</span></label>`).join('')}</div>
+        <label class="lbl">Not</label><textarea class="input" id="kmNote" rows="2" maxlength="1000">${esc((e && e.note) || '')}</textarea>
+        <p class="help" id="kmErr" style="color:#ef4444;display:none"></p></div>`,
+      actions: [...(e ? [{ label: 'Sil', cls: 'btn-danger', onClick: () => { DB.remove('churn', id); App.render(); toast('Kayıt silindi'); } }] : []), { label: 'Vazgeç' }, { label: 'Kaydet', cls: 'btn-primary', onClick: w => {
+        const err = t => { const x = $('#kmErr', w); x.textContent = t; x.style.display = 'block'; return false; };
+        const name = $('#kmName', w).value.trim(), start = $('#kmStart', w).value, end = $('#kmEnd', w).value;
+        if (name.length < 2) return err('Müşteri adını yaz.'); if (!end) return err('Ayrılış tarihini seç.'); if (start && start > end) return err('Başlangıç, ayrılıştan sonra olamaz.');
+        const doc = { name, start: start || null, end, fee: +$('#kmFee', w).value || null, reason: (w.querySelector('input[name=kmReason]:checked') || {}).value || 'unknown', note: $('#kmNote', w).value.trim().slice(0, 1000) || null, manual: true };
+        if (e) DB.update('churn', id, doc); else DB.insert('churn', { id: uid('ch'), ...doc, by: Auth.current, at: NOW() });
+        toast('Kaydedildi', 'success'); App.render();
+      } }]
+    });
+  },
+  pickLeaving() {
+    const cs = Karne.active().sort((a, b) => a.name.localeCompare(b.name, 'tr'));
+    if (!cs.length) return toast('Listede aktif müşteri yok', 'error');
+    Modal.open({ title: 'Hangi müşteri ayrıldı?', body: `<div class="kr-pick">${cs.map(c => `<button type="button" data-id="${esc(c.id)}"><span class="jb-dot" style="--cc:${c.color || '#64748b'}"></span>${esc(c.name)}</button>`).join('')}</div>`,
+      onMount: w => $$('.kr-pick button', w).forEach(b => b.onclick = () => { Modal.close(); setTimeout(() => this.leave(b.dataset.id), 330); }), actions: [{ label: 'Vazgeç' }] });
+  }
+};
+
+Views.karne = () => {
+  const ms = Karne.months(12), list = Karne.list(), cs = Karne.active(), tk = T.key(NOW()), d30 = T.key(T.addDays(T.sod(), -30));
+  const lost30 = list.filter(c => c.end >= d30).length, new30 = cs.filter(c => Karne.startOf(c) >= d30).length;
+  const lives = list.filter(c => c.start).map(c => Karne.monthsBetween(c.start, c.end));
+  const avg = lives.length ? (lives.reduce((a, b) => a + b, 0) / lives.length) : null;
+  const early = lives.length ? lives.filter(x => x < 3).length : 0;
+  const fees = cs.map(c => +Jobs.meta(c.id).fee || 0), income = fees.reduce((a, b) => a + b, 0), noFee = fees.filter(f => !f).length;
+  const yr = list.filter(c => c.end >= T.key(T.addDays(T.sod(), -365)));
+  const byR = CHURN_REASONS.map(r => ({ ...r, n: yr.filter(c => (c.reason || 'unknown') === r.id).length })).filter(r => r.n).sort((a, b) => b.n - a.n);
+  const lostFee = yr.reduce((a, c) => a + (+c.fee || 0), 0);
+  const max = Math.max(1, ...ms.map(m => m.active));
+  const insights = [];
+  if (byR[0]) insights.push(`Son 12 ayda en sık ayrılma sebebi: <b>${esc(byR[0].label)}</b> (${byR[0].n} müşteri).`);
+  if (lives.length) insights.push(`Ayrılan müşterilerin <b>${early}/${lives.length}</b> tanesi ilk 3 ayda gitti${early / lives.length >= .4 ? ' — ilk 90 gün planı en büyük kaldıraç.' : '.'}`);
+  if (lostFee) insights.push(`Son 12 ayda ayrılan müşterilerin aylık toplam ücreti: <b>${lostFee.toLocaleString('tr-TR')} ₺</b>.`);
+  if (noFee) insights.push(`${noFee} müşterinin aylık ücreti girilmemiş — Müşteriler sekmesindeki “Kart”tan ekle ki gelir doğru görünsün.`);
+  return `<div class="grid g-4 kr-kpis">
+      ${kpi('briefcase', 'Aktif müşteri', cs.length, `son 30 günde +${new30} / −${lost30}`)}
+      ${kpi('trend', 'Ortalama müşteri ömrü', avg == null ? '—' : avg.toFixed(1).replace('.0', '') + ' ay', lives.length ? `${lives.length} ayrılan müşteriye göre` : 'ayrılık kaydı yok')}
+      ${kpi('chart', 'Aylık sabit gelir', income ? income.toLocaleString('tr-TR') + ' ₺' : '—', noFee ? `${noFee} müşterinin ücreti eksik` : 'müşteri kartlarından')}
+      ${kpi('flag', 'Son 12 ayda giden', yr.length, yr.length ? `${byR[0] ? byR[0].label : ''}` : 'kayıt yok')}
+    </div>
+    <div class="kr-row">
+      <section class="kr-box"><h5>Son 12 ay · aktif müşteri <span>yeşil: gelen · kırmızı: giden</span></h5>
+        <div class="kr-chart">${ms.map(m => `<div class="kr-col ${m.key === tk.slice(0, 7) ? 'now' : ''}" title="${esc(m.label)} ${m.year}: ${m.active} aktif · +${m.added} gelen · −${m.lost} giden">
+          <span class="kr-n">${m.active}</span><i style="height:${Math.round(m.active / max * 100)}%"></i>
+          <span class="kr-d">${m.added ? `<b class="up">+${m.added}</b>` : ''}${m.lost ? `<b class="dn">−${m.lost}</b>` : ''}</span><small>${esc(m.label)}</small></div>`).join('')}</div></section>
+      <section class="kr-box"><h5>Neden ayrıldılar? <span>son 12 ay</span></h5>
+        ${byR.length ? `<div class="kr-reasons-bar">${byR.map(r => `<div><span>${esc(r.label)}</span><i style="--rc:${r.color};width:${Math.round(r.n / byR[0].n * 100)}%"></i><b>${r.n}</b></div>`).join('')}</div>` : '<p class="muted sm">Henüz ayrılık kaydı yok. Bir müşteri ayrıldığında sebebini kaydedince burada görünür.</p>'}
+        ${insights.length ? `<ul class="kr-ins">${insights.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}</section>
+    </div>
+    <div class="kr-actions"><button type="button" class="btn btn-ghost" data-act="krLeave">👋 Müşteri ayrıldı</button><button type="button" class="btn btn-ghost" data-act="krManual">${ic('plus', 15)} Geçmiş ayrılık ekle</button>
+      <span class="help">Bu özellikten önce gidenleri “Geçmiş ayrılık ekle” ile girersen 10 → 2 → 6 dalgalanması grafikte görünür.</span></div>
+    ${list.length ? `<div class="jb-table"><table><thead><tr><th>Müşteri</th><th>Çalışma süresi</th><th>Ayrılış</th><th>Sebep</th><th>Not</th><th></th></tr></thead><tbody>${list.map(c => { const r = Karne.reason(c.reason);
+      return `<tr><td><b>${esc(c.name)}</b>${c.fee ? `<small>${(+c.fee).toLocaleString('tr-TR')} ₺/ay</small>` : ''}</td><td>${c.start ? Karne.monthsBetween(c.start, c.end) + ' ay' : '—'}</td><td>${esc(T.fmt(new Date(c.end + 'T00:00').getTime(), { day: 'numeric', month: 'short', year: 'numeric' }))}</td>
+        <td><span class="kr-tag" style="--rc:${r.color}">${esc(r.label)}</span></td><td class="kr-note">${esc(c.note || '')}</td><td><button type="button" class="btn-icon sm" data-act="krEdit" data-id="${esc(c.id)}" title="Düzenle">${ic('edit', 13)}</button></td></tr>`; }).join('')}</tbody></table></div>` : ''}`;
+};
+Object.assign(Actions, {
+  krLeave() { Karne.pickLeaving(); },
+  krManual() { Karne.manual(null); },
+  krEdit(el) { Karne.manual(el.dataset.id); },
+  async clientDelete(el) { const c = DB.find('clients', el.dataset.id); if (c) Karne.leave(c.id, { fromDelete: true }); }
+});
+
+
+/* Telefonda alt menüde seçili sekme her zaman görünür olsun (menü yana kaydırılabilir) */
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.getElementById('root'); if (!root || !window.MutationObserver) return;
+  new MutationObserver(() => {
+    if (!matchMedia('(max-width:900px)').matches) return;
+    const a = document.querySelector('#tabBar .nav-item.active'); if (!a) return;
+    const n = a.parentElement, l = Math.max(0, a.offsetLeft - (n.clientWidth - a.offsetWidth) / 2);
+    if (n.scrollWidth > n.clientWidth && Math.abs(n.scrollLeft - l) > 4) n.scrollLeft = l;
+  }).observe(root, { childList: true });
+});
+
 const App = {
   view: 'dashboard', report: { mode: 'daily', date: Date.now() }, pressing: false, pressTimer: null, seenMsgs: new Set(), pendingBots: new Set(), msgSig: '',
   pending: false, renderTimer: null, lastMinute: null, dayKey: null, started: false,
 
   async init() {
+    if (await ClientApproval.boot()) return;   // ?onay=… : müşteri onay sayfası (giriş gerektirmez)
     document.addEventListener('click', e => this.onClick(e));
     document.addEventListener('change', e => this.onChange(e));
     document.addEventListener('input', e => this.onInput(e));
@@ -9233,7 +10522,7 @@ const App = {
       if (!e.target || e.target.id !== 'tkAdd') return;
       e.preventDefault();
       const ti = $('#tkTitle'), due = $('#tkDue');
-      if (!Tasks.add(ti.value, TaskUI.tab, $('#tkPrio').value, due ? due.value : '')) { ti.focus(); toast('Lütfen bir görev adı yaz', 'error'); return; }
+      if (!Tasks.add(ti.value, TaskUI.tab, $('#tkPrio').value, due ? due.value : '', Tasks.formRepeat())) { ti.focus(); toast('Lütfen bir görev adı yaz', 'error'); return; }
       ti.value = ''; toast(TaskUI.tab === 'daily' ? 'Günlük görev eklendi' : 'Haftalık görev eklendi', 'success');
       App.render(); const n = $('#tkTitle'); if (n) n.focus();
     });
@@ -9409,6 +10698,7 @@ const App = {
     if (col === 'games') { GameHub.checkInvites(); if (this.view === 'social') this.scheduleRender(); return; }   // oyun hamleleri diğer sayfaları yeniden çizmez   // sohbet mesajları sayfanın tamamını yeniden çizmez
     if (Auth.current && !DB.find('users', Auth.current)) { Auth.logout(); }
     if (col === 'settings' || col === '*') Music.sync();
+    if (col === 'jobs' || col === 'approvals' || col === '*') Jobs.onRemote();
     this.scheduleRender();
   },
   scheduleRender() {
@@ -9487,7 +10777,7 @@ const App = {
         if (!d.users || !d.settings) throw new Error('Geçersiz yedek dosyası.');
         const users = toMap(d.users);
         if (!await confirmBox('Yedekten yükle', `${Object.keys(users).length} üye ve ${Object.keys(toMap(d.sessions)).length} kayıt yüklenecek. Mevcut veriler HERKES için değiştirilecek.`, 'Yükle')) return;
-        await DB.multi({ settings: { ...Seed.settings(), ...d.settings }, users, sessions: toMap(d.sessions), days: toMap(d.days), messages: toMap(d.messages), ai_logs: toMap(d.ai_logs), clients: toMap(d.clients), events: toMap(d.events), dayprep: toMap(d.dayprep) });
+        await DB.multi({ settings: { ...Seed.settings(), ...d.settings }, users, sessions: toMap(d.sessions), days: toMap(d.days), messages: toMap(d.messages), ai_logs: toMap(d.ai_logs), clients: toMap(d.clients), events: toMap(d.events), dayprep: toMap(d.dayprep), ...['jobs', 'cmeta', 'gear', 'churn', 'ideas', 'pins'].reduce((o, k) => (d[k] ? { ...o, [k]: toMap(d[k]) } : o), {}) });
         if (!DB.find('users', Auth.current)) Auth.logout();
         toast('Yedek yüklendi', 'success'); this.render();
       } catch (err) { toast(err.message || 'Dosya okunamadı', 'error'); }
